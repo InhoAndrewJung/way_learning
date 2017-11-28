@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+
+	<resultMap type="member" id="memberRM">
+		<result property="userId" column="user_id"/>
+		<result property="email" column="email"/>
+		<result property="password" column="password"/>
+		<result property="activity" column="activity"/>
+		<result property="imgProfile" column="img_profile"/>
+		<result property="regDate" column="reg_date"/>
+	
+	</resultMap>
+	
+	
+	<sql id="selectMember">
+ 		select user_id,password,email, activity, img_profile, reg_date from wl_member
+ 	</sql>
+ 	
+ 	
+ 	
+ 	<select id="login"  parameterType="member" resultMap="memberRM">
+ 		select user_id,email, activity, img_profile, reg_date from wl_member
+ 		where user_id=#{id} and password=#{password}
+ 	</select>
+ 	
+ 	<update id="updateMember" parameterType="member" >
+		update wl_member set password=#{password},email=#{email},img_profile=#{imgProfile}
+		where user_id=#{userId}
+	</update>
+	
+	<insert id="registerMember" parameterType="member">
+		insert into wl_member(user_id,password,email,img_profile)
+		values(#{userId},#{password},#{email},#{imgProfile})
+	</insert>
+	<select id="idcheck" resultType="int">
+		select count(*) from wl_member where user_id=#{value}
+	</select>
+	
+	<select id="findMemberById" resultMap="memberRM">
+ 		SELECT	user_id,password,email,activity,img_profile,reg_date
+		FROM	wl_member
+		WHERE 	user_id=#{value}				
+ 	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
