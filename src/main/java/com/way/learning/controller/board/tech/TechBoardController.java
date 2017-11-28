@@ -40,6 +40,7 @@ public class TechBoardController {
 	@RequestMapping("write")
 	public String write() {
 		System.out.println("보드롸이트 컨트롤러 입성");
+		System.out.println("보드롸이트 컨트롤러 입성");
 		return "board/tech/write";
 	}
 	
