@@ -10,7 +10,7 @@ import com.way.learning.model.board.tech.vo.TechBoard;
  * 게시물 리스트 정보와 
  * 페이징 정보를 가지고 있는 클래스 
  * @author inst
- *
+
  */
 public class ListVO {
 	private List<TechBoard> list; // 전체 게시글 다 가지고 있다!!!
