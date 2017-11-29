@@ -40,6 +40,7 @@ function sorting(sort){
 
 #profile{width:50px; height:50px; border-radius: 50% }
 a{text-decoration:none; cursor: pointer;}
+#tag{font-size:10px;border:1px solid grey;border-radius:10%; background-color:grey; color:white; margin-left:10px;}
 </style>
 </head>
 <body>
@@ -69,7 +70,7 @@ a{text-decoration:none; cursor: pointer;}
 <a href="#"  onclick="sorting('recommend')">추천순 </a>  &nbsp;  
 <a href="#"  onclick="sorting('re')">댓글순 </a>   &nbsp; 
 <a href="#"  onclick="sorting('view')">조회순 </a>   &nbsp; 
-${map.count}의 게시물이 있습니다.
+${map.count}개의 게시물이 있습니다.
 <table border="1" width="650" cellpadding="2">
 	
 	<!-- @@@@@이 부분 반드시 수정 @@@@-->
@@ -79,7 +80,7 @@ ${map.count}의 게시물이 있습니다.
 			<c:forEach var="result" items="${requestScope.map.tagList}">
 			<%-- 보드넘버:${bvo.boardNo}  태그넘버: ${result.BOARD_NO} --%>
 			<c:if test="${bvo.boardNo == result.BOARD_NO}">
-			<span style="font-size:10px">	${result.TAG} </span>
+			<span id="tag" >	${result.TAG} </span>
 			</c:if>
 			</c:forEach>
 			<br>   
