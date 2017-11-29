@@ -115,27 +115,41 @@ public class TechBoardController {
 		if(mvo==null) { //로그인 하지 않았다.
 			return new ModelAndView("redirect:/index.jsp");
 		}*/
+		
+		
 		//조회수 증가 로직을 추가
 		
+		techBoardService.updateCount(boardNo);
+
+		TechBoard bvo=techBoardService.showContent(boardNo);
+		List tagList= techBoardService.getTag(boardNo);
 		
 		System.out.println("showContent컨트롤러 keyword:"+keyword);
 		System.out.println("show boardNo:"+boardNo);
-		
-		techBoardService.updateCount(boardNo);
-		
-		
-
-		TechBoard bvo=techBoardService.showContent(boardNo);
 		System.out.println("show 컨트롤러 bvo:"+bvo);
+	    System.out.println("show에서 태그:"+tagList);
+	
 		mav.setViewName("board/tech/show_content");
 		mav.addObject("bvo", bvo);
+		mav.addObject("tagList", tagList);
 		
 		mav.addObject("keyword", keyword);
 		return mav;
 	}
+	
+	@RequestMapping("changeLike")
+	public ModelAndView changeLike(int boardNo, String likeStatus)throws Exception{
+		
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		
+		//실제 DB에서 삭제됨
+		techBoardService.isBoardLike(mvo.getUserId(), boardNo,likeStatus);
+		return new ModelAndView("redirect:/board/tech/list");
+	}
 
 	@RequestMapping("delete")
-	public ModelAndView delete(HttpSession session,String boardNo, String newfilename)
+	public ModelAndView delete(HttpSession session, int boardNo)
 			throws Exception{
 		//로그인한 사람만 상세글 정보를 볼수있는 권한을 부여한다.
 		
