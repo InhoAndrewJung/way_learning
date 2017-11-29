@@ -31,12 +31,7 @@ public class TechReplyDAOImpl implements TechReplyDAO {
 
 	}
 
-	//listReply
-	public String  selectWriter(String no){
-
-		return sqlSession.selectOne("techReplyMapper.selectWriter", no);
-
-	}
+	
 
 	//updateReply
 	public void  updateReply(String replyNo, String replytext){
@@ -73,25 +68,9 @@ public class TechReplyDAOImpl implements TechReplyDAO {
 		return sqlSession.selectOne("techReplyMapper.getReply", replyNo);
 	}
 	
-	//updateStep
-		public void  updateStep(int ref, int re_step){
-			Map<String,Object> map =new HashMap<String, Object>();
-			map.put("ref", ref);
-			map.put("re_step", re_step);
-
-			int row=sqlSession.update("techReplyMapper.updateStep", map);
-			System.out.println(row+"개 기존 리플 update 완료!!");
-			
-		}
+	
 		
-		//insertReReply
-		public void  insertReReply(TechReply rvo){
-
-System.out.println("dao에서의 들어갈 vo:"+rvo);
-			int row=sqlSession.insert("techReplyMapper.insertReReply", rvo);
-			System.out.println(row+"개 재리플 insert 완료!!");
-			
-		}		
+		
 		
 		
 		@Override

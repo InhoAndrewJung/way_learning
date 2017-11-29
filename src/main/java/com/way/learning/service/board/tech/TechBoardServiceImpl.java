@@ -19,10 +19,10 @@ public class TechBoardServiceImpl implements TechBoardService{
 	@Autowired
 	private TechBoardDAO techBoardDao;
 	
-	public void write(TechBoard bvo)throws SQLException{
+	public void insertBoard(TechBoard bvo)throws SQLException{
 		System.out.println("Before BVO :: "+bvo.getBoardNo()); //0
 		System.out.println("보드 서비스 bvo:"+bvo);
-		techBoardDao.write(bvo); //selectKey가 돌아가서 시퀀스를 vo에주입
+		techBoardDao.insertBoard(bvo); //selectKey가 돌아가서 시퀀스를 vo에주입
 		System.out.println("After BVO :: "+bvo.getBoardNo()); //3
 		
 		Date date=techBoardDao.selectByNoForDate(bvo.getBoardNo());//3

@@ -26,9 +26,6 @@ public interface TechReplyDAO {
 	//listReply
 	public List<TechReply>  listReply(String no);
 
-	//listReply
-	public String  selectWriter(String no);
-
 	//updateReply
 	public void  updateReply(String rno, String replytext);
 

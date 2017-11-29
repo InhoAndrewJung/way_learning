@@ -20,7 +20,7 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public int write(TechBoard bvo)throws SQLException{
+	public int insertBoard(TechBoard bvo)throws SQLException{
 		return sqlSession.insert("techBoardMapper.write",bvo);
 	}
 	

@@ -18,7 +18,7 @@ public interface TechBoardService {
 	
 	
 	
-	public void write(TechBoard bvo)throws SQLException;
+	public void insertBoard(TechBoard bvo)throws SQLException;
 	
 	public List<TechBoard> getBoardList(String Pageno,  String keyword, String sorting) throws SQLException;
 	

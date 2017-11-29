@@ -47,7 +47,7 @@ public class TechBoardController {
 	}
 	
 	@RequestMapping("insert")
-	public ModelAndView write(HttpServletRequest request, HttpServletResponse response,
+	public ModelAndView insertBoard(HttpServletRequest request, HttpServletResponse response,
 			HttpSession session, TechBoard bvo ) throws Exception{
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("컨트로러 mvo:"+mvo);
@@ -60,7 +60,7 @@ public class TechBoardController {
 
 		
 
-		techBoardService.write(bvo); //w_date .. 이때 디비에 저장된다..
+		techBoardService.insertBoard(bvo); //w_date .. 이때 디비에 저장된다..
 		System.out.println("컨트롤러 bvo:"+bvo);
 		return new ModelAndView("board/tech/show_content", "bvo",bvo);
 	}
