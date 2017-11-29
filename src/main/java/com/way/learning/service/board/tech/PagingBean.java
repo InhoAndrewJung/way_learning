@@ -19,21 +19,22 @@ public class PagingBean {
 	/**
 	 * 한 페이지에서 보여줄 게시물 수 
 	 */
-	private int numberOfContentPerPage=CommonConstants.CONTENT_NUMBER_PER_PAGE;  //5
+	private int numberOfContentPerPage=CommonConstants.CONTENT_NUMBER_PER_PAGE;  //20
 	/**
 	 * 한 페이지 그룹내 페이지 수 
 	 */
-	private int numberOfPageGroup=CommonConstants.PAGEGROUP_NUMBER_PER_PAGE; //4
+	private int numberOfPageGroup=CommonConstants.PAGEGROUP_NUMBER_PER_PAGE; //10
 	/**
 	 * PagingBean을 통해 페이징 로직을 정의하기 위해서는 
 	 * 전체 게시물 수와 현재 페이지 넘버를 필요로 한다. 
 	 * @param totalContent
 	 * @param nowPage
 	 */
-	public PagingBean(int totalContent, int nowPage) {   //61개  , now page=5 page 
+	public PagingBean(int totalContent, int nowPage) {   //202개  , now page=11 page 
 		super();
 		this.totalContent = totalContent; 
 		this.nowPage = nowPage;
+		
 	}
 	/**
 	 * 총 페이지 수 리턴  
@@ -79,7 +80,7 @@ public class PagingBean {
 	 * @return
 	 */
 	public int getNowPageGroup(){
-		int num=this.nowPage%this.numberOfPageGroup;     
+		int num=this.nowPage%this.numberOfPageGroup;        
 		int nowGroup=0;
 		if(num==0)
 			nowGroup=this.nowPage/this.numberOfPageGroup;
