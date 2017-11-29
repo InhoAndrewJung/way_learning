@@ -2,14 +2,8 @@ package com.way.learning.model.board.tech.dao;
 
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
 import com.way.learning.model.board.tech.vo.TechBoard;
 
 
@@ -25,7 +19,7 @@ public interface TechBoardDAO {
 	//selectByNoForDate
 	public Date selectByNoForDate(int no) throws SQLException;
 	//getBoardList
-	public List<TechBoard> getBoardList(String no,String search_option, String keyword) throws SQLException;
+	public List<TechBoard> getBoardList(String pageNo, String keyword) throws SQLException;
 	
 	//showContent
 	public TechBoard showContent(String no) throws SQLException;
@@ -41,9 +35,11 @@ public interface TechBoardDAO {
 	public int totalCount() throws SQLException;
 
 	
-	public int countArticle(String search_option, String keyword)throws SQLException;
-		
+	public int countArticle( String keyword)throws SQLException;
 	
+	public void insertTag(String tag,int boardNo)throws SQLException;
+		
+	public List getTagList() throws SQLException;
 	
 }
 
