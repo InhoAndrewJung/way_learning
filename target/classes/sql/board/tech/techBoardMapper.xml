@@ -34,18 +34,20 @@
 		<result property="cntView" column="cnt_view" />
 		<result property="regDate" column="reg_date" />
 		<result property="member.userId" column="user_id" />
+		<result property="member.imgProfile" column="img_profile" />
+		<result property="tag" column="tag" />
 	</resultMap>
 
 	<select id="getBoardList" resultMap="boardListRM" parameterType="string">
-		SELECT board_no, title, cnt_view, reg_date, user_id ,page,(select count(*) from wl_tech_reply  where board_no=b.board_no) cntReply 
-		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/5) page, user_id  
-		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id
+		SELECT board_no, title, cnt_view, reg_date, user_id ,page,(select count(*) from wl_tech_reply  where board_no=b.board_no) cntReply,img_profile 
+		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id,img_profile  
+		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id, m.img_profile
 		FROM wl_tech_board tb, wl_member m
 	<include refid="search" />
 		ORDER BY tb.board_no DESC)
 		
 		) b
-		where page=#{boardNo}
+		where page=#{pageNo}
 	</select>
 
 	<!-- 특정 no에 해당하는 상세글보는 resultaMap -->
@@ -93,6 +95,10 @@
 		select count(*) from wl_tech_board tb, wl_member m
 		<include refid="search" />
 	</select>
+	
+	<insert id="insertTag">
+		insert into wl_tech_tag values(#{boardNo},#{tag})
+	</insert>
 
 	
 	<sql id="search">
@@ -100,35 +106,36 @@
 			<where>
 			 tb.writer=m.user_id  
 
-			<if test="search_option == 'all' ">
-	 
 				and 
 				(m.user_id like '%'||#{keyword}||'%' 
 				or content like '%'||#{keyword}||'%'
 				or title like '%'||#{keyword}||'%'
-				or tb.board_no in(select reply_no from wl_tech_reply where replytext  like '%'||#{keyword}||'%')
+				or tb.board_no in(select board_no from wl_tech_reply where replytext  like '%'||#{keyword}||'%')
+				or tb.board_no in(select board_no from wl_tech_tag where tag  like '%'||#{keyword}||'%')
 				)
-			</if>
-			
-			<if test="search_option != 'all' ">
-				<if test="search_option == 'replytext' ">
-				 and tb.board_no in(select reply_no from wl_tech_reply where replytext  like '%'||#{keyword}||'%')
-				</if>
-				<if test="search_option !=  'replytext' ">
-					and ${search_option} like '%'||#{keyword}||'%'
-				</if>
-					 
 		
-					
-					
-			
-			
-			</if>
 
 			</where>
 
 	</sql>
+	
+	
+	
+	<select id="getTagList" resultType="hashmap" parameterType="string">
+	
+	select board_no,tag from wl_tech_tag where board_no in( SELECT board_no 
+FROM (SELECT board_no, CEIL(rownum/20) page
+FROM (SELECT tb.board_no
+FROM wl_tech_board tb, wl_member m
+where  tb.writer=m.user_id
+ORDER BY tb.board_no DESC)
 
+) b
+) order by board_no desc
+		
+	</select>
+	
+	
 </mapper>	
 
 

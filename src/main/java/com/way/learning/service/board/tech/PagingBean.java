@@ -110,7 +110,11 @@ public class PagingBean {
 		if(end>this.getTotalPage()){
 			end=this.getTotalPage();
 		}
+		
+	
 		return end;
+		
+		
 	}
 	/**
 	 * 이전 페이지 그룹이 있는지 확인하여 있으면 true 없으면 false 

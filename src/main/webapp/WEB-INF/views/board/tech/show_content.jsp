@@ -137,7 +137,7 @@ ${delete_result}
 					</tr>
 					<tr>
 						<td valign="middle">
-						<a href="${pageContext.request.contextPath}/board/tech/list?keyword=${keyword}&search_option=${search_option}"><img alt="목록" src="${pageContext.request.contextPath}/resources/img/list_btn.jpg"></a>
+						<a href="${pageContext.request.contextPath}/board/tech/list?keyword=${keyword}"><img alt="목록" src="${pageContext.request.contextPath}/resources/img/list_btn.jpg"></a>
 						<!-- 현재 로그인한 사람이 자신의 글 상세보기 할때는 삭제와 수정버튼이 보여지도록 작성하면됨! -->
 						<sec:authorize access="isAuthenticated()">
 						<sec:authentication var="mvo" property="principal" /> 
