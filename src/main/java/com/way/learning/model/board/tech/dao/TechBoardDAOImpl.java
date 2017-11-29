@@ -28,18 +28,22 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 		return sqlSession.selectOne("techBoardMapper.selectByNoForDate", no);
 	}	
 	//getBoardList
-	public List<TechBoard> getBoardList(String no,String search_option, String keyword) throws SQLException{
+	public List<TechBoard> getBoardList(String pageNo,String keyword) throws SQLException{
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("search_option", search_option);
+	
 		map.put("keyword", keyword);
-		map.put("boardNo", no);
-		System.out.println("dao search_option:"+search_option);
-		System.out.println("dao keyword:"+keyword);
-		System.out.println("dao no:"+no);
-		
-		
-		
+		map.put("pageNo", pageNo);
+	
 		return sqlSession.selectList("techBoardMapper.getBoardList", map);
+	}
+	
+	//getTagList	
+	public List getTagList() throws SQLException{
+
+		List taglist=sqlSession.selectList("techBoardMapper.getTagList");
+		System.out.println("taglist::"+taglist);
+		System.out.println("taglist size::"+taglist.size());
+		return taglist;
 	}
 	
 	//showContent
@@ -66,11 +70,22 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 		return sqlSession.selectOne("techBoardMapper.totalCount");
 	}
 	
-	public int countArticle(String search_option, String keyword) {
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("search_option", search_option);
-		map.put("keyword", keyword);
-		return sqlSession.selectOne("techBoardMapper.countArticle",  map);
+	public int countArticle( String keyword) {
+	
+		
+	
+		return sqlSession.selectOne("techBoardMapper.countArticle",  keyword);
+	}
+
+	@Override
+	public void insertTag(String tag, int boardNo) throws SQLException {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("tag", tag);
+		map.put("boardNo", boardNo);
+		
+		sqlSession.insert("techBoardMapper.insertTag", map);
+		
 	}
 	
 	

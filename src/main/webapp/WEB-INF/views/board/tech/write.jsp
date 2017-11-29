@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
- <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
+ 
+ <%@ include file="../../include/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Insert title here</title>
 <script type="text/javascript">
 function content_submit(){
@@ -15,6 +16,13 @@ function content_submit(){
 		f.title.focus();
 		return; 
 	}	
+	
+	if(f.tag.value==""){
+		alert("태그를 입력하세요!");
+		f.tag.focus();
+		return; 
+	}	
+	
 	/* if(f.content.value==""){
 		alert("내용을 입력하세요!");
 		f.content.focus();
@@ -22,6 +30,28 @@ function content_submit(){
 	} */
 	f.submit();
 }
+ 
+
+
+/* 
+$(document).ready(function() {
+    var $menu = $(".menu");
+    var menuData = "menu1,menu2,menu3,menu4";
+    // 여기에 풀이를 입력해주세요.
+
+    // 문자열 메뉴 아이템 정보를 배열 메뉴 아이템 정보로 변경
+    var menuItems = menuData.split(",");
+
+    // 메뉴 개수 만큼 루프 돌기 =
+    for (var i = 0; i < menuItems.length; i++) {
+        // i번째 배열 요소를 메뉴 아이템으로 만들기
+        var newMenuItem = "<li>" + menuItems[i] + "</li>";
+        // 동적으로 메뉴 아이템 추가
+        $menu.append(newMenuItem);
+    }
+})
+ */
+
 </script>
 
 
@@ -31,6 +61,8 @@ function content_submit(){
 </head>
 
 <font face="HY나무L" size="5"><strong>글쓰기 <br><br></strong></font>
+
+
   <form action="${pageContext.request.contextPath}/board/tech/insert?${_csrf.parameterName}=${_csrf.token}" method="post" name="write_form"
   	enctype="multipart/form-data">
 <%--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">  --%> 
@@ -40,7 +72,14 @@ function content_submit(){
     <tr>
      <td>제목</td>
      <td>
-     <input type="text" name="title" maxlength="100" size="30">
+     <input type="text" name="title" maxlength="100" size="70" placeholder="제목을 입력해주세요">
+     </td>
+    </tr>
+    
+    <tr>
+     <td>태그</td>
+     <td>
+     <input type="text" name="tag" maxlength="100" size="70" placeholder="태그를  컴마로 구분해서 입력해주세요" >
      
     
      </td>

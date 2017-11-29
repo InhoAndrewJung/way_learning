@@ -15,57 +15,23 @@ import com.way.learning.model.member.vo.Member;
 
 
 @Service
-public class TechReplyService {
+public interface TechReplyService {
 
-	@Autowired
-	private TechReplyDAO techReplyDao;
+	;
 
 	//insertReply
-	public void  insertReply(TechReply vo){
-		techReplyDao.insertReply(vo);
+	public void  insertReply(TechReply vo);
 
-	}
-
-	public List<TechReply>  listReply(String boardNo ,HttpSession session){
-
-
-
-		List<TechReply> list = techReplyDao.listReply(boardNo);
-		// 현재 사용자
-		
-		System.out.println("reply list:"+list);
-		return list;
-
-
-
-
-	}
+	public List<TechReply>  listReply(String boardNo ,HttpSession session);
 
 	//updateReply
-	public void  updateReply(String rno, String replytext){
-			if(replytext.indexOf("Re:") ==-1){
-				replytext	="Re:"+replytext;
-			
-			}
-			techReplyDao.updateReply(rno, replytext);
-
-	}
+	public void  updateReply(String rno, String replytext);
 
 	//selectUpdatedReply
-	public String  selectUpdatedReply(String rno){
-
-
-		return techReplyDao.selectUpdatedReply(rno);
-
-	}
+	public String  selectUpdatedReply(String rno);
 
 	//deleteReply
-	public int  deleteReply(String replyNo){
-
-
-		return techReplyDao.deleteReply(replyNo);
-
-	}
+	public int  deleteReply(String replyNo);
 
 	
 

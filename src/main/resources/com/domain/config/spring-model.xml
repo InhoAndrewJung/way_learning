@@ -35,7 +35,7 @@
 		<constructor-arg ref="sqlSessionFactory"/>
 	</bean>
 	
-	<!-- <mvc:resources location="/img/" mapping="/resources/img/**" /> -->
+	<!-- <mvc:resources location="/resources/img/" mapping="/resources/img/**" /> -->
 	<mvc:resources location="/resources/" mapping="/resources/**"  />
 	<mvc:resources location="/WEB-INF/views/ckeditor/" mapping="/ckeditor/**" />
 	<mvc:resources location="/WEB-INF/views/images/" mapping="/images/**" />
