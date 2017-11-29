@@ -22,6 +22,7 @@ function content_submit(){
 		f.tag.focus();
 		return; 
 	}	
+	
 	/* if(f.content.value==""){
 		alert("내용을 입력하세요!");
 		f.content.focus();
