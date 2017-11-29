@@ -28,11 +28,13 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 		return sqlSession.selectOne("techBoardMapper.selectByNoForDate", no);
 	}	
 	//getBoardList
-	public List<TechBoard> getBoardList(String pageNo,String keyword) throws SQLException{
+	public List<TechBoard> getBoardList(String pageNo,String keyword, String sorting) throws SQLException{
 		Map<String,Object> map = new HashMap<String,Object>();
 	
 		map.put("keyword", keyword);
 		map.put("pageNo", pageNo);
+		map.put("sorting", sorting);
+		System.out.println("다오에서 쏠팅:"+sorting);
 	
 		return sqlSession.selectList("techBoardMapper.getBoardList", map);
 	}

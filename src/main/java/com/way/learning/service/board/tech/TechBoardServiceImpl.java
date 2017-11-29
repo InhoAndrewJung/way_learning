@@ -35,7 +35,7 @@ public class TechBoardServiceImpl implements TechBoardService{
 		}
 	}
 	
-	public List<TechBoard> getBoardList(String Pageno,  String keyword) throws SQLException{// no 
+	public List<TechBoard> getBoardList(String Pageno,  String keyword, String sorting) throws SQLException{// no 
 		/*if(Pageno ==null || Pageno=="")  Pageno="1";*///특정한 페이지를 클릭하지 않고 바로 최신 페이지로 들어가는 경우
 		//페이징 처리시 수정되어야 하는 부분
 		
@@ -43,7 +43,7 @@ public class TechBoardServiceImpl implements TechBoardService{
 		
 		
 		
-		return techBoardDao.getBoardList(Pageno,keyword);
+		return techBoardDao.getBoardList(Pageno,keyword, sorting);
 	}
 	
 	public List getTagList() throws SQLException{
