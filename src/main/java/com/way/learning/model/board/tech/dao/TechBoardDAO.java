@@ -14,7 +14,7 @@ public interface TechBoardDAO {
 	
 
 	
-	public int write(TechBoard bvo)throws SQLException;
+	public int insertBoard(TechBoard bvo)throws SQLException;
 	
 	//selectByNoForDate
 	public Date selectByNoForDate(int no) throws SQLException;

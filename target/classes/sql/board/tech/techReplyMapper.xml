@@ -34,9 +34,7 @@
 	
 	</select>
 	
-	<select id="selectWriter" resultType="string">
-		select writer from wl_tech_board where  board_no=#{boardNo}
-	</select>
+	
 	
 	<update id="updateReply">
 	update wl_tech_reply set replytext=#{replytext} where reply_no=#{replyNo}

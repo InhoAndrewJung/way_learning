@@ -59,22 +59,7 @@
 				where page=#{pageNo}
 		
 		
-		<!-- SELECT board_no, title, cnt_view, reg_date, user_id ,page,(select count(*) from wl_tech_reply  where board_no=b.board_no) cntReply,(select sum(cnt_board_like) from wl_tech_board where board_no=b.board_no)cnt_board_like, img_profile 
-		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id,img_profile  
-		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id, m.img_profile
-		FROM wl_tech_board tb, wl_member m
-	<include refid="search" />
-	  <if test="sorting == 'board_no'">order by board_no DESC</if> 
-      <if test="sorting == 'recommend'">order by cnt_board_like  DESC</if> 		
-      <if test="sorting == 're'">order by cnt_board_like  DESC</if> 		
-     	
-      <if test="sorting == 'view'">order by cnt_view DESC</if> 
-		)
 		
-		) b
-	
-      
-		where page=#{pageNo} -->
 		
 	 	
       
