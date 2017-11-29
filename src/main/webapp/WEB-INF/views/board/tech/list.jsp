@@ -17,15 +17,34 @@ function list(pageNo) {   ////////////////  curpage+serch_option +keyword 는 �
 	
 	location.href = "${pageContext.request.contextPath}/board/tech/list?pageNo="+pageNo+"&keyword=${map.keyword}"; 
 }
+
+function sorting(sort){
+	if(sort == 'board_no'){
+		$('input[name=sorting]').val('board_no');
+		
+	}else if(sort == 'recommend'){
+		$('input[name=sorting]').val('recommend');
+		
+	}else if(sort == 're'){
+		$('input[name=sorting]').val('re');
+		
+	}else if(sort == 'view'){
+		$('input[name=sorting]').val('view');
+		
+	}
+	 $('#form1').submit();  
+	 
+}
 </script>
 <style>
 
 #profile{width:50px; height:50px; border-radius: 50% }
-
+a{text-decoration:none; cursor: pointer;}
+#tag{font-size:10px;border:1px solid grey;border-radius:10%; background-color:grey; color:white; margin-left:10px;}
 </style>
 </head>
 <body>
-<h2 align="center">목 록</h2><p>
+
 <div align="center">
 
 <!-- 비로그인 사용자는 아래 버튼을 보여주지 않는다. -->
@@ -37,14 +56,21 @@ function list(pageNo) {   ////////////////  curpage+serch_option +keyword 는 �
  
 
 
-<form name="form1" method="post" action="${pageContext.request.contextPath}/board/tech/list">
+<form name="form1" method="post" action="${pageContext.request.contextPath}/board/tech/list" id="form1">
 		<input name="keyword" value=${map.keyword}> 
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<input type="hidden" name="sorting" value="">
 		<input type="submit" value="조회">
-	
+		
 </form> 
 	
-	${map.count}의 게시물이 있습니다.
+	
+	
+<a href="#"  onclick="sorting('board_no')">최신순  </a>  &nbsp; 
+<a href="#"  onclick="sorting('recommend')">추천순 </a>  &nbsp;  
+<a href="#"  onclick="sorting('re')">댓글순 </a>   &nbsp; 
+<a href="#"  onclick="sorting('view')">조회순 </a>   &nbsp; 
+${map.count}개의 게시물이 있습니다.
 <table border="1" width="650" cellpadding="2">
 	
 	<!-- @@@@@이 부분 반드시 수정 @@@@-->
@@ -54,12 +80,18 @@ function list(pageNo) {   ////////////////  curpage+serch_option +keyword 는 �
 			<c:forEach var="result" items="${requestScope.map.tagList}">
 			<%-- 보드넘버:${bvo.boardNo}  태그넘버: ${result.BOARD_NO} --%>
 			<c:if test="${bvo.boardNo == result.BOARD_NO}">
-			<span style="font-size:10px">	${result.TAG} </span>
+			<span id="tag" >	${result.TAG} </span>
 			</c:if>
 			</c:forEach>
 			<br>   
 			<a href="${pageContext.request.contextPath}/board/tech/showContent?boardNo=${bvo.boardNo}&&keyword=${map.keyword}">${bvo.title}</a> 
 			</td>
+			
+			<!-- 게시글에대한 좋아요 수 -->
+			<td>  
+			<img  src="${path}/resources/img/like.png" style="width:20px; height:20px;" >
+			${bvo.cntBoardLike}</td>
+			<!-- 총 리플수 -->
 			<td>  <span style="color:red">(${bvo.cntReply})</span></td>
 			<td> <img id="profile" src="${path}/resources/upload/${bvo.member.imgProfile}" > ${bvo.member.userId} 
 			<br><span style="font-size:10px"><fmt:formatDate value="${bvo.regDate}" pattern="yyyy.MM.dd HH:mm:ss" /></span>
@@ -79,11 +111,7 @@ function list(pageNo) {   ////////////////  curpage+serch_option +keyword 는 �
 
 <!--@@@@@ 페이징 처리@@@@@@ -->
 <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<!-- 페이징 처리 -->	
-	<%-- 이전 페이지 그룹이 있으면 이미지 보여준다.
-		  이미지 링크는 현 페이지 그룹 시작페이지 번호 -1 =>
-		   이전 페이지 그룹의 마지막 페이지 번호로 한다. 
-	 --%>
+	
 	
 	 <c:if test="${requestScope.map.lvo.pagingBean.nowPageGroup >=1}">
 	 
@@ -122,9 +150,7 @@ function list(pageNo) {   ////////////////  curpage+serch_option +keyword 는 �
 			right_arrow_btn.gif
 	 --%>
 	 
- 	 다음? ${requestScope.map.lvo.pagingBean.nextPageGroup}
-	나우: ${requestScope.map.lvo.pagingBean.nowPageGroup}
-	토탈: ${requestScope.map.lvo.pagingBean.totalPageGroup} 
+ 	
 	
 	 <c:if test="${requestScope.map.lvo.pagingBean.nextPageGroup}">
 	 <a href="javascript:list('${requestScope.map.lvo.pagingBean.endPageOfPageGroup+1}')">

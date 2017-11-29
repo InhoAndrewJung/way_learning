@@ -68,12 +68,12 @@ public class TechBoardController {
 
 	@RequestMapping("list")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, @RequestParam(defaultValue="1") String pageNo ,
-			@RequestParam(defaultValue="")  String keyword, ModelAndView mav)
+			@RequestParam(defaultValue="")  String keyword, @RequestParam(defaultValue="board_no") String sorting, ModelAndView mav)
 			throws Exception{
 		
 		
 		
-		List<TechBoard> list=techBoardService.getBoardList(pageNo,keyword);
+		List<TechBoard> list=techBoardService.getBoardList(pageNo,keyword, sorting);
 		
 		int count=techBoardService.countArticle(keyword); 
 		
@@ -82,8 +82,8 @@ public class TechBoardController {
 		ListVO lvo = new ListVO(list, pagingBean); //특정한 페이지에서 불러오는 전체 게시글임!!
 		
 		List tagList=techBoardService.getTagList();
-		
-		
+		System.out.println("sorting:"+sorting);
+		System.out.println("pageNo:"+pageNo);
 		System.out.println("컨트롤러 totalContent:"+count);
 		System.out.println("컨트롤러 에서 list:"+list);
 		System.out.println("컨트롤러에서 lvo:"+lvo);
