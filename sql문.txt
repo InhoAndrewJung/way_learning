@@ -1,0 +1,495 @@
+
+
+------------회원 테이블------------------------------------
+
+
+---회원 테이블 생성---
+CREATE TABLE wl_member
+(
+    user_id        VARCHAR2(200)    NOT NULL, 
+    password       VARCHAR2(500)    NOT NULL, 
+    email          VARCHAR2(100)    NOT NULL, 
+    activity       number    default '0',
+    img_profile    varchar2(300) , 
+    reg_date       DATE             default sysdate, 
+    CONSTRAINT WL_MEMBER_PK PRIMARY KEY (user_id)
+)
+/
+
+
+CREATE TABLE wl_authorities
+(
+    user_id    VARCHAR2(20)    NOT NULL, 
+    role       VARCHAR2(30)    default 'ROLE_MEMBER',
+    CONSTRAINT WL_AUTHORITIES_PK PRIMARY KEY (user_id, role)
+)
+/
+
+
+ALTER TABLE wl_authorities
+    ADD CONSTRAINT FK_wl_authorities_user_id_wl_m FOREIGN KEY (user_id)
+        REFERENCES wl_member (user_id) on delete cascade;
+/
+
+
+---회원 테이블 드롭---
+drop table wl_member cascade constraints;
+drop table wl_authorities cascade constraints;
+
+--회원 테이블 쿼리 테스트---
+select * from wl_member;
+select * from wl_authorities;
+delete from wl_member;
+delete from wl_authorities;
+commit;
+
+
+
+-------------------tech 게시판 태그------------------------------------------
+
+
+--tech 게시판 생성--
+CREATE TABLE wl_tech_board
+(
+    board_no         NUMBER            NOT NULL, 
+    writer           VARCHAR2(100)     NOT NULL, 
+    title            VARCHAR2(200)     NOT NULL, 
+    content          VARCHAR2(2000)    NOT NULL, 
+    cnt_view         NUMBER            default 0, 
+    cnt_board_like    NUMBER            default 0, 
+    reg_date         DATE             default sysdate, 
+    CONSTRAINT WL_TECH_BOARD_PK PRIMARY KEY (board_no)
+)
+/
+
+CREATE SEQUENCE wl_tech_board_SEQ
+START WITH 1
+INCREMENT BY 1
+nocache;
+/
+
+
+
+
+
+--테크 게시판 드롭--
+drop table wl_tech_board cascade constraints;    
+drop SEQUENCE wl_tech_board_SEQ;   
+
+
+
+delete from wl_tech_board;
+commit;
+
+
+--테크 게시판 더미 생성--
+ declare
+ i number := 1;
+ 
+ begin
+ while i<=200 loop
+ 
+   insert into wl_tech_board (board_no, writer, title, content)
+    values(
+   wl_tech_board_SEQ.nextVal ,'2222','제목'||i ,'내용'||i);
+    i :=i+1;
+    end loop;
+end;
+/   
+
+commit;
+
+
+--테크 게시판 테스트---
+
+SELECT board_no, title, cnt_view, reg_date, user_id ,page,(select count(*) from wl_tech_reply  where board_no=b.board_no) cntReply,img_profile 
+		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id,img_profile  
+		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id, m.img_profile
+		FROM wl_tech_board tb, wl_member m
+	 where tb.writer=m.user_id
+		ORDER BY tb.board_no DESC)
+		
+		) b
+		where page=1;
+    
+    
+    SELECT board_no, title, cnt_view, reg_date, user_id ,page,(select count(*) from wl_tech_reply  where board_no=b.board_no) cntReply,(select sum(cnt_board_like) from wl_tech_board where board_no=b.board_no)cnt_board_like, img_profile 
+		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id,img_profile  
+		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id, m.img_profile
+		FROM wl_tech_board tb, wl_member m
+	  where tb.writer=m.user_id
+--	  order by board_no DESC
+--     order by cnt_board_like  DESC
+     order by (select count(*) from wl_tech_reply  where board_no=b.board_no) DESC
+--   order by cnt_view DESC
+		)
+		) b
+		where page=1;
+    
+    
+
+select sum(cnt_board_like) from wl_tech_board;
+
+select * from wl_tech_board tb;
+
+update wl_tech_board set cnt_board_like=cnt_board_like+1 where board_no=149;
+commit;
+
+SELECT board_no, title, cnt_view, tb.reg_date, content, tb.writer
+		FROM wl_tech_board tb, wl_member m
+		WHERE tb.writer =m.user_id AND board_no=1;
+
+
+ select tr.board_no,reply_no,replytext, replyer ,tr.reg_date  
+			 from  wl_tech_reply tr, wl_member m where m.user_id =tr.replyer and board_No=200  order by reply_no asc;
+       
+
+INSERT INTO wl_tech_board (board_no, writer, title, content,cnt_post_like) VALUES(202,'2222','ggg','ggg',3);
+
+
+
+--테크 답변게시판 생성--        
+       
+CREATE TABLE wl_tech_reply
+(
+    reply_no          NUMBER            NOT NULL, 
+    board_no          NUMBER            NOT NULL, 
+    replyer           VARCHAR2(100)     NOT NULL, 
+    replytext         VARCHAR2(2000)    NOT NULL, 
+    cnt_reply_like    NUMBER            default 0, 
+    reg_date          DATE              default sysdate, 
+    CONSTRAINT WL_TECH_REPLY_PK PRIMARY KEY (reply_no)
+)
+/
+
+CREATE SEQUENCE wl_tech_reply_SEQ
+START WITH 1
+INCREMENT BY 1
+nocache;
+/
+
+ALTER TABLE wl_tech_reply
+    ADD CONSTRAINT FK_wl_tech_reply_board_no_wl_t FOREIGN KEY (board_no)
+        REFERENCES wl_tech_board (board_no) on delete cascade;
+/
+
+
+
+
+--테크 답변게시판 드롭--
+drop table wl_tech_reply cascade constraints;    
+drop SEQUENCE wl_tech_reply_SEQ;
+
+
+
+--테크 답변게시판 테스트--
+insert into wl_tech_reply (reply_no,board_no,replyer,replytext)  values(wl_tech_reply_SEQ.nextval,1,'2222','ㅎff4ㅎㅎ');
+commit;
+insert into wl_tech_reply (reply_no,board_no,replyer,replytext,cnt_reply_like)  values(wl_tech_reply_SEQ.nextval,201,'2222','ㅎff4ㅎㅎ',3);
+insert into wl_tech_reply (reply_no,board_no,replyer,replytext,cnt_reply_like)  values(wl_tech_reply_SEQ.nextval,201,'2222','ㅎff4ㅎㅎ',4);
+
+
+
+
+
+    
+select * from wl_tech_reply;
+
+select * from wl_tech_reply;
+select * from wl_tech_board;
+commit;
+
+
+
+
+--tech_tag 생성--
+CREATE TABLE wl_tech_tag
+(
+    board_no    NUMBER           NOT NULL, 
+    tag         VARCHAR2(300)    NOT NULL 
+    
+)
+/
+
+ALTER TABLE wl_tech_tag
+    ADD CONSTRAINT FK_wl_tech_tag_board_no_wl_tec FOREIGN KEY (board_no)
+        REFERENCES wl_tech_board (board_no) on delete cascade;
+/
+
+
+
+--tech_tag 게시판 드롭--
+drop table wl_tech_tag cascade constraints;
+
+
+--tech_tag  테스트----
+select * from wl_tech_tag order by board_no desc;
+select * from wl_tech_tag where tag like '%spri%';
+
+
+
+ 
+    
+select board_no,tag from wl_tech_tag where board_no in( SELECT board_no 
+FROM (SELECT board_no, CEIL(rownum/20) page
+FROM (SELECT tb.board_no
+FROM wl_tech_board tb, wl_member m
+where  tb.writer=m.user_id
+ORDER BY tb.board_no DESC)
+
+) b 
+) order by board_no desc;
+
+
+--SELECT board_no, title, cnt_view, reg_date, user_id ,page,(select count(*) from wl_tech_reply  where board_no=b.board_no) cntReply,img_profile 
+--		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id,img_profile  
+--		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id, m.img_profile
+--		FROM wl_tech_board tb, wl_member m
+--	where  tb.writer=m.user_id
+--		ORDER BY tb.board_no DESC)
+--		
+--		) b
+--		where page=1;
+    
+
+
+--select board_no,tag from wl_tech_tag where board_no in( SELECT board_no 
+--FROM (SELECT board_no, CEIL(rownum/20) page
+--FROM (SELECT tb.board_no
+--FROM wl_tech_board tb, wl_member m
+--where  tb.writer=m.user_id
+--ORDER BY tb.board_no DESC)
+--
+--) b where page=1
+--) order by board_no desc;
+
+ 
+ SELECT board_no 
+		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id  
+		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id
+		FROM wl_tech_board tb, wl_member m
+    where  tb.writer=m.user_id
+		ORDER BY tb.board_no DESC)
+		
+		) b
+		where page=1;
+
+
+
+--tech_tag 더미 테이블---
+ declare
+ i number := 1;
+ 
+ begin
+ while i<=200 loop
+  insert into wl_tech_tag values(i,'jsp'||i);
+   
+    i :=i+1;
+    end loop;
+end;
+/   
+
+commit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------qna 보드 테이블---------------------
+
+CREATE TABLE wl_qna_tag
+(
+    board_no    NUMBER           NOT NULL, 
+    tag         VARCHAR2(300)    NULL, 
+    CONSTRAINT WL_QNA_TAG_PK PRIMARY KEY (board_no)
+)
+/
+
+
+
+ALTER TABLE wl_qna_tag
+    ADD CONSTRAINT FK_wl_qna_tag_board_no_wl_qna_ FOREIGN KEY (board_no)
+        REFERENCES wl_qna_board (board_no) on delete cascade;
+/
+
+CREATE TABLE wl_qna_board(
+    board_no         NUMBER            NOT NULL, 
+    writer           VARCHAR2(100)     NOT NULL, 
+    title            VARCHAR2(200)     NOT NULL, 
+    content          VARCHAR2(2000)    NOT NULL, 
+    cnt_view         NUMBER            default 0, 
+    cnt_post_like    NUMBER            default 0, 
+    reg_date         DATE              default sysdate, 
+    CONSTRAINT WL_QNA_BOARD_PK PRIMARY KEY (board_no)
+)
+/
+
+CREATE SEQUENCE wl_qna_board_SEQ
+START WITH 1
+INCREMENT BY 1
+nocache;
+/
+
+
+
+
+
+------qna 리플라이 테이블-----
+
+CREATE TABLE wl_qna_reply
+(
+    reply_no          NUMBER            NOT NULL, 
+    board_no          NUMBER            NOT NULL, 
+    replyer           VARCHAR2(100)     NOT NULL, 
+    replytext         VARCHAR2(2000)    NOT NULL, 
+    cnt_reply_like    NUMBER           default 0, 
+    reg_date          DATE             default sysdate, 
+    CONSTRAINT WL_QNA_REPLY_PK PRIMARY KEY (reply_no)
+)
+/
+
+CREATE SEQUENCE wl_qna_reply_SEQ
+START WITH 1
+INCREMENT BY 1
+nocache;
+/
+
+
+
+
+ALTER TABLE wl_qna_reply
+    ADD CONSTRAINT FK_wl_qna_reply_board_no_wl_qn FOREIGN KEY (board_no)
+        REFERENCES wl_qna_board (board_no) on delete cascade;
+/
+
+---------------------question ------------------------------------------
+
+
+
+--제너럴 문제--
+CREATE TABLE wl_general_question
+(
+    question_no    NUMBER            NOT NULL, 
+    question       VARCHAR2(2000)    NOT NULL, 
+    input          VARCHAR2(2000)    NOT NULL, 
+    output         VARCHAR2(2000)    NOT NULL, 
+    language       VARCHAR2(50)      NOT NULL, 
+    answer         VARCHAR2(2000)    NOT NULL, 
+    cnt_submit     NUMBER            default 0, 
+    cnt_right      NUMBER            default 0, 
+    CONSTRAINT WL_GENERAL_QUESTION_PK PRIMARY KEY (question_no)
+)
+/
+
+CREATE SEQUENCE wl_general_question_SEQ
+START WITH 1
+INCREMENT BY 1
+nocache;
+/
+
+
+
+
+--알고리즘 문제--
+CREATE TABLE wl_algorithm_question
+(
+    question_no    NUMBER            NOT NULL, 
+    question       VARCHAR2(2000)    NOT NULL, 
+    input          VARCHAR2(2000)    NOT NULL, 
+    output         VARCHAR2(2000)    NOT NULL, 
+    language       VARCHAR2(50)      NOT NULL, 
+    answer         VARCHAR2(2000)    NOT NULL, 
+    cnt_submit     NUMBER            default 0, 
+    cnt_right      NUMBER            default 0, 
+    CONSTRAINT WL_ALGORITHM_QUESTION_PK PRIMARY KEY (question_no)
+)
+/
+
+CREATE SEQUENCE wl_algorithm_question_SEQ
+START WITH 1
+INCREMENT BY 1;
+nocache;
+/
+
+
+
+--제너럴 선택지 --
+CREATE TABLE wl_multiple_answer_choice
+(
+    question_no      NUMBER            NOT NULL, 
+    answer_choice    VARCHAR2(1000)    NOT NULL
+)
+/
+
+ALTER TABLE wl_multiple_answer_choice
+    ADD CONSTRAINT FK_wl_multiple_answer_choice_q FOREIGN KEY (question_no)
+        REFERENCES wl_general question (question_no) on delete cascade;
+/
+
+
+
+
+
+-- 문제푼 결과 --
+CREATE TABLE wl_answer_result
+(
+    user_id          VARCHAR2(200)    NOT NULL, 
+    question_no      NUMBER           NOT NULL, 
+    my_cnt_submit    NUMBER           default 0, 
+    my_cnt_wrong     NUMBER           default 0, 
+    my_cnt_right     NUMBER           default 0   
+)
+/
+
+
+
+ALTER TABLE wl_answer_result
+    ADD CONSTRAINT FK_wl_answer_result_question_n FOREIGN KEY (question_no)
+        REFERENCES wl_general question (question_no) on delete cascade;
+/
+
+ALTER TABLE wl_answer_result
+    ADD CONSTRAINT FK_wl_answer_result_user_id_wl FOREIGN KEY (user_id)
+        REFERENCES wl_member (user_id) on delete cascade;
+/
+
