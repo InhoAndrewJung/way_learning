@@ -36,12 +36,17 @@ function sorting(sort){
 	 
 }
 </script>
+
+
 <style>
 
 #profile{width:50px; height:50px; border-radius: 50% }
 a{text-decoration:none; cursor: pointer;}
 #tag{font-size:10px;border:1px solid grey;border-radius:10%; background-color:grey; color:white; margin-left:10px;}
 </style>
+
+
+
 </head>
 <body>
 

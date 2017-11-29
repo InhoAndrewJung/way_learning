@@ -2,6 +2,7 @@ package com.way.learning.model.board.tech.dao;
 
 
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,17 @@ public interface TechReplyDAO {
 	//deleteReply
 	public int  deleteReply(String rno);
 
+	public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException;
 	
+	public void insertReplyLike(String userId, int replyNo) throws SQLException;
+	
+	public void deleteReplyLike(String userId, int replyNo) throws SQLException;
+	
+	public void increaseCntReplyLike(int replyNo) throws SQLException;
+	
+	public void decreaseCntReplyLike(int replyNo) throws SQLException;
+	
+	public int selectCntReplyLike(int replyNo) throws SQLException;
 
 
 

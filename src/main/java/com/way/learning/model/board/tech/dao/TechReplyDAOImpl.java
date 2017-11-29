@@ -1,5 +1,6 @@
 package com.way.learning.model.board.tech.dao;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +92,72 @@ System.out.println("dao에서의 들어갈 vo:"+rvo);
 			System.out.println(row+"개 재리플 insert 완료!!");
 			
 		}		
+		
+		
+		@Override
+		public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException {
+			Map<String,Object> map = new HashMap<String,Object>();
+			
+			map.put("userId", userId);
+			map.put("replyNo", replyNo);
+			
+			return sqlSession.selectOne("techReplyMapper.isReplyLike", map);
+			
+		}
+		
+		
+		
+		@Override
+		public void insertReplyLike(String userId, int replyNo) throws SQLException {
+			Map<String,Object> map = new HashMap<String,Object>();
+			
+			map.put("userId", userId);
+			map.put("replyNo", replyNo);
+			
+			 sqlSession.insert("techReplyMapper.insertReplyLike", map);
+			
+		}
+		
+		@Override
+		public void deleteReplyLike(String userId, int replyNo) throws SQLException {
+			Map<String,Object> map = new HashMap<String,Object>();
+			
+			map.put("userId", userId);
+			map.put("replyNo", replyNo);
+			
+			 sqlSession.delete("techReplyMapper.deleteReplyLike", map);
+			
+		}
+		
+		@Override
+		public void increaseCntReplyLike(int replyNo) throws SQLException {
+			
+			System.out.println("총 좋아요 올리기:"+replyNo);
+			 sqlSession.update("techReplyMapper.increaseCntReplyLike", replyNo);
+			
+		}
+		
+		
+		@Override
+		public void decreaseCntReplyLike(int replyNo) throws SQLException {
+			
+			System.out.println("총 좋아요 내리기:"+replyNo);
+			 sqlSession.update("techReplyMapper.decreaseCntReplyLike", replyNo);
+			
+		}
+		
+		
+		@Override
+		public int selectCntReplyLike(int replyNo) throws SQLException {
+			Map<String,Object> map = new HashMap<String,Object>();
+			
+		
+			
+			return sqlSession.selectOne("techReplyMapper.selectCntReplyLike", replyNo);
+			
+		}
+
+		
 
 
 

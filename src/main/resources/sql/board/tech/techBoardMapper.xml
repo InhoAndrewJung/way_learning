@@ -94,6 +94,13 @@ ORDER BY tb.board_no DESC)
 ) order by board_no desc
 		
 	</select>
+	
+	
+	<select id="getTag" resultType="hashmap" parameterType="string">
+	
+select board_no,tag from wl_tech_tag where board_no=#{value}
+		
+	</select>
 
 	<!-- 특정 no에 해당하는 상세글보는 resultaMap -->
 	<resultMap type="techBoard" id="boardRM" extends="boardListRM">
@@ -102,10 +109,11 @@ ORDER BY tb.board_no DESC)
 		
 	</resultMap>
 
-	<select id="showContent" parameterType="string" resultMap="boardRM">
-		SELECT board_no, title, cnt_view, tb.reg_date, content, m.user_id
+	<select id="showContent" parameterType="string" resultMap="boardListRM">
+		SELECT user_id, img_profile,tb.reg_date reg_date ,cnt_view, (select count(*) from wl_tech_reply  where board_no=tb.board_no) cnt_reply,
+board_no,title,content,cnt_board_like 
 		FROM wl_tech_board tb, wl_member m
-		WHERE tb.writer =m.user_id AND board_no=#{value}
+		WHERE tb.writer =m.user_id AND board_no=#{boardNo} 
 	</select>
 
 	<delete id="deleteBoard">
@@ -166,10 +174,34 @@ ORDER BY tb.board_no DESC)
 
 	</sql>
 	
+	<!-- 좋아요 관련 로직 시작 -->
+	<select id="isBoardLike" resultType="int">
+	 select count(-1) from wl_tech_board_recommend where user_id=#{userId} and board_no=#{boardNo}
+	</select>
 	
+	<insert id="insertBoardLike">
 	
-
+	insert into wl_tech_board_recommend (user_id,board_no) values(#{userId}, #{boardNo})
 	
+	</insert>
+	
+	<delete id="deleteBoardLike">
+	
+	delete from wl_tech_board_recommend where user_id=#{userId} and board_no= #{boardNo}
+	</delete>
+	
+	<update id="increaseCntBoardLike">
+		update wl_tech_board set cnt_board_like=cnt_board_like+1 where board_no=#{boardNo}
+	</update>
+	
+	<update id="decreaseCntBoardLike">
+		update wl_tech_board set cnt_board_like=greatest(cnt_board_like-1,0) where board_no=#{boardNo}
+	</update>
+	
+    <select id="selectCntBoardLike" resultType="int">
+    select cnt_board_like from wl_tech_board where board_no=#{boardNo}
+    </select>
+	<!-- 좋아요 관련 로직 끝 -->
 	
 </mapper>	
 

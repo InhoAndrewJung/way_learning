@@ -21,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -104,38 +105,47 @@ public class TechBoardController {
 	}
 
 	@RequestMapping("showContent")
-	public ModelAndView showContent(HttpServletRequest request, HttpServletResponse response,String boardNo, 
-			@RequestParam(defaultValue="")  String keyword, ModelAndView mav)
+	public ModelAndView showContent( String boardNo, @RequestParam(defaultValue="")  String keyword, ModelAndView mav)
 			throws Exception{
 
-
-		//로그인한 사람만 상세글 정보를 볼수있는 권한을 부여한다.
-		/*MemberVO mvo = (MemberVO)request.getSession().getAttribute("mvo");
-
-		if(mvo==null) { //로그인 하지 않았다.
-			return new ModelAndView("redirect:/index.jsp");
-		}*/
+	
 		//조회수 증가 로직을 추가
 		
+		techBoardService.updateCount(boardNo);
+
+		TechBoard bvo=techBoardService.showContent(boardNo);
+		List tagList= techBoardService.getTag(boardNo);
 		
 		System.out.println("showContent컨트롤러 keyword:"+keyword);
 		System.out.println("show boardNo:"+boardNo);
-		
-		techBoardService.updateCount(boardNo);
-		
-		
-
-		TechBoard bvo=techBoardService.showContent(boardNo);
 		System.out.println("show 컨트롤러 bvo:"+bvo);
+	    System.out.println("show에서 태그:"+tagList);
+	
 		mav.setViewName("board/tech/show_content");
 		mav.addObject("bvo", bvo);
+		mav.addObject("tagList", tagList);
 		
 		mav.addObject("keyword", keyword);
 		return mav;
 	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping("changeLike")
+	public int changeLike(int boardNo, String likeStatus)throws Exception{
+		
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		
+		
+		techBoardService.isBoardLike(mvo.getUserId(), boardNo,likeStatus);
+		int cnt=techBoardService.selectCntBoardLike(boardNo);
+		return cnt;
+	}
 
 	@RequestMapping("delete")
-	public ModelAndView delete(HttpSession session,String boardNo, String newfilename)
+	public ModelAndView delete(HttpSession session, int boardNo)
 			throws Exception{
 		//로그인한 사람만 상세글 정보를 볼수있는 권한을 부여한다.
 		

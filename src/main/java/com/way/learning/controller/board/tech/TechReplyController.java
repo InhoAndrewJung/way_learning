@@ -62,6 +62,20 @@ public class TechReplyController {
 		
 	}
 	
+	@ResponseBody
+	@RequestMapping("changeLike")
+	public int changeLike(int replyNo, String likeStatus)throws Exception{
+		
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		
+		
+		techReplyService.isReplyLike(mvo.getUserId(), replyNo,likeStatus);
+		int cnt=techReplyService.selectCntReplyLike(replyNo);
+		return cnt;
+	}
+	
+	
 	
 	
 	@ResponseBody
