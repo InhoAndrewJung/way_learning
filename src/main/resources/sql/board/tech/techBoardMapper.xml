@@ -174,7 +174,7 @@ board_no,title,content,cnt_board_like
 
 	</sql>
 	
-	
+	<!-- 좋아요 관련 로직 시작 -->
 	<select id="isBoardLike" resultType="int">
 	 select count(-1) from wl_tech_board_recommend where user_id=#{userId} and board_no=#{boardNo}
 	</select>
@@ -198,8 +198,10 @@ board_no,title,content,cnt_board_like
 		update wl_tech_board set cnt_board_like=greatest(cnt_board_like-1,0) where board_no=#{boardNo}
 	</update>
 	
-
-	
+    <select id="selectCntBoardLike" resultType="int">
+    select cnt_board_like from wl_tech_board where board_no=#{boardNo}
+    </select>
+	<!-- 좋아요 관련 로직 끝 -->
 	
 </mapper>	
 

@@ -43,6 +43,7 @@ public interface TechBoardService {
 	
 	public void isBoardLike(String userId, int boardNo,String likeStatus) throws SQLException;
 	
+	public int selectCntBoardLike(int boardNo) throws SQLException;
 	
 		
 	

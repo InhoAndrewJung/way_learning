@@ -52,6 +52,8 @@ public interface TechBoardDAO {
 	
 	public void decreaseCntBoardLike(int boardNo) throws SQLException;
 	
+	public int selectCntBoardLike(int boardNo) throws SQLException;
+	
 }
 
 

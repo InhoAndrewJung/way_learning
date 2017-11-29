@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.way.learning.model.board.tech.dao.TechBoardDAO;
 import com.way.learning.model.board.tech.vo.TechBoard;
@@ -87,7 +88,8 @@ public class TechBoardServiceImpl implements TechBoardService{
 		
 		return techBoardDao.countArticle(keyword);
 	}
-
+	
+	@Transactional
 	public void isBoardLike(String userId, int boardNo,String likeStatus) throws SQLException {
 		int result=techBoardDao.isBoardLike(userId, boardNo, likeStatus);
 		System.out.println("서비스 isBoardLike likeStatus:"+likeStatus);
@@ -108,10 +110,13 @@ public class TechBoardServiceImpl implements TechBoardService{
 			}
 			
 		}
-		
-		
-		
-		
+	
+	}
+	
+	@Override
+	public int selectCntBoardLike(int boardNo) throws SQLException {
+
+		return techBoardDao.selectCntBoardLike(boardNo);
 		
 	}
 	

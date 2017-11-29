@@ -21,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -104,19 +105,10 @@ public class TechBoardController {
 	}
 
 	@RequestMapping("showContent")
-	public ModelAndView showContent(HttpServletRequest request, HttpServletResponse response,String boardNo, 
-			@RequestParam(defaultValue="")  String keyword, ModelAndView mav)
+	public ModelAndView showContent( String boardNo, @RequestParam(defaultValue="")  String keyword, ModelAndView mav)
 			throws Exception{
 
-
-		//로그인한 사람만 상세글 정보를 볼수있는 권한을 부여한다.
-		/*MemberVO mvo = (MemberVO)request.getSession().getAttribute("mvo");
-
-		if(mvo==null) { //로그인 하지 않았다.
-			return new ModelAndView("redirect:/index.jsp");
-		}*/
-		
-		
+	
 		//조회수 증가 로직을 추가
 		
 		techBoardService.updateCount(boardNo);
@@ -137,15 +129,19 @@ public class TechBoardController {
 		return mav;
 	}
 	
+	
+	
+	@ResponseBody
 	@RequestMapping("changeLike")
-	public ModelAndView changeLike(int boardNo, String likeStatus)throws Exception{
+	public int changeLike(int boardNo, String likeStatus)throws Exception{
 		
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		
-		//실제 DB에서 삭제됨
+		
 		techBoardService.isBoardLike(mvo.getUserId(), boardNo,likeStatus);
-		return new ModelAndView("redirect:/board/tech/list");
+		int cnt=techBoardService.selectCntBoardLike(boardNo);
+		return cnt;
 	}
 
 	@RequestMapping("delete")

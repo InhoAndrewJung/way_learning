@@ -93,17 +93,48 @@ function updateBoard(){
 
 }  */
 
-function likeUp(){
+function boardLikeUp(){
+
+	var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}&likeStatus=likeUp";
 	
-	location.href="${pageContext.request.contextPath}/board/tech/changeLike?boardNo=${requestScope.bvo.boardNo}&likeStatus=likeUp";
+	$.ajax({
+		type: "post",
+		url: "${pageContext.request.contextPath}/board/tech/changeLike",
+		data: param,
+		success: function(result){
+			
+			//alert("likeUp ajax result:"+result);
+			
+			$("#cntBoardLike").html(result);
+			
+		}
+		
+	});
+	
+	
 	
 }	
 
-function likeDown(){
-	location.href="${pageContext.request.contextPath}/board/tech/changeLike?boardNo=${requestScope.bvo.boardNo}&likeStatus=likeDown";
+function boardLikeDown(){
 	
-}	
+var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}&likeStatus=likeDown";
+	
+	$.ajax({
+		type: "post",
+		url: "${pageContext.request.contextPath}/board/tech/changeLike",
+		data: param,
+		success: function(result){
+			
+			//alert("likeDown ajax result:"+result);
+			
+			$("#cntBoardLike").html(result);
+			
+		}
+		
+	});
+	
 
+}	
 
 </script>
 
@@ -154,9 +185,9 @@ ${delete_result}
 							제목:${requestScope.bvo.title}
 							</td>
 							<td>
-							<img  src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="likeUp()" ><br><br>
-							${bvo.cntBoardLike}<br><br>
-							<img  src="${path}/resources/img/arrowDown.png" style="width:20px; height:20px;cursor:pointer;" onclick="likeDown()">
+							<img  src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="boardLikeUp()" ><br><br>
+							<span id="cntBoardLike" >${bvo.cntBoardLike}</span><br><br>
+							<img  src="${path}/resources/img/arrowDown.png" style="width:20px; height:20px;cursor:pointer;" onclick="boardLikeDown()">
 							
 							</td>
 

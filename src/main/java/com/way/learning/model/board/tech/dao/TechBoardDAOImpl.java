@@ -151,6 +151,23 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 	}
 	
 	
+	@Override
+	public int selectCntBoardLike(int boardNo) throws SQLException {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+	
+		
+		return sqlSession.selectOne("techBoardMapper.selectCntBoardLike", boardNo);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 
