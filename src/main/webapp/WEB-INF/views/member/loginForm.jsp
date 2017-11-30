@@ -34,8 +34,17 @@
 		<tr>
 			<td colspan="2"><input type="submit" value="로그인"></td>
 		</tr>
+	
 	</table>
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	
 </form>
+<form action="${pageContext.request.contextPath}/member/findIdByEmail?${_csrf.parameterName}=${_csrf.token}"
+		id="findIdForm">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<a href="${pageContext.request.contextPath}/member/findId">아이디</a>&nbsp;|&nbsp;
+		<a href="${pageContext.request.contextPath}/member/ExistId">비밀번호 찾기</a>
+</form>
+
 </body>
 </html>

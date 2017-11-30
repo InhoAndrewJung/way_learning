@@ -1,12 +1,12 @@
 package com.way.learning.model.member.dao;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.way.learning.model.member.vo.Member;
@@ -40,7 +40,21 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public int idcheck(String userId) {
+		System.out.println("다오임플 아이디:"+userId);
 		return sqlSession.selectOne("memberMapper.idcheck",userId);				
+	}
+
+	@Override
+	public String findIdByEmail(String email) {
+		
+		return sqlSession.selectOne("memberMapper.findIdByEmail", email);
+	}
+	@Override
+	public int updatefindPass(String password, String userId) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("password",password);
+		map.put("userId",userId);
+		return sqlSession.update("memberMapper.updatefindPass",map);
 	}
 	
 }
