@@ -21,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,7 +47,7 @@ public class TechBoardController {
 	}
 	
 	@RequestMapping("insert")
-	public ModelAndView write(HttpServletRequest request, HttpServletResponse response,
+	public ModelAndView insertBoard(HttpServletRequest request, HttpServletResponse response,
 			HttpSession session, TechBoard bvo ) throws Exception{
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("컨트로러 mvo:"+mvo);
@@ -59,7 +60,7 @@ public class TechBoardController {
 
 		
 
-		techBoardService.write(bvo); //w_date .. 이때 디비에 저장된다..
+		techBoardService.insertBoard(bvo); //w_date .. 이때 디비에 저장된다..
 		System.out.println("컨트롤러 bvo:"+bvo);
 		return new ModelAndView("board/tech/show_content", "bvo",bvo);
 	}
@@ -68,12 +69,12 @@ public class TechBoardController {
 
 	@RequestMapping("list")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, @RequestParam(defaultValue="1") String pageNo ,
-			@RequestParam(defaultValue="")  String keyword, ModelAndView mav)
+			@RequestParam(defaultValue="")  String keyword, @RequestParam(defaultValue="board_no") String sorting, ModelAndView mav)
 			throws Exception{
 		
 		
 		
-		List<TechBoard> list=techBoardService.getBoardList(pageNo,keyword);
+		List<TechBoard> list=techBoardService.getBoardList(pageNo,keyword, sorting);
 		
 		int count=techBoardService.countArticle(keyword); 
 		
@@ -82,8 +83,8 @@ public class TechBoardController {
 		ListVO lvo = new ListVO(list, pagingBean); //특정한 페이지에서 불러오는 전체 게시글임!!
 		
 		List tagList=techBoardService.getTagList();
-		
-		
+		System.out.println("sorting:"+sorting);
+		System.out.println("pageNo:"+pageNo);
 		System.out.println("컨트롤러 totalContent:"+count);
 		System.out.println("컨트롤러 에서 list:"+list);
 		System.out.println("컨트롤러에서 lvo:"+lvo);
@@ -104,38 +105,47 @@ public class TechBoardController {
 	}
 
 	@RequestMapping("showContent")
-	public ModelAndView showContent(HttpServletRequest request, HttpServletResponse response,String boardNo, 
-			@RequestParam(defaultValue="")  String keyword, ModelAndView mav)
+	public ModelAndView showContent( String boardNo, @RequestParam(defaultValue="")  String keyword, ModelAndView mav)
 			throws Exception{
 
-
-		//로그인한 사람만 상세글 정보를 볼수있는 권한을 부여한다.
-		/*MemberVO mvo = (MemberVO)request.getSession().getAttribute("mvo");
-
-		if(mvo==null) { //로그인 하지 않았다.
-			return new ModelAndView("redirect:/index.jsp");
-		}*/
+	
 		//조회수 증가 로직을 추가
 		
+		techBoardService.updateCount(boardNo);
+
+		TechBoard bvo=techBoardService.showContent(boardNo);
+		List tagList= techBoardService.getTag(boardNo);
 		
 		System.out.println("showContent컨트롤러 keyword:"+keyword);
 		System.out.println("show boardNo:"+boardNo);
-		
-		techBoardService.updateCount(boardNo);
-		
-		
-
-		TechBoard bvo=techBoardService.showContent(boardNo);
 		System.out.println("show 컨트롤러 bvo:"+bvo);
+	    System.out.println("show에서 태그:"+tagList);
+	
 		mav.setViewName("board/tech/show_content");
 		mav.addObject("bvo", bvo);
+		mav.addObject("tagList", tagList);
 		
 		mav.addObject("keyword", keyword);
 		return mav;
 	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping("changeLike")
+	public int changeLike(int boardNo, String likeStatus)throws Exception{
+		
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		
+		
+		techBoardService.isBoardLike(mvo.getUserId(), boardNo,likeStatus);
+		int cnt=techBoardService.selectCntBoardLike(boardNo);
+		return cnt;
+	}
 
 	@RequestMapping("delete")
-	public ModelAndView delete(HttpSession session,String boardNo, String newfilename)
+	public ModelAndView delete(HttpSession session, int boardNo)
 			throws Exception{
 		//로그인한 사람만 상세글 정보를 볼수있는 권한을 부여한다.
 		

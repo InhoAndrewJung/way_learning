@@ -2,10 +2,13 @@ package com.way.learning.service.board.tech;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.way.learning.model.board.tech.dao.TechBoardDAO;
 import com.way.learning.model.board.tech.vo.TechBoard;
@@ -16,10 +19,10 @@ public class TechBoardServiceImpl implements TechBoardService{
 	@Autowired
 	private TechBoardDAO techBoardDao;
 	
-	public void write(TechBoard bvo)throws SQLException{
+	public int insertBoard(TechBoard bvo)throws SQLException{
 		System.out.println("Before BVO :: "+bvo.getBoardNo()); //0
 		System.out.println("보드 서비스 bvo:"+bvo);
-		techBoardDao.write(bvo); //selectKey가 돌아가서 시퀀스를 vo에주입
+		int result=techBoardDao.insertBoard(bvo); //selectKey가 돌아가서 시퀀스를 vo에주입
 		System.out.println("After BVO :: "+bvo.getBoardNo()); //3
 		
 		Date date=techBoardDao.selectByNoForDate(bvo.getBoardNo());//3
@@ -33,9 +36,10 @@ public class TechBoardServiceImpl implements TechBoardService{
 			techBoardDao.insertTag(tags,bvo.getBoardNo());
 			
 		}
+		return result;
 	}
 	
-	public List<TechBoard> getBoardList(String Pageno,  String keyword) throws SQLException{// no 
+	public List<TechBoard> getBoardList(String Pageno,  String keyword, String sorting) throws SQLException{// no 
 		/*if(Pageno ==null || Pageno=="")  Pageno="1";*///특정한 페이지를 클릭하지 않고 바로 최신 페이지로 들어가는 경우
 		//페이징 처리시 수정되어야 하는 부분
 		
@@ -43,7 +47,7 @@ public class TechBoardServiceImpl implements TechBoardService{
 		
 		
 		
-		return techBoardDao.getBoardList(Pageno,keyword);
+		return techBoardDao.getBoardList(Pageno,keyword, sorting);
 	}
 	
 	public List getTagList() throws SQLException{
@@ -51,13 +55,21 @@ public class TechBoardServiceImpl implements TechBoardService{
 		return techBoardDao.getTagList();
 	}
 	
+	@Override
+	public List getTag(String boardNo) throws SQLException {
+		// TODO Auto-generated method stub
+		return techBoardDao.getTag(boardNo);
+	}
+	
+	
 	//showContent
 	public TechBoard showContent(String no) throws SQLException{
+		
 		return techBoardDao.showContent(no);
 	}
 		
 	//deleteBoard
-	public void deleteBoard(String no) throws SQLException{
+	public void deleteBoard(int no) throws SQLException{
 		techBoardDao.deleteBoard(no);
 	}
 	
@@ -77,6 +89,40 @@ public class TechBoardServiceImpl implements TechBoardService{
 		
 		return techBoardDao.countArticle(keyword);
 	}
+	
+	@Transactional
+	public int isBoardLike(String userId, int boardNo,String likeStatus) throws SQLException {
+		int result=techBoardDao.isBoardLike(userId, boardNo, likeStatus);
+		System.out.println("서비스 isBoardLike likeStatus:"+likeStatus);
+		System.out.println("서비스 isBoardLike userId:"+userId);
+		System.out.println("서비스 isBoardLike boardNo:"+boardNo);
+		System.out.println("서비스 isBoardLike result:"+result);
+		int action=0;
+		if(likeStatus.equals("likeUp")){
+			if(result==0){
+				techBoardDao.insertBoardLike(userId, boardNo);
+				action=techBoardDao.increaseCntBoardLike(boardNo);
+			}
+			
+		}else if(likeStatus.equals("likeDown")){
+			if(result==1){
+				techBoardDao.deleteBoardLike(userId, boardNo);
+				action=techBoardDao.decreaseCntBoardLike(boardNo);
+			}
+			
+		}
+		return action;
+	
+	}
+	
+	@Override
+	public int selectCntBoardLike(int boardNo) throws SQLException {
+
+		return techBoardDao.selectCntBoardLike(boardNo);
+		
+	}
+	
+	
 	
 	
 		

@@ -18,12 +18,12 @@ public class TechBoard {
 	private String content;
 	private int cntView;
 	private int cntReply;
-	private int cntPostLike;
+	private int cntBoardLike;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date regDate;    //java.util   
 	List<String> tag;
 	public TechBoard(int boardNo, Member member, String title, String content, int cntView, int cntReply,
-			int cntPostLike, Date regDate, List<String> tag) {
+			int cntBoardLike, Date regDate, List<String> tag) {
 		super();
 		this.boardNo = boardNo;
 		this.member = member;
@@ -31,11 +31,10 @@ public class TechBoard {
 		this.content = content;
 		this.cntView = cntView;
 		this.cntReply = cntReply;
-		this.cntPostLike = cntPostLike;
+		this.cntBoardLike = cntBoardLike;
 		this.regDate = regDate;
 		this.tag = tag;
 	}
-	
 	
 	
 	public TechBoard() {
@@ -43,11 +42,9 @@ public class TechBoard {
 	}
 
 
-
 	public int getBoardNo() {
 		return boardNo;
 	}
-
 
 
 	public void setBoardNo(int boardNo) {
@@ -55,11 +52,9 @@ public class TechBoard {
 	}
 
 
-
 	public Member getMember() {
 		return member;
 	}
-
 
 
 	public void setMember(Member member) {
@@ -67,11 +62,9 @@ public class TechBoard {
 	}
 
 
-
 	public String getTitle() {
 		return title;
 	}
-
 
 
 	public void setTitle(String title) {
@@ -79,11 +72,9 @@ public class TechBoard {
 	}
 
 
-
 	public String getContent() {
 		return content;
 	}
-
 
 
 	public void setContent(String content) {
@@ -91,11 +82,9 @@ public class TechBoard {
 	}
 
 
-
 	public int getCntView() {
 		return cntView;
 	}
-
 
 
 	public void setCntView(int cntView) {
@@ -103,11 +92,9 @@ public class TechBoard {
 	}
 
 
-
 	public int getCntReply() {
 		return cntReply;
 	}
-
 
 
 	public void setCntReply(int cntReply) {
@@ -115,17 +102,14 @@ public class TechBoard {
 	}
 
 
-
-	public int getCntPostLike() {
-		return cntPostLike;
+	public int getCntBoardLike() {
+		return cntBoardLike;
 	}
 
 
-
-	public void setCntPostLike(int cntPostLike) {
-		this.cntPostLike = cntPostLike;
+	public void setCntBoardLike(int cntBoardLike) {
+		this.cntBoardLike = cntBoardLike;
 	}
-
 
 
 	public Date getRegDate() {
@@ -133,11 +117,9 @@ public class TechBoard {
 	}
 
 
-
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-
 
 
 	public List<String> getTag() {
@@ -145,21 +127,17 @@ public class TechBoard {
 	}
 
 
-
 	public void setTag(List<String> tag) {
 		this.tag = tag;
 	}
 
 
-
 	@Override
 	public String toString() {
 		return "TechBoard [boardNo=" + boardNo + ", member=" + member + ", title=" + title + ", content=" + content
-				+ ", cntView=" + cntView + ", cntReply=" + cntReply + ", cntPostLike=" + cntPostLike + ", regDate="
+				+ ", cntView=" + cntView + ", cntReply=" + cntReply + ", cntBoardLike=" + cntBoardLike + ", regDate="
 				+ regDate + ", tag=" + tag + "]";
 	}
-	
-	
 	
 	
 	
