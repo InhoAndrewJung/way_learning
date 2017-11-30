@@ -33,8 +33,14 @@ public class MemberController {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	// 메일보낼때 필요한...
-	@Autowired
+	
+	
 	private JavaMailSenderImpl mailSender;
+	
+	@Autowired
+	public void setMailSender(JavaMailSenderImpl mailSender) {
+		this.mailSender = mailSender;
+	}
 
 	// 아이디 찾기 페이지이동
 	@RequestMapping("findId")
