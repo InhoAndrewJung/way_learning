@@ -167,6 +167,12 @@ public class MemberServiceImpl implements MemberService {
 		return authoritiesDAO.selectAuthorityByUserName(username);
 	}
 
+	@Override
+	public int emailcheck(String email) {
+		int emailResult = memberDAO.emailcheck(email);
+		return emailResult;
+	}
+
 
 
 }

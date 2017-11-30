@@ -21,5 +21,6 @@ public interface MemberDAO {
 	void registerMember(Member vo);
 
 	int idcheck(String id);
-
+	
+	int emailcheck (String email);
 }

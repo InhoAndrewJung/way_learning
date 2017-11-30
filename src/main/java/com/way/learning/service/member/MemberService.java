@@ -23,4 +23,6 @@ public interface MemberService {
 	String idcheck(String id);
 
 	List<Authority> selectAuthorityByUsername(String username);
+
+	int emailcheck (String email);
 }

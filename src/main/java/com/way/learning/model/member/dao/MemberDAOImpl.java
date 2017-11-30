@@ -56,7 +56,11 @@ public class MemberDAOImpl implements MemberDAO {
 		map.put("userId",userId);
 		return sqlSession.update("memberMapper.updatefindPass",map);
 	}
-	
+	@Override
+	public int emailcheck(String email) {
+
+		return sqlSession.selectOne("memberMapper.emailcheck",email);				
+	}
 }
 
 

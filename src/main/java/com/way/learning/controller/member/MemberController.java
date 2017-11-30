@@ -1,14 +1,9 @@
 package com.way.learning.controller.member;
 
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -33,10 +28,10 @@ public class MemberController {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	// 메일보낼때 필요한...
-	
-	
+
+	@Autowired
 	private JavaMailSenderImpl mailSender;
-	
+
 	@Autowired
 	public void setMailSender(JavaMailSenderImpl mailSender) {
 		this.mailSender = mailSender;
@@ -94,17 +89,17 @@ public class MemberController {
 
 	// 아이디 이메일 받아 비밀번호 이메일전송
 	@RequestMapping("mailSender")
-	public ModelAndView mailSender(HttpServletRequest request, ModelAndView mav,  Member vo) throws Exception {
+	public ModelAndView mailSender(HttpServletRequest request, ModelAndView mav, Member vo) throws Exception {
 
 		String result = request.getParameter("result");
-		System.out.println("컨트result:"+result);
+		System.out.println("컨트result:" + result);
 		final String userId = request.getParameter("userId");
-		System.out.println("파이널 userId:"+userId);
+		System.out.println("파이널 userId:" + userId);
 		// 1.아이디가 있다 확인
 		if (result.equals("fail")) {
 			mav.setViewName("member/loginForm");
-			
-			System.out.println("컨트userId:"+userId);
+
+			System.out.println("컨트userId:" + userId);
 			final String email = request.getParameter("email");
 			// 2.임시비밀번호 생성
 			final String tempPassword = "" + (int) (Math.random() * 100000 + 1);
@@ -118,7 +113,7 @@ public class MemberController {
 			if (email.equals(vo.getEmail())) {
 				System.out.println("입력받은 email과 등록된 email이 일치합니다.");
 				// 6. 임시비밀번호를 db에 세팅
-				memberService.updatefindPass(encodePassword,userId);
+				memberService.updatefindPass(encodePassword, userId);
 
 				// 7.보낼 메세지 준비
 				MimeMessagePreparator preparator = new MimeMessagePreparator() {
@@ -134,21 +129,26 @@ public class MemberController {
 						helper.setText(body, true);
 					}// prepare
 				};// MimeMessagePreparator
+
+				// 없는 메일로 보낼때 예외처리
+				try {
 					// 8.메일보냄
-				mailSender.send(preparator);
+					mailSender.send(preparator);
 
-				System.out.println("[MailSender] : Email Sent Successfully!!");
+					System.out.println("[MailSender] : Email Sent Successfully!!");
 
-				mav.addObject("result", result);
-				// 9.메일보내기 성공 결과 리턴
-				
+					mav.addObject("result", result);
+					// 9.메일보내기 성공 결과 리턴
+				} catch (Exception e) {
+					System.out.println(e.fillInStackTrace());
+				}
 			} else {
 				System.out.println("[MailSender] : No Such User Found !");
 				mav.addObject("result", result);
 				// 10.메일보내기 실패 결과 리턴
-				
+
 			} // if
-		}// if
+		} // if
 		return mav;
 	}// mailSender
 
@@ -164,7 +164,10 @@ public class MemberController {
 	public String insertMaember(Member vo, HttpServletRequest request) throws Exception {
 		System.out.println("컨트롤러 멤버 vo:" + vo);
 		System.out.println("컨트롤러 멤버 vo:" + vo);
-
+		int emailResult = memberService.emailcheck(request.getParameter("email"));
+		if (emailResult == 1) {
+			System.out.println("이미 있는 이메일입니다.");
+		}
 		memberService.registerMember(vo, request);
 		return "redirect:/";
 
@@ -181,6 +184,13 @@ public class MemberController {
 	@ResponseBody
 	public String idCheckAjax(HttpServletRequest request) {
 		return memberService.idcheck(request.getParameter("userId"));
+	}
+	
+	//이메일 중복확인
+	@RequestMapping("emailcheckAjax")
+	@ResponseBody
+	public int emailCheckView(HttpServletRequest request) {
+		return memberService.emailcheck(request.getParameter("email"));
 	}
 
 	@RequestMapping("updateForm")
