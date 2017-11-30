@@ -18,10 +18,10 @@ import com.way.learning.model.member.vo.Member;
 @Service
 public interface TechReplyService {
 
-	;
+	
 
 	//insertReply
-	public void  insertReply(TechReply vo);
+	public int  insertReply(TechReply vo);
 
 	public List<TechReply>  listReply(String boardNo ,HttpSession session);
 
@@ -34,7 +34,7 @@ public interface TechReplyService {
 	//deleteReply
 	public int  deleteReply(String replyNo);
 	
-	public void isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException;
+	public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException;
 	
 	public int selectCntReplyLike(int replyNo) throws SQLException;
 

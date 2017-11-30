@@ -19,8 +19,8 @@ public class TechReplyDAOImpl implements TechReplyDAO {
 	private SqlSession sqlSession;
 
 	//insertReply
-	public void  insertReply(TechReply vo){
-		sqlSession.insert("techReplyMapper.insertReply", vo);
+	public int  insertReply(TechReply vo){
+		return sqlSession.insert("techReplyMapper.insertReply", vo);
 
 	}
 
@@ -109,19 +109,19 @@ public class TechReplyDAOImpl implements TechReplyDAO {
 		}
 		
 		@Override
-		public void increaseCntReplyLike(int replyNo) throws SQLException {
+		public int increaseCntReplyLike(int replyNo) throws SQLException {
 			
 			System.out.println("총 좋아요 올리기:"+replyNo);
-			 sqlSession.update("techReplyMapper.increaseCntReplyLike", replyNo);
+			 return sqlSession.update("techReplyMapper.increaseCntReplyLike", replyNo);
 			
 		}
 		
 		
 		@Override
-		public void decreaseCntReplyLike(int replyNo) throws SQLException {
+		public int decreaseCntReplyLike(int replyNo) throws SQLException {
 			
 			System.out.println("총 좋아요 내리기:"+replyNo);
-			 sqlSession.update("techReplyMapper.decreaseCntReplyLike", replyNo);
+			 return sqlSession.update("techReplyMapper.decreaseCntReplyLike", replyNo);
 			
 		}
 		
