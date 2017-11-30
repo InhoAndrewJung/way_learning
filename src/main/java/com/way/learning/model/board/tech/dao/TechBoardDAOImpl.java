@@ -134,19 +134,19 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 	}
 	
 	@Override
-	public void increaseCntBoardLike(int boardNo) throws SQLException {
+	public int increaseCntBoardLike(int boardNo) throws SQLException {
 		
 		System.out.println("총 좋아요 올리기:"+boardNo);
-		 sqlSession.update("techBoardMapper.increaseCntBoardLike", boardNo);
+		return sqlSession.update("techBoardMapper.increaseCntBoardLike", boardNo);
 		
 	}
 	
 	
 	@Override
-	public void decreaseCntBoardLike(int boardNo) throws SQLException {
+	public int decreaseCntBoardLike(int boardNo) throws SQLException {
 		
 		System.out.println("총 좋아요 내리기:"+boardNo);
-		 sqlSession.update("techBoardMapper.decreaseCntBoardLike", boardNo);
+		return sqlSession.update("techBoardMapper.decreaseCntBoardLike", boardNo);
 		
 	}
 	

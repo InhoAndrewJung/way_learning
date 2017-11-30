@@ -19,8 +19,8 @@ public class TechReplyServiceImpl implements TechReplyService{
 	private TechReplyDAO techReplyDao;
 
 	//insertReply
-	public void  insertReply(TechReply vo){
-		techReplyDao.insertReply(vo);
+	public int  insertReply(TechReply vo){
+		return techReplyDao.insertReply(vo);
 
 	}
 
@@ -67,27 +67,28 @@ public class TechReplyServiceImpl implements TechReplyService{
 	
 	
 	@Transactional
-	public void isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException {
+	public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException {
 		int result=techReplyDao.isReplyLike(userId, replyNo, likeStatus);
 		System.out.println("서비스 isReplyLike likeStatus:"+likeStatus);
 		System.out.println("서비스 isReplyLike userId:"+userId);
 		System.out.println("서비스 isReplyLike boardNo:"+replyNo);
 		System.out.println("서비스 isReplyike result:"+result);
-		
+		int action=0;
 		if(likeStatus.equals("likeUp")){
 			if(result==0){
 				techReplyDao.insertReplyLike(userId, replyNo);
-				techReplyDao.increaseCntReplyLike(replyNo);
+				action=techReplyDao.increaseCntReplyLike(replyNo);
 			}
 			
 		}else if(likeStatus.equals("likeDown")){
 			if(result==1){
 				techReplyDao.deleteReplyLike(userId, replyNo);
-				techReplyDao.decreaseCntReplyLike(replyNo);
+			action=techReplyDao.decreaseCntReplyLike(replyNo);
 			}
 			
 		}
-	
+		return action;
+		
 	}
 	
 	@Override

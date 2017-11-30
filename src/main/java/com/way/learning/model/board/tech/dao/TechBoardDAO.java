@@ -48,9 +48,9 @@ public interface TechBoardDAO {
 	
 	public void deleteBoardLike(String userId, int boardNo) throws SQLException;
 	
-	public void increaseCntBoardLike(int boardNo) throws SQLException;
+	public int increaseCntBoardLike(int boardNo) throws SQLException;
 	
-	public void decreaseCntBoardLike(int boardNo) throws SQLException;
+	public int decreaseCntBoardLike(int boardNo) throws SQLException;
 	
 	public int selectCntBoardLike(int boardNo) throws SQLException;
 	

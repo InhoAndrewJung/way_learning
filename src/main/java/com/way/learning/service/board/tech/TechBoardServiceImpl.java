@@ -19,10 +19,10 @@ public class TechBoardServiceImpl implements TechBoardService{
 	@Autowired
 	private TechBoardDAO techBoardDao;
 	
-	public void insertBoard(TechBoard bvo)throws SQLException{
+	public int insertBoard(TechBoard bvo)throws SQLException{
 		System.out.println("Before BVO :: "+bvo.getBoardNo()); //0
 		System.out.println("보드 서비스 bvo:"+bvo);
-		techBoardDao.insertBoard(bvo); //selectKey가 돌아가서 시퀀스를 vo에주입
+		int result=techBoardDao.insertBoard(bvo); //selectKey가 돌아가서 시퀀스를 vo에주입
 		System.out.println("After BVO :: "+bvo.getBoardNo()); //3
 		
 		Date date=techBoardDao.selectByNoForDate(bvo.getBoardNo());//3
@@ -36,6 +36,7 @@ public class TechBoardServiceImpl implements TechBoardService{
 			techBoardDao.insertTag(tags,bvo.getBoardNo());
 			
 		}
+		return result;
 	}
 	
 	public List<TechBoard> getBoardList(String Pageno,  String keyword, String sorting) throws SQLException{// no 
@@ -90,26 +91,27 @@ public class TechBoardServiceImpl implements TechBoardService{
 	}
 	
 	@Transactional
-	public void isBoardLike(String userId, int boardNo,String likeStatus) throws SQLException {
+	public int isBoardLike(String userId, int boardNo,String likeStatus) throws SQLException {
 		int result=techBoardDao.isBoardLike(userId, boardNo, likeStatus);
 		System.out.println("서비스 isBoardLike likeStatus:"+likeStatus);
 		System.out.println("서비스 isBoardLike userId:"+userId);
 		System.out.println("서비스 isBoardLike boardNo:"+boardNo);
 		System.out.println("서비스 isBoardLike result:"+result);
-		
+		int action=0;
 		if(likeStatus.equals("likeUp")){
 			if(result==0){
 				techBoardDao.insertBoardLike(userId, boardNo);
-				techBoardDao.increaseCntBoardLike(boardNo);
+				action=techBoardDao.increaseCntBoardLike(boardNo);
 			}
 			
 		}else if(likeStatus.equals("likeDown")){
 			if(result==1){
 				techBoardDao.deleteBoardLike(userId, boardNo);
-				techBoardDao.decreaseCntBoardLike(boardNo);
+				action=techBoardDao.decreaseCntBoardLike(boardNo);
 			}
 			
 		}
+		return action;
 	
 	}
 	
