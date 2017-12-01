@@ -52,17 +52,29 @@ $(document).ready(function() {
 })
  */
 
+ 
 </script>
 
 
 <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 
 
+      
+    
+<%-- <link href="${pageContext.request.contextPath}/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet"> --%> 
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+ 
+
+
+
 </head>
 
+
+
+<div align="center">
 <font face="HY나무L" size="5"><strong>글쓰기 <br><br></strong></font>
-
-
   <form action="${pageContext.request.contextPath}/board/tech/insert?${_csrf.parameterName}=${_csrf.token}" method="post" name="write_form"
   	enctype="multipart/form-data">
 <%--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">  --%> 
@@ -72,14 +84,14 @@ $(document).ready(function() {
     <tr>
      <td>제목</td>
      <td>
-     <input type="text" name="title" maxlength="100" size="70" placeholder="제목을 입력해주세요">
+     <input type="text" name="title" maxlength="100" size="90" placeholder="제목을 입력해주세요">
      </td>
     </tr>
     
     <tr>
      <td>태그</td>
      <td>
-     <input type="text" name="tag" maxlength="100" size="70" placeholder="태그를  컴마로 구분해서 입력해주세요" >
+     <input type="text" name="tag" maxlength="100" size="90" placeholder="태그를  컴마로 구분해서 입력해주세요" >
      
     
      </td>
@@ -90,8 +102,7 @@ $(document).ready(function() {
     
     <tr>
      <td colspan="2">
-    <textarea id="content" name="content" rows="5" cols="80"
-	placeholder="내용을 입력하세요"></textarea>
+    <textarea id="content" name="content"rows="10" cols="80" ></textarea>
 	
 	<!-- 텍스트 에리어를 스마트 에디터로 변경 -->
 <script>
@@ -103,7 +114,12 @@ $(document).ready(function() {
 	
  CKEDITOR.replace("content", {
 	filebrowserUploadUrl : "${pageContext.request.contextPath}/board/tech/imageUpload"
+	
+	
 }); 
+
+ CKEDITOR.on('instanceLoaded', function(e) {e.editor.resize(700, 600)} );
+
 
 </script>
      </td>
@@ -115,4 +131,5 @@ $(document).ready(function() {
     </tr>
    </table>
   </form>
+  </div>
 </html>

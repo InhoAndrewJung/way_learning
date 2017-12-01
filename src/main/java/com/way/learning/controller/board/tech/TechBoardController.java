@@ -58,9 +58,7 @@ public class TechBoardController {
 		//로그인 한 상태라면
 		bvo.setMember(mvo); //bvo와 mvo의 Hasing 관계가 성립된다..
 
-		
-
-		techBoardService.insertBoard(bvo); //w_date .. 이때 디비에 저장된다..
+		techBoardService.insertBoard(bvo); 
 		System.out.println("컨트롤러 bvo:"+bvo);
 		return new ModelAndView("board/tech/show_content", "bvo",bvo);
 	}
