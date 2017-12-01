@@ -1,17 +1,17 @@
 package com.way.learning.model.question.vo;
 
 public class AlgorithmQuestion {
-	private Integer questionNo;
+	private int questionNo;
 	private String title;
 	private String question;
 	private String input;
 	private String output;
 	private String answer;
-	private Integer cntSubmit;
-	private Integer cntRight;
+	private int cntSubmit;
+	private int cntRight;
 
-	public AlgorithmQuestion(Integer questionNo, String title, String question, String input, String output,
-			String answer, Integer cntSubmit, Integer cntRight) {
+	public AlgorithmQuestion(int questionNo, String title, String question, String input, String output, String answer,
+			int cntSubmit, int cntRight) {
 		super();
 		this.questionNo = questionNo;
 		this.title = title;
@@ -26,11 +26,11 @@ public class AlgorithmQuestion {
 	public AlgorithmQuestion() {
 	}
 
-	public Integer getQuestionNo() {
+	public int getQuestionNo() {
 		return questionNo;
 	}
 
-	public void setQuestionNo(Integer questionNo) {
+	public void setQuestionNo(int questionNo) {
 		this.questionNo = questionNo;
 	}
 
@@ -74,19 +74,19 @@ public class AlgorithmQuestion {
 		this.answer = answer;
 	}
 
-	public Integer getCntSubmit() {
+	public int getCntSubmit() {
 		return cntSubmit;
 	}
 
-	public void setCntSubmit(Integer cntSubmit) {
+	public void setCntSubmit(int cntSubmit) {
 		this.cntSubmit = cntSubmit;
 	}
 
-	public Integer getCntRight() {
+	public int getCntRight() {
 		return cntRight;
 	}
 
-	public void setCntRight(Integer cntRight) {
+	public void setCntRight(int cntRight) {
 		this.cntRight = cntRight;
 	}
 
