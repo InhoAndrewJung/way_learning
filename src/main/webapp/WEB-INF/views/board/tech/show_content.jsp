@@ -136,17 +136,54 @@ var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boar
 
 }	
 
+
+/**
+* Resize height of (outer) editor frame to match inner height of contents
+* @param fckEditor = editor instance reference
+* @param min = minimum height (in pixels)
+* @param max = maximum height
+*/
+/* function resizeHeightToContents(CKEDITOR, min, max) {
+var frameHeight = CKEDITOR.EditorWindow.parent.innerHeight; //outer frame which includes menu bar
+var editHeight = CKEDITOR.EditorWindow.innerHeight; //inner content frame
+var contentHeight = CKEDITOR.EditorDocument.body.offsetHeight;
+var heightDiff = contentHeight - editHeight;
+if ((heightDiff < 0) && (frameHeight > min)) {
+//shrink editor frame
+frameHeight += heightDiff;
+if (frameHeight < min) frameHeight = min;
+CKEDITOR.EditorWindow.parent.frameElement.style.height = frameHeight;
+}
+else if ((heightDiff > 0) && (frameHeight < max)) {
+//expand editor frame
+frameHeight += heightDiff;
+if (frameHeight > max) frameHeight = max;
+CKEDITOR.EditorWindow.parent.frameElement.style.height = frameHeight;
+}
+} */
+
+
+
 </script>
 
 
 <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 
 
+
+
 <style>
 
+    .cke_top
+    {
+        display: none !important;
+    }
+
+.cke_bottom {display: !important;}
 #profile{width:50px; height:50px; border-radius: 50% }
 a{text-decoration:none; cursor: pointer;}
 #tag{font-size:10px;border:1px solid grey;border-radius:10%; background-color:grey; color:white; margin-left:10px;}
+
 </style>
 
 
@@ -196,9 +233,13 @@ ${delete_result}
 						<tr>
 
 							<td colspan="4">
-							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" readonly>${requestScope.bvo.content}</textarea>
+							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" >${requestScope.bvo.content}</textarea>
 								<script>
-			          CKEDITOR.replace("content"); // 태그의 id
+			          CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false, readonly:true }); // 태그의 id
+			          CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});
+
+			        
+			          
 		                        </script> 
 							
 							</td>
