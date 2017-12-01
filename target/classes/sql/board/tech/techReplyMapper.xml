@@ -79,7 +79,10 @@
     </select>
 	<!-- 좋아요 관련 로직 끝 -->
 
-
+	<select id="selectAllRecommendNo" resultType="int">
+     select reply_No from wl_tech_reply_recommend
+    
+    </select>
 	
 	
 </mapper>	

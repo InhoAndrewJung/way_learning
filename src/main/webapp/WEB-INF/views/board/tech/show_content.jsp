@@ -96,7 +96,7 @@ $(document).ready(function() {
 			success: function(result){
 				$("#listReply").html(result);
 				
-				console.log(result);
+				
 			}
 		});
 	 }
@@ -137,7 +137,7 @@ function boardLikeUp(boardNo){
 			//alert("likeUp ajax result:"+result);
 			
 			$("#cntBoardLike").html(result);
-			$('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;	
+			$('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
 		}
 	});	
 }	

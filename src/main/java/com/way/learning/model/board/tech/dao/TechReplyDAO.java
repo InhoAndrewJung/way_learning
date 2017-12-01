@@ -45,6 +45,8 @@ public interface TechReplyDAO {
 	public int decreaseCntReplyLike(int replyNo) throws SQLException;
 	
 	public int selectCntReplyLike(int replyNo) throws SQLException;
+	
+	public List<Integer> selectAllRecommendNo() throws SQLException;
 
 
 
