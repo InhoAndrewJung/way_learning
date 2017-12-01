@@ -31,10 +31,10 @@ public class ActivityAspect { //POJO
 		
 		
 		
-			Object[ ] params=pjp.getArgs();
+			/*Object[ ] params=pjp.getArgs();
 			System.out.println(" activity aopparams[0].toString():"+params[0].toString());
 			System.out.println(" activity aopparams[1].toString():"+params[1].toString());
-			System.out.println(" activity aopparams[2].toString():"+params[2].toString());
+			System.out.println(" activity aopparams[2].toString():"+params[2].toString());*/
 			System.out.println("activity aop result:"+result);
 			Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(result.toString().equals("1") ){
@@ -59,7 +59,7 @@ public class ActivityAspect { //POJO
 		
 		
 		
-			Object[ ] params=pjp.getArgs();
+			
 			
 			System.out.println("activity aop result:"+result);
 			Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
