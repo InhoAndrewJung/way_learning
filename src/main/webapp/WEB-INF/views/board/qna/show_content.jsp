@@ -21,7 +21,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type: "post",
-			url: "${pageContext.request.contextPath}/board/tech/likeStatus",
+			url: "${pageContext.request.contextPath}/board/qna/likeStatus",
 			data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}",
 			success: function(result){
 				
@@ -71,7 +71,7 @@ $(document).ready(function() {
 			
 			$.ajax({
 				type: "post",
-				url: "${pageContext.request.contextPath}/reply/tech/insert",
+				url: "${pageContext.request.contextPath}/reply/qna/insert",
 				data: param,
 				success: function(){
 					
@@ -92,7 +92,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type:"get",
-			url: "${pageContext.request.contextPath}/reply/tech/list?boardNo=${requestScope.bvo.boardNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
+			url: "${pageContext.request.contextPath}/reply/qna/list?boardNo=${requestScope.bvo.boardNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
 			success: function(result){
 				$("#listReply").html(result);
 				
@@ -105,14 +105,14 @@ $(document).ready(function() {
 
 function deleteBoard(){
 	if(confirm("해당 글을 삭제하시겠습니까?")){
-		location.href="${pageContext.request.contextPath}/board/tech/delete?boardNo=${requestScope.bvo.boardNo}";
+		location.href="${pageContext.request.contextPath}/board/qna/delete?boardNo=${requestScope.bvo.boardNo}";
 	}
 	
 }
 
 function updateBoard(){
 	if(confirm("해당 글을 수정하시겠습니까?")){
-		location.href="${pageContext.request.contextPath}/board/tech/updateView?boardNo=${requestScope.bvo.boardNo}";
+		location.href="${pageContext.request.contextPath}/board/qna/updateView?boardNo=${requestScope.bvo.boardNo}";
 	}
 }
 
@@ -130,7 +130,7 @@ function boardLikeUp(boardNo){
 	
 	$.ajax({
 		type: "post",
-		url: "${pageContext.request.contextPath}/board/tech/changeLike",
+		url: "${pageContext.request.contextPath}/board/qna/changeLike",
 		data: param,
 		success: function(result){
 			
@@ -148,7 +148,7 @@ var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boar
 	
 	$.ajax({
 		type: "post",
-		url: "${pageContext.request.contextPath}/board/tech/changeLike",
+		url: "${pageContext.request.contextPath}/board/qna/changeLike",
 		data: param,
 		success: function(result){
 			
@@ -252,7 +252,7 @@ ${delete_result}
 					</table>
 
 							<a
-								href="${pageContext.request.contextPath}/board/tech/list?keyword=${keyword}"><img
+								href="${pageContext.request.contextPath}/board/qna/list?keyword=${keyword}"><img
 									alt="목록"
 									src="${pageContext.request.contextPath}/resources/img/list_btn.jpg"></a>
 								<!-- 현재 로그인한 사람이 자신의 글 상세보기 할때는 삭제와 수정버튼이 보여지도록 작성하면됨! --> <sec:authorize
