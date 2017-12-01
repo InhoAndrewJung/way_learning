@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="/resources/css/board.css">
 <title>Insert title here</title>
 
 <style type="text/css">
@@ -55,6 +56,7 @@
 			<li><a href="${path}/member/updateForm">정보 수정 폼</a></li>
 			<li><a href="${pageContext.request.contextPath}/board/tech/write"><img alt="게시판 글쓰기" src="${pageContext.request.contextPath}/img/write_btn.jpg" border="0"></a><li>
 			<li><a href="${pageContext.request.contextPath}/board/tech/list">게시판목록<img alt="게시판 목록" src="${pageContext.request.contextPath}/img/list_btn.jpg" border="0"></a><li>
+			<li><a href="${pageContext.request.contextPath}/board/qna/list">Q&A<img alt="게시판 목록" src="${pageContext.request.contextPath}/img/list_btn.jpg" border="0"></a><li>
 
 		</sec:authorize>
 		<li><a href="javascript:logout();">로그아웃</a></li>

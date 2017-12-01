@@ -36,7 +36,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 	config.defaultLanguage = 'kr';
-	config.codeSnippet_theme='github';
+	
 	  
 	  
 };

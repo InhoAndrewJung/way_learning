@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../include/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +8,7 @@
 <link rel="stylesheet" href="${path}/resources/css/board.css?ver=2">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
+<%@ include file="../../include/common.jsp" %>
 </head>
 <body>
 	
@@ -24,14 +23,14 @@
 			
 			<div class="titleName">
 			
-				<img src="${path}/resources/img/question.png" id="image_title"> Q & A
+				<img src="${path}/resources/image/question.png" id="image_title"> Q & A
 			
 			</div>
 			
 			<div class="write_button">
 				<!-- 로그인 상태에서 보이는,  글쓰기-->
 				<sec:authorize access="isAuthenticated()">
-					<a href="#form"><img src="${path}/resources/img/write.png" id="image_write"></a>
+					<a href="#form"><img src="${path}/resources/image/write.png" id="image_write"></a>
 				</sec:authorize>
 				
 			</div>
@@ -46,7 +45,9 @@
 					<a class="reply" onclick="sorting('re')">댓글순</a> 
 					<a class="hit"  onclick="sorting('view')">조회순</a>
 					
-								
+					<!-- 바로 아래부분 디자인해주기. -->
+					${map.count}개의 게시물이 있습니다.
+					
 					
 				</span>
 			
@@ -83,7 +84,12 @@
 					<!-- 보드넘버 view 창에는 X -->
 					<%-- 보드넘버:${bvo.boardNo}  태그넘버: ${result.BOARD_NO} --%>
 						
-					<span class="table-center_content_left">
+						
+					<c:forEach var="result" items="${requestScope.map.tagList}">
+					
+						<c:if test="${bvo.boardNo == result.BOARD_NO}">
+					
+						<span class="table-center_content_left">
 							
 							<!-- 글 제목 : TITLE -->
 							<div class="left_title"> 
@@ -95,37 +101,27 @@
 							<!-- 태그 : TAG -->
 							
 							<div class="left_tag">
+								<span class="tag"> ${result.TAG} </span>
+							</div>
 							
-							<!-- Tag의 span 영역만 돌아야 하므로 여기부터
-								 게시판Table의 글 번호랑 Tag Table의 번호를 비교하여 
-								 해당 글의 태그를 호출 -->
-							
-						<c:forEach var="result" items="${requestScope.map.tagList}">
-							<c:if test="${bvo.boardNo == result.BOARD_NO}">
-								
-								
-									<span class="tag"> ${result.TAG} </span>
-								
-							</c:if>
-						</c:forEach>
+						</span>
 						
-						</div>
+						</c:if>
+					</c:forEach>
 						
-					</span>
-					
 						<span class="table-center_content_right">
 							
 							<!-- 좋아요, 답글수, 조회수 -->
 							
 							<div class="right_like-comment">
 								<span class="like">
-								<img src="${path}/resources/img/heart.png" id="image_heart"> &nbsp; ${bvo.cntBoardLike}
+								<img src="${path}/resources/image/heart.png" id="image_heart"> &nbsp; ${bvo.cntBoardLike}
 								</span>
 								<span class="comment">
-								<img src="${path}/resources/img/reply.png" id="image_reply"> &nbsp; ${bvo.cntReply}
+								<img src="${path}/resources/image/reply.png" id="image_reply"> &nbsp; ${bvo.cntReply}
 								</span>
 								<span class="hit">
-								<img src="${path}/resources/img/eyes.png" id="image_eyes"> &nbsp; ${bvo.cntView}
+								<img src="${path}/resources/image/eyes.png" id="image_eyes"> &nbsp; ${bvo.cntView}
 								</span>
 							</div>
 							
@@ -167,7 +163,7 @@
 	<div class="move-boardList">
 		
 		<a href="${pageContext.request.contextPath}">
-			<img src="${path}/resources/img/house.png" id="image_list">
+			<img src="${path}/resources/image/house.png" id="image_list">
 		</a>
 	</div>	
 			
