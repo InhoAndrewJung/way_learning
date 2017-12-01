@@ -42,7 +42,7 @@ public interface TechBoardDAO {
 		
 	public List getTagList() throws SQLException;
 	
-	public int isBoardLike(String userId, int boardNo,String likeStatus) throws SQLException;
+	public int isBoardLike(String userId, int boardNo) throws SQLException;
 	
 	public void insertBoardLike(String userId, int boardNo) throws SQLException;
 	

@@ -25,7 +25,7 @@ public class TechReplyDAOImpl implements TechReplyDAO {
 	}
 
 	//listReply
-	public List<TechReply>  listReply(String boardNo){
+	public List<TechReply>  listReply(int boardNo){
 
 		return sqlSession.selectList("techReplyMapper.listReply", boardNo);
 
@@ -74,7 +74,7 @@ public class TechReplyDAOImpl implements TechReplyDAO {
 		
 		
 		@Override
-		public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException {
+		public int isReplyLike(String userId, int replyNo) throws SQLException {
 			Map<String,Object> map = new HashMap<String,Object>();
 			
 			map.put("userId", userId);

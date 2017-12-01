@@ -46,8 +46,8 @@
 	   
     SELECT board_no, title, cnt_view, reg_date, user_id ,page,  cnt_reply,(select sum(cnt_board_like) from wl_qna_board where board_no=b.board_no)cnt_board_like, img_profile 
 		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id,img_profile,cnt_reply
-		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id, m.img_profile,(select count(*) from wl_qna_reply  where board_no=tb.board_no) cnt_reply
-		FROM wl_qna_board tb, wl_member m
+		FROM (SELECT qb.board_no, title, cnt_view, qb.reg_date, m.user_id, m.img_profile,(select count(*) from wl_qna_reply  where board_no=qb.board_no) cnt_reply
+		FROM wl_qna_board qb, wl_member m
 	  <include refid="search" />
       <if test="sorting == 'board_no'">order by board_no DESC</if> 
       <if test="sorting == 'recommend'">order by cnt_board_like  DESC</if> 		
@@ -70,10 +70,10 @@
 	
 select board_no,tag from wl_qna_tag where board_no in( SELECT board_no 
 FROM (SELECT board_no, CEIL(rownum/20) page
-FROM (SELECT tb.board_no
-FROM wl_qna_board tb, wl_member m
-where  tb.writer=m.user_id
-ORDER BY tb.board_no DESC)
+FROM (SELECT qb.board_no
+FROM wl_qna_board qb, wl_member m
+where  qb.writer=m.user_id
+ORDER BY qb.board_no DESC)
 
 ) b
 ) order by board_no desc
@@ -95,10 +95,10 @@ select board_no,tag from wl_qna_tag where board_no=#{value}
 	</resultMap>
 
 	<select id="showContent" parameterType="string" resultMap="boardListRM">
-		SELECT user_id, img_profile,tb.reg_date reg_date ,cnt_view, (select count(*) from wl_qna_reply  where board_no=tb.board_no) cnt_reply,
+		SELECT user_id, img_profile,qb.reg_date reg_date ,cnt_view, (select count(*) from wl_qna_reply  where board_no=qb.board_no) cnt_reply,
 board_no,title,content,cnt_board_like 
-		FROM wl_qna_board tb, wl_member m
-		WHERE tb.writer =m.user_id AND board_no=#{boardNo} 
+		FROM wl_qna_board qb, wl_member m
+		WHERE qb.writer =m.user_id AND board_no=#{boardNo} 
 	</select>
 
 	<delete id="deleteBoard">
@@ -130,7 +130,7 @@ board_no,title,content,cnt_board_like
 	</select>
 
 	<select id="countArticle" resultType="int">
-		select count(*) from wl_qna_board tb, wl_member m
+		select count(*) from wl_qna_board qb, wl_member m
 		<include refid="search" />
 	</select>
 	
@@ -143,7 +143,7 @@ board_no,title,content,cnt_board_like
 	<sql id="search">
 		
 			<where>
-			 tb.writer=m.user_id  
+			 qb.writer=m.user_id  
 				
 				
 				
@@ -151,8 +151,8 @@ board_no,title,content,cnt_board_like
 				(m.user_id like '%'||#{keyword}||'%' 
 				or content like '%'||#{keyword}||'%'
 				or title like '%'||#{keyword}||'%'
-				or tb.board_no in(select board_no from wl_qna_reply where replytext  like '%'||#{keyword}||'%')
-				or tb.board_no in(select board_no from wl_qna_tag where tag  like '%'||#{keyword}||'%')
+				or qb.board_no in(select board_no from wl_qna_reply where replytext  like '%'||#{keyword}||'%')
+				or qb.board_no in(select board_no from wl_qna_tag where tag  like '%'||#{keyword}||'%')
 				)
 				
 

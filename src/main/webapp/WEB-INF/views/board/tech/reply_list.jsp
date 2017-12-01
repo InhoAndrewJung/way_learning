@@ -25,7 +25,7 @@ $(document).ready(function() {
 			$(result).each(function(index,item) {
 				
 				//$('#boardGood'+item).css({'width':500});
-				 $('#replyGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;	
+				 $('#replyGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
 			});
 
 			
@@ -53,16 +53,18 @@ function replyLikeUp(replyNo){
 			//alert("likeUp ajax result:"+result);
 			
 			$("#cntReplyLike"+replyNo).html(result);
-			$('#replyGood'+replyNo).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
+			var src=$('#replyGood'+replyNo).attr('src') ;
+			if(src =='/learning/resources/img/arrowUpGood.png'){
+			 $('#replyGood'+replyNo).attr('src' ,'/learning/resources/img/arrowUp.png') ;
+			 }else if(src =='/learning/resources/img/arrowUp.png'){
+				 $('#replyGood'+replyNo).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;
+			 }
 		}
 		
-	});
-	
-	
-	
+	});	
 }	
 
-function replyLikeDown(replyNo){
+/* function replyLikeDown(replyNo){
 	
 	var param="${_csrf.parameterName}=${_csrf.token}&likeStatus=likeDown&replyNo="+replyNo;
 	
@@ -81,7 +83,7 @@ function replyLikeDown(replyNo){
 	});
 	
 
-}	
+}	 */
 	
 	
  function showModify(replyNo){
@@ -179,7 +181,7 @@ table {border:1px solid #000;}
   	 <span style="font-size:10px">(${row.regdate}  ) </span> 
   	<img  id="replyGood${row.replyNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer;float:right; " onclick="replyLikeUp('${row.replyNo}')" ><br>
 	<span id="cntReplyLike${row.replyNo}" style="width:20px; height:20px;cursor:pointer;float:right; ">${row.cntReplyLike}</span><br><br>
-	<img  src="${path}/resources/img/arrowDown.png" style="width:20px; height:20px;cursor:pointer;float:right;" onclick="replyLikeDown('${row.replyNo}')">
+
   	  <br>
   	</td>
    </tr>	

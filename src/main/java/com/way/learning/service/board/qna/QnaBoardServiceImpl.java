@@ -87,10 +87,10 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	@Transactional
 	public int isBoardLike(String userId, int boardNo,String likeStatus) throws SQLException {
 		int result=qnaBoardDao.isBoardLike(userId, boardNo, likeStatus);
-		System.out.println("서비스 isBoardLike likeStatus:"+likeStatus);
-		System.out.println("서비스 isBoardLike userId:"+userId);
-		System.out.println("서비스 isBoardLike boardNo:"+boardNo);
-		System.out.println("서비스 isBoardLike result:"+result);
+		System.out.println("qna 서비스 isBoardLike likeStatus:"+likeStatus);
+		System.out.println("qna 서비스 isBoardLike userId:"+userId);
+		System.out.println("qna 서비스 isBoardLike boardNo:"+boardNo);
+		System.out.println("qna 서비스 isBoardLike result:"+result);
 		int action=0;
 		if(likeStatus.equals("likeUp")){
 			if(result==0){

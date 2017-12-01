@@ -23,7 +23,7 @@ public interface TechReplyService {
 	//insertReply
 	public int  insertReply(TechReply vo);
 
-	public List<TechReply>  listReply(String boardNo ,HttpSession session);
+	public List<TechReply>  listReply(int boardNo);
 
 	//updateReply
 	public void  updateReply(String rno, String replytext);
@@ -34,7 +34,7 @@ public interface TechReplyService {
 	//deleteReply
 	public int  deleteReply(String replyNo);
 	
-	public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException;
+	public int isReplyLike(String userId, int replyNo) throws SQLException;
 	
 	public int selectCntReplyLike(int replyNo) throws SQLException;
 	
