@@ -135,6 +135,14 @@ public class TechReplyDAOImpl implements TechReplyDAO {
 			return sqlSession.selectOne("techReplyMapper.selectCntReplyLike", replyNo);
 			
 		}
+		
+		
+		@Override
+		public List<Integer> selectAllRecommendNo() throws SQLException {
+
+			return sqlSession.selectList("techReplyMapper.selectAllRecommendNo");
+			
+		}
 
 		
 

@@ -45,7 +45,7 @@ public interface TechBoardService {
 	
 	public int selectCntBoardLike(int boardNo) throws SQLException;
 	
-		
+	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException;	
 	
 }
 

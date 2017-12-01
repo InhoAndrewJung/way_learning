@@ -75,7 +75,18 @@ public class TechReplyController {
 		return cnt;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping("likeStatus")
+	public List<Integer> likeStatus()throws Exception{
+		
+		
+		System.out.println("likestatus 컨트롤러!:");
+		
+		
+		List<Integer> replyGoodNoList=techReplyService.selectAllRecommendNo();
+		
+		return replyGoodNoList;
+	}
 	
 	
 	@ResponseBody

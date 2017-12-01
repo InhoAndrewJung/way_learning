@@ -161,6 +161,13 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 		
 	}
 	
+	@Override
+	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException {
+
+		return sqlSession.selectList("techBoardMapper.selectAllRecommendNo", boardNo);
+		
+	}
+	
 	
 	
 	
