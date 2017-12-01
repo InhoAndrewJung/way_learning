@@ -110,7 +110,7 @@ $(document).ready(function(){
 <form method="post" action="${pageContext.request.contextPath}/member/registerMember?${_csrf.parameterName}=${_csrf.token}" id="regForm"  enctype="multipart/form-data">
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 ID <input type="text" name="userId" id="userId"><span id="idCheckView"></span><br><br>
-PASSWORD <input type="password" name="password"><br><br>
+PASSWORD <input type="password" name="password" ><br><br>
 email <input type="text" name="email"><span id="emailCheckView"></span><br><br>
 img_profile <input type="file" name="uploadFile" id="uploadFile" />
 

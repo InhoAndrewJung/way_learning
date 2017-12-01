@@ -66,7 +66,7 @@ img {
 
 		<img src="${path}/resources/upload/${mvo.imgProfile}"> <br>
 		아이디 : <input type="text" name="userId"  value="${mvo.userId}" readonly>
-		<br>패스워드 : <input type="text" name="password" id="passCheck" required="required" >
+		<br>패스워드 : <input type="password" name="password" id="passCheck" required="required" >
 		<br>이메일 : <input type="text" name="email" value="${mvo.email}"><span id="emailCheckView"></span><br><br>
 		<br>프로필 사진 : <input type="file" name="uploadFile" id="uploadFile" />
 
