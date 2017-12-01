@@ -53,10 +53,10 @@
 		<!--  일반 회원이거나 관리자인 두 경우. 두개 이상의 role을 비교할때 hasAnyRole()-->
 		<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')">
 			<li><a href="${path}/member/updateForm">정보 수정 폼</a></li>
-			<li><a href="${pageContext.request.contextPath}/board/tech/write"><img alt="게시판 글쓰기" src="${pageContext.request.contextPath}/img/write_btn.jpg" border="0"></a><li>
-			<li><a href="${pageContext.request.contextPath}/board/qna/list">qna게시판목록<img alt="게시판 목록" src="${pageContext.request.contextPath}/img/list_btn.jpg" border="0"></a><li>
-			<li><a href="${pageContext.request.contextPath}/board/tech/list">tech게시판목록<img alt="게시판 목록" src="${pageContext.request.contextPath}/img/list_btn.jpg" border="0"></a><li>
-			
+			<li><a href="${pageContext.request.contextPath}/board/tech/write"></a><li>
+			<li><a href="${pageContext.request.contextPath}/board/qna/list">qna게시판목록</a><li>
+			<li><a href="${pageContext.request.contextPath}/board/tech/list">tech게시판목록</a><li>
+			<li><a href="${pageContext.request.contextPath}/question/general/makeQuestion">객관식 문제 생성</a><li>
 
 		</sec:authorize>
 		<li><a href="javascript:logout();">로그아웃</a></li>
