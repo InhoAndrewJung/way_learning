@@ -97,5 +97,14 @@ public class TechReplyServiceImpl implements TechReplyService{
 		return techReplyDao.selectCntReplyLike(replyNo);
 		
 	}
+	
+	@Override
+	public List<Integer> selectAllRecommendNo() throws SQLException {
+
+		return techReplyDao.selectAllRecommendNo();
+		
+	}
+	
+	
 }
 	

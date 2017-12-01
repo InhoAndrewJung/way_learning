@@ -37,6 +37,8 @@ public interface TechReplyService {
 	public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException;
 	
 	public int selectCntReplyLike(int replyNo) throws SQLException;
+	
+	public List<Integer> selectAllRecommendNo() throws SQLException;
 
 	
 

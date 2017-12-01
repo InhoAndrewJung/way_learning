@@ -116,6 +116,14 @@ public class TechBoardServiceImpl implements TechBoardService{
 		
 	}
 	
+	@Override
+	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException {
+
+		return techBoardDao.selectAllRecommendNo(boardNo);
+		
+	}
+
+	
 	
 	
 	
