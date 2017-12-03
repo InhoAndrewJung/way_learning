@@ -19,6 +19,7 @@
 		<result property="member.userId" column="replyer"/>
 		<result property="cntReplyLike" column="cnt_reply_like"/>
 		<result property="member.imgProfile" column="img_profile"/>
+		<result property="member.activity" column="activity" />
 		<result property="regdate" column="reg_date"/>
 	
 	
@@ -29,7 +30,7 @@
 	
 	<select id="listReply" resultMap="replyListRM" parameterType="string">
 	
-			select replyer, m.img_profile, qr.reg_date,cnt_reply_like,replytext,qr.board_no,reply_no 
+			select replyer, m.img_profile,m.activity, qr.reg_date,cnt_reply_like,replytext,qr.board_no,reply_no 
 			 from  wl_qna_reply qr, wl_member m where m.user_id =qr.replyer and board_no=#{boardNo}  order by reply_no asc
 	
 	</select>

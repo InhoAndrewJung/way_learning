@@ -8,8 +8,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import com.way.learning.aop.service.ActivityService;
+import com.way.learning.aop.service.activity.ActivityService;
 import com.way.learning.model.member.vo.Member;
+import com.way.learning.service.question.QuestionService;
 
 @Component
 @Aspect
@@ -36,8 +37,10 @@ public class ActivityAspect { //POJO
 			System.out.println(pjp.getSignature().getName()+"() target method call....");
 			System.out.println("activity aop result:"+result);
 			Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String behavior="like";
 			if(result.toString().equals("1") ){
-				activityService.updateLikeActivity(mvo.getUserId());
+				
+				activityService.updateActivity(mvo.getUserId(),behavior);
 			}
 			
 	
@@ -57,13 +60,35 @@ public class ActivityAspect { //POJO
 			System.out.println(pjp.getSignature().getName()+"() target method call....");
 			System.out.println("activity aop result:"+result);
 			Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 
 			if(result.toString().equals("1")){
-				activityService.updateLikeActivity(mvo.getUserId());
+				activityService.updateActivity(mvo.getUserId(),pjp.getSignature().getName());
 			}
 			
 	
 		return result;
 	}
+	
+	
+	@Around("execution( * com.way.learning.service..*ServiceImpl.checkAnswer(..))")
+	public Object questionActivity(ProceedingJoinPoint pjp) throws Throwable{
+		
+			
+			Object result= pjp.proceed();
+		
+		
+			System.out.println(pjp.getSignature().getName()+"() target method call....");
+			System.out.println("activity aop result:"+result);
+			Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			activityService.updateActivity(mvo.getUserId(),pjp.getSignature().getName());
+			
+			
+	
+		return result;
+	}
+	
+	
+	
 }
 
 

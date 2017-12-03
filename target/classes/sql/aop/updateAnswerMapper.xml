@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="updateAnswerMapper">
+
+<update id="updatePostCntSubmit">
+
+	update wl_general_question set  cnt_submit=cnt_submit+1  where question_no=#{questinoNO}
+	
+</update>
+
+<update id="updatePostCntRight">
+
+	update wl_general_question set  cnt_right=cnt_right+1  where question_no=#{questinoNO}
+	
+</update>
+
+
+
+<update id="updateMyCntSubmit">
+
+update wl_answer_result set my_cnt_submit=my_cnt_submit+1 where question_no=#{questionNo} and user_id=#{userId} 
+</update>
+
+
+<insert id="insertMyCntsubmit">
+insert into wl_answer_result (user_id,question_no,my_cnt_submit) values(#{userId} ,#{questionNo},1)
+</insert>
+
+
+<update id="updateMyCntRight">
+
+update wl_answer_result set my_cnt_right=my_cnt_right+1 where question_no=#{questionNo} and user_id=#{userId} 
+</update>	
+
+<insert id="insertMyCntRight">
+insert into wl_answer_result (user_id,question_no,my_cnt_right) values(#{userId} ,#{questionNo},1)
+</insert>
+
+
+<update id="updateMyCntWrong">
+
+update wl_answer_result set my_cnt_wrong=my_cnt_wrong+1 where question_no=#{questionNo} and user_id=#{userId} 
+</update>	
+
+<insert id="insertMyCntWrong">
+insert into wl_answer_result (user_id,question_no,my_cnt_wrong) values(#{userId} ,#{questionNo},1)
+</insert>
+
+
+
+</mapper>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
