@@ -80,12 +80,12 @@ public class QnaBoardController {
 		ListVO lvo = new ListVO(list, pagingBean); //특정한 페이지에서 불러오는 전체 게시글임!!
 		
 		List tagList=qnaBoardService.getTagList();
-		System.out.println("sorting:"+sorting);
-		System.out.println("pageNo:"+pageNo);
-		System.out.println("컨트롤러 totalContent:"+count);
-		System.out.println("컨트롤러 에서 list:"+list);
-		System.out.println("컨트롤러에서 lvo:"+lvo);
-		System.out.println("컨트롤러에서 lvo 사이즈:"+lvo.getList().size());
+		System.out.println("qna sorting:"+sorting);
+		System.out.println("qna  pageNo:"+pageNo);
+		System.out.println("qna  컨트롤러 totalContent:"+count);
+		System.out.println("qna  컨트롤러 에서 list:"+list);
+		System.out.println("qna  컨트롤러에서 lvo:"+lvo);
+		System.out.println("qna 컨트롤러에서 lvo 사이즈:"+lvo.getList().size());
 		
 		Map<String, Object> map = new HashMap<String,Object>();
 		

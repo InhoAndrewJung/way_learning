@@ -4,220 +4,123 @@
 
 
 
-<insert id="insertQuestion">
+	<insert id="insertQuestion" parameterType="generalQuestion">
 
-insert into wl_general_question (question_no,question,answer) values(wl_general_question_SEQ.nextval,#{question}, #{answer})
+		insert into
+		wl_general_question (question_no,question,answer,category)
+		values(wl_general_question_SEQ.nextval,#{question}, #{answer},#{category})
 
-</insert>	
+	</insert>
+
+	<insert id="insertAnswerChoice" parameterType="generalChoice">
+
+		insert into
+		wl_general_answer_choice (question_no,answer_order,answer_choice)
+		values((select
+		max(question_no) from wl_general_question),#{answerOrder}
+		,#{answerChoice})
+
+	</insert>
+
+	<resultMap type="generalQuestion" id="generalQuestionRM">
+		<result property="questionNo" column="question_no" />
+		<result property="question" column="question" />
+		<result property="answer" column="answer" />
+		<result property="cntSubmit" column="cnt_submit" />
+		<result property="cntRight" column="cnt_right" />
+	</resultMap>
+
+	<select id="getList" resultMap="generalQuestionRM">
+		select * from wl_general_question
+	</select>
 	
-<insert id="insertAnswerChoice">
-
-insert into wl_general_answer_choice (question_no,answer_choice) values((select max(question_no) from wl_general_question) ,#{answerChoice});
-
-</insert>	
+	<select id="multipleChoiceContent" resultMap="generalQuestionRM">
+		select * from wl_general_question where question_no=#{questionNo}
+	
+	</select>
+	
+	<resultMap type="generalChoice" id="generalChoiceRM">
+		<result property="questionNo" column="question_no" />
+		<result property="answerChoice" column="answer_choice" />
+		
+	</resultMap>
 	
 	
+	<select id="getAnswerChoice"  resultMap="generalChoiceRM">
+	select * from wl_general_answer_choice where question_no=#{questionNo} order by answer_order
+	</select>
+	
+	<select id="checkAnswer" resultType="int">
+		select count(-1) from wl_general_question where question_no=#{questionNo} and answer=#{answer}
+	</select>
+
+
 </mapper>
 
 
-<!--<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
-
-	
- <mapper namespace="qnaBoardMapper">
-
-	
-	
-	
-	<insert id="write" parameterType="qnaBoard">
-		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
-			SELECT
-			wl_qna_board_SEQ.nextval FROM dual
-		</selectKey>
-		INSERT INTO wl_qna_board (board_no, writer, title, content)
-		VALUES(#{boardNo},#{member.userId},#{title},#{content})
-		
-		
-	</insert>
-
-	<select id="selectByNoForDate" resultType="Date"
-		parameterType="int">
-		SELECT reg_date FROM wl_qna_board
-		WHERE board_no=#{value}
-	</select>
-
-	전체게시글보기를 위한 resultMap
-	jdbctype은 insert, update, delete의 경우 nullable column인 경우에만 필수적이다.
-	<resultMap type="qnaBoard" id="boardListRM">
-		<result property="boardNo" column="board_no" />
-		<result property="title" column="title" />
-		<result property="cntView" column="cnt_view" />
-		<result property="cntReply" column="cnt_reply" />
-		<result property="regDate" column="reg_date" />
-		<result property="member.userId" column="user_id" />
-		<result property="member.imgProfile" column="img_profile" />
-		<result property="tag" column="tag" />
-		<result property="cntBoardLike" column="cnt_board_like" />
-	</resultMap>
-
-	<select id="getBoardList" resultMap="boardListRM" parameterType="string">
-	
-	
-	   
-    SELECT board_no, title, cnt_view, reg_date, user_id ,page,  cnt_reply,(select sum(cnt_board_like) from wl_qna_board where board_no=b.board_no)cnt_board_like, img_profile 
-		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id,img_profile,cnt_reply
-		FROM (SELECT qb.board_no, title, cnt_view, qb.reg_date, m.user_id, m.img_profile,(select count(*) from wl_qna_reply  where board_no=qb.board_no) cnt_reply
-		FROM wl_qna_board qb, wl_member m
-	  <include refid="search" />
-      <if test="sorting == 'board_no'">order by board_no DESC</if> 
-      <if test="sorting == 'recommend'">order by cnt_board_like  DESC</if> 		
-      <if test="sorting == 're'">order by cnt_reply  DESC</if> 		
-     	
-      <if test="sorting == 'view'">order by cnt_view DESC</if> 
-		)
-		) b
-				where page=#{pageNo}
-		
-		
-		
-		
-	 	
-      
-	</select>
-	
-	
-	<select id="getTagList" resultType="hashmap" parameterType="string">
-	
-select board_no,tag from wl_qna_tag where board_no in( SELECT board_no 
-FROM (SELECT board_no, CEIL(rownum/20) page
-FROM (SELECT qb.board_no
-FROM wl_qna_board qb, wl_member m
-where  qb.writer=m.user_id
-ORDER BY qb.board_no DESC)
-
-) b
-) order by board_no desc
-		
-	</select>
-	
-	
-	<select id="getTag" resultType="hashmap" parameterType="string">
-	
-select board_no,tag from wl_qna_tag where board_no=#{value}
-		
-	</select>
-
-	특정 no에 해당하는 상세글보는 resultaMap
-	<resultMap type="qnaBoard" id="boardRM" extends="boardListRM">
-		<result property="content" column="content" />
-		<result property="member.userId" column="user_id" />
-		
-	</resultMap>
-
-	<select id="showContent" parameterType="string" resultMap="boardListRM">
-		SELECT user_id, img_profile,qb.reg_date reg_date ,cnt_view, (select count(*) from wl_qna_reply  where board_no=qb.board_no) cnt_reply,
-board_no,title,content,cnt_board_like 
-		FROM wl_qna_board qb, wl_member m
-		WHERE qb.writer =m.user_id AND board_no=#{boardNo} 
-	</select>
-
-	<delete id="deleteBoard">
-		Delete from wl_qna_board where
-		board_no=#{value}
-	</delete>
-
-	<update id="updateCount">
-		update wl_qna_board set cnt_view=cnt_view+1 where
-		board_no=#{value}
-	</update>
-	
-	<update id="updateBoard">
-		update wl_qna_board set
-		title=#{title},content=#{content}  where board_no=#{boardNo}
-
-	</update>
-
-	페이징 처리 추가
-
-	<select id="totalCount" resultType="int">
-		select count(-1) from
-		wl_qna_board
-
-	</select>
-
-	<select id="countReply">
-		select count(-1) from wl_qna_reply  where reply_no=#{replyNo}
-	</select>
-
-	<select id="countArticle" resultType="int">
-		select count(*) from wl_qna_board qb, wl_member m
-		<include refid="search" />
-	</select>
-	
-	태그 처리 추가
-	<insert id="insertTag">
-		insert into wl_qna_tag values(#{boardNo},#{tag})
-	</insert>
-
-	
-	<sql id="search">
-		
-			<where>
-			 qb.writer=m.user_id  
-				
-				
-				
-				and 
-				(m.user_id like '%'||#{keyword}||'%' 
-				or content like '%'||#{keyword}||'%'
-				or title like '%'||#{keyword}||'%'
-				or qb.board_no in(select board_no from wl_qna_reply where replytext  like '%'||#{keyword}||'%')
-				or qb.board_no in(select board_no from wl_qna_tag where tag  like '%'||#{keyword}||'%')
-				)
-				
-
-			</where>
-
-	</sql>
-	
-	좋아요 관련 로직 시작
-	<select id="isBoardLike" resultType="int">
-	 select count(-1) from wl_qna_board_recommend where user_id=#{userId} and board_no=#{boardNo}
-	</select>
-	
-	<insert id="insertBoardLike">
-	
-	insert into wl_qna_board_recommend (user_id,board_no) values(#{userId}, #{boardNo})
-	
-	</insert>
-	
-	<delete id="deleteBoardLike">
-	
-	delete from wl_qna_board_recommend where user_id=#{userId} and board_no= #{boardNo}
-	</delete>
-	
-	<update id="increaseCntBoardLike">
-		update wl_qna_board set cnt_board_like=cnt_board_like+1 where board_no=#{boardNo}
-	</update>
-	
-	<update id="decreaseCntBoardLike">
-		update wl_qna_board set cnt_board_like=greatest(cnt_board_like-1,0) where board_no=#{boardNo}
-	</update>
-	
-    <select id="selectCntBoardLike" resultType="int">
-    select cnt_board_like from wl_qna_board where board_no=#{boardNo}
-    </select>
-    
-    <select id="selectAllRecommendNo" resultType="int">
-     select board_no from wl_qna_board_recommend
-    
-    </select>
-    
-	좋아요 관련 로직 끝
-	
-</mapper>	 -->
+<!--<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD 
+	Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <mapper namespace="qnaBoardMapper"> 
+	<insert id="write" parameterType="qnaBoard"> <selectKey keyProperty="boardNo" 
+	resultType="int" order="BEFORE"> SELECT wl_qna_board_SEQ.nextval FROM dual 
+	</selectKey> INSERT INTO wl_qna_board (board_no, writer, title, content) 
+	VALUES(#{boardNo},#{member.userId},#{title},#{content}) </insert> <select 
+	id="selectByNoForDate" resultType="Date" parameterType="int"> SELECT reg_date 
+	FROM wl_qna_board WHERE board_no=#{value} </select> 전체게시글보기를 위한 resultMap 
+	jdbctype은 insert, update, delete의 경우 nullable column인 경우에만 필수적이다. <resultMap 
+	type="qnaBoard" id="boardListRM"> <result property="boardNo" column="board_no" 
+	/> <result property="title" column="title" /> <result property="cntView" 
+	column="cnt_view" /> <result property="cntReply" column="cnt_reply" /> <result 
+	property="regDate" column="reg_date" /> <result property="member.userId" 
+	column="user_id" /> <result property="member.imgProfile" column="img_profile" 
+	/> <result property="tag" column="tag" /> <result property="cntBoardLike" 
+	column="cnt_board_like" /> </resultMap> <select id="getBoardList" resultMap="boardListRM" 
+	parameterType="string"> SELECT board_no, title, cnt_view, reg_date, user_id 
+	,page, cnt_reply,(select sum(cnt_board_like) from wl_qna_board where board_no=b.board_no)cnt_board_like, 
+	img_profile FROM (SELECT board_no, title, cnt_view, reg_date, CEIL(rownum/20) 
+	page, user_id,img_profile,cnt_reply FROM (SELECT qb.board_no, title, cnt_view, 
+	qb.reg_date, m.user_id, m.img_profile,(select count(*) from wl_qna_reply 
+	where board_no=qb.board_no) cnt_reply FROM wl_qna_board qb, wl_member m <include 
+	refid="search" /> <if test="sorting == 'board_no'">order by board_no DESC</if> 
+	<if test="sorting == 'recommend'">order by cnt_board_like DESC</if> <if test="sorting 
+	== 're'">order by cnt_reply DESC</if> <if test="sorting == 'view'">order 
+	by cnt_view DESC</if> ) ) b where page=#{pageNo} </select> <select id="getTagList" 
+	resultType="hashmap" parameterType="string"> select board_no,tag from wl_qna_tag 
+	where board_no in( SELECT board_no FROM (SELECT board_no, CEIL(rownum/20) 
+	page FROM (SELECT qb.board_no FROM wl_qna_board qb, wl_member m where qb.writer=m.user_id 
+	ORDER BY qb.board_no DESC) ) b ) order by board_no desc </select> <select 
+	id="getTag" resultType="hashmap" parameterType="string"> select board_no,tag 
+	from wl_qna_tag where board_no=#{value} </select> 특정 no에 해당하는 상세글보는 resultaMap 
+	<resultMap type="qnaBoard" id="boardRM" extends="boardListRM"> <result property="content" 
+	column="content" /> <result property="member.userId" column="user_id" /> 
+	</resultMap> <select id="showContent" parameterType="string" resultMap="boardListRM"> 
+	SELECT user_id, img_profile,qb.reg_date reg_date ,cnt_view, (select count(*) 
+	from wl_qna_reply where board_no=qb.board_no) cnt_reply, board_no,title,content,cnt_board_like 
+	FROM wl_qna_board qb, wl_member m WHERE qb.writer =m.user_id AND board_no=#{boardNo} 
+	</select> <delete id="deleteBoard"> Delete from wl_qna_board where board_no=#{value} 
+	</delete> <update id="updateCount"> update wl_qna_board set cnt_view=cnt_view+1 
+	where board_no=#{value} </update> <update id="updateBoard"> update wl_qna_board 
+	set title=#{title},content=#{content} where board_no=#{boardNo} </update> 
+	페이징 처리 추가 <select id="totalCount" resultType="int"> select count(-1) from 
+	wl_qna_board </select> <select id="countReply"> select count(-1) from wl_qna_reply 
+	where reply_no=#{replyNo} </select> <select id="countArticle" resultType="int"> 
+	select count(*) from wl_qna_board qb, wl_member m <include refid="search" 
+	/> </select> 태그 처리 추가 <insert id="insertTag"> insert into wl_qna_tag values(#{boardNo},#{tag}) 
+	</insert> <sql id="search"> <where> qb.writer=m.user_id and (m.user_id like 
+	'%'||#{keyword}||'%' or content like '%'||#{keyword}||'%' or title like '%'||#{keyword}||'%' 
+	or qb.board_no in(select board_no from wl_qna_reply where replytext like 
+	'%'||#{keyword}||'%') or qb.board_no in(select board_no from wl_qna_tag where 
+	tag like '%'||#{keyword}||'%') ) </where> </sql> 좋아요 관련 로직 시작 <select id="isBoardLike" 
+	resultType="int"> select count(-1) from wl_qna_board_recommend where user_id=#{userId} 
+	and board_no=#{boardNo} </select> <insert id="insertBoardLike"> insert into 
+	wl_qna_board_recommend (user_id,board_no) values(#{userId}, #{boardNo}) </insert> 
+	<delete id="deleteBoardLike"> delete from wl_qna_board_recommend where user_id=#{userId} 
+	and board_no= #{boardNo} </delete> <update id="increaseCntBoardLike"> update 
+	wl_qna_board set cnt_board_like=cnt_board_like+1 where board_no=#{boardNo} 
+	</update> <update id="decreaseCntBoardLike"> update wl_qna_board set cnt_board_like=greatest(cnt_board_like-1,0) 
+	where board_no=#{boardNo} </update> <select id="selectCntBoardLike" resultType="int"> 
+	select cnt_board_like from wl_qna_board where board_no=#{boardNo} </select> 
+	<select id="selectAllRecommendNo" resultType="int"> select board_no from 
+	wl_qna_board_recommend </select> 좋아요 관련 로직 끝 </mapper> -->
 
 
 

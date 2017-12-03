@@ -184,7 +184,7 @@ ${delete_result}
 
 						<tr>
 							<td><img id="profile" src="${path}/resources/upload/${bvo.member.imgProfile}">
-							${requestScope.bvo.member.userId} <br> <span
+							${requestScope.bvo.member.userId}  ${requestScope.bvo.member.activity}<br> <span
 								style="font-size: 10px"><fmt:formatDate value="${bvo.regDate}" pattern="yyyy.MM.dd HH:mm:ss" /></td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
@@ -222,7 +222,11 @@ ${delete_result}
 		                        </script> 
 							
 							</td>
-							<td>&nbsp;</td>
+							<td align="center">
+							<a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent('http://127.0.0.1:7777/learning/board/tech/showContent?boardNo=${requestScope.bvo.boardNo}&&keyword=')+'&t='+encodeURIComponent('Q&A 게시판'), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" ><img
+					src="${path}/resources/img/facebook.png"
+					style="width: 20px; height: 20px; cursor: pointer;"></a>
+							</td>
 
 						</tr>
 
