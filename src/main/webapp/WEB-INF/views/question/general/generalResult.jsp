@@ -19,6 +19,7 @@
 		</c:if>
 		
 		<a href="${path}/question/general/getList"> 문제리스트로가기</a>
+		<a href="${path}/"> 메인페이지로 이동</a>
 	</div>
 </body>
 </html>

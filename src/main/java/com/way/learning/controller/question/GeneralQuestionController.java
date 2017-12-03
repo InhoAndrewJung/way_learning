@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.way.learning.model.question.vo.GeneralChoice;
@@ -42,22 +43,25 @@ public class GeneralQuestionController {
 	}
 	
 	@RequestMapping("/getList")
-	public  ModelAndView getList(ModelAndView mav) throws SQLException{
-
-		 List<GeneralQuestion> list=questionService.getList();
+	public  ModelAndView getList(ModelAndView mav, @RequestParam(defaultValue="")String keyword, @RequestParam(defaultValue="")String sorting) throws SQLException{
+		System.out.println("keyword:"+keyword);
+		System.out.println("sorting:"+sorting);
+		 List<GeneralQuestion> list=questionService.getList(keyword, sorting);
 		 mav.addObject("list", list);
+		 mav.addObject("keyword", keyword);
 		 mav.setViewName("/question/general/list");
 
 		return mav;
 	}
 	
 	@RequestMapping("/multipleChoiceContent")
-	public  ModelAndView multipleChoiceContent(ModelAndView mav,int questionNo) throws SQLException{
+	public  ModelAndView multipleChoiceContent(ModelAndView mav,int questionNo, String keyword) throws SQLException{
 
 	GeneralQuestion gq=questionService.multipleChoiceContent(questionNo);
 	List<GeneralChoice> aList=questionService.getAnswerChoice(questionNo);
 		 mav.addObject("gq", gq);
 		 mav.addObject("aList", aList);
+		 mav.addObject("keyword", keyword);
 		 mav.setViewName("/question/general/multipleChoiceContent");
 		 
 		 System.out.println("gq:"+gq);
@@ -90,12 +94,12 @@ public class GeneralQuestionController {
 	}
 	
 	@RequestMapping("/shortAnswerContent")
-	public  ModelAndView shortAnswerContent(ModelAndView mav,int questionNo) throws SQLException{
+	public  ModelAndView shortAnswerContent(ModelAndView mav,int questionNo, String keyword) throws SQLException{
 
 	GeneralQuestion gq=questionService.multipleChoiceContent(questionNo);
 	
 		 mav.addObject("gq", gq);
-		
+		 mav.addObject("keyword", keyword);
 		 mav.setViewName("/question/general/shortAnswerContent");
 		 
 		 System.out.println("gq:"+gq);

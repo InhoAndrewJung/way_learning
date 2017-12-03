@@ -27,8 +27,8 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 	
 	
-	public List<GeneralQuestion> getList() throws SQLException{
-		return questionDAO.getList();
+	public List<GeneralQuestion> getList(String keyword, String sorting) throws SQLException{
+		return questionDAO.getList(keyword,sorting);
 	}
 	
 	
