@@ -22,5 +22,6 @@
 <label for="answerChoice">선택지4:</label><input type="text" name="answerChoice" id="answerChoice" /><br>
 <input type="submit" value="제출" />
 </form>
+<a href="${path}/"> 메인페이지로 이동</a>
 </body>
 </html>

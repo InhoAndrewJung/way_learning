@@ -1,18 +1,22 @@
 package com.way.learning.controller.member;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.way.learning.model.member.vo.Member;
+import com.way.learning.model.question.vo.AnswerResult;
 import com.way.learning.service.member.MemberService;
 
 
@@ -75,12 +79,47 @@ public class MemberController {
 	@RequestMapping("updateMember")
 	public ModelAndView updateMemberAction(HttpServletRequest request, Member vo) throws Exception {
 		memberService.updateMember(vo,request);
-		
-	
-				
-		
+
 		return new ModelAndView("member/update_result");
 	}
+	
+	@RequestMapping("showMyRecord")
+	public ModelAndView showMyRecord(HttpServletRequest request,ModelAndView mav) throws Exception {
+		System.out.println("showMyRecord 컨트롤러 입성!");
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userId=mvo.getUserId();
+		System.out.println("showMyRecord 유저아이디:"+userId);
+		List<String> rightList=memberService.selectRightNo(userId);
+		List<String> wrongList=memberService.selectWrongNo(userId);
+		AnswerResult answerResult=memberService.selectMyRecord(userId);
+		int myRanking=memberService.selectMyRanking(userId);
+		mav.addObject("rightList", rightList);
+		mav.addObject("wrongList", wrongList);
+		mav.addObject("answerResult", answerResult);
+		mav.addObject("myRanking", myRanking);
+		mav.setViewName("/member/showMyRecord");
+
+		return mav;
+	}
+	
+	
+	@RequestMapping("showAllRanking")
+	public ModelAndView showAllRanking(HttpServletRequest request,ModelAndView mav, @RequestParam(defaultValue="cntSubmit") String sorting) throws Exception {
+		System.out.println("showAllRanking 컨트롤러 입성!");
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userId=mvo.getUserId();
+		System.out.println("showAllRanking 유저아이디:"+userId);
+		System.out.println("showAllRanking sorting:"+sorting);
+		List<AnswerResult> list=memberService.selectAllRanking(sorting);
+		mav.addObject("list", list);
+		mav.setViewName("/member/showAllRanking");
+
+		return mav;
+	}
+	
+	
+	
+	
 	
 }
 

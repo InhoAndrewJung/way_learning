@@ -7,15 +7,20 @@ public class AnswerResult {
 	private int myCntSubmit;
 	private int myCntWrong;
 	private int myCntRight;
-	public AnswerResult(String userId, int questionNo, int myCntSubmit, int myCntWrong, int myCntRight) {
+	private int ranking;
+	private double myRightPercent;
+	public AnswerResult(String userId, int questionNo, int myCntSubmit, int myCntWrong, int myCntRight, int ranking,
+			double myRightPercent) {
 		super();
 		this.userId = userId;
 		this.questionNo = questionNo;
 		this.myCntSubmit = myCntSubmit;
 		this.myCntWrong = myCntWrong;
 		this.myCntRight = myCntRight;
+		this.ranking = ranking;
+		this.myRightPercent = myRightPercent;
 	}
-
+	
 	
 	public AnswerResult() {
 		// TODO Auto-generated constructor stub
@@ -72,11 +77,36 @@ public class AnswerResult {
 	}
 
 
+	public int getRanking() {
+		return ranking;
+	}
+
+
+	public void setRanking(int ranking) {
+		this.ranking = ranking;
+	}
+
+
+	public double getMyRightPercent() {
+		return myRightPercent;
+	}
+
+
+	public void setMyRightPercent(double myRightPercent) {
+		this.myRightPercent = myRightPercent;
+	}
+
+
 	@Override
 	public String toString() {
 		return "AnswerResult [userId=" + userId + ", questionNo=" + questionNo + ", myCntSubmit=" + myCntSubmit
-				+ ", myCntWrong=" + myCntWrong + ", myCntRight=" + myCntRight + "]";
+				+ ", myCntWrong=" + myCntWrong + ", myCntRight=" + myCntRight + ", ranking=" + ranking
+				+ ", myRightPercent=" + myRightPercent + "]";
 	}
+	
+	
+	
+	
 	
 
 }

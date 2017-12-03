@@ -56,8 +56,9 @@
 			<li><a href="${pageContext.request.contextPath}/board/tech/write"></a><li>
 			<li><a href="${pageContext.request.contextPath}/board/qna/list">qna게시판목록</a><li>
 			<li><a href="${pageContext.request.contextPath}/board/tech/list">tech게시판목록</a><li>
-			<li><a href="${pageContext.request.contextPath}/question/general/getList">객관식 문제 리스트</a><li>
-
+			<li><a href="${pageContext.request.contextPath}/question/general/getList">제너럴 문제 리스트</a><li>
+			<li><a href="${pageContext.request.contextPath}/member/showMyRecord">내가 푼 문제 기록</a><li>
+			<li><a href="${pageContext.request.contextPath}/member/showAllRanking">전체 랭킹보기</a><li>
 		</sec:authorize>
 		<li><a href="javascript:logout();">로그아웃</a></li>
 	</sec:authorize>

@@ -20,6 +20,7 @@ import com.way.learning.model.member.dao.AuthoritiesDAO;
 import com.way.learning.model.member.dao.MemberDAO;
 import com.way.learning.model.member.vo.Authority;
 import com.way.learning.model.member.vo.Member;
+import com.way.learning.model.question.vo.AnswerResult;
 import com.way.learning.util.Constants;
 
 
@@ -172,6 +173,31 @@ public class MemberServiceImpl implements MemberService {
 	public List<Authority> selectAuthorityByUsername(String username) {
 
 		return authoritiesDAO.selectAuthorityByUserName(username);
+	}
+	
+	
+	@Override
+	public List<String> selectRightNo(String userId) {
+		return memberDAO.selectRightNo(userId);		
+	}
+	@Override
+	public List<String> selectWrongNo(String userId) {
+		return memberDAO.selectWrongNo(userId);		
+	}
+	
+	@Override
+	public AnswerResult selectMyRecord(String userId) {
+		return memberDAO.selectMyRecord(userId);	
+	}
+	
+	@Override
+	public int selectMyRanking(String userId) {
+		return memberDAO.selectMyRanking(userId);				
+	}
+	
+	@Override
+	public List<AnswerResult> selectAllRanking(String sorting) {
+		return memberDAO.selectAllRanking(sorting);			
 	}
 
 
