@@ -102,7 +102,7 @@ public class TechBoardController {
 	}
 
 	@RequestMapping("showContent")
-	public ModelAndView showContent( String boardNo, @RequestParam(defaultValue="")  String keyword, ModelAndView mav)
+	public ModelAndView showContent( String boardNo, @RequestParam(defaultValue="")  String keyword, ModelAndView mav,String replyNo)
 			throws Exception{
 
 	
@@ -117,11 +117,12 @@ public class TechBoardController {
 		System.out.println("show boardNo:"+boardNo);
 		System.out.println("show 컨트롤러 bvo:"+bvo);
 	    System.out.println("show에서 태그:"+tagList);
+	    System.out.println("show에서 replyNo:"+replyNo);
 	
 		mav.setViewName("board/tech/show_content");
 		mav.addObject("bvo", bvo);
 		mav.addObject("tagList", tagList);
-		
+		mav.addObject("replyNo", replyNo);
 		mav.addObject("keyword", keyword);
 		return mav;
 	}

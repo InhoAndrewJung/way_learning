@@ -10,9 +10,8 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-<link rel="stylesheet" media="screen and (max-width:1024px)" href="resources/css/desktop.css">
-<link rel="stylesheet" media="screen and (max-width:768px)" href="resources/css/tablet.css">
-<link rel="stylesheet" media="screen and (max-width:320px)" href="resources/css/mobile.css">
+
+<%@ include file="../../include/common.jsp"%>
 <style>
 a{
 	text-decoration:none;
@@ -67,8 +66,9 @@ a{
 
 
 </div>
+<a href="${path}/question/essay/showEssayContent?questionNo=${questionNo}"> 서술형 문제 다시풀기</a><br><br>
 
-
+<a href="${path}/"> 메인페이지로 이동</a>
 </div>
 </body>
 </html>

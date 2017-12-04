@@ -18,9 +18,7 @@ $(document).ready(function() {
 	listReply(); //댓글 목록
 	
 	
-	
-	
-		
+
 		
 		$.ajax({
 			type: "post",
@@ -49,19 +47,9 @@ $(document).ready(function() {
 
 	
 		
-	
-		$('#btnReply').click(function(){
-			
-		
-			reply(); 
-			
-			 
-		});
-	
-	
 		//댓글 쓴거 전송 
 		//텍스트와,bno, 비밀글 여부를 insert.do의 파라미터값으로 넣음
-		function reply(){
+		$('#btnReply').click(function(){
 			var replytext=$("#replytext").val();
 			var boardNo="${requestScope.bvo.boardNo}"; // view 컨트롤러에서 가져옴!
 			//비밀댓글 체크 여부
@@ -85,8 +73,12 @@ $(document).ready(function() {
 				
 			});
 			$("#replytext").val("");
-			
-		}
+			 
+		});
+	
+	
+		
+		
 	
 });
 			
@@ -104,7 +96,9 @@ $(document).ready(function() {
 		});
 	 }
 	
-
+	
+	
+	
 
 function deleteBoard(){
 	if(confirm("해당 글을 삭제하시겠습니까?")){
@@ -198,7 +192,25 @@ a{text-decoration:none; cursor: pointer;}
 
 
 <body>
-<h2 align="center"><b>게시글</b></h2>
+
+<c:if test="${replyNo !=null}">
+
+	<script>
+	setTimeout(function(){
+		 var heightItem=$('#replyGood'+${replyNo}+'').offset().top; 
+		$('body,html').animate({scrollTop:heightItem-100});
+		
+	},700) ;
+	</script>
+
+</c:if>
+
+
+
+	
+	
+	
+<h2 align="center"><b>게시글 </b></h2>
 <div align="center">
  
 

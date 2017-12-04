@@ -17,6 +17,7 @@
 <tr> <td>제출수:${answerResult.myCntSubmit}개</td></tr>
 <tr> <td>맞은수:${answerResult.myCntRight}개</td></tr>
 <tr> <td>틀린갯수:${answerResult.myCntWrong}개</td></tr>
+<tr> <td>런타임에러:${answerResult.myCntError}개</td></tr>
 
 
 

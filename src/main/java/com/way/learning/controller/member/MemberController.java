@@ -254,6 +254,23 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping("myFavoriteList")
+	public ModelAndView selectBoardFavorite(ModelAndView mav) throws Exception {
+		
+		
+		
+		List boardList=memberService.selectBoardFavorite();
+		System.out.println("boardList:"+boardList);
+		List replyList=memberService.selectReplyFavorite();
+		mav.addObject("boardList", boardList);
+		mav.addObject("replyList", replyList);
+		mav.setViewName("/member/myFavoriteList");
+
+		return mav;
+	}
+	
+	
+	
 	
 	
 	

@@ -12,6 +12,8 @@ public interface AnswerDAO {
 	public int insertMyCntRight(int questionNo, String userId)throws SQLException;
 	public int updateMyCntWrong(int questionNo, String userId)throws SQLException;
 	public int insertMyCntWrong(int questionNo, String userId)throws SQLException;
+	public int updateMyCntError(int questionNo, String userId)throws SQLException;
+	public int insertMyCntError(int questionNo, String userId)throws SQLException;
 	
 
 }
