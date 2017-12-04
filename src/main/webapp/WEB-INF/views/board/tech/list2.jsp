@@ -8,7 +8,31 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/resources/css/board.css?ver=2">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.js"></script>
 
+<script>
+function list(pageNo) {   ////////////////  curpage+serch_option +keyword 는 꼭 가져감!!
+	
+	location.href = "${pageContext.request.contextPath}/board/tech/list?pageNo="+pageNo+"&keyword=${map.keyword}"; 
+}
+function sorting(sort){
+	if(sort == 'board_no'){
+		$('input[name=sorting]').val('board_no');
+		
+	}else if(sort == 'recommend'){
+		$('input[name=sorting]').val('recommend');
+		
+	}else if(sort == 're'){
+		$('input[name=sorting]').val('re');
+		
+	}else if(sort == 'view'){
+		$('input[name=sorting]').val('view');
+		
+	}
+	 $('#form1').submit();  
+	 
+}
+</script>
 
 </head>
 <body>
@@ -28,23 +52,31 @@
 			
 			</div>
 			
-			<div class="write_button">
+			<div class="pageMove_button">
+											
 				<!-- 로그인 상태에서 보이는,  글쓰기-->
 				<sec:authorize access="isAuthenticated()">
 					<a href="#form"><img src="${path}/resources/img/write.png" id="image_write"></a>
 				</sec:authorize>
 				
+				<!-- 메인으로 이동 -->
+				<a href="/learning">
+					<img src="/learning/resources/img/house.png" id="image_list">
+				</a>	
+				
 			</div>
+			
+	
 			
 			<div class="search_menu">
 			
 			<!-- sorting 부분 -->
 				<span class="search_button">
 				
-					<a class="new" onclick="sorting('board_no')">최신순</a> 
-					<a class="recommend"  onclick="sorting('recommend')">추천순</a> 
-					<a class="reply" onclick="sorting('re')">댓글순</a> 
-					<a class="hit"  onclick="sorting('view')">조회순</a>
+					<a class="new_search" onclick="sorting('board_no')">최신순</a> 
+					<a class="recommend_search"  onclick="sorting('recommend')">추천순</a> 
+					<a class="reply_search" onclick="sorting('re')">댓글순</a> 
+					<a class="hit_search"  onclick="sorting('view')">조회순</a>
 					
 								
 					
@@ -56,12 +88,12 @@
 					<form name="form1" method="post" action="${pageContext.request.contextPath}/board/tech/list" id="form1">
 						
 						
-						<input type="submit" value="조회">
+						
 
 						<input type="search" id="search_bar" value=${map.keyword}>
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 							<input type="hidden" name="sorting" value="">	
-					    <input type="button" id="search_button" value="Search">
+					    <input type="submit" id="search_button" value="Search">
 					
 					</form> 
 					
@@ -162,14 +194,7 @@
 		</table>
 	</div>
 	
-	<!-- MAIN으로 -->
 	
-	<div class="move-boardList">
-		
-		<a href="${pageContext.request.contextPath}">
-			<img src="${path}/resources/img/house.png" id="image_list">
-		</a>
-	</div>	
 			
 			
 	<!-- PAGE 이동 -->		
@@ -190,7 +215,7 @@
 		
 	 <c:if test="${requestScope.map.lvo.pagingBean.nowPageGroup >=1}">
 		<li class="page-first">
-			<a href="javascript:list('1')" class="number_page">First</a>
+			<a href="javascript:list('1')" class="444ge">First</a>
 			
 		</li>
 	</c:if>
@@ -211,7 +236,9 @@
 	 	</c:when>
 	 	
 		 <c:otherwise>
-			 ${i}
+			<li class="page-active_now">
+			<a href="javascript:list('${i}')" class="number_page">${i}</a>
+		</li>	
 		</c:otherwise>
 	</c:choose>
 			
