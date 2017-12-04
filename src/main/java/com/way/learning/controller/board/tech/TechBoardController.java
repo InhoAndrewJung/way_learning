@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,7 +46,7 @@ public class TechBoardController {
 	}
 	
 	@RequestMapping("insert")
-	public ModelAndView write(HttpServletRequest request, HttpServletResponse response,
+	public ModelAndView insertBoard(HttpServletRequest request, HttpServletResponse response,
 			HttpSession session, TechBoard bvo ) throws Exception{
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("컨트로러 mvo:"+mvo);
@@ -57,9 +57,7 @@ public class TechBoardController {
 		//로그인 한 상태라면
 		bvo.setMember(mvo); //bvo와 mvo의 Hasing 관계가 성립된다..
 
-		
-
-		techBoardService.write(bvo); //w_date .. 이때 디비에 저장된다..
+		techBoardService.insertBoard(bvo); 
 		System.out.println("컨트롤러 bvo:"+bvo);
 		return new ModelAndView("board/tech/show_content", "bvo",bvo);
 	}
@@ -104,38 +102,61 @@ public class TechBoardController {
 	}
 
 	@RequestMapping("showContent")
-	public ModelAndView showContent(HttpServletRequest request, HttpServletResponse response,String boardNo, 
-			@RequestParam(defaultValue="")  String keyword, ModelAndView mav)
+	public ModelAndView showContent( String boardNo, @RequestParam(defaultValue="")  String keyword, ModelAndView mav)
 			throws Exception{
 
-
-		//로그인한 사람만 상세글 정보를 볼수있는 권한을 부여한다.
-		/*MemberVO mvo = (MemberVO)request.getSession().getAttribute("mvo");
-
-		if(mvo==null) { //로그인 하지 않았다.
-			return new ModelAndView("redirect:/index.jsp");
-		}*/
+	
 		//조회수 증가 로직을 추가
 		
+		techBoardService.updateCount(boardNo);
+
+		TechBoard bvo=techBoardService.showContent(boardNo);
+		List tagList= techBoardService.getTag(boardNo);
 		
 		System.out.println("showContent컨트롤러 keyword:"+keyword);
 		System.out.println("show boardNo:"+boardNo);
-		
-		techBoardService.updateCount(boardNo);
-		
-		
-
-		TechBoard bvo=techBoardService.showContent(boardNo);
 		System.out.println("show 컨트롤러 bvo:"+bvo);
+	    System.out.println("show에서 태그:"+tagList);
+	
 		mav.setViewName("board/tech/show_content");
 		mav.addObject("bvo", bvo);
+		mav.addObject("tagList", tagList);
 		
 		mav.addObject("keyword", keyword);
 		return mav;
 	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping("changeLike")
+	public int changeLike(int boardNo)throws Exception{
+		
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		
+		
+		techBoardService.isBoardLike(mvo.getUserId(), boardNo);
+		int cnt=techBoardService.selectCntBoardLike(boardNo);
+		return cnt;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("likeStatus")
+	public List<Integer> likeStatus(int boardNo)throws Exception{
+		
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		
+		
+		List<Integer> noList=techBoardService.selectAllRecommendNo(boardNo);
+		
+		return noList;
+	}
 
 	@RequestMapping("delete")
-	public ModelAndView delete(HttpSession session,String boardNo, String newfilename)
+	public ModelAndView delete(HttpSession session, int boardNo)
 			throws Exception{
 		//로그인한 사람만 상세글 정보를 볼수있는 권한을 부여한다.
 		

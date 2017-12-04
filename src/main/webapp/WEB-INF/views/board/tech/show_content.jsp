@@ -6,27 +6,54 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.js"></script>
 
+<%@ include file="../../include/common.jsp" %>
 </head>
 <script>
 $(document).ready(function() {
 
 	listReply(); //댓글 목록
+
+	
+	
+	
+		$.ajax({
+			type: "post",
+			url: "${pageContext.request.contextPath}/board/tech/likeStatus",
+			data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}",
+			success: function(result){
+				
+				
+				
+				$(result).each(function(index,item) {
+					
+					
+					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;	
+				});
+
+				
+				
+				
+			}
+			
+		});
+		
+	
+		
+				  
+		
 	
 		
 	
 		$('#btnReply').click(function(){
-			
-		
-			reply(); 
-			
-			 
+
+			reply(); 		 
 		});
+		
+		
 	
 	
-		//댓글 쓴거 전송 
-		//텍스트와,bno, 비밀글 여부를 insert.do의 파라미터값으로 넣음
+		
 		function reply(){
 			var replytext=$("#replytext").val();
 			var boardNo="${requestScope.bvo.boardNo}"; // view 컨트롤러에서 가져옴!
@@ -44,7 +71,7 @@ $(document).ready(function() {
 				data: param,
 				success: function(){
 					
-					alert("댓글이 등록되었습니다.");
+					//alert("댓글이 등록되었습니다.");
 					
 					listReply(); //이거안하면 새로고침해야 쓴게 나옴!!!
 				}
@@ -65,7 +92,7 @@ $(document).ready(function() {
 			success: function(result){
 				$("#listReply").html(result);
 				
-				console.log(result);
+				
 			}
 		});
 	 }
@@ -85,75 +112,145 @@ function updateBoard(){
 	}
 }
 
-/* function showModify(rno){
-	alert("gg");
-	$('#modifyResult').html('<input type="text"  id="reply"  value="ddddddd" />');
-	
-	
 
-}  */
 
+function boardLikeChange(boardNo){
 	
+	var param="${_csrf.parameterName}=${_csrf.token}&boardNo="+boardNo;
+	
+	$.ajax({
+		type: "post",
+		url: "${pageContext.request.contextPath}/board/tech/changeLike",
+		data: param,
+		success: function(result){
+			
+			
+			
+			$("#cntBoardLike").html(result);
+			
+			 var src=$('#boardGood'+boardNo).attr('src') ;
+			 if(src =='/learning/resources/img/arrowUpGood.png'){
+				 $('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUp.png') ;
+			 }else if(src =='/learning/resources/img/arrowUp.png'){
+				 $('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;
+			 }
+		
+				
+		}
+	});	
+}	
+
+
+
+
+
+
+
 
 </script>
 
 
 <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+
+
+
+
+<style>
+
+    .cke_top
+    {
+        display: none !important;
+    }
+
+.cke_bottom {display: !important;}
+#profile{width:50px; height:50px; border-radius: 50% }
+a{text-decoration:none; cursor: pointer;}
+#tag{font-size:10px;border:1px solid grey;border-radius:10%; background-color:grey; color:white; margin-left:10px;}
+
+</style>
+
+
+
+
 <body>
 <h2 align="center"><b>게시글</b></h2>
 ${delete_result}
 	<div align="center">
 	
 	
-	<table cellpadding="5">
-		<tr>
-		   <td>
-		   	    <table border="1" width="650" align="center">
-					<tr>
-						<td><b>글번호 : ${requestScope.bvo.boardNo} |
-							   타이틀 : ${requestScope.bvo.title}</b>
-						<hr style="color: #6691BC; border-style: dotted; margin: 0">
-						</td>
-					</tr>
-					<tr>
-						<td >작성자 :  ${requestScope.bvo.member.userId} |
-							작성일시 : ${requestScope.bvo.regDate}
-							Count : ${requestScope.bvo.cntView}
-						</td>
-					</tr>
-					
-					<tr>
-						<td>
-						<hr style="color: #6691BC; margin: 0">
-							
-			<textarea  id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" readonly>${requestScope.bvo.content}</textarea>
-		<script >
-			CKEDITOR.replace("content"); // 태그의 id
-			
+	
+					<table border="1" width="650" align="center">
 
-		</script>
-						<%-- <pre>${requestScope.bvo.content}</pre>	 --%>				
-						</td>
-					</tr>
-					<tr>
-						<td valign="middle">
-						<a href="${pageContext.request.contextPath}/board/tech/list?keyword=${keyword}"><img alt="목록" src="${pageContext.request.contextPath}/resources/img/list_btn.jpg"></a>
-						<!-- 현재 로그인한 사람이 자신의 글 상세보기 할때는 삭제와 수정버튼이 보여지도록 작성하면됨! -->
-						<sec:authorize access="isAuthenticated()">
-						<sec:authentication var="mvo" property="principal" /> 
+
+						<tr>
+							<td><img id="profile" src="${path}/resources/upload/${bvo.member.imgProfile}">
+							${requestScope.bvo.member.userId}  ${requestScope.bvo.member.activity}<br> <span
+								style="font-size: 10px"><fmt:formatDate value="${bvo.regDate}" pattern="yyyy.MM.dd HH:mm:ss" /></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td nowrap>뷰수:${requestScope.bvo.cntView} 답글수:${requestScope.bvo.cntReply} </td>
+						</tr>
 						
+						<tr>
+
+							<td colspan="4">
+							번호:${requestScope.bvo.boardNo}  
+							<c:forEach var="tag" items="${tagList}">
+									<span id="tag" >${tag.TAG}</span>
+							
+							</c:forEach>
+							
+							<br>
+							제목:${requestScope.bvo.title}
+							</td>
+							<td>
+							<img id="boardGood${bvo.boardNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="boardLikeChange('${bvo.boardNo}')" ><br><br>
+							<span id="cntBoardLike" >${bvo.cntBoardLike}</span><br><br>
+							
+							</td>
+
+						</tr>
 						
-						<c:if test="${mvo.userId == requestScope.bvo.member.userId }">
-							<img alt="삭제" src="${pageContext.request.contextPath}/resources/img/delete_btn.jpg" onclick="deleteBoard()">
-							<img alt="수정" src="${pageContext.request.contextPath}/resources/img/modify_btn.jpg" onclick="updateBoard()">
-						</c:if>
-						</sec:authorize>
-						</td>
-					</tr>
-				</table> 	
-			</td>
-		</tr>
-	</table>	
+						<tr>
+
+							<td colspan="4">
+							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" >${requestScope.bvo.content}</textarea>
+								<script>
+			          CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false, readonly:true }); // 태그의 id
+			          CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});
+		                        </script> 
+							
+							</td>
+							<td align="center">
+							<a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent('http://127.0.0.1:7777/learning/board/tech/showContent?boardNo=${requestScope.bvo.boardNo}&&keyword=')+'&t='+encodeURIComponent('Q&A 게시판'), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" ><img
+					src="${path}/resources/img/facebook.png"
+					style="width: 20px; height: 20px; cursor: pointer;"></a>
+							</td>
+
+						</tr>
+
+					</table>
+
+							<a
+								href="${pageContext.request.contextPath}/board/tech/list?keyword=${keyword}"><img
+									alt="목록"
+									src="${pageContext.request.contextPath}/resources/img/list_btn.jpg"></a>
+								<!-- 현재 로그인한 사람이 자신의 글 상세보기 할때는 삭제와 수정버튼이 보여지도록 작성하면됨! --> <sec:authorize
+									access="isAuthenticated()">
+									<sec:authentication var="mvo" property="principal" />
+
+
+									<c:if test="${mvo.userId == requestScope.bvo.member.userId }">
+										<img alt="삭제"
+											src="${pageContext.request.contextPath}/resources/img/delete_btn.jpg"
+											onclick="deleteBoard()">
+										<img alt="수정"
+											src="${pageContext.request.contextPath}/resources/img/modify_btn.jpg"
+											onclick="updateBoard()">
+									</c:if>
+								</sec:authorize>
+				
 	<!--  댓글 작성하는 양식  form 안씀-->
 	
 	

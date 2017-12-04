@@ -36,6 +36,7 @@
 		<result property="regDate" column="reg_date" />
 		<result property="member.userId" column="user_id" />
 		<result property="member.imgProfile" column="img_profile" />
+		<result property="member.activity" column="activity" />
 		<result property="tag" column="tag" />
 		<result property="cntBoardLike" column="cnt_board_like" />
 	</resultMap>
@@ -44,9 +45,9 @@
 	
 	
 	   
-    SELECT board_no, title, cnt_view, reg_date, user_id ,page,  cnt_reply,(select sum(cnt_board_like) from wl_tech_board where board_no=b.board_no)cnt_board_like, img_profile 
-		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id,img_profile,cnt_reply
-		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id, m.img_profile,(select count(*) from wl_tech_reply  where board_no=tb.board_no) cnt_reply
+    SELECT board_no, title, cnt_view, reg_date, user_id, activity ,page,  cnt_reply,(select sum(cnt_board_like) from wl_tech_board where board_no=b.board_no)cnt_board_like, img_profile 
+		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id, activity,img_profile,cnt_reply
+		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id,m.activity, m.img_profile,(select count(*) from wl_tech_reply  where board_no=tb.board_no) cnt_reply
 		FROM wl_tech_board tb, wl_member m
 	  <include refid="search" />
       <if test="sorting == 'board_no'">order by board_no DESC</if> 
@@ -59,22 +60,7 @@
 				where page=#{pageNo}
 		
 		
-		<!-- SELECT board_no, title, cnt_view, reg_date, user_id ,page,(select count(*) from wl_tech_reply  where board_no=b.board_no) cntReply,(select sum(cnt_board_like) from wl_tech_board where board_no=b.board_no)cnt_board_like, img_profile 
-		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id,img_profile  
-		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id, m.img_profile
-		FROM wl_tech_board tb, wl_member m
-	<include refid="search" />
-	  <if test="sorting == 'board_no'">order by board_no DESC</if> 
-      <if test="sorting == 'recommend'">order by cnt_board_like  DESC</if> 		
-      <if test="sorting == 're'">order by cnt_board_like  DESC</if> 		
-     	
-      <if test="sorting == 'view'">order by cnt_view DESC</if> 
-		)
 		
-		) b
-	
-      
-		where page=#{pageNo} -->
 		
 	 	
       
@@ -94,6 +80,13 @@ ORDER BY tb.board_no DESC)
 ) order by board_no desc
 		
 	</select>
+	
+	
+	<select id="getTag" resultType="hashmap" parameterType="string">
+	
+select board_no,tag from wl_tech_tag where board_no=#{value}
+		
+	</select>
 
 	<!-- 특정 no에 해당하는 상세글보는 resultaMap -->
 	<resultMap type="techBoard" id="boardRM" extends="boardListRM">
@@ -102,10 +95,11 @@ ORDER BY tb.board_no DESC)
 		
 	</resultMap>
 
-	<select id="showContent" parameterType="string" resultMap="boardRM">
-		SELECT board_no, title, cnt_view, tb.reg_date, content, m.user_id
+	<select id="showContent" parameterType="string" resultMap="boardListRM">
+		SELECT user_id, img_profile,activity,tb.reg_date reg_date ,cnt_view, (select count(*) from wl_tech_reply  where board_no=tb.board_no) cnt_reply,
+board_no,title,content,cnt_board_like 
 		FROM wl_tech_board tb, wl_member m
-		WHERE tb.writer =m.user_id AND board_no=#{value}
+		WHERE tb.writer =m.user_id AND board_no=#{boardNo} 
 	</select>
 
 	<delete id="deleteBoard">
@@ -166,10 +160,40 @@ ORDER BY tb.board_no DESC)
 
 	</sql>
 	
+	<!-- 좋아요 관련 로직 시작 -->
+	<select id="isBoardLike" resultType="int">
+	 select count(-1) from wl_tech_board_recommend where user_id=#{userId} and board_no=#{boardNo}
+	</select>
 	
+	<insert id="insertBoardLike">
 	
-
+	insert into wl_tech_board_recommend (user_id,board_no) values(#{userId}, #{boardNo})
 	
+	</insert>
+	
+	<delete id="deleteBoardLike">
+	
+	delete from wl_tech_board_recommend where user_id=#{userId} and board_no= #{boardNo}
+	</delete>
+	
+	<update id="increaseCntBoardLike">
+		update wl_tech_board set cnt_board_like=cnt_board_like+1 where board_no=#{boardNo}
+	</update>
+	
+	<update id="decreaseCntBoardLike">
+		update wl_tech_board set cnt_board_like=greatest(cnt_board_like-1,0) where board_no=#{boardNo}
+	</update>
+	
+    <select id="selectCntBoardLike" resultType="int">
+    select cnt_board_like from wl_tech_board where board_no=#{boardNo}
+    </select>
+    
+    <select id="selectAllRecommendNo" resultType="int">
+     select board_no from wl_tech_board_recommend
+    
+    </select>
+    
+	<!-- 좋아요 관련 로직 끝 -->
 	
 </mapper>	
 

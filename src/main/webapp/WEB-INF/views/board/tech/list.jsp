@@ -36,12 +36,17 @@ function sorting(sort){
 	 
 }
 </script>
+
+
 <style>
 
 #profile{width:50px; height:50px; border-radius: 50% }
 a{text-decoration:none; cursor: pointer;}
 #tag{font-size:10px;border:1px solid grey;border-radius:10%; background-color:grey; color:white; margin-left:10px;}
 </style>
+
+
+
 </head>
 <body>
 
@@ -93,7 +98,7 @@ ${map.count}개의 게시물이 있습니다.
 			${bvo.cntBoardLike}</td>
 			<!-- 총 리플수 -->
 			<td>  <span style="color:red">(${bvo.cntReply})</span></td>
-			<td> <img id="profile" src="${path}/resources/upload/${bvo.member.imgProfile}" > ${bvo.member.userId} 
+			<td> <img id="profile" src="${path}/resources/upload/${bvo.member.imgProfile}" > ${bvo.member.userId} ${bvo.member.activity} 
 			<br><span style="font-size:10px"><fmt:formatDate value="${bvo.regDate}" pattern="yyyy.MM.dd HH:mm:ss" /></span>
 			</td>
 			

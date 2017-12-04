@@ -16,10 +16,11 @@ import com.way.learning.model.board.tech.vo.TechBoard;
 
 @Repository
 public class TechBoardDAOImpl implements TechBoardDAO{
+	
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public int write(TechBoard bvo)throws SQLException{
+	public int insertBoard(TechBoard bvo)throws SQLException{
 		return sqlSession.insert("techBoardMapper.write",bvo);
 	}
 	
@@ -48,13 +49,20 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 		return taglist;
 	}
 	
+	public List getTag(String boardNo) throws SQLException{
+
+		
+		
+		return sqlSession.selectList("techBoardMapper.getTag",boardNo);
+	}
+	
 	//showContent
-	public TechBoard showContent(String no) throws SQLException{
-		return sqlSession.selectOne("techBoardMapper.showContent",no);
+	public TechBoard showContent(String boardNo) throws SQLException{
+		return sqlSession.selectOne("techBoardMapper.showContent",boardNo);
 	}
 	
 	//deleteBoard
-	public void deleteBoard(String no) throws SQLException{
+	public void deleteBoard(int no) throws SQLException{
 		 sqlSession.delete("techBoardMapper.deleteBoard",no);
 	}
 	//updateCount
@@ -89,6 +97,83 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 		sqlSession.insert("techBoardMapper.insertTag", map);
 		
 	}
+	
+	
+	@Override
+	public int isBoardLike(String userId, int boardNo) throws SQLException {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("userId", userId);
+		map.put("boardNo", boardNo);
+		
+		return sqlSession.selectOne("techBoardMapper.isBoardLike", map);
+		
+	}
+	
+	
+	@Override
+	public void insertBoardLike(String userId, int boardNo) throws SQLException {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("userId", userId);
+		map.put("boardNo", boardNo);
+		
+		 sqlSession.insert("techBoardMapper.insertBoardLike", map);
+		
+	}
+	
+	@Override
+	public void deleteBoardLike(String userId, int boardNo) throws SQLException {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("userId", userId);
+		map.put("boardNo", boardNo);
+		
+		 sqlSession.delete("techBoardMapper.deleteBoardLike", map);
+		
+	}
+	
+	@Override
+	public int increaseCntBoardLike(int boardNo) throws SQLException {
+		
+		System.out.println("총 좋아요 올리기:"+boardNo);
+		return sqlSession.update("techBoardMapper.increaseCntBoardLike", boardNo);
+		
+	}
+	
+	
+	@Override
+	public int decreaseCntBoardLike(int boardNo) throws SQLException {
+		
+		System.out.println("총 좋아요 내리기:"+boardNo);
+		return sqlSession.update("techBoardMapper.decreaseCntBoardLike", boardNo);
+		
+	}
+	
+	
+	@Override
+	public int selectCntBoardLike(int boardNo) throws SQLException {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+	
+		
+		return sqlSession.selectOne("techBoardMapper.selectCntBoardLike", boardNo);
+		
+	}
+	
+	@Override
+	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException {
+
+		return sqlSession.selectList("techBoardMapper.selectAllRecommendNo", boardNo);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

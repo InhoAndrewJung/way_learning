@@ -14,17 +14,18 @@ public interface TechBoardDAO {
 	
 
 	
-	public int write(TechBoard bvo)throws SQLException;
+	public int insertBoard(TechBoard bvo)throws SQLException;
 	
 	//selectByNoForDate
 	public Date selectByNoForDate(int no) throws SQLException;
 	//getBoardList
 	public List<TechBoard> getBoardList(String pageNo, String keyword, String sorting) throws SQLException;
 	
+	public List getTag(String boardNo) throws SQLException;
 	//showContent
 	public TechBoard showContent(String no) throws SQLException;
 	//deleteBoard
-	public void deleteBoard(String no) throws SQLException;
+	public void deleteBoard(int no) throws SQLException;
 	//updateCount
 	public void updateCount(String no) throws SQLException;
 	
@@ -40,6 +41,21 @@ public interface TechBoardDAO {
 	public void insertTag(String tag,int boardNo)throws SQLException;
 		
 	public List getTagList() throws SQLException;
+	
+	public int isBoardLike(String userId, int boardNo) throws SQLException;
+	
+	public void insertBoardLike(String userId, int boardNo) throws SQLException;
+	
+	public void deleteBoardLike(String userId, int boardNo) throws SQLException;
+	
+	public int increaseCntBoardLike(int boardNo) throws SQLException;
+	
+	public int decreaseCntBoardLike(int boardNo) throws SQLException;
+	
+	public int selectCntBoardLike(int boardNo) throws SQLException;
+	
+	
+	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException;
 	
 }
 

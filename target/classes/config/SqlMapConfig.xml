@@ -4,7 +4,11 @@
 
 	 <settings>
 		<setting name="jdbcTypeForNull" value="NULL"/>
+<<<<<<< HEAD
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+=======
+		
+>>>>>>> master
 	</settings> 
 	
 	<!-- <typeAliases>

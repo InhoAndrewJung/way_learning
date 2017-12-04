@@ -3,15 +3,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.js"></script>
+
+
+<%@ include file="../../include/common.jsp" %>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
 <script>
+$(document).ready(function() {
+	
+	$.ajax({
+		
+		type: "post",
+		url: "${path}/reply/tech/likeStatus",
+		data:"${_csrf.parameterName}=${_csrf.token}",
+		success: function(result){
+			
+			
+			
+			$(result).each(function(index,item) {
+				
+				//$('#boardGood'+item).css({'width':500});
+				 $('#replyGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
+			});
 
+			
+			//alert("likeUp ajax result:"+result);
+			
+			//$("#cntBoardLike").html(result);
+			
+		}
+		
+	});
+});
+</script>
+<script>
 
+function replyLikeUp(replyNo){
+
+	var param="${_csrf.parameterName}=${_csrf.token}&likeStatus=likeUp&replyNo="+replyNo;
+	
+	$.ajax({
+		type: "post",
+		url: "${pageContext.request.contextPath}/reply/tech/changeLike",
+		data: param,
+		success: function(result){
+			
+			//alert("likeUp ajax result:"+result);
+			
+			$("#cntReplyLike"+replyNo).html(result);
+			var src=$('#replyGood'+replyNo).attr('src') ;
+			if(src =='/learning/resources/img/arrowUpGood.png'){
+			 $('#replyGood'+replyNo).attr('src' ,'/learning/resources/img/arrowUp.png') ;
+			 }else if(src =='/learning/resources/img/arrowUp.png'){
+				 $('#replyGood'+replyNo).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;
+			 }
+		}
+		
+	});	
+}	
+
+/* function replyLikeDown(replyNo){
+	
+	var param="${_csrf.parameterName}=${_csrf.token}&likeStatus=likeDown&replyNo="+replyNo;
+	
+	$.ajax({
+		type: "post",
+		url: "${pageContext.request.contextPath}/reply/tech/changeLike",
+		data: param,
+		success: function(result){
+			
+			//alert("likeDown ajax result:"+result);
+			
+			$("#cntReplyLike"+replyNo).html(result);
+			$('#replyGood'+replyNo).attr('src' ,'/learning/resources/img/arrowUp.png') ;
+		}
+		
+	});
+	
+
+}	 */
 	
 	
  function showModify(replyNo){
@@ -84,17 +156,9 @@
 						listReply();
 					}
 				}); 
-			
-			
-			
-			
-			
-			
-			
+	
 		}
-		
-		
-		
+
 	}  
 
 </script>
@@ -103,21 +167,28 @@
 .modifyCancel{display:none;}
 .replyCancel{display:none;}
 #replyInsertBtn{display:none;}
-td {border-bottom:1px dotted #000;}
+table {border:1px solid #000;}
 </style>
 </head>
 <body>
-<table style="width:700px; " >
+
 <c:forEach var="row"  items="${list}">
+<table style="width:700px; " >
   <tr>
   	<td  nowrap algin="left">
-  	 ${row.member.userId}
+  	 <img id="profile" src="${path}/resources/upload/${row.member.imgProfile}">
+  	 ${row.member.userId} ${row.member.activity}<br>
   	 <span style="font-size:10px">(${row.regdate}  ) </span> 
-  	
+  	<img  id="replyGood${row.replyNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer;float:right; " onclick="replyLikeUp('${row.replyNo}')" ><br>
+	<span id="cntReplyLike${row.replyNo}" style="width:20px; height:20px;cursor:pointer;float:right; ">${row.cntReplyLike}</span><br><br>
+
   	  <br>
-	
-  	<span id="modifyResult" title="modifyResult${row.replyNo}" > ${row.replytext} </span>
- 
+  	</td>
+   </tr>	
+  
+ <tr>
+ <td  nowrap >
+ 	<span id="modifyResult" title="modifyResult${row.replyNo}" > ${row.replytext} </span><br>
   	 <!-- 본인의 댓글만 수정,삭제가 가능하도록 처리 -->
   	 <sec:authorize access="isAuthenticated()">
   	 <sec:authentication var="mvo" property="principal" /> 
@@ -137,10 +208,10 @@ td {border-bottom:1px dotted #000;}
   	
   </tr>
   
-
+</table>
 </c:forEach>
 
-</table>
+
 
 </body>
 </html>
