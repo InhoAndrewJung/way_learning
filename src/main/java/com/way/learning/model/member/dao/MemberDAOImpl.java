@@ -1,10 +1,9 @@
 package com.way.learning.model.member.dao;
 
 import java.util.HashMap;
-<<<<<<< HEAD
-=======
+
 import java.util.List;
->>>>>>> master
+
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -48,7 +47,7 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("다오임플 아이디:"+userId);
 		return sqlSession.selectOne("memberMapper.idcheck",userId);				
 	}
-<<<<<<< HEAD
+
 
 	@Override
 	public String findIdByEmail(String email) {
@@ -67,7 +66,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 		return sqlSession.selectOne("memberMapper.emailcheck",email);				
 	}
-=======
+
 	
 	@Override
 	public List<String> selectRightNo(String userId) {
@@ -100,7 +99,7 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	
 	
->>>>>>> master
+
 }
 
 

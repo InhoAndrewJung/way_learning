@@ -1,22 +1,22 @@
 package com.way.learning.controller.member;
 
-<<<<<<< HEAD
+
 import javax.mail.internet.MimeMessage;
-=======
+
 
 import java.util.List;
 
->>>>>>> master
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
+
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-=======
+
 import org.springframework.security.core.context.SecurityContextHolder;
->>>>>>> master
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -212,12 +212,9 @@ public class MemberController {
 
 	@RequestMapping("updateMember")
 	public ModelAndView updateMemberAction(HttpServletRequest request, Member vo) throws Exception {
-<<<<<<< HEAD
-		memberService.updateMember(vo, request);
+		
+		
 
-		return new ModelAndView("member/update_result");
-	}
-=======
 		memberService.updateMember(vo,request);
 
 		return new ModelAndView("member/update_result");
@@ -267,12 +264,3 @@ public class MemberController {
 
 
 
-
-
-
-
-
-
->>>>>>> master
-
-}
