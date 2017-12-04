@@ -100,7 +100,7 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 	
 	
 	@Override
-	public int isBoardLike(String userId, int boardNo,String likeStatus) throws SQLException {
+	public int isBoardLike(String userId, int boardNo) throws SQLException {
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		map.put("userId", userId);
@@ -158,6 +158,13 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 	
 		
 		return sqlSession.selectOne("techBoardMapper.selectCntBoardLike", boardNo);
+		
+	}
+	
+	@Override
+	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException {
+
+		return sqlSession.selectList("techBoardMapper.selectAllRecommendNo", boardNo);
 		
 	}
 	

@@ -36,6 +36,7 @@
 		<result property="regDate" column="reg_date" />
 		<result property="member.userId" column="user_id" />
 		<result property="member.imgProfile" column="img_profile" />
+		<result property="member.activity" column="activity" />
 		<result property="tag" column="tag" />
 		<result property="cntBoardLike" column="cnt_board_like" />
 	</resultMap>
@@ -44,9 +45,9 @@
 	
 	
 	   
-    SELECT board_no, title, cnt_view, reg_date, user_id ,page,  cnt_reply,(select sum(cnt_board_like) from wl_tech_board where board_no=b.board_no)cnt_board_like, img_profile 
-		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id,img_profile,cnt_reply
-		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id, m.img_profile,(select count(*) from wl_tech_reply  where board_no=tb.board_no) cnt_reply
+    SELECT board_no, title, cnt_view, reg_date, user_id, activity ,page,  cnt_reply,(select sum(cnt_board_like) from wl_tech_board where board_no=b.board_no)cnt_board_like, img_profile 
+		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id, activity,img_profile,cnt_reply
+		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id,m.activity, m.img_profile,(select count(*) from wl_tech_reply  where board_no=tb.board_no) cnt_reply
 		FROM wl_tech_board tb, wl_member m
 	  <include refid="search" />
       <if test="sorting == 'board_no'">order by board_no DESC</if> 
@@ -95,7 +96,7 @@ select board_no,tag from wl_tech_tag where board_no=#{value}
 	</resultMap>
 
 	<select id="showContent" parameterType="string" resultMap="boardListRM">
-		SELECT user_id, img_profile,tb.reg_date reg_date ,cnt_view, (select count(*) from wl_tech_reply  where board_no=tb.board_no) cnt_reply,
+		SELECT user_id, img_profile,activity,tb.reg_date reg_date ,cnt_view, (select count(*) from wl_tech_reply  where board_no=tb.board_no) cnt_reply,
 board_no,title,content,cnt_board_like 
 		FROM wl_tech_board tb, wl_member m
 		WHERE tb.writer =m.user_id AND board_no=#{boardNo} 
@@ -186,6 +187,12 @@ board_no,title,content,cnt_board_like
     <select id="selectCntBoardLike" resultType="int">
     select cnt_board_like from wl_tech_board where board_no=#{boardNo}
     </select>
+    
+    <select id="selectAllRecommendNo" resultType="int">
+     select board_no from wl_tech_board_recommend
+    
+    </select>
+    
 	<!-- 좋아요 관련 로직 끝 -->
 	
 </mapper>	

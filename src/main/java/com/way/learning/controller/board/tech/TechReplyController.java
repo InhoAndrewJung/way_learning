@@ -47,10 +47,10 @@ public class TechReplyController {
 	
 	
 	@RequestMapping("list")
-	public ModelAndView list(String boardNo, ModelAndView mav, HttpSession session) {
+	public ModelAndView list(int boardNo, ModelAndView mav) {
 		System.out.println("reply list 컨트롤러 입성");
 		System.out.println("넘어온 boardNo:"+boardNo);
-		List<TechReply> list = techReplyService.listReply(boardNo, session);
+		List<TechReply> list = techReplyService.listReply(boardNo);
 		mav.setViewName("board/tech/reply_list");
 		System.out.println("컨트롤러 list:"+list);
 		mav.addObject("list", list);
@@ -64,18 +64,29 @@ public class TechReplyController {
 	
 	@ResponseBody
 	@RequestMapping("changeLike")
-	public int changeLike(int replyNo, String likeStatus)throws Exception{
+	public int changeLike(int replyNo)throws Exception{
 		
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		
 		
-		techReplyService.isReplyLike(mvo.getUserId(), replyNo,likeStatus);
+		techReplyService.isReplyLike(mvo.getUserId(), replyNo);
 		int cnt=techReplyService.selectCntReplyLike(replyNo);
 		return cnt;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping("likeStatus")
+	public List<Integer> likeStatus()throws Exception{
+		
+		
+		System.out.println("likestatus 컨트롤러!:");
+		
+		
+		List<Integer> replyGoodNoList=techReplyService.selectAllRecommendNo();
+		
+		return replyGoodNoList;
+	}
 	
 	
 	@ResponseBody

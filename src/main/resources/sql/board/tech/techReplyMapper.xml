@@ -19,6 +19,7 @@
 		<result property="member.userId" column="replyer"/>
 		<result property="cntReplyLike" column="cnt_reply_like"/>
 		<result property="member.imgProfile" column="img_profile"/>
+		<result property="member.activity" column="activity" />
 		<result property="regdate" column="reg_date"/>
 	
 	
@@ -29,8 +30,8 @@
 	
 	<select id="listReply" resultMap="replyListRM" parameterType="string">
 	
-			select replyer,m.img_profile, tr.reg_date,cnt_reply_like,replytext,tr.board_no,reply_no 
-			 from  wl_tech_reply tr, wl_member m where m.user_id =tr.replyer and board_no=#{value}  order by reply_no asc
+			select replyer, m.img_profile,m.activity, tr.reg_date,cnt_reply_like,replytext,tr.board_no,reply_no 
+			 from  wl_tech_reply tr, wl_member m where m.user_id =tr.replyer and board_no=#{boardNo}  order by reply_no asc
 	
 	</select>
 	
@@ -79,7 +80,10 @@
     </select>
 	<!-- 좋아요 관련 로직 끝 -->
 
-
+	<select id="selectAllRecommendNo" resultType="int">
+     select reply_No from wl_tech_reply_recommend
+    
+    </select>
 	
 	
 </mapper>	

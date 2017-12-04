@@ -24,7 +24,7 @@ public class TechReplyServiceImpl implements TechReplyService{
 
 	}
 
-	public List<TechReply>  listReply(String boardNo ,HttpSession session){
+	public List<TechReply>  listReply(int boardNo ){
 
 
 
@@ -67,26 +67,26 @@ public class TechReplyServiceImpl implements TechReplyService{
 	
 	
 	@Transactional
-	public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException {
-		int result=techReplyDao.isReplyLike(userId, replyNo, likeStatus);
-		System.out.println("서비스 isReplyLike likeStatus:"+likeStatus);
+	public int isReplyLike(String userId, int replyNo) throws SQLException {
+		int result=techReplyDao.isReplyLike(userId, replyNo);
+		
 		System.out.println("서비스 isReplyLike userId:"+userId);
 		System.out.println("서비스 isReplyLike boardNo:"+replyNo);
 		System.out.println("서비스 isReplyike result:"+result);
 		int action=0;
-		if(likeStatus.equals("likeUp")){
+		
 			if(result==0){
 				techReplyDao.insertReplyLike(userId, replyNo);
 				action=techReplyDao.increaseCntReplyLike(replyNo);
 			}
 			
-		}else if(likeStatus.equals("likeDown")){
-			if(result==1){
+		
+			else if(result==1){
 				techReplyDao.deleteReplyLike(userId, replyNo);
 			action=techReplyDao.decreaseCntReplyLike(replyNo);
 			}
 			
-		}
+	
 		return action;
 		
 	}
@@ -97,5 +97,14 @@ public class TechReplyServiceImpl implements TechReplyService{
 		return techReplyDao.selectCntReplyLike(replyNo);
 		
 	}
+	
+	@Override
+	public List<Integer> selectAllRecommendNo() throws SQLException {
+
+		return techReplyDao.selectAllRecommendNo();
+		
+	}
+	
+	
 }
 	

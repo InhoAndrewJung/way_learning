@@ -13,20 +13,47 @@
 $(document).ready(function() {
 
 	listReply(); //댓글 목록
+
+	
+	
+	
+		$.ajax({
+			type: "post",
+			url: "${pageContext.request.contextPath}/board/tech/likeStatus",
+			data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}",
+			success: function(result){
+				
+				
+				
+				$(result).each(function(index,item) {
+					
+					
+					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;	
+				});
+
+				
+				
+				
+			}
+			
+		});
+		
+	
+		
+				  
+		
 	
 		
 	
 		$('#btnReply').click(function(){
-			
-		
-			reply(); 
-			
-			 
+
+			reply(); 		 
 		});
+		
+		
 	
 	
-		//댓글 쓴거 전송 
-		//텍스트와,bno, 비밀글 여부를 insert.do의 파라미터값으로 넣음
+		
 		function reply(){
 			var replytext=$("#replytext").val();
 			var boardNo="${requestScope.bvo.boardNo}"; // view 컨트롤러에서 가져옴!
@@ -44,7 +71,7 @@ $(document).ready(function() {
 				data: param,
 				success: function(){
 					
-					alert("댓글이 등록되었습니다.");
+					//alert("댓글이 등록되었습니다.");
 					
 					listReply(); //이거안하면 새로고침해야 쓴게 나옴!!!
 				}
@@ -65,7 +92,7 @@ $(document).ready(function() {
 			success: function(result){
 				$("#listReply").html(result);
 				
-				console.log(result);
+				
 			}
 		});
 	 }
@@ -85,17 +112,11 @@ function updateBoard(){
 	}
 }
 
-/* function showModify(rno){
-	alert("gg");
-	$('#modifyResult').html('<input type="text"  id="reply"  value="ddddddd" />');
+
+
+function boardLikeChange(boardNo){
 	
-	
-
-}  */
-
-function boardLikeUp(){
-
-	var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}&likeStatus=likeUp";
+	var param="${_csrf.parameterName}=${_csrf.token}&boardNo="+boardNo;
 	
 	$.ajax({
 		type: "post",
@@ -103,64 +124,26 @@ function boardLikeUp(){
 		data: param,
 		success: function(result){
 			
-			//alert("likeUp ajax result:"+result);
+			
 			
 			$("#cntBoardLike").html(result);
 			
-		}
+			 var src=$('#boardGood'+boardNo).attr('src') ;
+			 if(src =='/learning/resources/img/arrowUpGood.png'){
+				 $('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUp.png') ;
+			 }else if(src =='/learning/resources/img/arrowUp.png'){
+				 $('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;
+			 }
 		
-	});
-	
-	
-	
-}	
-
-function boardLikeDown(){
-	
-var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}&likeStatus=likeDown";
-	
-	$.ajax({
-		type: "post",
-		url: "${pageContext.request.contextPath}/board/tech/changeLike",
-		data: param,
-		success: function(result){
-			
-			//alert("likeDown ajax result:"+result);
-			
-			$("#cntBoardLike").html(result);
-			
+				
 		}
-		
-	});
-	
-
+	});	
 }	
 
 
-/**
-* Resize height of (outer) editor frame to match inner height of contents
-* @param fckEditor = editor instance reference
-* @param min = minimum height (in pixels)
-* @param max = maximum height
-*/
-/* function resizeHeightToContents(CKEDITOR, min, max) {
-var frameHeight = CKEDITOR.EditorWindow.parent.innerHeight; //outer frame which includes menu bar
-var editHeight = CKEDITOR.EditorWindow.innerHeight; //inner content frame
-var contentHeight = CKEDITOR.EditorDocument.body.offsetHeight;
-var heightDiff = contentHeight - editHeight;
-if ((heightDiff < 0) && (frameHeight > min)) {
-//shrink editor frame
-frameHeight += heightDiff;
-if (frameHeight < min) frameHeight = min;
-CKEDITOR.EditorWindow.parent.frameElement.style.height = frameHeight;
-}
-else if ((heightDiff > 0) && (frameHeight < max)) {
-//expand editor frame
-frameHeight += heightDiff;
-if (frameHeight > max) frameHeight = max;
-CKEDITOR.EditorWindow.parent.frameElement.style.height = frameHeight;
-}
-} */
+
+
+
 
 
 
@@ -201,12 +184,12 @@ ${delete_result}
 
 						<tr>
 							<td><img id="profile" src="${path}/resources/upload/${bvo.member.imgProfile}">
-							${requestScope.bvo.member.userId} <br> <span
+							${requestScope.bvo.member.userId}  ${requestScope.bvo.member.activity}<br> <span
 								style="font-size: 10px"><fmt:formatDate value="${bvo.regDate}" pattern="yyyy.MM.dd HH:mm:ss" /></td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
-							<td>${requestScope.bvo.cntView} ${requestScope.bvo.cntReply} </td>
+							<td nowrap>뷰수:${requestScope.bvo.cntView} 답글수:${requestScope.bvo.cntReply} </td>
 						</tr>
 						
 						<tr>
@@ -222,9 +205,8 @@ ${delete_result}
 							제목:${requestScope.bvo.title}
 							</td>
 							<td>
-							<img  src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="boardLikeUp()" ><br><br>
+							<img id="boardGood${bvo.boardNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="boardLikeChange('${bvo.boardNo}')" ><br><br>
 							<span id="cntBoardLike" >${bvo.cntBoardLike}</span><br><br>
-							<img  src="${path}/resources/img/arrowDown.png" style="width:20px; height:20px;cursor:pointer;" onclick="boardLikeDown()">
 							
 							</td>
 
@@ -237,13 +219,14 @@ ${delete_result}
 								<script>
 			          CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false, readonly:true }); // 태그의 id
 			          CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});
-
-			        
-			          
 		                        </script> 
 							
 							</td>
-							<td>&nbsp;</td>
+							<td align="center">
+							<a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent('http://127.0.0.1:7777/learning/board/tech/showContent?boardNo=${requestScope.bvo.boardNo}&&keyword=')+'&t='+encodeURIComponent('Q&A 게시판'), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" ><img
+					src="${path}/resources/img/facebook.png"
+					style="width: 20px; height: 20px; cursor: pointer;"></a>
+							</td>
 
 						</tr>
 

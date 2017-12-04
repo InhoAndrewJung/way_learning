@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -131,15 +130,29 @@ public class TechBoardController {
 	
 	@ResponseBody
 	@RequestMapping("changeLike")
-	public int changeLike(int boardNo, String likeStatus)throws Exception{
+	public int changeLike(int boardNo)throws Exception{
 		
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		
 		
-		techBoardService.isBoardLike(mvo.getUserId(), boardNo,likeStatus);
+		techBoardService.isBoardLike(mvo.getUserId(), boardNo);
 		int cnt=techBoardService.selectCntBoardLike(boardNo);
 		return cnt;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("likeStatus")
+	public List<Integer> likeStatus(int boardNo)throws Exception{
+		
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		
+		
+		List<Integer> noList=techBoardService.selectAllRecommendNo(boardNo);
+		
+		return noList;
 	}
 
 	@RequestMapping("delete")
