@@ -1,7 +1,7 @@
 package com.way.learning.model.question.vo;
 
 public class AnswerResult {
-	
+
 	private String userId;
 	private int questionNo;
 	private int myCntSubmit;
@@ -117,9 +117,6 @@ public class AnswerResult {
 	}
 	
 	
-	
-	
-	
-	
+
 
 }
