@@ -41,7 +41,7 @@ public interface TechBoardService {
 	
 	public int countArticle(String keyword) throws SQLException ;
 	
-	public int isBoardLike(String userId, int boardNo,String likeStatus) throws SQLException;
+	public int isBoardLike(String userId, int boardNo) throws SQLException;
 	
 	public int selectCntBoardLike(int boardNo) throws SQLException;
 	

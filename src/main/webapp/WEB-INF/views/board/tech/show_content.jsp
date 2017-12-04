@@ -13,12 +13,10 @@
 $(document).ready(function() {
 
 	listReply(); //댓글 목록
+
 	
 	
 	
-	
-		
-		
 		$.ajax({
 			type: "post",
 			url: "${pageContext.request.contextPath}/board/tech/likeStatus",
@@ -29,35 +27,33 @@ $(document).ready(function() {
 				
 				$(result).each(function(index,item) {
 					
-					//$('#boardGood'+item).css({'width':500});
+					
 					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;	
 				});
 
 				
-				//alert("likeUp ajax result:"+result);
 				
-				//$("#cntBoardLike").html(result);
 				
 			}
 			
 		});
 		
+	
 		
-
+				  
+		
 	
 		
 	
 		$('#btnReply').click(function(){
-			
-		
-			reply(); 
-			
-			 
+
+			reply(); 		 
 		});
+		
+		
 	
 	
-		//댓글 쓴거 전송 
-		//텍스트와,bno, 비밀글 여부를 insert.do의 파라미터값으로 넣음
+		
 		function reply(){
 			var replytext=$("#replytext").val();
 			var boardNo="${requestScope.bvo.boardNo}"; // view 컨트롤러에서 가져옴!
@@ -116,17 +112,11 @@ function updateBoard(){
 	}
 }
 
-/* function showModify(rno){
-	alert("gg");
-	$('#modifyResult').html('<input type="text"  id="reply"  value="ddddddd" />');
+
+
+function boardLikeChange(boardNo){
 	
-	
-
-}  */
-
-function boardLikeUp(boardNo){
-
-	var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}&likeStatus=likeUp";
+	var param="${_csrf.parameterName}=${_csrf.token}&boardNo="+boardNo;
 	
 	$.ajax({
 		type: "post",
@@ -134,35 +124,23 @@ function boardLikeUp(boardNo){
 		data: param,
 		success: function(result){
 			
-			//alert("likeUp ajax result:"+result);
+			
 			
 			$("#cntBoardLike").html(result);
-			$('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
+			
+			 var src=$('#boardGood'+boardNo).attr('src') ;
+			 if(src =='/learning/resources/img/arrowUpGood.png'){
+				 $('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUp.png') ;
+			 }else if(src =='/learning/resources/img/arrowUp.png'){
+				 $('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;
+			 }
+		
+				
 		}
 	});	
 }	
 
-function boardLikeDown(boardNo){
-	
-var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}&likeStatus=likeDown";
-	
-	$.ajax({
-		type: "post",
-		url: "${pageContext.request.contextPath}/board/tech/changeLike",
-		data: param,
-		success: function(result){
-			
-			//alert("likeDown ajax result:"+result);
-			
-			$("#cntBoardLike").html(result);
-			$('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUp.png') ;	
-			
-		}
-		
-	});
-	
 
-}	
 
 
 
@@ -206,7 +184,7 @@ ${delete_result}
 
 						<tr>
 							<td><img id="profile" src="${path}/resources/upload/${bvo.member.imgProfile}">
-							${requestScope.bvo.member.userId} <br> <span
+							${requestScope.bvo.member.userId}  ${requestScope.bvo.member.activity}<br> <span
 								style="font-size: 10px"><fmt:formatDate value="${bvo.regDate}" pattern="yyyy.MM.dd HH:mm:ss" /></td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
@@ -227,9 +205,8 @@ ${delete_result}
 							제목:${requestScope.bvo.title}
 							</td>
 							<td>
-							<img id="boardGood${bvo.boardNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="boardLikeUp('${bvo.boardNo}')" ><br><br>
+							<img id="boardGood${bvo.boardNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="boardLikeChange('${bvo.boardNo}')" ><br><br>
 							<span id="cntBoardLike" >${bvo.cntBoardLike}</span><br><br>
-							<img  src="${path}/resources/img/arrowDown.png" style="width:20px; height:20px;cursor:pointer;" onclick="boardLikeDown('${bvo.boardNo}')">
 							
 							</td>
 
@@ -245,7 +222,11 @@ ${delete_result}
 		                        </script> 
 							
 							</td>
-							<td>&nbsp;</td>
+							<td align="center">
+							<a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent('http://127.0.0.1:7777/learning/board/tech/showContent?boardNo=${requestScope.bvo.boardNo}&&keyword=')+'&t='+encodeURIComponent('Q&A 게시판'), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" ><img
+					src="${path}/resources/img/facebook.png"
+					style="width: 20px; height: 20px; cursor: pointer;"></a>
+							</td>
 
 						</tr>
 

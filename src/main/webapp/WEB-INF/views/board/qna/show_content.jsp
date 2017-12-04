@@ -7,6 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+  
+
+
 <%@ include file="../../include/common.jsp" %>
 </head>
 <script>
@@ -196,17 +199,19 @@ a{text-decoration:none; cursor: pointer;}
 
 <body>
 <h2 align="center"><b>게시글</b></h2>
-${delete_result}
-	<div align="center">
-	
-	
+<div align="center">
+ 
+
+
+
+
 	
 					<table border="1" width="650" align="center">
 
 
 						<tr>
 							<td><img id="profile" src="${path}/resources/upload/${bvo.member.imgProfile}">
-							${requestScope.bvo.member.userId} <br> <span
+							${requestScope.bvo.member.userId}  ${requestScope.bvo.member.activity}<br> <span
 								style="font-size: 10px"><fmt:formatDate value="${bvo.regDate}" pattern="yyyy.MM.dd HH:mm:ss" /></td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
@@ -231,6 +236,7 @@ ${delete_result}
 							<span id="cntBoardLike" >${bvo.cntBoardLike}</span><br><br>
 							<img  src="${path}/resources/img/arrowDown.png" style="width:20px; height:20px;cursor:pointer;" onclick="boardLikeDown('${bvo.boardNo}')">
 							
+							
 							</td>
 
 						</tr>
@@ -245,12 +251,17 @@ ${delete_result}
 		                        </script> 
 							
 							</td>
-							<td>&nbsp;</td>
-
+							<td align="center">
+							<a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent('http://127.0.0.1:7777/learning/board/qna/showContent?boardNo=${requestScope.bvo.boardNo}&&keyword=')+'&t='+encodeURIComponent('Q&A 게시판'), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" ><img
+					src="${path}/resources/img/facebook.png"
+					style="width: 20px; height: 20px; cursor: pointer;"></a>
+							
+							</td>
+								
 						</tr>
 
 					</table>
-
+							
 							<a
 								href="${pageContext.request.contextPath}/board/qna/list?keyword=${keyword}"><img
 									alt="목록"

@@ -8,8 +8,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import com.way.learning.aop.service.ActivityService;
+import com.way.learning.aop.service.activity.ActivityService;
 import com.way.learning.model.member.vo.Member;
+import com.way.learning.service.question.QuestionService;
 
 @Component
 @Aspect
@@ -18,11 +19,9 @@ public class ActivityAspect { //POJO
 	@Autowired
 	private ActivityService activityService;
 	
-	/*@Around("execution(* com.way.learning.controller..*Controller.*(..))"
-	+ " or execution(* com.way.learning.service..*Impl.*(..))"
-	+ " or execution(* com.way.learning.model..dao.*Impl.*(..))")*/
 	
-	@Around("execution( * com.way.learning.service..Tech*ServiceImpl.is*Like(..))")
+	
+	@Around("execution( * com.way.learning.service..*ServiceImpl.is*Like(..))")
 	public Object updatelikeActivity(ProceedingJoinPoint pjp) throws Throwable{
 		Object result= pjp.proceed();
 		
@@ -35,10 +34,13 @@ public class ActivityAspect { //POJO
 			System.out.println(" activity aopparams[0].toString():"+params[0].toString());
 			System.out.println(" activity aopparams[1].toString():"+params[1].toString());
 			System.out.println(" activity aopparams[2].toString():"+params[2].toString());*/
+			System.out.println(pjp.getSignature().getName()+"() target method call....");
 			System.out.println("activity aop result:"+result);
 			Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String behavior="like";
 			if(result.toString().equals("1") ){
-				activityService.updateLikeActivity(mvo.getUserId());
+				
+				activityService.updateActivity(mvo.getUserId(),behavior);
 			}
 			
 	
@@ -47,29 +49,46 @@ public class ActivityAspect { //POJO
 	
 	
 	//com.way.learning.service.board.tech.TechReplyServiceImpl.insertReply
-	@Around("execution( * com.way.learning.service..Tech*ServiceImpl.insertBoard(..))"
-			+" or execution( * com.way.learning.service..Tech*ServiceImpl.insertReply(..))"
+	@Around("execution( * com.way.learning.service..*ServiceImpl.insertBoard(..))"
+			+" or execution( * com.way.learning.service..*ServiceImpl.insertReply(..))"
 			
 			)
 	public Object updateInsertActivity(ProceedingJoinPoint pjp) throws Throwable{
 		Object result= pjp.proceed();
 		
 		
-		System.out.println(pjp.getSignature().getName()+"() target method call....");
-		
-		
-		
-			
-			
+			System.out.println(pjp.getSignature().getName()+"() target method call....");
 			System.out.println("activity aop result:"+result);
 			Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			if(result.toString().equals("1") ){
-				activityService.updateLikeActivity(mvo.getUserId());
+		 
+			if(result.toString().equals("1")){
+				activityService.updateActivity(mvo.getUserId(),pjp.getSignature().getName());
 			}
 			
 	
 		return result;
 	}
+	
+	
+	@Around("execution( * com.way.learning.service..*ServiceImpl.checkAnswer(..))")
+	public Object questionActivity(ProceedingJoinPoint pjp) throws Throwable{
+		
+			
+			Object result= pjp.proceed();
+		
+		
+			System.out.println(pjp.getSignature().getName()+"() target method call....");
+			System.out.println("activity aop result:"+result);
+			Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			activityService.updateActivity(mvo.getUserId(),pjp.getSignature().getName());
+			
+			
+	
+		return result;
+	}
+	
+	
+	
 }
 
 

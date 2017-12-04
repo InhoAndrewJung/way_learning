@@ -98,7 +98,7 @@ ${map.count}개의 게시물이 있습니다.
 			${bvo.cntBoardLike}</td>
 			<!-- 총 리플수 -->
 			<td>  <span style="color:red">(${bvo.cntReply})</span></td>
-			<td> <img id="profile" src="${path}/resources/upload/${bvo.member.imgProfile}" > ${bvo.member.userId} 
+			<td> <img id="profile" src="${path}/resources/upload/${bvo.member.imgProfile}" > ${bvo.member.userId} ${bvo.member.activity} 
 			<br><span style="font-size:10px"><fmt:formatDate value="${bvo.regDate}" pattern="yyyy.MM.dd HH:mm:ss" /></span>
 			</td>
 			

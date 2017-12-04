@@ -175,7 +175,7 @@ table {border:1px solid #000;}
   <tr>
   	<td  nowrap algin="left">
   	 <img id="profile" src="${path}/resources/upload/${row.member.imgProfile}">
-  	 ${row.member.userId}
+  	 ${row.member.userId}   ${row.member.activity}<br>
   	 <span style="font-size:10px">(${row.regdate}  ) </span> 
   	<img  id="replyGood${row.replyNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer;float:right; " onclick="replyLikeUp('${row.replyNo}')" ><br>
 	<span id="cntReplyLike${row.replyNo}" style="width:20px; height:20px;cursor:pointer;float:right; ">${row.cntReplyLike}</span><br><br>

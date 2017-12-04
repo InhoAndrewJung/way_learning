@@ -130,13 +130,13 @@ public class TechBoardController {
 	
 	@ResponseBody
 	@RequestMapping("changeLike")
-	public int changeLike(int boardNo, String likeStatus)throws Exception{
+	public int changeLike(int boardNo)throws Exception{
 		
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		
 		
-		techBoardService.isBoardLike(mvo.getUserId(), boardNo,likeStatus);
+		techBoardService.isBoardLike(mvo.getUserId(), boardNo);
 		int cnt=techBoardService.selectCntBoardLike(boardNo);
 		return cnt;
 	}

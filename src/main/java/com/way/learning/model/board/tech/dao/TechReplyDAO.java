@@ -24,7 +24,7 @@ public interface TechReplyDAO {
 	public int  insertReply(TechReply vo);
 
 	//listReply
-	public List<TechReply>  listReply(String no);
+	public List<TechReply>  listReply(int no);
 
 	//updateReply
 	public void  updateReply(String rno, String replytext);
@@ -34,7 +34,7 @@ public interface TechReplyDAO {
 	//deleteReply
 	public int  deleteReply(String rno);
 
-	public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException;
+	public int isReplyLike(String userId, int replyNo) throws SQLException;
 	
 	public void insertReplyLike(String userId, int replyNo) throws SQLException;
 	

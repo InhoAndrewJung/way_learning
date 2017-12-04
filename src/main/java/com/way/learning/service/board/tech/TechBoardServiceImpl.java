@@ -85,26 +85,26 @@ public class TechBoardServiceImpl implements TechBoardService{
 	}
 	
 	@Transactional
-	public int isBoardLike(String userId, int boardNo,String likeStatus) throws SQLException {
-		int result=techBoardDao.isBoardLike(userId, boardNo, likeStatus);
-		System.out.println("서비스 isBoardLike likeStatus:"+likeStatus);
-		System.out.println("서비스 isBoardLike userId:"+userId);
-		System.out.println("서비스 isBoardLike boardNo:"+boardNo);
-		System.out.println("서비스 isBoardLike result:"+result);
+	public int isBoardLike(String userId, int boardNo) throws SQLException {
+		int result=techBoardDao.isBoardLike(userId, boardNo);
+		
+		System.out.println("tech 서비스 isBoardLike userId:"+userId);
+		System.out.println("tech 서비스 isBoardLike boardNo:"+boardNo);
+		System.out.println("tech 서비스 isBoardLike result:"+result);
 		int action=0;
-		if(likeStatus.equals("likeUp")){
+		
 			if(result==0){
 				techBoardDao.insertBoardLike(userId, boardNo);
 				action=techBoardDao.increaseCntBoardLike(boardNo);
-			}
+		
 			
-		}else if(likeStatus.equals("likeDown")){
-			if(result==1){
+	
+			}else if(result==1){
 				techBoardDao.deleteBoardLike(userId, boardNo);
 				action=techBoardDao.decreaseCntBoardLike(boardNo);
 			}
 			
-		}
+		
 		return action;
 	
 	}
