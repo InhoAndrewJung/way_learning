@@ -4,8 +4,6 @@ public class GeneralQuestion {
 
 	 	private int questionNo;
 	    private String question;
-	    private String input;
-	    private String output;
 	    private String language;
 	    private String answer;
 	    private int cntSubmit;
@@ -17,13 +15,11 @@ public class GeneralQuestion {
 		}
 
 
-		public GeneralQuestion(int questionNo, String question, String input, String output, String language,
-				String answer, int cntSubmit, int cntRight) {
+		public GeneralQuestion(int questionNo, String question, String language, String answer, int cntSubmit,
+				int cntRight) {
 			super();
 			this.questionNo = questionNo;
 			this.question = question;
-			this.input = input;
-			this.output = output;
 			this.language = language;
 			this.answer = answer;
 			this.cntSubmit = cntSubmit;
@@ -48,26 +44,6 @@ public class GeneralQuestion {
 
 		public void setQuestion(String question) {
 			this.question = question;
-		}
-
-
-		public String getInput() {
-			return input;
-		}
-
-
-		public void setInput(String input) {
-			this.input = input;
-		}
-
-
-		public String getOutput() {
-			return output;
-		}
-
-
-		public void setOutput(String output) {
-			this.output = output;
 		}
 
 
@@ -109,7 +85,9 @@ public class GeneralQuestion {
 		public void setCntRight(int cntRight) {
 			this.cntRight = cntRight;
 		}
-	    
+
+
+		
 		
 	    
 

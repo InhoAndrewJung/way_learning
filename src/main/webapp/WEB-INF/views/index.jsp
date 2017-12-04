@@ -55,6 +55,8 @@
 			<li><a href="${path}/member/updateForm">정보 수정 폼</a></li>
 			<li><a href="${pageContext.request.contextPath}/board/tech/write"><img alt="게시판 글쓰기" src="${pageContext.request.contextPath}/img/write_btn.jpg" border="0"></a><li>
 			<li><a href="${pageContext.request.contextPath}/board/tech/list">게시판목록<img alt="게시판 목록" src="${pageContext.request.contextPath}/img/list_btn.jpg" border="0"></a><li>
+			<li><a href="${pageContext.request.contextPath}/question/algo/list">코드문제 게시판<img alt="코드문제 게시판" src="${pageContext.request.contextPath}/img/list_btn.jpg" border="0"></a><li>
+			<li><a href="${pageContext.request.contextPath}/question/general/list">일반문제 게시판<img alt="일반문제 게시판" src="${pageContext.request.contextPath}/img/list_btn.jpg" border="0"></a><li>
 
 		</sec:authorize>
 		<li><a href="javascript:logout();">로그아웃</a></li>

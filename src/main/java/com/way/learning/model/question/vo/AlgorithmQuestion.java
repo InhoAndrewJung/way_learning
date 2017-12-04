@@ -91,6 +91,13 @@ public class AlgorithmQuestion {
 		public void setCntRight(int cntRight) {
 			this.cntRight = cntRight;
 		}
+
+		@Override
+		public String toString() {
+			return "AlgorithmQuestion [questionNo=" + questionNo + ", question=" + question + ", input=" + input
+					+ ", output=" + output + ", language=" + language + ", answer=" + answer + ", cntSubmit="
+					+ cntSubmit + ", cntRight=" + cntRight + "]";
+		}
 	    
 	    
 	    
