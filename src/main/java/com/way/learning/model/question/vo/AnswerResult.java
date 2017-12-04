@@ -1,26 +1,28 @@
 package com.way.learning.model.question.vo;
 
 public class AnswerResult {
-	
+
 	private String userId;
 	private int questionNo;
 	private int myCntSubmit;
 	private int myCntWrong;
 	private int myCntRight;
+	private int myCntError;
 	private int ranking;
 	private double myRightPercent;
-	public AnswerResult(String userId, int questionNo, int myCntSubmit, int myCntWrong, int myCntRight, int ranking,
-			double myRightPercent) {
+	public AnswerResult(String userId, int questionNo, int myCntSubmit, int myCntWrong, int myCntRight, int myCntError,
+			int ranking, double myRightPercent) {
 		super();
 		this.userId = userId;
 		this.questionNo = questionNo;
 		this.myCntSubmit = myCntSubmit;
 		this.myCntWrong = myCntWrong;
 		this.myCntRight = myCntRight;
+		this.myCntError = myCntError;
 		this.ranking = ranking;
 		this.myRightPercent = myRightPercent;
 	}
-	
+
 	
 	public AnswerResult() {
 		// TODO Auto-generated constructor stub
@@ -77,6 +79,16 @@ public class AnswerResult {
 	}
 
 
+	public int getMyCntError() {
+		return myCntError;
+	}
+
+
+	public void setMyCntError(int myCntError) {
+		this.myCntError = myCntError;
+	}
+
+
 	public int getRanking() {
 		return ranking;
 	}
@@ -100,13 +112,11 @@ public class AnswerResult {
 	@Override
 	public String toString() {
 		return "AnswerResult [userId=" + userId + ", questionNo=" + questionNo + ", myCntSubmit=" + myCntSubmit
-				+ ", myCntWrong=" + myCntWrong + ", myCntRight=" + myCntRight + ", ranking=" + ranking
-				+ ", myRightPercent=" + myRightPercent + "]";
+				+ ", myCntWrong=" + myCntWrong + ", myCntRight=" + myCntRight + ", myCntError=" + myCntError
+				+ ", ranking=" + ranking + ", myRightPercent=" + myRightPercent + "]";
 	}
 	
 	
-	
-	
-	
+
 
 }

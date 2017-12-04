@@ -25,7 +25,13 @@ public class Member {
 		this.userType = userType;
 		this.uploadFile = uploadFile;
 	}
-	
+	//메일전송용 생성자
+	public Member(String userId, String password) {
+		super();
+		this.userId = userId;
+		this.password = password;
+	}
+
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}

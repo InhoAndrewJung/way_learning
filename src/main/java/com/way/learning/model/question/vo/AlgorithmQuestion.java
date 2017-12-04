@@ -1,6 +1,7 @@
 package com.way.learning.model.question.vo;
 
 public class AlgorithmQuestion {
+
 	
 	private int questionNo;
 	private String title;
@@ -10,6 +11,7 @@ public class AlgorithmQuestion {
 	private String answer;
 	private int cntSubmit;
 	private int cntRight;
+
 	public AlgorithmQuestion(int questionNo, String title, String question, String input, String output, String answer,
 			int cntSubmit, int cntRight) {
 		super();
@@ -23,10 +25,12 @@ public class AlgorithmQuestion {
 		this.cntRight = cntRight;
 	}
 
+
 	
 	public AlgorithmQuestion() {
 		// TODO Auto-generated constructor stub
 	}
+
 
 
 	public int getQuestionNo() {
@@ -34,9 +38,11 @@ public class AlgorithmQuestion {
 	}
 
 
+
 	public void setQuestionNo(int questionNo) {
 		this.questionNo = questionNo;
 	}
+
 
 
 	public String getTitle() {
@@ -44,9 +50,11 @@ public class AlgorithmQuestion {
 	}
 
 
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 
 
 	public String getQuestion() {
@@ -54,9 +62,11 @@ public class AlgorithmQuestion {
 	}
 
 
+
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+
 
 
 	public String getInput() {
@@ -64,9 +74,11 @@ public class AlgorithmQuestion {
 	}
 
 
+
 	public void setInput(String input) {
 		this.input = input;
 	}
+
 
 
 	public String getOutput() {
@@ -74,9 +86,11 @@ public class AlgorithmQuestion {
 	}
 
 
+
 	public void setOutput(String output) {
 		this.output = output;
 	}
+
 
 
 	public String getAnswer() {
@@ -84,9 +98,11 @@ public class AlgorithmQuestion {
 	}
 
 
+
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+
 
 
 	public int getCntSubmit() {
@@ -94,9 +110,11 @@ public class AlgorithmQuestion {
 	}
 
 
+
 	public void setCntSubmit(int cntSubmit) {
 		this.cntSubmit = cntSubmit;
 	}
+
 
 
 	public int getCntRight() {
@@ -104,9 +122,11 @@ public class AlgorithmQuestion {
 	}
 
 
+
 	public void setCntRight(int cntRight) {
 		this.cntRight = cntRight;
 	}
+
 
 
 	@Override
@@ -115,7 +135,8 @@ public class AlgorithmQuestion {
 				+ ", input=" + input + ", output=" + output + ", answer=" + answer + ", cntSubmit=" + cntSubmit
 				+ ", cntRight=" + cntRight + "]";
 	}
-	
-	
+
+
+
 
 }
