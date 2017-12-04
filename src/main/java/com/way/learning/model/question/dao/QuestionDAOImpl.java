@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.way.learning.model.question.vo.AlgorithmQuestion;
 import com.way.learning.model.question.vo.AnswerResult;
 import com.way.learning.model.question.vo.GeneralChoice;
 import com.way.learning.model.question.vo.GeneralQuestion;
@@ -20,10 +21,18 @@ public class QuestionDAOImpl implements QuestionDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public void insertQuestion(GeneralQuestion gq) throws SQLException {
-		System.out.println("before insertQuestion");
-		sqlSession.insert("questionMapper.insertQuestion", gq);
-		System.out.println("after insertQuestion");
+	public void insertGeneralQuestion(GeneralQuestion gq) throws SQLException {
+		
+		sqlSession.insert("questionMapper.insertGeneralQuestion", gq);
+		
+
+	}
+	
+	@Override
+	public void insertEssayQuestion(AlgorithmQuestion aq) throws SQLException {
+		
+		sqlSession.insert("questionMapper.insertEssayQuestion", aq);
+	
 
 	}
 
@@ -45,18 +54,33 @@ public class QuestionDAOImpl implements QuestionDAO {
 
 
 	@Override
-	public List<GeneralQuestion> getList(String keyword, String sorting) throws SQLException {
+	public List<GeneralQuestion> getGeneralList(String keyword, String sorting) throws SQLException {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyword", keyword);
 		map.put("sorting", sorting);
-		return sqlSession.selectList("questionMapper.getList",map);
+		return sqlSession.selectList("questionMapper.getGeneralList",map);
 
 	}
 	
 	@Override
-	public GeneralQuestion multipleChoiceContent(int questionNo) throws SQLException {
+	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException {
+		
+		
+		return sqlSession.selectList("questionMapper.getEssayList",keyword);
 
-		return sqlSession.selectOne("questionMapper.multipleChoiceContent",questionNo);
+	}
+	
+	@Override
+	public GeneralQuestion showGeneralContent(int questionNo) throws SQLException {
+
+		return sqlSession.selectOne("questionMapper.showGeneralContent",questionNo);
+
+	}
+	
+	@Override
+	public GeneralQuestion showEssayContent(int questionNo) throws SQLException {
+
+		return sqlSession.selectOne("questionMapper.showEssayContent",questionNo);
 
 	}
 	
