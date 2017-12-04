@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="questionMapper">
+	<insert id="write" parameterType="questionBoard">
+		<selectKey keyProperty="questionBoardNo" resultType="int"
+			order="BEFORE">
+			SELECT
+			wl_algorithm_question_SEQ.nextval FROM dual
+		</selectKey>
+		INSERT INTO wl_algorithm_question
+		(question_no,title,question,input,output,answer)
+		VALUES(#{question_no},#{title},#{question},#{input},#{output},#{answer})
+	</insert>
+
+	<select id="showContent" parameterType="string" resultMap="questionListRM">
+		SELECT question_no,title,cnt_right, cnt_submit
+		FROM
+		wl_algorithm_question
+	</select>
+
+	<delete id="deleteQuestionBoard">
+		DELETE FROM wl_algorithm_question
+		WHERE question_no=#{value}
+	</delete>
+
+	<update id="questionBoard">
+		UPDATE wl_algorithm_question SET
+		title=#{title},question=#{question},input=#{input},output=#{output},answer=#{answer}
+		WHERE question_no=#{question_no}
+	</update>
+
+	<insert id="submit" parameterType="techBoard">
+		INSERT INTO
+		wl_algorithm_question (answer)
+		WHERE question_no=#{value};
+	</insert>
+
+	<update id="updateSubmitCount">
+		UPDATE wl_answer_result SET
+		my_cnt_submit=my_cnt_submit+1
+		WHERE user_id=#{user_id} AND
+		question_no=#{question_no}
+	</update>
+
+	<update id="updateWrongCount">
+		UPDATE wl_answer_result SET
+		my_cnt_wrong=my_cnt_wrong+1
+		WHERE user_id=#{user_id} AND
+		question_no=#{question_no}
+	</update>
+
+	<update id="updateRightCount">
+		UPDATE wl_answer_result set
+		my_cnt_right=my_cnt_right+1
+		WHERE user_id=#{user_id} AND
+		question_no=#{question_no}
+	</update>
+
+	<select id="getAnswer" resultType="hashmap" parameterType="string">
+		SELECT
+		user_id,question_no,question,my_cnt_submit_no,my_cnt_wrong,my_cnt_right
+		FROM wl_answer_result
+		WHERE user_id=#{value}
+	</select>
+
+</mapper>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

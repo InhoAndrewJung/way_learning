@@ -3,41 +3,75 @@
 <mapper namespace="memberMapper">
 
 	<resultMap type="member" id="memberRM">
-		<result property="userId" column="user_id"/>
-		<result property="email" column="email"/>
-		<result property="password" column="password"/>
-		<result property="activity" column="activity"/>
-		<result property="imgProfile" column="img_profile"/>
-		<result property="regDate" column="reg_date"/>
-	
+		<result property="userId" column="user_id" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="activity" column="activity" />
+		<result property="imgProfile" column="img_profile" />
+		<result property="regDate" column="reg_date" />
+
 	</resultMap>
-	
-	
+
+
 	<sql id="selectMember">
- 		select user_id,password,email, activity, img_profile, reg_date from wl_member
- 	</sql>
- 	
- 	
- 	
- 	<select id="login"  parameterType="member" resultMap="memberRM">
- 		select user_id,email, activity, img_profile, reg_date from wl_member
- 		where user_id=#{id} and password=#{password}
- 	</select>
- 	
- 	<update id="updateMember" parameterType="member" >
-		update wl_member set password=#{password},email=#{email},img_profile=#{imgProfile}
-		where user_id=#{userId}
+		select user_id,password,email, activity, img_profile,
+		reg_date from
+		wl_member
+	</sql>
+
+
+
+	<select id="login" parameterType="member" resultMap="memberRM">
+		select
+		user_id,email, activity, img_profile, reg_date from wl_member
+		where
+		user_id=#{id} and password=#{password}
+	</select>
+
+	<update id="updateMember" parameterType="member">
+		update
+		wl_member set
+		password=#{password},email=#{email},img_profile=#{imgProfile}
+		where
+		user_id=#{userId}
 	</update>
-	
+
 	<insert id="registerMember" parameterType="member">
-		insert into wl_member(user_id,password,email,img_profile)
+		insert into
+		wl_member(user_id,password,email,img_profile)
 		values(#{userId},#{password},#{email},#{imgProfile})
 	</insert>
 	<select id="idcheck" resultType="int">
-		select count(*) from wl_member where user_id=#{value}
+		select count(*) from wl_member
+		where user_id=#{value}
 	</select>
-	
+	<select id="emailcheck" resultType="int">
+		SELECT count(*) 
+		FROM wl_member
+		WHERE email=#{value}
+	</select>
 	<select id="findMemberById" resultMap="memberRM">
+<<<<<<< HEAD
+		SELECT
+		user_id,password,email,activity,img_profile,reg_date
+		FROM wl_member
+		WHERE user_id=#{value}
+	</select>
+
+	<select id="findIdByEmail" parameterType="string" resultType="string">
+		SELECT user_id
+		FROM wl_member
+		WHERE email=#{value}
+	</select>
+
+	<update id="updatefindPass">
+		UPDATE wl_member
+		SET password=#{password}
+		WHERE
+		user_id=#{userId}
+	</update>
+
+=======
  		SELECT	user_id,password,email,activity,img_profile,reg_date
 		FROM	wl_member
 		WHERE 	user_id=#{value}				
@@ -87,6 +121,7 @@ where user_id=#{userId}
  	
  	</select>
  	
+>>>>>>> master
 </mapper>
 
 
