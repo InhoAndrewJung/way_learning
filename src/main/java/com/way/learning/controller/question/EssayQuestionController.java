@@ -1,5 +1,6 @@
 package com.way.learning.controller.question;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,6 +15,9 @@ import com.way.learning.model.question.vo.AlgorithmQuestion;
 import com.way.learning.model.question.vo.GeneralChoice;
 import com.way.learning.model.question.vo.GeneralQuestion;
 import com.way.learning.service.question.QuestionService;
+import com.way.learning.util.Compute;
+import com.way.learning.util.Data;
+import com.way.learning.util.Preprocess;
 
 @Controller
 @RequestMapping("/question/essay/*")
@@ -48,10 +52,10 @@ public class EssayQuestionController {
 		return mav;
 	}
 	
-	@RequestMapping("/essayContent")
+	@RequestMapping("/showEssayContent")
 	public  ModelAndView showEssayContent(ModelAndView mav,int questionNo, String keyword) throws SQLException{
 
-	GeneralQuestion aq=questionService.showEssayContent(questionNo);
+		AlgorithmQuestion aq=questionService.showEssayContent(questionNo);
 	
 		 mav.addObject("aq", aq);
 		 mav.addObject("keyword", keyword);
@@ -61,6 +65,36 @@ public class EssayQuestionController {
 
 		return mav;
 	}
+	
+	@RequestMapping("/essayResult")
+	public  ModelAndView shortAnswerResult(ModelAndView mav,int questionNo, String code) throws IOException, InterruptedException, Exception{
+		 
+		
+		String[] compiledResult = new String[4];
+		
+		int tcNo = 0; //TestCase number
+		//Handling System.in & Compare user soureCode and Answer
+		Preprocess proc = new Preprocess();
+		for(tcNo=0; tcNo<2; tcNo++) {
+		code = proc.process(code, questionNo, tcNo);
+		System.out.println("After process:"+code);
+		//Compile using javac
+		Compute com = new Compute();
+		compiledResult = com.compile(code, questionNo, tcNo);
+		//put error message and result to setVO
+		}
+		//0 : answerResult, 1 : error, 2 : result 
+		System.out.println("에러메세지@controller : "+ compiledResult[0]);
+		if(compiledResult[0].contains("Exception")) {
+			System.out.println("런타임에러 확인 :"+compiledResult[0]);
+			compiledResult[0] = "Exception";
+		}
+		System.out.println("런타임에러 확인 :"+compiledResult[1]);
+		Data set = new Data(compiledResult[0], compiledResult[1], compiledResult[2]);
+		return new ModelAndView("/question/essay/result","code", set);	
+	}
+		
+	
 	
 	/*@RequestMapping("/shortAnswerResult")
 	public  ModelAndView shortAnswerResult(ModelAndView mav,int questionNo, String answer) throws SQLException{

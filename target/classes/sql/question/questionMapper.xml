@@ -58,11 +58,12 @@ insert into wl_algorithm_question (question_no, title, question,input,output) va
 		<if test="sorting == 'short'">and category='shortAnswer'</if>
 		 
 		</where> 
+		order by question_no desc
 	</select>
 	
 	
 	<select id="getEssayList" resultMap="algorithmQuestionRM">
-		select * from wl_algorithm_question where question like '%'||#{keyword}||'%' 
+		select * from wl_algorithm_question where question like '%'||#{keyword}||'%'  order by question_no desc
 	 
 	</select>
 	
@@ -71,7 +72,7 @@ insert into wl_algorithm_question (question_no, title, question,input,output) va
 	
 	</select>
 	
-	<select id="showGeneralContent" resultMap="algorithmQuestionRM">
+	<select id="showEssayContent" resultMap="algorithmQuestionRM">
 		select * from wl_algorithm_question where question_no=#{questionNo}
 	
 	</select>

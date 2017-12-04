@@ -14,7 +14,7 @@ public interface QuestionService {
 	public List<GeneralQuestion> getGeneralList(String keyword, String sorting) throws SQLException;
 	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException;
 	public GeneralQuestion showGeneralContent(int questionNo) throws SQLException;
-	public GeneralQuestion showEssayContent(int questionNo) throws SQLException;
+	public AlgorithmQuestion showEssayContent(int questionNo) throws SQLException;
 	public List<GeneralChoice> getAnswerChoice(int questionNo) throws SQLException;
 	public int checkAnswer(int questionNo,String answer) throws SQLException;
 

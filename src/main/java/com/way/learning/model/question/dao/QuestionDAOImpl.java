@@ -78,7 +78,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 	}
 	
 	@Override
-	public GeneralQuestion showEssayContent(int questionNo) throws SQLException {
+	public AlgorithmQuestion showEssayContent(int questionNo) throws SQLException {
 
 		return sqlSession.selectOne("questionMapper.showEssayContent",questionNo);
 

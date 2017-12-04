@@ -54,7 +54,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	}
 	
-	public GeneralQuestion showEssayContent(int questionNo) throws SQLException {
+	public AlgorithmQuestion showEssayContent(int questionNo) throws SQLException {
 
 		return questionDAO.showEssayContent(questionNo);
 
