@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.way.learning.model.question.dao.QuestionDAO;
+import com.way.learning.model.question.vo.AlgorithmQuestion;
 import com.way.learning.model.question.vo.GeneralChoice;
 import com.way.learning.model.question.vo.GeneralQuestion;
 
@@ -19,22 +20,43 @@ public class QuestionServiceImpl implements QuestionService {
 	private QuestionDAO questionDAO;
 
 	@Override
-	public void insertQuestion(GeneralQuestion gq, String[] answerChoice) throws SQLException {
-		System.out.println("insertQuestion 서비스 입성");
-		questionDAO.insertQuestion(gq);
+	public void insertGeneralQuestion(GeneralQuestion gq, String[] answerChoice) throws SQLException {
+		System.out.println("insertGeneralQuestion 서비스 입성");
+		questionDAO.insertGeneralQuestion(gq);
 		questionDAO.insertAnswerChoice(answerChoice);
 
 	}
 	
-	
-	public List<GeneralQuestion> getList(String keyword, String sorting) throws SQLException{
-		return questionDAO.getList(keyword,sorting);
+	@Override
+	public void insertEssayQuestion(AlgorithmQuestion aq) throws SQLException {
+		System.out.println("insertEssayQuestion 서비스 입성");
+		questionDAO.insertEssayQuestion(aq);
+		
+
 	}
 	
 	
-	public GeneralQuestion multipleChoiceContent(int questionNo) throws SQLException {
+	public List<GeneralQuestion> getGeneralList(String keyword, String sorting) throws SQLException{
+		return questionDAO.getGeneralList(keyword,sorting);
+	}
+	
+	
+	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException{
+		return questionDAO.getEssayList(keyword);
+	}
+	
+	
+	
+	
+	public GeneralQuestion showGeneralContent(int questionNo) throws SQLException {
 
-		return questionDAO.multipleChoiceContent(questionNo);
+		return questionDAO.showGeneralContent(questionNo);
+
+	}
+	
+	public AlgorithmQuestion showEssayContent(int questionNo) throws SQLException {
+
+		return questionDAO.showEssayContent(questionNo);
 
 	}
 	
@@ -50,6 +72,8 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionDAO.checkAnswer(questionNo, answer);
 
 	}
+
+
 	
 	
 	
