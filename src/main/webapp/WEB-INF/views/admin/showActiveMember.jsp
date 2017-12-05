@@ -79,9 +79,9 @@ if(role == 'ROLE_AUTHOR'){
 
 </script>
 <body>
-활동점수 200점이상 멤버:
+활동점수 200점이상 멤버:<br><br><br><br><br><br><br>
 <c:forEach var="row" items="${list }">
-<c:if test="${row.ROLE =='ROLE_AUTHOR'}">200점이상이면서 강사:<img id="profile" src="${path}/resources/upload/${row.IMG_PROFILE}" alt="이미지" /> <a href="#" onclick="check('${row.USER_ID}','${row.ROLE}')">${row.USER_ID}</a> <span id="activity"> ${row.ACTIVITY} </span></c:if>
+<c:if test="${row.ROLE =='ROLE_AUTHOR'}">1) 200점이상이면서 강사:<img id="profile" src="${path}/resources/upload/${row.IMG_PROFILE}" alt="이미지" /> <a href="#" onclick="check('${row.USER_ID}','${row.ROLE}')">${row.USER_ID}</a> <span id="activity"> ${row.ACTIVITY} </span></c:if>
 
 
 </c:forEach>
@@ -89,7 +89,7 @@ if(role == 'ROLE_AUTHOR'){
 
 <c:forEach var="row" items="${list }">
 
-<c:if test="${row.ROLE =='ROLE_MEMBER'}">200점이면서 일반 멤버:<img id="profile" src="${path}/resources/upload/${row.IMG_PROFILE}" alt="이미지" /> <a href="#" onclick="check('${row.USER_ID}','${row.ROLE}')">${row.USER_ID}</a> <span id="activity"> ${row.ACTIVITY} </span></c:if>
+<c:if test="${row.ROLE =='ROLE_MEMBER'}">2) 200점이면서 일반 멤버:<img id="profile" src="${path}/resources/upload/${row.IMG_PROFILE}" alt="이미지" /> <a href="#" onclick="check('${row.USER_ID}','${row.ROLE}')">${row.USER_ID}</a> <span id="activity"> ${row.ACTIVITY} </span></c:if>
 
 </c:forEach>
 </body>
