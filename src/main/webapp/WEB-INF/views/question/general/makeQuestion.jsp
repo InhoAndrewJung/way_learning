@@ -65,12 +65,12 @@
 <label for="answerChoice">선택지2:<input type="text" name="answerChoice" id="answerChoice" /><br>
 <label for="answerChoice">선택지3:<input type="text" name="answerChoice" id="answerChoice"/><br>
 <label for="answerChoice">선택지4:<input type="text" name="answerChoice" id="answerChoice" /><br>
-</span>
+
 
 
 
 <input type="button" id="btnAnswerPlus" value="선택지 추가" /><br>
-
+</span>
 <div id="answerChoicePlus"></div>
 
 
