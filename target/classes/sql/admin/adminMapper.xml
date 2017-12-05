@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMapper">
+
+<!-- <resultMap type="member" id="memberRM">
+		<result property="userId" column="user_id" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="activity" column="activity" />
+		<result property="imgProfile" column="img_profile" />
+		<result property="regDate" column="reg_date" />
+</resultMap> -->		
+		
+<select id="selectActiveMember" resultType="hashmap">
+	select m.user_id,activity,img_profile,role from wl_member m ,wl_authorities a where m.user_id=a.user_id and activity  &gt; 100
+</select>
+
+<update id="changeAuthority" >
+
+update wl_authorities set
+<if test="role == 'ROLE_AUTHOR'">
+role='ROLE_MEMBER'
+</if>
+<if test="role == 'ROLE_MEMBER'">
+role='ROLE_AUTHOR' 
+</if>
+
+where user_id=#{userId}
+
+</update>
+
+	<!-- <resultMap type="member" id="memberRM">
+		<result property="userId" column="user_id" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="activity" column="activity" />
+		<result property="imgProfile" column="img_profile" />
+		<result property="regDate" column="reg_date" />
+
+	</resultMap>
+
+
+	<sql id="selectMember">
+		select user_id,password,email, activity, img_profile,
+		reg_date from
+		wl_member
+	</sql>
+
+
+
+	<select id="login" parameterType="member" resultMap="memberRM">
+		select
+		user_id,email, activity, img_profile, reg_date from wl_member
+		where
+		user_id=#{id} and password=#{password}
+	</select>
+
+	<update id="updateMember" parameterType="member">
+		update
+		wl_member set
+		password=#{password},email=#{email},img_profile=#{imgProfile}
+		where
+		user_id=#{userId}
+	</update>
+
+	<insert id="registerMember" parameterType="member">
+		insert into
+		wl_member(user_id,password,email,img_profile)
+		values(#{userId},#{password},#{email},#{imgProfile})
+	</insert>
+	<select id="idcheck" resultType="int">
+		select count(*) from wl_member
+		where user_id=#{value}
+	</select>
+	<select id="emailcheck" resultType="int">
+		SELECT count(*) 
+		FROM wl_member
+		WHERE email=#{value}
+	</select>
+	<select id="findMemberById" resultMap="memberRM">
+
+		SELECT
+		user_id,password,email,activity,img_profile,reg_date
+		FROM wl_member
+		WHERE user_id=#{value}
+	</select>
+
+	<select id="findIdByEmail" parameterType="string" resultType="string">
+		SELECT user_id
+		FROM wl_member
+		WHERE email=#{value}
+	</select>
+
+	<update id="updatefindPass">
+		UPDATE wl_member
+		SET password=#{password}
+		WHERE
+		user_id=#{userId}
+	</update>
+
+
+ 	
+ 	 마이 페이지 관련
+ 	<resultMap type="answerResult" id="answerResultRM">
+ 	 <result property="userId" column="user_id"/>
+ 	 <result property="questionNo" column="question_no"/>
+ 	 <result property="myCntSubmit" column="my_cnt_submit"/>
+ 	 <result property="myCntWrong" column="my_cnt_wrong"/>
+ 	 <result property="myCntRight" column="my_cnt_right"/>
+ 	 <result property="myCntError" column="my_cnt_error"/>
+ 	 <result property="myRightPercent" column="my_right_Percent"/>
+ 	</resultMap>
+ 	
+ 	<select id="selectRightNo" resultType="string">
+ 		select QUESTION_NO from wl_answer_result where user_id=#{userId} and MY_CNT_RIGHT != 0
+ 	</select>
+ 	
+ 	<select id="selectWrongNo" resultType="string">
+ 		select QUESTION_NO from wl_answer_result where user_id=#{userId} and MY_CNT_RIGHT = 0 and MY_CNT_WRONG is not null
+ 	</select>
+ 	
+ 	 <select id="selectMyRecord" resultMap="answerResultRM">
+ 		select user_id ,sum(MY_CNT_SUBMIT) MY_CNT_SUBMIT,sum(MY_CNT_RIGHT) MY_CNT_RIGHT,sum(MY_CNT_WRONG) MY_CNT_WRONG, sum(MY_CNT_ERROR) MY_CNT_ERROR from wl_answer_result where user_id=#{userId} group by user_id
+ 	</select>
+ 	
+ 	<select id="selectMyRanking" resultType="int">
+ 		select a.ranking from(select user_id ,sum(MY_CNT_SUBMIT) my_cnt_submit,sum(MY_CNT_RIGHT)my_cnt_right,sum(MY_CNT_WRONG) my_cnt_wrong,rank() over(order by sum(MY_CNT_SUBMIT) desc)as ranking from wl_answer_result  group by user_id)a
+where user_id=#{userId}
+ 	</select>
+ 	
+ 	<select id="selectAllRanking" parameterType="string" resultMap="answerResultRM">
+ 	select user_id ,sum(MY_CNT_SUBMIT) MY_CNT_SUBMIT, sum(MY_CNT_RIGHT) MY_CNT_RIGHT,sum(MY_CNT_WRONG) MY_CNT_WRONG,  round(( sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2) my_right_Percent , 
+ 	
+ 	<if test="sorting == 'cntSubmit'">
+ 	rank() over(order by sum(MY_CNT_SUBMIT) desc)as ranking from wl_answer_result  group by user_id
+ 	</if>
+ 	
+ 	<if test="sorting == 'cntRight'">
+ 	rank() over(order by sum(MY_CNT_RIGHT) desc)as ranking from wl_answer_result  group by user_id
+ 	</if>
+ 	
+ 	<if test="sorting == 'RightPercent'">
+ 	rank() over(order by round(( sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2) desc)as ranking from wl_answer_result  group by user_id
+ 	</if>
+ 	
+ 	</select>
+ 	
+ 	
+ 	
+ 	<select id="selectBoardFavorite" resultType="hashmap">
+ 	select * from
+(select  tbr.board_no, tbr.reg_date, tb.writer, title,m.img_profile,m.activity,'tech' as table_name from wl_tech_board_recommend tbr, wl_tech_board tb,wl_member m where tbr.board_no=tb.board_no and
+tb.writer=m.user_id  
+UNION ALL 
+select  qbr.board_no, qbr.reg_date, qb.writer, title, m.img_profile, m.activity,'qna' as table_name from wl_qna_board_recommend qbr, wl_qna_board qb,wl_member m where qbr.board_no=qb.board_no and
+qb.writer=m.user_id)a where a.reg_date  &gt; (sysdate -4) order by a.reg_date desc 
+ 	
+ 	</select>
+ 	
+ 	<select id="selectReplyFavorite" resultType="hashmap">
+ 	select * from (select tr.board_no,trr.reply_no, tr.replyer ,
+(select writer from wl_tech_board where board_no=tr.board_no)writer,
+(select title from wl_tech_board where board_no=tr.board_no)title, 
+trr.reg_date,m.img_profile,m.activity,'tech' as table_name from wl_tech_reply_recommend trr, wl_tech_reply tr,wl_member m where trr.reply_no=tr.reply_no and
+tr.replyer=m.user_id  
+UNION ALL 
+select qr.board_no,qrr.reply_no, qr.replyer ,
+(select writer from wl_qna_board where board_no=qr.board_no)writer,
+(select title from wl_qna_board where board_no=qr.board_no)title, 
+qrr.reg_date,m.img_profile,m.activity,'qna' as table_name from wl_qna_reply_recommend qrr, wl_qna_reply qr,wl_member m where qrr.reply_no=qr.reply_no and
+qr.replyer=m.user_id )a where a.reg_date  &gt; (sysdate -4) order by a.reg_date desc 
+ 	
+ 	</select>
+ 	 -->
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
