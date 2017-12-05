@@ -12,8 +12,9 @@
 	
 		<table border=1px>
 			<tr>
-				<td nowrap>Question ${gq.questionNo} </td> 
-				<td nowrap>${gq.question }</td>
+				<td nowrap>Question ${gq.questionNo}</td> 
+				
+				<td nowrap><textarea name="question" id="question" style="width:500px; height:500px;" readOnly> ${gq.question}</textarea></td>
 				
 			</tr>
 			

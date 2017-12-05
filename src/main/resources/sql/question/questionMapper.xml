@@ -7,8 +7,8 @@
 	<insert id="insertGeneralQuestion" parameterType="generalQuestion">
 
 		insert into
-		wl_general_question (question_no,question,answer,category)
-		values(wl_general_question_SEQ.nextval,#{question}, #{answer},#{category})
+		wl_general_question (question_no,title,question,answer,category)
+		values(wl_general_question_SEQ.nextval,#{title},#{question}, #{answer},#{category})
 
 	</insert>
 
