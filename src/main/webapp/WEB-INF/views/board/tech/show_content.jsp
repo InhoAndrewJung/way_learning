@@ -16,6 +16,8 @@ $(document).ready(function() {
 
 	
 	
+		
+
 	
 		$.ajax({
 			type: "post",
@@ -30,31 +32,16 @@ $(document).ready(function() {
 					
 					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;	
 				});
-
-				
-				
+	
 				
 			}
 			
 		});
 		
-	
-		
-				  
-		
-	
-		
+
 	
 		$('#btnReply').click(function(){
 
-			reply(); 		 
-		});
-		
-		
-	
-	
-		
-		function reply(){
 			var replytext=$("#replytext").val();
 			var boardNo="${requestScope.bvo.boardNo}"; // view 컨트롤러에서 가져옴!
 			//비밀댓글 체크 여부
@@ -77,9 +64,10 @@ $(document).ready(function() {
 				}
 				
 			});
-			$("#replytext").val("");
-			
-		}
+			$("#replytext").val(""); 		 
+		});
+		
+		
 	
 });
 			
@@ -96,6 +84,8 @@ $(document).ready(function() {
 			}
 		});
 	 }
+	
+	
 	
 
 
@@ -163,7 +153,7 @@ function boardLikeChange(boardNo){
     }
 
 .cke_bottom {display: !important;}
-#profile{width:50px; height:50px; border-radius: 50% }
+#profile{width:50px; height:50px; border-radius: 50%}
 a{text-decoration:none; cursor: pointer;}
 #tag{font-size:10px;border:1px solid grey;border-radius:10%; background-color:grey; color:white; margin-left:10px;}
 
@@ -173,6 +163,20 @@ a{text-decoration:none; cursor: pointer;}
 
 
 <body>
+
+<c:if test="${replyNo !=null}">
+
+<script>
+setTimeout(function(){
+	 var heightItem=$('#replyGood'+${replyNo}+'').offset().top; 
+	$('body,html').animate({scrollTop:heightItem-100});
+	
+},700) ;
+</script>
+
+</c:if>
+
+
 <h2 align="center"><b>게시글</b></h2>
 ${delete_result}
 	<div align="center">
@@ -251,7 +255,7 @@ ${delete_result}
 									</c:if>
 								</sec:authorize>
 				
-	<!--  댓글 작성하는 양식  form 안씀-->
+	
 	
 	
 	<!-- 댓글목록 출력 -->

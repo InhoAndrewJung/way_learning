@@ -31,7 +31,12 @@ public interface MemberDAO {
 	public AnswerResult selectMyRecord(String userId);
 	public int selectMyRanking(String userId);
 	public List<AnswerResult> selectAllRanking(String sorting);
+	public List selectBoardFavorite();
+	public List selectReplyFavorite();
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 }

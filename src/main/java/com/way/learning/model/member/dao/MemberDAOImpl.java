@@ -45,6 +45,10 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("다오임플 아이디:" + userId);
 		return sqlSession.selectOne("memberMapper.idcheck", userId);
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 
 	@Override
 	public String findIdByEmail(String email) {
@@ -66,6 +70,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("memberMapper.emailcheck", email);
 	}
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> master
 	@Override
 	public List<String> selectRightNo(String userId) {
 		return sqlSession.selectList("memberMapper.selectRightNo", userId);
@@ -93,5 +101,46 @@ public class MemberDAOImpl implements MemberDAO {
 		map.put("sorting", sorting);
 		return sqlSession.selectList("memberMapper.selectAllRanking", map);
 	}
+<<<<<<< HEAD
+=======
+	
+	
+	@Override
+	public List selectBoardFavorite() {
+		System.out.println("selectBoardFavorite dao ");
+		
+		return sqlSession.selectList("memberMapper.selectBoardFavorite");				
+	}
+	
+	@Override
+	public List selectReplyFavorite() {
+		System.out.println("selectReplyFavorite dao ");
+		
+		return sqlSession.selectList("memberMapper.selectReplyFavorite");				
+	}
+	
+	
+	
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> master
 
 }

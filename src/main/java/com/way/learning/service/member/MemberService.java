@@ -34,5 +34,10 @@ public interface MemberService {
 	public AnswerResult selectMyRecord(String userId);
 	public int selectMyRanking(String userId);
 	public List<AnswerResult> selectAllRanking(String sorting);
+<<<<<<< HEAD
+=======
+	public List selectBoardFavorite();
+	public List selectReplyFavorite();
+>>>>>>> master
 
 }

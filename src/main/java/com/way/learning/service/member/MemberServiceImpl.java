@@ -198,6 +198,20 @@ public class MemberServiceImpl implements MemberService {
 		int emailResult = memberDAO.emailcheck(email);
 		return emailResult;
 	}
+	
+	@Override
+	public List selectBoardFavorite() {
+		System.out.println("selectBoardFavorite service ");
+		
+		return memberDAO.selectBoardFavorite();	
+	}
+	
+	@Override
+	public List selectReplyFavorite() {
+		System.out.println("selectReplyFavorite service ");
+		
+		return memberDAO.selectReplyFavorite();	
+	}
 
 
 

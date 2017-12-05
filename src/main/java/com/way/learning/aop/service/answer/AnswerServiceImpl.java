@@ -16,14 +16,16 @@ public class AnswerServiceImpl implements AnswerService {
 	private AnswerDAO answerDAO;
 
 	public int updatePostCntSubmit(int questionNo)throws SQLException{
-
-		return answerDAO.updatePostCntSubmit(questionNo);
+		int result=answerDAO.updatePostCntSubmit(questionNo);
+		System.out.println("updatePostCntSubmit 결과:"+result);
+		return result;
 
 
 	}
 	public int updatePostCntRight(int questionNo)throws SQLException{
-
-		return answerDAO.updatePostCntRight(questionNo);
+		int result=answerDAO.updatePostCntRight(questionNo);
+		System.out.println("updatePostCntRight 결과:"+result);
+		return result;
 	}	
 	
 	
@@ -60,6 +62,17 @@ public int updateMyCntWrong(int questionNo, String userId)throws SQLException{
 		}
 		return result;
 	}
+
+public int updateMyCntError(int questionNo, String userId)throws SQLException{
+	
+	int result=answerDAO.updateMyCntError(questionNo, userId);
+	System.out.println("updateMyCntError 결과:"+result);
+	if(result == 0){
+		int insert=answerDAO.insertMyCntError(questionNo, userId);
+		System.out.println("insert결과:"+insert);
+	}
+	return result;
+}
 		
 	
 	

@@ -1,9 +1,19 @@
 package com.way.learning.controller.member;
 
+<<<<<<< HEAD
 import javax.mail.internet.MimeMessage;
 
 import java.util.List;
 
+=======
+
+import javax.mail.internet.MimeMessage;
+
+
+import java.util.List;
+
+
+>>>>>>> master
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -209,11 +219,18 @@ public class MemberController {
 
 	@RequestMapping("updateMember")
 	public ModelAndView updateMemberAction(HttpServletRequest request, Member vo) throws Exception {
+<<<<<<< HEAD
 
 		memberService.updateMember(vo, request);
 
 		return new ModelAndView("member/update_result");
 	}
+=======
+		
+		
+
+		memberService.updateMember(vo,request);
+>>>>>>> master
 
 	@RequestMapping("showMyRecord")
 	public ModelAndView showMyRecord(HttpServletRequest request, ModelAndView mav) throws Exception {
@@ -248,5 +265,36 @@ public class MemberController {
 
 		return mav;
 	}
+<<<<<<< HEAD
 
 }
+=======
+	
+	@RequestMapping("myFavoriteList")
+	public ModelAndView selectBoardFavorite(ModelAndView mav) throws Exception {
+		
+		
+		
+		List boardList=memberService.selectBoardFavorite();
+		System.out.println("boardList:"+boardList);
+		List replyList=memberService.selectReplyFavorite();
+		mav.addObject("boardList", boardList);
+		mav.addObject("replyList", replyList);
+		mav.setViewName("/member/myFavoriteList");
+
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+}
+
+
+
+
+
+>>>>>>> master

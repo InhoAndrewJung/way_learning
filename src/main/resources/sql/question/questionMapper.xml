@@ -4,7 +4,7 @@
 
 
 
-	<insert id="insertQuestion" parameterType="generalQuestion">
+	<insert id="insertGeneralQuestion" parameterType="generalQuestion">
 
 		insert into
 		wl_general_question (question_no,question,answer,category)
@@ -21,6 +21,12 @@
 		,#{answerChoice})
 
 	</insert>
+	
+	<insert id="insertEssayQuestion" parameterType="generalQuestion">
+
+insert into wl_algorithm_question (question_no, title, question,input,output) values(wl_algorithm_question_SEQ.nextval,#{title},#{question}, #{input},#{output})
+
+	</insert>
 
 	<resultMap type="generalQuestion" id="generalQuestionRM">
 		<result property="questionNo" column="question_no" />
@@ -29,8 +35,20 @@
 		<result property="cntSubmit" column="cnt_submit" />
 		<result property="cntRight" column="cnt_right" />
 	</resultMap>
+	
+	
+	<resultMap type="algorithmQuestion" id="algorithmQuestionRM">
+		<result property="questionNo" column="question_no" />
+		<result property="title" column="title" />
+		<result property="question" column="question" />
+		<result property="input" column="input" />
+		<result property="output" column="output" />
+		<result property="answer" column="answer" />
+		<result property="cntSubmit" column="cnt_submit" />
+		<result property="cntRight" column="cnt_right" />
+	</resultMap>
 
-	<select id="getList" resultMap="generalQuestionRM">
+	<select id="getGeneralList" resultMap="generalQuestionRM">
 		select * from wl_general_question 
 		
 		<where>
@@ -40,10 +58,22 @@
 		<if test="sorting == 'short'">and category='shortAnswer'</if>
 		 
 		</where> 
+		order by question_no desc
 	</select>
 	
-	<select id="multipleChoiceContent" resultMap="generalQuestionRM">
+	
+	<select id="getEssayList" resultMap="algorithmQuestionRM">
+		select * from wl_algorithm_question where question like '%'||#{keyword}||'%'  order by question_no desc
+	 
+	</select>
+	
+	<select id="showGeneralContent" resultMap="generalQuestionRM">
 		select * from wl_general_question where question_no=#{questionNo}
+	
+	</select>
+	
+	<select id="showEssayContent" resultMap="algorithmQuestionRM">
+		select * from wl_algorithm_question where question_no=#{questionNo}
 	
 	</select>
 	
