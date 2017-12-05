@@ -22,10 +22,10 @@ public interface MemberDAO {
 	void registerMember(Member vo);
 
 	int idcheck(String id);
-<<<<<<< HEAD
+
 	
 	int emailcheck (String email);
-=======
+
 	public List<String> selectRightNo(String userId);
 	public List<String> selectWrongNo(String userId);
 	public AnswerResult selectMyRecord(String userId);
@@ -33,5 +33,5 @@ public interface MemberDAO {
 	public List<AnswerResult> selectAllRanking(String sorting);
 
 
->>>>>>> master
+
 }

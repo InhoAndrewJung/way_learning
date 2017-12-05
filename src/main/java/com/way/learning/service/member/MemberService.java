@@ -24,15 +24,15 @@ public interface MemberService {
 	String idcheck(String id);
 
 	List<Authority> selectAuthorityByUsername(String username);
-<<<<<<< HEAD
+
 
 	int emailcheck (String email);
-=======
+
 	
 	public List<String> selectRightNo(String userId);
 	public List<String> selectWrongNo(String userId);
 	public AnswerResult selectMyRecord(String userId);
 	public int selectMyRanking(String userId);
 	public List<AnswerResult> selectAllRanking(String sorting);
->>>>>>> master
+
 }
