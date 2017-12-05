@@ -54,7 +54,7 @@
 <label for="category">객관식</label><input type="radio" name="category" id="category1" value="multipleChoice" onchange="show()"/>
 <label for="category">주관식</label><input type="radio" name="category" id="category2" value="shortAnswer" onchange="hide()"/><br>
 <label for="question">문제:</label><textarea name="question" id="question" cols="60" rows="30"></textarea><br>
-
+<label for="answerChoice">제목:<input type="text" name="title" id="title" /><br>
 <label for="answer">정답:</label><textarea name="answer" id="answer" cols="60" rows="30"></textarea><br>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 <!-- <label for="question">문제:</label><input type="text" name="question" id="question" /><br> -->
