@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="${path}/insertCourse" method="post">
 
+제목:<input type="text" name="title" id="title" /><br>
+문제:<input type="text" name="question" id="question" /><br>
+인풋:<input type="text" name="input" id="input" /><br>
+아웃풋:<input type="text" name="output" id="output" /><br>
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+
+<input type="submit" value="제출" />
+</form>
 </body>
 </html>
