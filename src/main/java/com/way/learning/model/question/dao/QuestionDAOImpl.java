@@ -22,17 +22,15 @@ public class QuestionDAOImpl implements QuestionDAO {
 
 	@Override
 	public void insertGeneralQuestion(GeneralQuestion gq) throws SQLException {
-		
+
 		sqlSession.insert("questionMapper.insertGeneralQuestion", gq);
-		
 
 	}
-	
+
 	@Override
 	public void insertEssayQuestion(AlgorithmQuestion aq) throws SQLException {
-		
+
 		sqlSession.insert("questionMapper.insertEssayQuestion", aq);
-	
 
 	}
 
@@ -41,10 +39,11 @@ public class QuestionDAOImpl implements QuestionDAO {
 		// TODO Auto-generated method stub
 		System.out.println("insertAnswerChoice");
 
-		Map<String,Object> map = new HashMap<String,Object>();
-		for(int i=0;i<answerChoice.length;i++) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		for (int i = 0; i < answerChoice.length; i++) {
 
-			if(answerChoice[i] ==null || answerChoice[i].equals(""))  break;
+			if (answerChoice[i] == null || answerChoice[i].equals(""))
+				break;
 			map.put("answerOrder", i);
 			map.put("answerChoice", answerChoice[i]);
 			sqlSession.insert("questionMapper.insertAnswerChoice", map);
@@ -52,80 +51,87 @@ public class QuestionDAOImpl implements QuestionDAO {
 		}
 	}
 
-
 	@Override
 	public List<GeneralQuestion> getGeneralList(String keyword, String sorting) throws SQLException {
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword", keyword);
 		map.put("sorting", sorting);
-		return sqlSession.selectList("questionMapper.getGeneralList",map);
+		return sqlSession.selectList("questionMapper.getGeneralList", map);
 
 	}
-	
+
 	@Override
 	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException {
-		
-		
-		return sqlSession.selectList("questionMapper.getEssayList",keyword);
+
+		return sqlSession.selectList("questionMapper.getEssayList", keyword);
 
 	}
-	
+
 	@Override
 	public GeneralQuestion showGeneralContent(int questionNo) throws SQLException {
 
-		return sqlSession.selectOne("questionMapper.showGeneralContent",questionNo);
+		return sqlSession.selectOne("questionMapper.showGeneralContent", questionNo);
 
 	}
-	
+
 	@Override
 	public AlgorithmQuestion showEssayContent(int questionNo) throws SQLException {
 
-		return sqlSession.selectOne("questionMapper.showEssayContent",questionNo);
+		return sqlSession.selectOne("questionMapper.showEssayContent", questionNo);
 
 	}
-	
+
 	@Override
 	public List<GeneralChoice> getAnswerChoice(int questionNo) throws SQLException {
 
-		return sqlSession.selectList("questionMapper.getAnswerChoice",questionNo);
+		return sqlSession.selectList("questionMapper.getAnswerChoice", questionNo);
 
 	}
-
-	
 
 	@Override
-	public int checkAnswer(int questionNo,String answer) throws SQLException {
-		Map<String,Object> map = new HashMap<String,Object>();
+	public int checkAnswer(int questionNo, String answer) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("questionNo", questionNo);
 		map.put("answer", answer);
-		return sqlSession.selectOne("questionMapper.checkAnswer",map);
+		return sqlSession.selectOne("questionMapper.checkAnswer", map);
 
 	}
+
+	// 수정 삭제 추가
+	@Override
+	public void updateQuestion(GeneralQuestion qvo) throws SQLException {
+		sqlSession.update("questionMapper.updateQuestion", qvo);
+	}
+
+	@Override
+	public void updateAnswerChoice(int questionNo, String[] answerChoice) throws SQLException {
+		
+		System.out.println("GeneralAnswerChoice");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		for (int i = 0; i < answerChoice.length; i++) {
+
+			if (answerChoice[i] == null || answerChoice[i].equals(""))
+				break;
+			map.put("questionNo", questionNo);
+			map.put("answerOrder", i);
+			map.put("answerChoice", answerChoice[i]);
+		sqlSession.update("questionMapper.updateAnswerChoice", map);
+
+		}
+		
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}
+
+	@Override
+	public int deleteBoard(int questionNo) throws SQLException {
+		return sqlSession.delete("questionMapper.deleteBoard", questionNo);
+	}
+
+	@Override
+	public int deleteAnswer(int questionNo) throws SQLException {
+		
+	return sqlSession.delete("questionMapper.deleteAnswer", questionNo);
+	}
+
 }
-
-
-
-
-
-

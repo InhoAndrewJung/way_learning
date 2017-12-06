@@ -56,7 +56,8 @@
 			<li><a href="${pageContext.request.contextPath}/board/tech/write">tech게시글쓰기</a><li>
 			
 			<li><a href="${pageContext.request.contextPath}/board/tech/list">tech게시판목록</a><li>
-			<li><a href="${pageContext.request.contextPath}/board/qna/write">qna게시판글쓰기</a><li>
+			<li><a href="${pageContext.request.contextPath}/board/qna/write">qna게시판 글쓰기</a><li>
+
 			<li><a href="${pageContext.request.contextPath}/board/qna/list">qna게시판목록</a><li>
 			<li><a href="${pageContext.request.contextPath}/question/general/getList">제너럴 문제 리스트</a><li>
 			<li><a href="${pageContext.request.contextPath}/question/essay/getList">에세이 문제 리스트</a><li>
