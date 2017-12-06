@@ -76,12 +76,12 @@ public class EssayQuestionController {
 		//Handling System.in & Compare user soureCode and Answer
 		Preprocess proc = new Preprocess();
 		for(tcNo=0; tcNo<2; tcNo++) {
-		code = proc.process(code, questionNo, tcNo);
-		System.out.println("After process:"+code);
-		//Compile using javac
-		Compute com = new Compute();
-		compiledResult = com.compile(code, questionNo, tcNo);
-		//put error message and result to setVO
+			code = proc.process(code, questionNo, tcNo);
+			System.out.println("After process:"+code);
+			//Compile using javac
+			Compute com = new Compute();
+			compiledResult = com.compile(code, questionNo, tcNo);
+			//put error message and result to setVO
 		}
 		//0 : answerResult, 1 : error, 2 : result 
 		System.out.println("에러메세지@controller : "+ compiledResult[0]);

@@ -24,7 +24,8 @@
 	
 	<insert id="insertEssayQuestion" parameterType="generalQuestion">
 
-insert into wl_algorithm_question (question_no, title, question,input,output) values(wl_algorithm_question_SEQ.nextval,#{title},#{question}, #{input},#{output})
+insert into wl_algorithm_question (question_no, title, question,input,output) values((select
+		max(question_no)+1 from wl_algorithm_question),#{title},#{question}, #{input},#{output})
 
 	</insert>
 
