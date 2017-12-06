@@ -65,6 +65,10 @@
 			
 			<li><a href="${pageContext.request.contextPath}/member/showAllRanking">전체 랭킹보기</a><li>
 			<li><a href="${pageContext.request.contextPath}/member/myFavoriteList">내 좋아요 목록 링크</a><li>
+			
+			<br>
+			<li><a href="${pageContext.request.contextPath}/course/writeCourse">코스등록</a><li>
+			<li><a href="${pageContext.request.contextPath}/course/showCourseList">내가 등록한 코스 보기 </a><li>
 		</sec:authorize>
 		<li><a href="javascript:logout();">로그아웃</a></li>
 	</sec:authorize>
