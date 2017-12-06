@@ -36,7 +36,7 @@
 					<td>${row.questionNo}</td>
 					
 					
-					<td><a href="${path}/question/essay/showEssayContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.question}</a></td>
+					<td><a href="${path}/question/essay/showEssayContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.title}</a></td>
 					
 					
 					<td>${row.cntSubmit }</td>
