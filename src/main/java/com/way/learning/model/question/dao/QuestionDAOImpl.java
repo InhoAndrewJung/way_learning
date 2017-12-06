@@ -103,35 +103,18 @@ public class QuestionDAOImpl implements QuestionDAO {
 		sqlSession.update("questionMapper.updateQuestion", qvo);
 	}
 
-	@Override
-	public void updateAnswerChoice(int questionNo, String[] answerChoice) throws SQLException {
-		
-		System.out.println("GeneralAnswerChoice");
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		for (int i = 0; i < answerChoice.length; i++) {
-
-			if (answerChoice[i] == null || answerChoice[i].equals(""))
-				break;
-			map.put("questionNo", questionNo);
-			map.put("answerOrder", i);
-			map.put("answerChoice", answerChoice[i]);
-		sqlSession.update("questionMapper.updateAnswerChoice", map);
-
-		}
-		
 	
-	}
 
 	@Override
-	public int deleteBoard(int questionNo) throws SQLException {
-		return sqlSession.delete("questionMapper.deleteBoard", questionNo);
+	public int deleteQuestion(int questionNo) throws SQLException {
+		return sqlSession.delete("questionMapper.deleteQuestion", questionNo);
+	}
+	
+	@Override
+	public int deleteAnswerChoice(int questionNo) throws SQLException {
+		return sqlSession.delete("questionMapper.deleteAnswerChoice", questionNo);
 	}
 
-	@Override
-	public int deleteAnswer(int questionNo) throws SQLException {
-		
-	return sqlSession.delete("questionMapper.deleteAnswer", questionNo);
-	}
+	
 
 }

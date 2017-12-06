@@ -73,20 +73,17 @@ public class QuestionServiceImpl implements QuestionService {
 	public void updateQuestion(GeneralQuestion qvo,String[] answerChoice) throws SQLException {
 
 		questionDAO.updateQuestion(qvo);
-		questionDAO.updateAnswerChoice(qvo.getQuestionNo(), answerChoice);
+		questionDAO.deleteAnswerChoice(qvo.getQuestionNo());
+		questionDAO.insertAnswerChoice(answerChoice);
 	}
 
 
 	@Override
-	public int deleteBoard(int questionNo) throws SQLException {
+	public int deleteQuestion(int questionNo) throws SQLException {
 
-		return questionDAO.deleteBoard(questionNo);
+		return questionDAO.deleteQuestion(questionNo);
 	}
 
-	@Override
-	public int deleteAnswer(int questionNo) throws SQLException {
-
-		return questionDAO.deleteAnswer(questionNo);
-	}
+	
 
 }

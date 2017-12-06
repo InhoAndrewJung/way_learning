@@ -42,7 +42,7 @@
 				<c:forEach var="row" items="${aList}" varStatus="status" begin="0">
 					<tr>
 
-						<td colspan="2"><label for="answer">${status.index}.</label><input
+						<td colspan="2"><label for="answer">${status.index+1}.</label><input
 							type="radio" name="answer" id="answer" value="${status.index}" />
 							${row.answerChoice}</td>
 					</tr>

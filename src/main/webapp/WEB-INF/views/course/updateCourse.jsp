@@ -41,7 +41,7 @@ function content_submit(){
 
 
 <div align="center">
-	<font face="HY나무L" size="5"><strong>글쓰기 <br>
+	<font face="HY나무L" size="5"><strong>코스 업데이트하기 <br>
 		<br></strong></font>
 	<form
 		action="${pageContext.request.contextPath}/course/updateCourse?${_csrf.parameterName}=${_csrf.token}"
