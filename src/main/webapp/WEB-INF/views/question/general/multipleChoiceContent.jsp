@@ -11,9 +11,10 @@
 	<div align="center">
 	
 		<table border=1px>
-			<tr>
+			 <tr>
 				<td nowrap>Question ${gq.questionNo} </td> 
-				<td nowrap>${gq.question }</td>
+				
+				<td nowrap><textarea name="question" id="question" style="width:500px; height:500px;" readOnly> ${gq.question}</textarea> </td>
 				
 			</tr>
 			
@@ -32,8 +33,9 @@
 			</tr>
 			
 			</form>
-			<a href="${pageContext.request.contextPath}/general/question/getList?keyword=${keyword}"> 목록가기</a>
+		
 		</table>
+			<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}"> 목록가기</a>
 		<a href="${path}/"> 메인페이지로 이동</a>
 	</div>
 </body>

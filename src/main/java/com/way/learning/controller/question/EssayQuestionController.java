@@ -60,14 +60,14 @@ public class EssayQuestionController {
 		 mav.addObject("aq", aq);
 		 mav.addObject("keyword", keyword);
 		 mav.setViewName("/question/essay/essayContent");
-		 
+	
 		
 
 		return mav;
 	}
 	
 	@RequestMapping("/essayResult")
-	public  ModelAndView shortAnswerResult(ModelAndView mav,int questionNo, String code) throws IOException, InterruptedException, Exception{
+	public  ModelAndView essayResult(int questionNo, String code,ModelAndView mav) throws  Exception{
 		 
 		
 		String[] compiledResult = new String[4];
@@ -89,9 +89,14 @@ public class EssayQuestionController {
 			System.out.println("런타임에러 확인 :"+compiledResult[0]);
 			compiledResult[0] = "Exception";
 		}
+		
 		System.out.println("런타임에러 확인 :"+compiledResult[1]);
 		Data set = new Data(compiledResult[0], compiledResult[1], compiledResult[2]);
-		return new ModelAndView("/question/essay/result","code", set);	
+		mav.setViewName("/question/essay/essayResult");
+		mav.addObject("code",set);
+		mav.addObject("questionNo",questionNo);
+		
+		return mav;	
 	}
 		
 	

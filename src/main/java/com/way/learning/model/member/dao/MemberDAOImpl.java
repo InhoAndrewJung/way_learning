@@ -98,6 +98,21 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	
+	@Override
+	public List selectBoardFavorite() {
+		System.out.println("selectBoardFavorite dao ");
+		
+		return sqlSession.selectList("memberMapper.selectBoardFavorite");				
+	}
+	
+	@Override
+	public List selectReplyFavorite() {
+		System.out.println("selectReplyFavorite dao ");
+		
+		return sqlSession.selectList("memberMapper.selectReplyFavorite");				
+	}
+	
+	
 	
 
 }

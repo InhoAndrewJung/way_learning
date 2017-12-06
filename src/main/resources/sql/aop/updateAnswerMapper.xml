@@ -6,15 +6,41 @@
 
 <mapper namespace="updateAnswerMapper">
 
-<update id="updatePostCntSubmit">
-
-	update wl_general_question set  cnt_submit=cnt_submit+1  where question_no=#{questinoNO}
+<update id="updatePostCntSubmit"  parameterType="int">
+	
+	
+	 update 
+	 <if test="value lte 999">
+	 wl_general_question
+	 </if>
+	<if test="value gte 1000">
+	wl_algorithm_question 
+	</if>
+	set  cnt_submit=cnt_submit+1  where question_no=#{value}
+	
+	
+	 <!-- <if test="value lte 999">
+	update wl_general_question set  cnt_submit=cnt_submit+1  where question_no=#{value}
+	</if>
+	
+	<if test="value gte 1000">
+	update wl_algorithm_question set  cnt_submit=cnt_submit+1  where question_no=#{value}
+	</if> -->
+	
 	
 </update>
 
-<update id="updatePostCntRight">
+<update id="updatePostCntRight"  parameterType="int">
+	update
+	<if test="value lte 999">
+	wl_general_question 
+	</if>
+	<if test="value gte 1000">
+	 wl_algorithm_question 
+	</if>
+	set  cnt_right=cnt_right+1  where question_no=#{value}
 
-	update wl_general_question set  cnt_right=cnt_right+1  where question_no=#{questinoNO}
+
 	
 </update>
 
@@ -22,11 +48,14 @@
 
 <update id="updateMyCntSubmit">
 
+
 update wl_answer_result set my_cnt_submit=my_cnt_submit+1 where question_no=#{questionNo} and user_id=#{userId} 
 </update>
 
 
 <insert id="insertMyCntsubmit">
+
+
 insert into wl_answer_result (user_id,question_no,my_cnt_submit) values(#{userId} ,#{questionNo},1)
 </insert>
 
@@ -48,6 +77,16 @@ update wl_answer_result set my_cnt_wrong=my_cnt_wrong+1 where question_no=#{ques
 
 <insert id="insertMyCntWrong">
 insert into wl_answer_result (user_id,question_no,my_cnt_wrong) values(#{userId} ,#{questionNo},1)
+</insert>
+
+
+<update id="updateMyCntError">
+
+update wl_answer_result set my_cnt_Error=my_cnt_Error+1 where question_no=#{questionNo} and user_id=#{userId} 
+</update>	
+
+<insert id="insertMyCntError">
+insert into wl_answer_result (user_id,question_no, my_cnt_Error) values(#{userId} ,#{questionNo},1)
 </insert>
 
 
