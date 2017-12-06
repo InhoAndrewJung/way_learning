@@ -9,6 +9,7 @@ public class GeneralQuestion {
 	    private int cntSubmit;
 	    private int cntRight;
 	    private String category;
+	    
 		public GeneralQuestion(int questionNo, String question, String title, String answer, int cntSubmit,
 				int cntRight, String category) {
 			super();
