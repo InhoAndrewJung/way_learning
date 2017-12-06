@@ -92,7 +92,29 @@ insert into wl_algorithm_question (question_no, title, question,input,output) va
 		select count(-1) from wl_general_question where question_no=#{questionNo} and answer=#{answer}
 	</select>
 
+<!-- 수정 , 삭제 추가 -->	
+
+	<delete id="deleteBoard">
+		DELETE FROM wl_general_question 
+		WHERE question_no=#{value}
+	</delete>
+	<delete id="deleteAnswer">
+		DELETE FROM wl_general_answer_choice 
+		WHERE question_no=#{value}
+	</delete>
+
+	<update id="updateQuestion">
+		UPDATE wl_general_question 
+		SET	title=#{title},question=#{question}, answer=#{answer}
+		WHERE question_no=#{questionNo}
+	</update>
 	
+	<update id="updateAnswerChoice" >
+		 UPDATE wl_general_answer_choice 
+		SET	 answer_choice=#{answerChoice}
+		WHERE question_no=#{questionNo} and answer_order=#{answerOrder}
+	</update>
+
 
 <!-- 
 
