@@ -38,11 +38,11 @@ function sorting(sort){
 </form> 
 		<table border=1px>
 			<tr>
-				<td>문제번호</td>
-				<td nowrap>문제</td>
+				<td nowrap>문제번호</td>
+				<td nowrap>제목</td>
 				<td>제출</td>
 				<td>정답</td>
-				<td>정답비율</td>
+				<td nowrap>정답비율</td>
 			</tr>
 			<c:forEach var="row" items="${list}">
 				<tr>
@@ -50,10 +50,10 @@ function sorting(sort){
 					<td>${row.questionNo}</td>
 					
 					<c:if test="${row.category =='multipleChoice'}">
-					<td><a href="${path}/question/general/multipleChoiceContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.question }</a></td>
+					<td nowrap><a href="${path}/question/general/multipleChoiceContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.title }</a></td>
 					</c:if>
 					<c:if test="${row.category =='shortAnswer'}">
-					<td><a href="${path}/question/general/shortAnswerContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.question }</a></td>
+					<td nowrap><a href="${path}/question/general/shortAnswerContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.title }</a></td>
 					</c:if>
 					<td>${row.cntSubmit }</td>
 					<td>${row.cntRight }</td>

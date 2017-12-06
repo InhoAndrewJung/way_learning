@@ -46,22 +46,25 @@
 	<sec:authorize access="isAuthenticated()">
 		<!-- 관리자인 경우 -->
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<li><a href="${path}/member/enterCafe">ADMIN Cafe Enterance</a></li>
+			<li><a href="${path}/admin/main">ADMIN Cafe Enterance</a></li>
 			
 		</sec:authorize>
 		
 		<!--  일반 회원이거나 관리자인 두 경우. 두개 이상의 role을 비교할때 hasAnyRole()-->
 		<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')">
 			<li><a href="${path}/member/updateForm">정보 수정 폼</a></li>
-			<li><a href="${pageContext.request.contextPath}/board/tech/write"></a><li>
-			<li><a href="${pageContext.request.contextPath}/board/qna/list">qna게시판목록</a><li>
+			<li><a href="${pageContext.request.contextPath}/board/tech/write">tech게시글쓰기</a><li>
+			
 			<li><a href="${pageContext.request.contextPath}/board/tech/list">tech게시판목록</a><li>
+			<li><a href="${pageContext.request.contextPath}/board/qna/write">qna게시판글쓰기</a><li>
+			<li><a href="${pageContext.request.contextPath}/board/qna/list">qna게시판목록</a><li>
 			<li><a href="${pageContext.request.contextPath}/question/general/getList">제너럴 문제 리스트</a><li>
 			<li><a href="${pageContext.request.contextPath}/question/essay/getList">에세이 문제 리스트</a><li>
 			<li><a href="${pageContext.request.contextPath}/question/essay/makeQuestion">에세이 만들기</a><li>
 			<li><a href="${pageContext.request.contextPath}/member/showMyRecord">내가 푼 문제 기록</a><li>
-			<li><a href="${pageContext.request.contextPath}/member/myFavoriteList">내 좋아요 목록 링크</a><li>
+			
 			<li><a href="${pageContext.request.contextPath}/member/showAllRanking">전체 랭킹보기</a><li>
+			<li><a href="${pageContext.request.contextPath}/member/myFavoriteList">내 좋아요 목록 링크</a><li>
 		</sec:authorize>
 		<li><a href="javascript:logout();">로그아웃</a></li>
 	</sec:authorize>
