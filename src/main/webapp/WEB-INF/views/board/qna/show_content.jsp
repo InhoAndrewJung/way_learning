@@ -11,7 +11,11 @@
 
 
 <%@ include file="../../include/common.jsp" %>
+
+
 </head>
+
+
 <script>
 $(document).ready(function() {
 
@@ -87,11 +91,9 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type:"get",
-			url: "${pageContext.request.contextPath}/reply/qna/list?boardNo=${requestScope.bvo.boardNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
+			url: "${pageContext.request.contextPath}/lectureReply/qna/list?boardNo=${requestScope.bvo.boardNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
 			success: function(result){
-				$("#listReply").html(result);
-				
-				
+				$("#listReply").html(result);	
 			}
 		});
 	 }
@@ -138,6 +140,8 @@ function boardLikeUp(boardNo){
 		}
 	});	
 }	
+
+
 
 function boardLikeDown(boardNo){
 	
@@ -192,7 +196,7 @@ a{text-decoration:none; cursor: pointer;}
 
 
 <body>
-
+<%-- 
 <c:if test="${replyNo !=null}">
 
 	<script>
@@ -203,7 +207,7 @@ a{text-decoration:none; cursor: pointer;}
 	},700) ;
 	</script>
 
-</c:if>
+</c:if> --%>
 
 
 

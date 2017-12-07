@@ -10,16 +10,16 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 function content_submit(){
-	 var f=document.update_form;
-	 /*if(f.courseName.value==""){
-		alert("코스명을 입력하세요!");
-		f.courseName.focus();
+	var f=document.write_form;
+	/* if(f.title.value==""){
+		alert("제목을 입력하세요!");
+		f.title.focus();
 		return; 
 	}	
 	
-	if(f.tags.value==""){
+	if(f.tag.value==""){
 		alert("태그를 입력하세요!");
-		f.tags.focus();
+		f.tag.focus();
 		return; 
 	}	 */
 	
@@ -35,44 +35,83 @@ function content_submit(){
 </script>
 
 
+<script src="${path}/ckeditor/ckeditor.js"></script>
+
+
+
+
+<style>
+
+   
+#profile{width:50px; height:50px; border-radius: 50% }
+a{text-decoration:none; cursor: pointer;}
+
+
+</style>
 
 </head>
 
 
 
 <div align="center">
-	<font face="HY나무L" size="5"><strong>코스 업데이트하기 <br>
+	<font face="HY나무L" size="5"><strong>렉쳐수정하기!!! <br>
 		<br></strong></font>
-	<form
-		action="${pageContext.request.contextPath}/course/updateCourse?${_csrf.parameterName}=${_csrf.token}"
-		method="post" name="update_form" enctype="multipart/form-data">
-	
+	<form action="${pageContext.request.contextPath}/lectureBoard/updateLecture?${_csrf.parameterName}=${_csrf.token}"
+		method="post" name="write_form" enctype="multipart/form-data">
+		
 
 
 		<table>
-			<tr>
-				<td nowrap>코스명</td>
-				<td><input type="text" name="courseName" placeholder="코스명을 입력해주세요" size="100" value="${cvo.courseName }"></td>
-			</tr>
+			<%-- <tr>
+				<td nowrap>코스</td>
+				<td>
+			<select name="courseNo" id="courseNo">
+			<c:forEach var="row" items="${list}">
+			   <option value="${row.COURSE_NO}">${row.COURSE_NAME}코스</option>
+			</c:forEach>
+			
+			
+			</select>
+
+</td>
+			</tr> --%>
 
 			<tr>
-				<td nowrap>코스 설명을 입력하세요</td>
-				<td><input type="text" name="description" maxlength="200" size="200"
-					placeholder="코스 설명을 입력해주세요" value="${cvo.description }"></td>
+				<td nowrap>강의명</td>
+				<td><input type="text" name="lectureName" maxlength="50" size="50"
+					value="${lvo.lectureName }"></td>
 			</tr>
 			<tr>
-				<td nowrap> 태그를 입력하세요</td>
-				<input type="hidden" name="author" value="${cvo.member.userId}"/>
-				<input type="hidden" name="courseNo" value="${cvo.courseNo}"/>
+				<td nowrap>강의 순서</td>
+				<td><input type="number" name="lectureOrder"  min="1" max="15" value="${lvo.lectureOrder }"></td>
+				<input type="hidden" name="courseNo" value="${lvo.courseNo }" />
+				<input type="hidden" name="lectureNo" value="${lvo.lectureNo }" />
+			</tr>
 			
-				
-				
-				
-				<td><input type="text" name="tags" maxlength="200" size="200" placeholder="코스 태그를 입력해주세요"  value="<c:out value="${tag}" ><c:forEach var="tag" items="${tags}"  varStatus="status">${tag} <c:if test="${!status.last}">,</c:if> </c:forEach>	 </c:out>"></td>
-			</tr>
 			<tr>
-				<td nowrap>코스 이미지 등록</td>
-				<td><input type="file" name="uploadFile" ></td>
+				<td nowrap>컨텐츠</td>
+				<td> <textarea id="content" name="content"rows="10" cols="80" >${lvo.content }</textarea>
+						
+						<!-- 텍스트 에리어를 스마트 에디터로 변경 -->
+					<script>
+					//CKEDITOR.replace("content"); // 태그의 id
+					//이미지 업로드를 할 경우
+					
+						
+						
+						
+					 CKEDITOR.replace("content", {
+						filebrowserUploadUrl : "${pageContext.request.contextPath}/lectureBoard/imageUpload"
+						
+						
+					}); 
+					
+					 CKEDITOR.on('instanceLoaded', function(e) {e.editor.resize(700, 1000)} );
+					
+					
+					</script>
+		                        
+		        </td>
 			</tr>
 
 		

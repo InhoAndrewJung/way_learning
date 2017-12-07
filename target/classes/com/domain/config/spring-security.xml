@@ -10,12 +10,20 @@
 	<!-- Spring Security 인증처리로직 미적용 -->
 	 <sec:http pattern="/board/tech/imageUpload"  security="none" />
 	 <sec:http pattern="/board/qna/imageUpload"  security="none" />
-	 <sec:http pattern="/lecture/imageUpload"  security="none" />
+	 <sec:http pattern="/lectureBoard/imageUpload"  security="none" />
+	  <sec:http pattern="/learning/resources/upload"  security="none" />
+	  
+	  
+	  
 	 
+	
 	 
 	 <!-- Spring Security 인증처리로직를 정의한 클래스 -->
 <sec:http use-expressions="true" auto-config="true" >
-	  
+	  <sec:headers>
+	  		<sec:frame-options policy="SAMEORIGIN"/>
+	  	</sec:headers>
+	  	
 	<sec:intercept-url pattern="/admin/main"   access="hasRole('ROLE_ADMIN')"/>
 	
 	<sec:intercept-url pattern="/member/main"  access="isAuthenticated()"/>

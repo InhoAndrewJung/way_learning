@@ -37,6 +37,9 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 	config.defaultLanguage = 'kr';
 	config.codeSnippet_theme='github';
+	config.extraPlugins = 'html5video';
+
+	config.extraPlugins = 'youtube';
 	  
 	  
 };

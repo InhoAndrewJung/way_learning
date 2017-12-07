@@ -32,17 +32,16 @@
 		<result property="courseNo" column="course_no" />
 		<result property="lectureName" column="lecture_name" />
 		<result property="lectureOrder" column="lecture_order" />
-		<result property="author" column="author" />
+		<result property="member.userId" column="author" />
 		<result property="content" column="content" />
-		
 		<result property="regDate" column="reg_date" />
 
 	</resultMap>
 	
 	
 	
-	<select id="selectLectureName" resultType="string">
-	select lecture_name,lecture_no from wl_lecture_board where course_no=#{value} order by lecture_order
+	<select id="selectLectureList" resultMap="lectureBoardRM">
+	select lecture_name,lecture_no, lecture_order from wl_lecture_board where course_no=#{courseNo} order by lecture_order
 	</select>
 	
 	<resultMap type="Course" id="courseRM">
@@ -68,13 +67,30 @@
 	</select>
 	
 	
+	<select id="selectCourseTag"  resultType="string">
+	select tag from wl_course_tag where course_no=#{courseNo}
+	</select>
 	
 	
 	
+	<select id="selectLecture" resultMap="lectureBoardRM">
+	
+	select lecture_no, course_no, lecture_name ,lecture_order,author ,content,reg_date from  wl_lecture_board  where course_no=#{courseNo} and lecture_no=#{lectureNo}
+	
+	</select>
 	
 	
 	
+	<delete id="deleteLecture">
+	delete from wl_lecture_board where course_no=#{courseNo} and lecture_no=#{lectureNo}
 	
+	</delete>
+	
+	<update id="updateLecture">
+	update wl_lecture_board set  lecture_name=#{lectureName},lecture_order=#{lectureOrder},content=#{content} 
+	where course_no=#{courseNo} and lecture_no=#{lectureNo}
+	
+	</update>
 	
 	
 	
