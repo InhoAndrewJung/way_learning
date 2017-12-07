@@ -16,10 +16,10 @@
 
 		insert into
 		wl_general_answer_choice (question_no,answer_order,answer_choice)
-		values((select
-		max(question_no) from wl_general_question),#{answerOrder}
+		values(#{questionNo},#{answerOrder}
 		,#{answerChoice})
-
+<!--(select
+		max(question_no) from wl_general_question)  -->
 	</insert>
 	
 	<insert id="insertEssayQuestion" parameterType="generalQuestion">
@@ -108,7 +108,7 @@ insert into wl_algorithm_question (question_no, title, question,input,output) va
 	
 	
 	<delete id="deleteAnswerChoice">
-	 delete wl_general_answer_choice where  question_no=#{questionNo}
+	 delete from wl_general_answer_choice where  question_no=#{questionNo}
 	</delete>
 	
 	

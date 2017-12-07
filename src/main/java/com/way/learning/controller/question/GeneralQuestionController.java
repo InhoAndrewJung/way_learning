@@ -134,7 +134,7 @@ public class GeneralQuestionController {
 		int result = questionService.deleteQuestion(questionNo);
 		
 
-		mav.setViewName("/question/general/getList");
+		mav.setViewName("redirect:/question/general/getList");
 	
 		
 		return mav;
