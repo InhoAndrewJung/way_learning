@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+	
+<mapper namespace="lectureBoardMapper">
+
+
+
+	<select id="selectMyCourseNo"  resultType="hashmap">
+	select course_no,course_name from wl_course where author=#{value}
+	</select>
+
+
+	<insert id="insertLecture" >
+	
+	<selectKey keyProperty="lectureNo" resultType="int" order="BEFORE">
+	 	select wl_lecture_board_SEQ.nextval from dual
+	</selectKey>
+		insert into wl_lecture_board (lecture_no,course_no,lecture_order,lecture_name,author,content) 
+		values (#{lectureNo},#{courseNo},#{lectureOrder},#{lectureName},#{member.userId},#{content})
+	
+	</insert>
+
+
+
+
+
+	<resultMap type="LectureBoard" id="lectureBoardRM">
+		<result property="lectureNo" column="lecture_no" />
+		<result property="courseNo" column="course_no" />
+		<result property="lectureName" column="lecture_name" />
+		<result property="lectureOrder" column="lecture_order" />
+		<result property="author" column="author" />
+		<result property="content" column="content" />
+		
+		<result property="regDate" column="reg_date" />
+
+	</resultMap>
+	
+	
+	
+	<select id="selectLectureName" resultType="string">
+	select lecture_name,lecture_no from wl_lecture_board where course_no=#{value} order by lecture_order
+	</select>
+	
+	<resultMap type="Course" id="courseRM">
+	<result property="courseNo" column="course_no"/>
+	<result property="courseName" column="course_name"/>
+	<result property="description" column="description"/>
+	<result property="courseImage" column="course_image"/>
+	<result property="member.userId" column="author"/>
+	<result property="regDate" column="reg_date"/>
+	<result property="isAccept" column="is_accept"/>
+	<result property="cntCourseLike" column="cnt_course_like"/>
+	<result property="member.activity" column="activity"/>
+	<result property="member.imgProfile" column="img_profile"/>
+	
+	
+</resultMap>
+	
+	
+	
+	<select id="selectMyCourse" resultMap="courseRM">
+	select course_no, course_name,description,course_image,author,c.reg_date,is_accept,cnt_course_like,activity,img_profile 
+	from wl_course c, wl_member m where  c.AUTHOR=m.USER_ID and author=#{userId} and course_No=#{courseNo}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>	
+
+
+
+
+<!-- 
+
+<resultMap type="Course" id="courseRM">
+	<result property="courseNo" column="course_no"/>
+	<result property="courseName" column="course_name"/>
+	<result property="description" column="description"/>
+	<result property="courseImage" column="course_image"/>
+	<result property="member.userId" column="author"/>
+	<result property="regDate" column="reg_date"/>
+	<result property="isAccept" column="is_accept"/>
+	<result property="cntGood" column="cnt_good"/>
+	<result property="member.activity" column="activity"/>
+	<result property="member.imgProfile" column="img_profile"/>
+	
+	
+</resultMap>
+
+	
+	<insert id="insertCourse">
+	
+	<selectKey keyProperty="courseNo" resultType="int" order="BEFORE">
+			SELECT
+			wl_course_SEQ.nextval FROM dual
+	</selectKey>
+		
+		
+	insert into wl_course (course_no,course_name,description,course_image,author) 
+	values(#{courseNo},#{courseName},#{description},#{courseImage},#{member.userId})
+	
+	</insert>
+	
+	<insert id="insertTags">
+	insert into  wl_course_tag (course_no,tag) values((select Max(course_no) from wl_course),#{tags})
+	</insert>
+	
+	<select id="selectMyCourseList" resultMap="courseRM" >
+	select * from wl_course where author=#{userId}
+	</select>
+	
+	<select id="selectMyCourse" resultMap="courseRM">
+	select course_no, course_name,description,course_image,author,c.reg_date,is_accept,cnt_good,activity,img_profile 
+	from wl_course c, wl_member m where  c.AUTHOR=m.USER_ID and author=#{userId} and course_No=#{courseNo}
+	
+	
+	</select>
+	
+	
+	<select id="selectCourseTag"  resultType="string">
+	select tag from wl_course_tag where course_no=#{courseNo}
+	</select>
+	
+	<delete id="deleteCourse">
+		delete from wl_course where course_no=#{courseNo}
+	</delete>
+	
+	
+	<update id="updateCourse">
+	
+	<if test="courseImage !=null">
+	update wl_course set course_name=#{courseName} ,description=#{description},course_image=#{courseImage} where course_no=#{courseNo}
+	</if>
+	<if test="courseImage ==null">
+	update wl_course set course_name=#{courseName} ,description=#{description} where course_no=#{courseNo}
+	</if>
+	
+	</update>
+	
+	<delete id="deleteTags">
+	delete wl_course_tag  where  course_no=#{courseNo}
+	</delete>
+	
+
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

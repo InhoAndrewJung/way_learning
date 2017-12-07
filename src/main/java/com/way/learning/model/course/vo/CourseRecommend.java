@@ -2,22 +2,20 @@ package com.way.learning.model.course.vo;
 
 import java.util.Date;
 
-public class LectureRecommend {
+public class CourseRecommend {
 	
 	private String userId;
-	private int lectureNo;
 	private int courseNo;
 	private Date regDate;
-	public LectureRecommend(String userId, int lectureNo, int courseNo, Date regDate) {
+	public CourseRecommend(String userId, int courseNo, Date regDate) {
 		super();
 		this.userId = userId;
-		this.lectureNo = lectureNo;
 		this.courseNo = courseNo;
 		this.regDate = regDate;
 	}
+
 	
-	
-	public LectureRecommend() {
+	public CourseRecommend() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,16 +27,6 @@ public class LectureRecommend {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-
-	public int getLectureNo() {
-		return lectureNo;
-	}
-
-
-	public void setLectureNo(int lectureNo) {
-		this.lectureNo = lectureNo;
 	}
 
 
@@ -64,9 +52,9 @@ public class LectureRecommend {
 
 	@Override
 	public String toString() {
-		return "LectureRecommend [userId=" + userId + ", lectureNo=" + lectureNo + ", courseNo=" + courseNo
-				+ ", regDate=" + regDate + "]";
+		return "CourseRecommend [userId=" + userId + ", courseNo=" + courseNo + ", regDate=" + regDate + "]";
 	}
+	
 	
 	
 

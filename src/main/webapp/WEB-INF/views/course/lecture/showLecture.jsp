@@ -11,7 +11,7 @@
 
 
 
-<%@ include file="../include/common.jsp"%>
+<%@ include file="../../include/common.jsp"%>
 </head>
 <script>
 
@@ -92,7 +92,7 @@ a {
 					src="${path}/resources/upload/${cvo.member.imgProfile}">
 					${cvo.member.userId} ${cvo.member.activity}<br></td>
 
-				<td nowrap>좋아요 수:${cvo.cntCourseLike}</td>
+				<td nowrap>좋아요 수:${cvo.cntGood}</td>
 			</tr>
 
 			<tr>
@@ -145,7 +145,7 @@ a {
 			</c:if>
 		</sec:authorize>
 
-<a href="${pageContext.request.contextPath}">홈으로</a>
+
 
 	</div>
 </body>

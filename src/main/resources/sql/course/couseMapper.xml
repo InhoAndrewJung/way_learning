@@ -14,7 +14,7 @@
 	<result property="member.userId" column="author"/>
 	<result property="regDate" column="reg_date"/>
 	<result property="isAccept" column="is_accept"/>
-	<result property="cntGood" column="cnt_good"/>
+	<result property="cntCourseLike" column="cnt_course_like"/>
 	<result property="member.activity" column="activity"/>
 	<result property="member.imgProfile" column="img_profile"/>
 	
@@ -44,10 +44,8 @@
 	</select>
 	
 	<select id="selectMyCourse" resultMap="courseRM">
-	select course_no, course_name,description,course_image,author,c.reg_date,is_accept,cnt_good,activity,img_profile 
+	select course_no, course_name,description,course_image,author,c.reg_date,is_accept,cnt_course_like,activity,img_profile 
 	from wl_course c, wl_member m where  c.AUTHOR=m.USER_ID and author=#{userId} and course_No=#{courseNo}
-	
-	
 	</select>
 	
 	
