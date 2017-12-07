@@ -131,12 +131,12 @@ public class GeneralQuestionController {
 	@RequestMapping("/deleteQuestion")
 	public ModelAndView deleteQuestion(ModelAndView mav, int questionNo) throws Exception {
 		System.out.println("questionNo:" + questionNo);
-		int result = questionService.deleteBoard(questionNo);
-		int result2 = questionService.deleteAnswer(questionNo);
+		int result = questionService.deleteQuestion(questionNo);
+		
 
-		mav.setViewName("/question/general/list");
-		System.out.println("result:" + result);
-		System.out.println("result2:" + result2);
+		mav.setViewName("/question/general/getList");
+	
+		
 		return mav;
 	}
 

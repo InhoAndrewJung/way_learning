@@ -11,7 +11,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		var count=5;
+		var count= $('input[name=answerChoice]').length+1
 		var ac ='<label for="answerChoice">선택지'+count+':</label><input type="text" name="answerChoice" id="answerChoice" /><br>';
 		$('#btnAnswerPlus').click(function() {
 			count=count+1;

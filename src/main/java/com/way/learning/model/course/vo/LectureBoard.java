@@ -6,18 +6,18 @@ import com.way.learning.model.member.vo.Member;
 
 public class LectureBoard {
 	
-	 private int lectureNo;
-	 private String courseNo;
-	 private String lectureName;
-	 private int lecutureOrder;
-	 private Member memer;  //author  ,이미지.
-	 private String title;
-	 private String content;
-	 private int cntBoardLike;
-	 private int cntReply;
-	 private Date regDate;
-	public LectureBoard(int lectureNo, String courseNo, String lectureName, int lecutureOrder, Member memer,
-			String title, String content, int cntBoardLike, int cntReply, Date regDate) {
+	private int lectureNo;
+	private int courseNo;
+	private String lectureName;
+	private int lecutureOrder;
+	private Member memer;  //author  ,이미지.
+	private String title;
+	private String content;
+	private int cntReply;
+	private int cntBoardLike;
+	private Date regDate;
+	public LectureBoard(int lectureNo, int courseNo, String lectureName, int lecutureOrder, Member memer, String title,
+			String content, int cntReply, int cntBoardLike, Date regDate) {
 		super();
 		this.lectureNo = lectureNo;
 		this.courseNo = courseNo;
@@ -26,12 +26,12 @@ public class LectureBoard {
 		this.memer = memer;
 		this.title = title;
 		this.content = content;
-		this.cntBoardLike = cntBoardLike;
 		this.cntReply = cntReply;
+		this.cntBoardLike = cntBoardLike;
 		this.regDate = regDate;
 	}
-	 
-	 
+
+	
 	public LectureBoard() {
 		// TODO Auto-generated constructor stub
 	}
@@ -47,12 +47,12 @@ public class LectureBoard {
 	}
 
 
-	public String getCourseNo() {
+	public int getCourseNo() {
 		return courseNo;
 	}
 
 
-	public void setCourseNo(String courseNo) {
+	public void setCourseNo(int courseNo) {
 		this.courseNo = courseNo;
 	}
 
@@ -107,16 +107,6 @@ public class LectureBoard {
 	}
 
 
-	public int getCntBoardLike() {
-		return cntBoardLike;
-	}
-
-
-	public void setCntBoardLike(int cntBoardLike) {
-		this.cntBoardLike = cntBoardLike;
-	}
-
-
 	public int getCntReply() {
 		return cntReply;
 	}
@@ -124,6 +114,16 @@ public class LectureBoard {
 
 	public void setCntReply(int cntReply) {
 		this.cntReply = cntReply;
+	}
+
+
+	public int getCntBoardLike() {
+		return cntBoardLike;
+	}
+
+
+	public void setCntBoardLike(int cntBoardLike) {
+		this.cntBoardLike = cntBoardLike;
 	}
 
 
@@ -141,11 +141,10 @@ public class LectureBoard {
 	public String toString() {
 		return "LectureBoard [lectureNo=" + lectureNo + ", courseNo=" + courseNo + ", lectureName=" + lectureName
 				+ ", lecutureOrder=" + lecutureOrder + ", memer=" + memer + ", title=" + title + ", content=" + content
-				+ ", cntBoardLike=" + cntBoardLike + ", cntReply=" + cntReply + ", regDate=" + regDate + "]";
+				+ ", cntReply=" + cntReply + ", cntBoardLike=" + cntBoardLike + ", regDate=" + regDate + "]";
 	}
 	
 	
-	 
 	 
 	 
 

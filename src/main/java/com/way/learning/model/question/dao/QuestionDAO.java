@@ -30,9 +30,9 @@ public interface QuestionDAO {
 	// 수정,삭제 추가
 	public void updateQuestion(GeneralQuestion qvo) throws SQLException;
 
-	public void updateAnswerChoice(int questionNo, String[] answerChoice) throws SQLException;
+	
 
-	public int deleteBoard(int questionNo) throws SQLException;
+	public int deleteQuestion(int questionNo) throws SQLException;
 
-	public int deleteAnswer(int questionNo) throws SQLException;
+	public int deleteAnswerChoice(int questionNo) throws SQLException;
 }

@@ -30,7 +30,7 @@ public interface QuestionService {
 	// 수정,삭제 추가
 	public void updateQuestion(GeneralQuestion qvo,String[] answerChoice) throws SQLException;
 
-	public int deleteBoard(int questionNo) throws SQLException;
+	public int deleteQuestion(int questionNo) throws SQLException;
 
-	public int deleteAnswer(int questionNo) throws SQLException;
+	
 }
