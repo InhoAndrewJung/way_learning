@@ -57,7 +57,7 @@ public class CourseController {
 		List<Course> list=courseService.selectMycourseList(mvo.getUserId());
 
 
-		return new ModelAndView("course/courselist","list",list);
+		return new ModelAndView("course/courseList","list",list);
 	}
 
 
