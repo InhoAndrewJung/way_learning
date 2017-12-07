@@ -51,7 +51,7 @@
 
 <form action="${path}/question/general/insertQuestion" method="post">
 
-<label for="category">객관식</label><input type="radio" name="category" id="category1" value="multipleChoice" onchange="show()"/>
+<label for="category">객관식</label><input type="radio" name="category" id="category1" value="multipleChoice" onchange="show()" checked="checked"/>
 <label for="category">주관식</label><input type="radio" name="category" id="category2" value="shortAnswer" onchange="hide()"/><br>
 <label for="answerChoice">제목:<input type="text" name="title" id="title" /><br>
 
