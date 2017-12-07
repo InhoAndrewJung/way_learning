@@ -36,7 +36,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 
 	@Override
 	public void insertAnswerChoice(String[] answerChoice) throws SQLException {
-		// TODO Auto-generated method stub
+		
 		System.out.println("insertAnswerChoice");
 
 		Map<String, Object> map = new HashMap<String, Object>();

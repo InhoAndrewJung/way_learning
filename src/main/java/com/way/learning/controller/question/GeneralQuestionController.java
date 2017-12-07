@@ -132,11 +132,9 @@ public class GeneralQuestionController {
 	public ModelAndView deleteQuestion(ModelAndView mav, int questionNo) throws Exception {
 		System.out.println("questionNo:" + questionNo);
 		int result = questionService.deleteQuestion(questionNo);
-		
 
 		mav.setViewName("redirect:/question/general/getList");
-	
-		
+
 		return mav;
 	}
 
@@ -144,13 +142,16 @@ public class GeneralQuestionController {
 	public ModelAndView updateQuestion(int questionNo, ModelAndView mav) throws Exception {
 
 		GeneralQuestion gq = questionService.showGeneralContent(questionNo);
-		List<GeneralChoice> aList = questionService.getAnswerChoice(questionNo);
 		mav.addObject("gq", gq);
-		mav.addObject("aList", aList);
+		
+		if (gq.getCategory().equals("multipleChoice")) {
+			List<GeneralChoice> aList = questionService.getAnswerChoice(questionNo);
+			mav.addObject("aList", aList);
+			System.out.println("aList:" + aList);
+		}
 		mav.setViewName("/question/general/updateQuestion");
 
 		System.out.println("gq:" + gq);
-		System.out.println("aList:" + aList);
 
 		return mav;
 
@@ -165,9 +166,8 @@ public class GeneralQuestionController {
 
 		System.out.println("answerChoice:" + answerChoice);
 
-		questionService.updateQuestion(gq,answerChoice);
-	
-		
+		questionService.updateQuestion(gq, answerChoice);
+
 		mav.addObject("gq", questionService.showGeneralContent(gq.getQuestionNo()));
 		mav.setViewName("redirect:/question/general/getList");
 

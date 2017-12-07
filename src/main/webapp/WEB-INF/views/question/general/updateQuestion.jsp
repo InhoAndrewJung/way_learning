@@ -44,11 +44,18 @@
 
 	
 <body>
+${gq.category}
+
+
+
 
 <form action="${path}/question/general/updateQuestionAction?questionNo=${gq.questionNo}" method="post">
-
-<label for="category">객관식</label><input type="radio" name="category" id="category1" value="multipleChoice"  onchange="show()" checked="checked"/>
-<label for="category">주관식</label><input type="radio" name="category" id="category2" value="shortAnswer" onchange="hide()"/><br>
+<c:if test="${gq.category == 'multipleChoice'}">
+<label for="category">객관식</label><input type="radio" name="category" id="category1" value="multipleChoice"  onchange="show()" <c:out value="checked"></c:out> />
+</c:if>
+<c:if test="${gq.category == 'shortAnswer'}">
+<label for="category">주관식</label><input type="radio" name="category" id="category2" value="shortAnswer" onchange="hide()" <c:out value="checked"></c:out> />
+</c:if><br>
 <label for="answerChoice">제목:<input type="text" name="title" id="title" value="${gq.title}" /><br>
 
 <label for="question">문제:</label><textarea name="question" id="question" cols="60" rows="30"  >${gq.question}</textarea><br>
