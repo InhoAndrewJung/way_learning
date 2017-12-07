@@ -108,7 +108,7 @@ insert into wl_algorithm_question (question_no, title, question,input,output) va
 	
 	
 	<delete id="deleteAnswerChoice">
-	 delete wl_general_answer_choice where  question_no=#{questionNo}
+	 delete from wl_general_answer_choice where  question_no=#{questionNo}
 	</delete>
 	
 	

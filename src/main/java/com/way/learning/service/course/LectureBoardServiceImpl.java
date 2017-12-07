@@ -26,9 +26,9 @@ public class LectureBoardServiceImpl implements LectureBoardService {
 
 	}
 	
-	public List<String> selectLectureName(int courseNo){
+	public List<LectureBoard> selectLectureList(int courseNo){
 
-		return lectureBoardDAO.selectLectureName(courseNo);
+		return lectureBoardDAO.selectLectureList(courseNo);
 		
 		
 	}
@@ -37,6 +37,34 @@ public class LectureBoardServiceImpl implements LectureBoardService {
 		
 
 		return lectureBoardDAO.selectMyCourse(courseNo, userId);
+
+	}
+	
+	public List<String> selectCourseTag(int courseNo) {
+
+		return lectureBoardDAO.selectCourseTag(courseNo);
+
+	}
+	
+	public LectureBoard selectLecture(int lectureNo,int courseNo) {
+
+		return lectureBoardDAO.selectLecture(lectureNo,courseNo);
+
+	}
+	
+	public int deleteLecture(int lectureNo,int courseNo) {
+		
+		
+		
+		return lectureBoardDAO.deleteLecture(lectureNo, courseNo);
+	
+	}
+	
+	public int updateLecture(LectureBoard lvo) {
+
+		
+
+		return lectureBoardDAO.updateLecture(lvo);
 
 	}
 	

@@ -56,7 +56,7 @@ a{text-decoration:none; cursor: pointer;}
 <div align="center">
 	<font face="HY나무L" size="5"><strong>글쓰기 <br>
 		<br></strong></font>
-	<form action="${pageContext.request.contextPath}/lecture/insertLecture?${_csrf.parameterName}=${_csrf.token}"
+	<form action="${pageContext.request.contextPath}/lectureBoard/insertLecture?${_csrf.parameterName}=${_csrf.token}"
 		method="post" name="write_form" enctype="multipart/form-data">
 		
 
@@ -99,7 +99,7 @@ a{text-decoration:none; cursor: pointer;}
 						
 						
 					 CKEDITOR.replace("content", {
-						filebrowserUploadUrl : "${pageContext.request.contextPath}/lecture/imageUpload"
+						filebrowserUploadUrl : "${pageContext.request.contextPath}/lectureBoard/imageUpload"
 						
 						
 					}); 
