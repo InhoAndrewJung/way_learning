@@ -8,14 +8,31 @@ import com.way.learning.model.question.vo.GeneralChoice;
 import com.way.learning.model.question.vo.GeneralQuestion;
 
 public interface QuestionDAO {
-	
+
 	public void insertGeneralQuestion(GeneralQuestion gq) throws SQLException;
+
 	public void insertAnswerChoice(String[] answerChoice) throws SQLException;
+
 	public void insertEssayQuestion(AlgorithmQuestion aq) throws SQLException;
+
 	public List<GeneralQuestion> getGeneralList(String keyword, String sorting) throws SQLException;
+
 	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException;
+
 	public GeneralQuestion showGeneralContent(int questionNo) throws SQLException;
-	public AlgorithmQuestion showEssayContent(int questionNo) throws SQLException; 
+
+	public AlgorithmQuestion showEssayContent(int questionNo) throws SQLException;
+
 	public List<GeneralChoice> getAnswerChoice(int questionNo) throws SQLException;
-	public int checkAnswer(int questionNo,String answer) throws SQLException;
+
+	public int checkAnswer(int questionNo, String answer) throws SQLException;
+
+	// 수정,삭제 추가
+	public void updateQuestion(GeneralQuestion qvo) throws SQLException;
+
+	
+
+	public int deleteQuestion(int questionNo) throws SQLException;
+
+	public int deleteAnswerChoice(int questionNo) throws SQLException;
 }

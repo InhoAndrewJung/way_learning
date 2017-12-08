@@ -12,6 +12,7 @@
 
 <style type="text/css">
 	a{text-decoration:  none;}
+	ul,li{list-style:none;}
 </style>
 <script type="text/javascript">
 	function logout() {
@@ -52,19 +53,37 @@
 		
 		<!--  일반 회원이거나 관리자인 두 경우. 두개 이상의 role을 비교할때 hasAnyRole()-->
 		<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')">
-			<li><a href="${path}/member/updateForm">정보 수정 폼</a></li>
-			<li><a href="${pageContext.request.contextPath}/board/tech/write">tech게시글쓰기</a><li>
+		
 			
-			<li><a href="${pageContext.request.contextPath}/board/tech/list">tech게시판목록</a><li>
-			<li><a href="${pageContext.request.contextPath}/board/qna/write">qna게시판글쓰기</a><li>
-			<li><a href="${pageContext.request.contextPath}/board/qna/list">qna게시판목록</a><li>
-			<li><a href="${pageContext.request.contextPath}/question/general/getList">제너럴 문제 리스트</a><li>
-			<li><a href="${pageContext.request.contextPath}/question/essay/getList">에세이 문제 리스트</a><li>
-			<li><a href="${pageContext.request.contextPath}/question/essay/makeQuestion">에세이 만들기</a><li>
+			
+			<b>마이페이지용</b><br>
 			<li><a href="${pageContext.request.contextPath}/member/showMyRecord">내가 푼 문제 기록</a><li>
-			
+				<li><a href="${path}/member/updateForm">정보 수정 폼</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/showAllRanking">전체 랭킹보기</a><li>
 			<li><a href="${pageContext.request.contextPath}/member/myFavoriteList">내 좋아요 목록 링크</a><li>
+			
+			<b>게시판용</b><br>
+			<li><a href="${pageContext.request.contextPath}/board/tech/write">tech게시글쓰기</a><li>	
+			<li><a href="${pageContext.request.contextPath}/board/tech/list">tech게시판목록</a><li>
+			<li><a href="${pageContext.request.contextPath}/board/qna/write">qna게시판 글쓰기</a><li>
+			<li><a href="${pageContext.request.contextPath}/board/qna/list">qna게시판목록</a><li>
+			
+			<b>문제 용</b> <br>
+			<li><a href="${pageContext.request.contextPath}/question/general/getList">제너럴 문제 리스트</a><li>
+			<li><a href="${pageContext.request.contextPath}/question/general/makeQuestion">제너럴 문제 만들기</a><li>
+			<li><a href="${pageContext.request.contextPath}/question/essay/getList">에세이 문제 리스트</a><li>
+			<li><a href="${pageContext.request.contextPath}/question/essay/makeQuestion">에세이 만들기</a><li>
+
+			
+			
+			<b>코스용</b><br>
+			<li><a href="${pageContext.request.contextPath}/course/writeCourse">코스등록</a><li>
+			<li><a href="${pageContext.request.contextPath}/course/showCourseList">내가 등록한 코스 리스트 </a><li>
+			
+			<b>강의용</b><br>
+			<li><a href="${pageContext.request.contextPath}/lectureBoard/writeLecture">강의등록</a><li>
+			<li><a href="${pageContext.request.contextPath}/lectureBoard/showLectureList?courseNo=1">내가 등록한 강의 리스트 </a><li>
+			
 		</sec:authorize>
 		<li><a href="javascript:logout();">로그아웃</a></li>
 	</sec:authorize>

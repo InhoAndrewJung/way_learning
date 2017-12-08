@@ -1,11 +1,8 @@
 package com.way.learning.controller.member;
 
-
 import javax.mail.internet.MimeMessage;
 
-
 import java.util.List;
-
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -197,8 +194,8 @@ public class MemberController {
 	public String idCheckAjax(HttpServletRequest request) {
 		return memberService.idcheck(request.getParameter("userId"));
 	}
-	
-	//이메일 중복확인
+
+	// 이메일 중복확인
 	@RequestMapping("emailcheckAjax")
 	@ResponseBody
 	public int emailCheckView(HttpServletRequest request) {
@@ -212,24 +209,22 @@ public class MemberController {
 
 	@RequestMapping("updateMember")
 	public ModelAndView updateMemberAction(HttpServletRequest request, Member vo) throws Exception {
-		
-		
 
-		memberService.updateMember(vo,request);
+		memberService.updateMember(vo, request);
 
 		return new ModelAndView("member/update_result");
 	}
-	
+
 	@RequestMapping("showMyRecord")
-	public ModelAndView showMyRecord(HttpServletRequest request,ModelAndView mav) throws Exception {
+	public ModelAndView showMyRecord(HttpServletRequest request, ModelAndView mav) throws Exception {
 		System.out.println("showMyRecord 컨트롤러 입성!");
-		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String userId=mvo.getUserId();
-		System.out.println("showMyRecord 유저아이디:"+userId);
-		List<String> rightList=memberService.selectRightNo(userId);
-		List<String> wrongList=memberService.selectWrongNo(userId);
-		AnswerResult answerResult=memberService.selectMyRecord(userId);
-		int myRanking=memberService.selectMyRanking(userId);
+		Member mvo = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userId = mvo.getUserId();
+		System.out.println("showMyRecord 유저아이디:" + userId);
+		List<String> rightList = memberService.selectRightNo(userId);
+		List<String> wrongList = memberService.selectWrongNo(userId);
+		AnswerResult answerResult = memberService.selectMyRecord(userId);
+		int myRanking = memberService.selectMyRanking(userId);
 		mav.addObject("rightList", rightList);
 		mav.addObject("wrongList", wrongList);
 		mav.addObject("answerResult", answerResult);
@@ -238,46 +233,33 @@ public class MemberController {
 
 		return mav;
 	}
-	
-	
+
 	@RequestMapping("showAllRanking")
-	public ModelAndView showAllRanking(HttpServletRequest request,ModelAndView mav, @RequestParam(defaultValue="cntSubmit") String sorting) throws Exception {
+	public ModelAndView showAllRanking(HttpServletRequest request, ModelAndView mav,
+			@RequestParam(defaultValue = "cntSubmit") String sorting) throws Exception {
 		System.out.println("showAllRanking 컨트롤러 입성!");
-		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String userId=mvo.getUserId();
-		System.out.println("showAllRanking 유저아이디:"+userId);
-		System.out.println("showAllRanking sorting:"+sorting);
-		List<AnswerResult> list=memberService.selectAllRanking(sorting);
+		Member mvo = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userId = mvo.getUserId();
+		System.out.println("showAllRanking 유저아이디:" + userId);
+		System.out.println("showAllRanking sorting:" + sorting);
+		List<AnswerResult> list = memberService.selectAllRanking(sorting);
 		mav.addObject("list", list);
 		mav.setViewName("/member/showAllRanking");
 
 		return mav;
 	}
-	
+
 	@RequestMapping("myFavoriteList")
 	public ModelAndView selectBoardFavorite(ModelAndView mav) throws Exception {
-		
-		
-		
-		List boardList=memberService.selectBoardFavorite();
-		System.out.println("boardList:"+boardList);
-		List replyList=memberService.selectReplyFavorite();
+
+		List boardList = memberService.selectBoardFavorite();
+		System.out.println("boardList:" + boardList);
+		List replyList = memberService.selectReplyFavorite();
 		mav.addObject("boardList", boardList);
 		mav.addObject("replyList", replyList);
 		mav.setViewName("/member/myFavoriteList");
 
 		return mav;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }
-
-
-
-
-
