@@ -50,7 +50,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 
 
-	//config.extraPlugins = 'autogrow,youtube';
+	config.extraPlugins = 'autogrow,youtube';
 	config.extraPlugins = 'html5video';
 	
 	
