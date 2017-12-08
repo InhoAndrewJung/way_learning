@@ -36,7 +36,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 
 	@Override
 	public void insertAnswerChoice(String[] answerChoice) throws SQLException {
-		
+
 		System.out.println("insertAnswerChoice");
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -54,20 +54,23 @@ public class QuestionDAOImpl implements QuestionDAO {
 	@Override
 	public List<GeneralQuestion> getGeneralList(String keyword, String sorting) throws SQLException {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("keyword", keyword);
 		map.put("sorting", sorting);
 		return sqlSession.selectList("questionMapper.getGeneralList", map);
 
 	}
-	public int countArticle( String keyword) {
-				
-		return sqlSession.selectOne("questionMapper.countArticle",  keyword);
+
+	public int countArticle(String keyword) {
+
+		return sqlSession.selectOne("questionMapper.countArticle", keyword);
 	}
-	
+
 	@Override
 	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException {
+		Map<String, Object> map = new HashMap<String, Object>();
 
+		map.put("keyword", keyword);
 		return sqlSession.selectList("questionMapper.getEssayList", keyword);
 
 	}
@@ -108,18 +111,14 @@ public class QuestionDAOImpl implements QuestionDAO {
 		sqlSession.update("questionMapper.updateQuestion", qvo);
 	}
 
-	
-
 	@Override
 	public int deleteQuestion(int questionNo) throws SQLException {
 		return sqlSession.delete("questionMapper.deleteQuestion", questionNo);
 	}
-	
+
 	@Override
 	public int deleteAnswerChoice(int questionNo) throws SQLException {
 		return sqlSession.delete("questionMapper.deleteAnswerChoice", questionNo);
 	}
-
-	
 
 }

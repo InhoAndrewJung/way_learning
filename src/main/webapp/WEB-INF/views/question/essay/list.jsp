@@ -25,7 +25,7 @@
 		<table border=1px>
 			<tr>
 				<td>문제번호</td>
-				<td nowrap>문제</td>
+				<td nowrap>제목</td>
 				<td>제출</td>
 				<td>정답</td>
 				<td>정답비율</td>
@@ -36,7 +36,7 @@
 					<td>${row.questionNo}</td>
 					
 					
-					<td><a href="${path}/question/essay/showEssayContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.question}</a></td>
+					<td><a href="${path}/question/essay/showEssayContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.title}</a></td>
 					
 					
 					<td>${row.cntSubmit }</td>

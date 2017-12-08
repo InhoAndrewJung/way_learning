@@ -87,8 +87,12 @@
 
 	<select id="getEssayList" resultMap="algorithmQuestionRM">
 		select * from
-		wl_algorithm_question where question like '%'||#{keyword}||'%' order
-		by question_no desc
+		wl_algorithm_question
+		<where>
+			question like '%'||#{keyword}||'%'
+			or title like '%'||#{keyword}||'%'
+		</where>
+		order by question_no desc
 
 	</select>
 

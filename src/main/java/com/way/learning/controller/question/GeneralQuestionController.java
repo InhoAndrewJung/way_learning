@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.way.learning.model.question.vo.AlgorithmQuestion;
 import com.way.learning.model.question.vo.GeneralChoice;
 import com.way.learning.model.question.vo.GeneralQuestion;
-import com.way.learning.service.question.ListVO;
-import com.way.learning.service.question.PagingBean;
 import com.way.learning.service.question.QuestionService;
 
 @Controller
@@ -64,6 +63,9 @@ public class GeneralQuestionController {
 		return mav;
 	}
 
+	
+	
+	
 	/*
 	 * @RequestMapping("/getList") public ModelAndView getList(ModelAndView
 	 * mav, @RequestParam(defaultValue = "") String keyword,
