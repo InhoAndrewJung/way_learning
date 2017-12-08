@@ -49,15 +49,43 @@ a {
 	margin-left: 20px;
 }
 
-#recommend {
-	border: 1px solid #f00;
-	border-radius: 10%;
-}
+
 </style>
 
 
 
 <script>
+
+$(document).ready(function() {
+$.ajax({
+	type: "post",
+	url: "${pageContext.request.contextPath}/lectureBoard/likeStatus",
+	data:"${_csrf.parameterName}=${_csrf.token}&courseNo=${cvo.courseNo}",
+	success: function(result){
+		
+	//alert(result)
+		if(result == 1){
+			$('#recommend').attr('src' ,'/learning/resources/img/redHeart.png');	
+			
+			
+		}
+	
+			
+			//$('#boardGood'+item).css({'width':500});
+			// $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
+		
+
+		
+		//alert("likeUp ajax result:"+result);
+		
+		
+		
+	}
+	
+});
+
+});
+
 
 var lecNo= ${lecList[0].lectureNo};
 
@@ -113,6 +141,31 @@ function updateLecture(){
 }
 	
 
+function courseLikeChange(){
+	
+	var param="${_csrf.parameterName}=${_csrf.token}&courseNo=${cvo.courseNo}";
+	
+	$.ajax({
+		type: "post",
+		url: "${pageContext.request.contextPath}/lectureBoard/changeLike",
+		data: param,
+		success: function(result){
+			//alert(result)
+			
+			
+			$("#recommendCnt").html(result);
+			
+			 var src=$('#recommend').attr('src') ;
+			 if(src =='/learning/resources/img/redHeart.png'){
+				 $('#recommend').attr('src' ,'/learning/resources/img/heart.png') ;
+			 }else if(src =='/learning/resources/img/heart.png'){
+				 $('#recommend').attr('src' ,'/learning/resources/img/redHeart.png') ;
+			 }
+		
+				
+		}
+	});	
+}	
 	
 	
 
@@ -150,8 +203,10 @@ moveLecture('${lecList[0].lectureNo}');
 							</c:forEach><br> Course 설명<br> ${cvo.description}<br> 총 26강/
 							12시간 40분</td>
 						<td width=20%>강사 ${cvo.member.userId}<br> <fmt:formatDate
-								value="${cvo.regDate}" pattern="YYYY.MM.dd" /> <br> <span
-							id="recommend"> 이코스 추천하기</span>
+								value="${cvo.regDate}" pattern="YYYY.MM.dd" /> <br>
+								<img src="${path}/resources/img/heart.png" width="50" alt="추천" id="recommend"  onclick="courseLikeChange()"/> 
+								<span id="recommendCnt">11</span>
+								
 
 						</td>
 						<td width=10%><img id="profile"

@@ -16,6 +16,7 @@ public class Preprocess {
 		if(code.contains("Scanner") && tcNo == 0) {
 			//String TCpath = "\"C:\\\\\\\\\\Users\\\\\\\\\\inhoj\\\\\\\\\\Desktop\\\\\\\\\\eclipse\\\\\\\\\\workspace\\\\\\\\\\The Coder\\\\\\\\\\TestCase\\\\\\\\\\Q"+questionNo+"_"+"TC"+tcNo+".txt\"";
 			String TCpath = "\"C:\\\\\\\\\\The Coder\\\\\\\\\\TestCase\\\\\\\\\\Q"+questionNo+"_"+"TC"+tcNo+".txt\"";
+			code=code.replace("throws", ",");
 			code=code.replace("args)", "args) throws FileNotFoundException");
 			code=code.replaceFirst("Scanner", "File input = new File("+TCpath+"); Scanner");
 			

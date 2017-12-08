@@ -49,7 +49,7 @@ public class CourseController {
 
 
 
-	@RequestMapping("showCourseList")
+	@RequestMapping("showMyCourseList")
 	public ModelAndView showCourseList() throws Exception{
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -57,7 +57,7 @@ public class CourseController {
 		List<Course> list=courseService.selectMycourseList(mvo.getUserId());
 
 
-		return new ModelAndView("course/courseList","list",list);
+		return new ModelAndView("course/myCourseList","list",list);
 	}
 
 
@@ -117,6 +117,20 @@ public class CourseController {
 
 
 		return new ModelAndView("redirect:/");
+	}
+	
+	
+	@RequestMapping("selectAccetpedCourseList")
+	public ModelAndView selectAccetpedCourseList(ModelAndView mav) throws Exception{
+		
+	
+
+
+		List<Course> list=courseService.selectAccetpedCourseList();
+		mav.setViewName("course/acceptedCourse");
+		mav.addObject("list", list);
+
+		return mav;
 	}
 
 
