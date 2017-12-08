@@ -124,8 +124,15 @@ ${lvo.lectureName} <fmt:formatDate value="${lvo.regDate}" pattern="YYYY.MM.dd" /
 
 <textarea id="content" name="content" readonly >${lvo.content} </textarea>
 								<script>
-			          CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false}); // 태그의 id
-			          CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 1000)});
+								CKEDITOR.replace( 'content', {
+									extraPlugins: 'autogrow,youtube',
+					      			
+					      			autoGrow_minHeight: 400,
+					      			autoGrow_maxHeight: 10000,
+					      			autoGrow_bottomSpace: 50,
+					      			removePlugins: 'resize',
+					      			
+					      		} );
 		                        </script> 
 		                        	<!-- 댓글목록 출력 -->
 	<div id=listReply></div>

@@ -263,7 +263,8 @@ a{text-decoration:none; cursor: pointer;}
 							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" >${requestScope.bvo.content}</textarea>
 								<script>
 								CKEDITOR.replace( 'content', {
-					      			extraPlugins: 'autogrow',
+					      			
+					      			
 					      			autoGrow_minHeight: 300,
 					      			autoGrow_maxHeight: 10000,
 					      			autoGrow_bottomSpace: 50,
