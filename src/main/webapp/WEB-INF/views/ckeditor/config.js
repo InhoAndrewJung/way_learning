@@ -34,20 +34,21 @@ CKEDITOR.editorConfig = function( config ) {
 	config.format_tags = 'p;h1;h2;h3;pre';
 
 	// Simplify the dialog windows.
+
 	config.extraPlugins = 'autogrow';
 	config.autoGrow_onStartup = true;
+	
+	
 	
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 	config.defaultLanguage = 'kr';
 	config.codeSnippet_theme='github';
-<<<<<<< HEAD
-	config.autoGrow_minHeight = 500;
-	config.autoGrow_maxHeight = 2000;
-=======
+
+
 	config.extraPlugins = 'html5video';
 
 	config.extraPlugins = 'youtube';
->>>>>>> master
+
 	  
 	  
 };

@@ -223,8 +223,17 @@ ${delete_result}
 								<script>
 			          /* CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false, readonly:true }); */ // 태그의 id
 			          /*  CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});  */
-		              CKEDITOR.replace("content");         
-			          </script> 
+		             // CKEDITOR.replace("content");  
+		             // <script>
+		      		CKEDITOR.replace( 'content', {
+		      			extraPlugins: 'autogrow',
+		      			autoGrow_minHeight: 300,
+		      			autoGrow_maxHeight: 10000,
+		      			autoGrow_bottomSpace: 50,
+		      			removePlugins: 'resize'
+		      		} );
+		      	</script>
+			          
 							
 							</td>
 							<td align="center">
