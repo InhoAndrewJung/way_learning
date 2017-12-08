@@ -212,7 +212,13 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDAO.selectReplyFavorite();	
 	}
+	//회원탈퇴 추가
 
-
+	@Override
+	public int deleteMember(String password, String userId) {
+		
+		return memberDAO.deleteMember(password, userId);
+	}
+		
 
 }

@@ -40,5 +40,6 @@ public interface MemberService {
 	public List selectBoardFavorite();
 
 	public List selectReplyFavorite();
-
+	//회원탈퇴 추가
+	public int deleteMember(String password, String userId);
 }

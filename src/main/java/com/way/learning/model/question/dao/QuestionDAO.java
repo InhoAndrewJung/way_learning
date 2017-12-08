@@ -35,4 +35,6 @@ public interface QuestionDAO {
 	public int deleteQuestion(int questionNo) throws SQLException;
 
 	public int deleteAnswerChoice(int questionNo) throws SQLException;
+
+
 }

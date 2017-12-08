@@ -5,6 +5,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -46,6 +47,44 @@ public class MemberController {
 		this.mailSender = mailSender;
 	}
 
+	// 회원탈퇴 페이지이동
+	@RequestMapping("delete")
+	public String deletePage() {
+
+		return "member/delete";
+	}
+
+	// 회원탈퇴
+
+	@RequestMapping("deleteProc")
+	@ResponseBody
+	public ModelAndView deleteMember(HttpServletRequest request, ModelAndView mav, String userId, String password) {
+		System.out.println("deleteMember 컨트롤러...");
+		HttpSession session = request.getSession();
+
+		userId = request.getParameter("userId");
+		String checkResult = memberService.idcheck(userId);
+		password = request.getParameter("password");
+		int deleteResult = 0;
+		System.out.println("delete :" + userId + ", " + password);
+		if (checkResult.equals("fail")) {
+			deleteResult = memberService.deleteMember(password, userId);
+			if (deleteResult == 1) {
+				session.invalidate();
+				mav.setViewName("member/index");
+				mav.addObject("deleteResult", deleteResult);
+				return mav;
+			}
+		} else {
+			System.out.println("회원탈퇴실패..");
+			mav.setViewName("member/deleteProc");
+			mav.addObject("deleteResult", deleteResult);
+			return mav;
+
+		}
+		return mav;
+	}
+
 	// 아이디 찾기 페이지이동
 	@RequestMapping("findId")
 	public String findIdPage() {
@@ -58,20 +97,20 @@ public class MemberController {
 	@RequestMapping("findIdProc")
 	@ResponseBody
 	public ModelAndView findIdByEmail(HttpServletRequest request, ModelAndView mav) {
-		
+
 		String userId = memberService.findIdByEmail(request.getParameter("email"));
-		String findIdResult=memberService.idcheck(userId);
-		
+		String findIdResult = memberService.idcheck(userId);
+
 		mav.setViewName("member/findIdProc");
 		if (findIdResult.equals("ok")) {
-			
-			System.out.println("findIdResult"+findIdResult);
+
+			System.out.println("findIdResult" + findIdResult);
 			mav.addObject("findIdResult", findIdResult);
 			return mav;
-			
+
 		} else {
-			
-			System.out.println("findIdResult"+findIdResult);
+
+			System.out.println("findIdResult" + findIdResult);
 			mav.addObject("findIdResult", findIdResult);
 			mav.addObject("userId", userId);
 			return mav;

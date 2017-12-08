@@ -1,9 +1,7 @@
 package com.way.learning.model.member.dao;
 
 import java.util.HashMap;
-
 import java.util.List;
-
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -104,10 +102,17 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List selectReplyFavorite() {
 		System.out.println("selectReplyFavorite dao ");
+
+		return sqlSession.selectList("memberMapper.selectReplyFavorite");
+	}
+	// 회원탈퇴 추가
+
+	
+	public int deleteMember(String password, String userId) {
 		
-		return sqlSession.selectList("memberMapper.selectReplyFavorite");				
+		return sqlSession.selectOne("memberMapper.deleteMember");
 	}
 
-
-
+	
+	
 }
