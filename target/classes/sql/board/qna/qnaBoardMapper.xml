@@ -45,9 +45,12 @@
 	
 	
 	   
-    SELECT board_no, title, cnt_view, reg_date ,page,  user_id,activity, cnt_reply,(select sum(cnt_board_like) from wl_qna_board where board_no=b.board_no)cnt_board_like, img_profile 
-		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id, activity,img_profile,cnt_reply
-		FROM (SELECT qb.board_no, title, cnt_view, qb.reg_date, m.user_id,m.activity, m.img_profile,(select count(*) from wl_qna_reply  where board_no=qb.board_no) cnt_reply
+    SELECT board_no, title, cnt_view, reg_date ,page,  user_id,activity, cnt_reply,
+    (select sum(cnt_board_like) from wl_qna_board where board_no=b.board_no)cnt_board_like, img_profile 
+		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id, activity,img_profile,
+		cnt_reply
+		FROM (SELECT qb.board_no, title, cnt_view, qb.reg_date, m.user_id,m.activity, m.img_profile,
+		(select count(*) from wl_qna_reply  where board_no=qb.board_no) cnt_reply
 		FROM wl_qna_board qb, wl_member m
 	  <include refid="search" />
       <if test="sorting == 'board_no'">order by board_no DESC</if> 

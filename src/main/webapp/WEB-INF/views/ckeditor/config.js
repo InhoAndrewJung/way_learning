@@ -34,8 +34,12 @@ CKEDITOR.editorConfig = function( config ) {
 	config.format_tags = 'p;h1;h2;h3;pre';
 
 	// Simplify the dialog windows.
+
 	
-	//config.extraPlugins = 'autogrow';
+	
+
+	
+
 	config.autoGrow_onStartup = true;
 	
 	
@@ -45,12 +49,11 @@ CKEDITOR.editorConfig = function( config ) {
 	config.codeSnippet_theme='github';
 
 
-//	config.extraPlugins = 'html5video';
 
-	//config.extraPlugins = 'youtube';
+	//config.extraPlugins = 'autogrow,youtube';
+	config.extraPlugins = 'html5video';
+	
 	
 
-
-	
 	  
 };

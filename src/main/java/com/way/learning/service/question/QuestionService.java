@@ -15,7 +15,9 @@ public interface QuestionService {
 
 	public void insertEssayQuestion(AlgorithmQuestion aq) throws SQLException;
 
-	public List<GeneralQuestion> getGeneralList(String keyword, String sorting) throws SQLException;
+	public List<GeneralQuestion> getGeneralList( String keyword, String sorting) throws SQLException;
+
+	public int countArticle(String keyword) throws SQLException;
 
 	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException;
 
@@ -28,9 +30,8 @@ public interface QuestionService {
 	public int checkAnswer(int questionNo, String answer) throws SQLException;
 
 	// 수정,삭제 추가
-	public void updateQuestion(GeneralQuestion qvo,String[] answerChoice) throws SQLException;
+	public void updateQuestion(GeneralQuestion qvo, String[] answerChoice) throws SQLException;
 
 	public int deleteQuestion(int questionNo) throws SQLException;
 
-	
 }

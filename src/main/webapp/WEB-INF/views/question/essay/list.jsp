@@ -25,7 +25,7 @@
 		<table border=1px>
 			<tr>
 				<td>문제번호</td>
-				<td nowrap>문제</td>
+				<td nowrap>제목</td>
 				<td>제출</td>
 				<td>정답</td>
 				<td>정답비율</td>
@@ -49,7 +49,10 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<!-- 비로그인 사용자는 일반문제 생성을 보여주지 않는다. -->
+		<sec:authorize access="isAuthenticated()">
 		<a href="${pageContext.request.contextPath}/question/essay/makeQuestion">에세이문제 생성</a>
+		</sec:authorize>
 		<a href="${path}/"> 메인페이지로 이동</a>
 	</div>
 

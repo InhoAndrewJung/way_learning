@@ -37,7 +37,11 @@ public class QuestionServiceImpl implements QuestionService {
 	public List<GeneralQuestion> getGeneralList(String keyword, String sorting) throws SQLException {
 		return questionDAO.getGeneralList(keyword, sorting);
 	}
-
+	public int countArticle(String keyword) throws SQLException {
+		
+		return questionDAO.countArticle(keyword);
+	}
+	
 	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException {
 		return questionDAO.getEssayList(keyword);
 	}
@@ -73,8 +77,13 @@ public class QuestionServiceImpl implements QuestionService {
 	public void updateQuestion(GeneralQuestion qvo,String[] answerChoice) throws SQLException {
 
 		questionDAO.updateQuestion(qvo);
-		questionDAO.deleteAnswerChoice(qvo.getQuestionNo());
-		questionDAO.insertAnswerChoice(answerChoice);
+		
+		System.out.println(qvo.getCategory());
+		if (qvo.getCategory().equals("multipleChoice")) {
+			questionDAO.deleteAnswerChoice(qvo.getQuestionNo());
+			questionDAO.insertAnswerChoice(answerChoice);
+		}
+		
 	}
 
 

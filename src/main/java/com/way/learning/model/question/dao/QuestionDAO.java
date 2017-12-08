@@ -15,7 +15,9 @@ public interface QuestionDAO {
 
 	public void insertEssayQuestion(AlgorithmQuestion aq) throws SQLException;
 
-	public List<GeneralQuestion> getGeneralList(String keyword, String sorting) throws SQLException;
+	public List<GeneralQuestion> getGeneralList( String keyword, String sorting) throws SQLException;
+
+	public int countArticle(String keyword);
 
 	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException;
 
@@ -29,8 +31,6 @@ public interface QuestionDAO {
 
 	// 수정,삭제 추가
 	public void updateQuestion(GeneralQuestion qvo) throws SQLException;
-
-	
 
 	public int deleteQuestion(int questionNo) throws SQLException;
 
