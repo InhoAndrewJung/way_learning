@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,6 +51,20 @@ public class EssayQuestionController {
 		 mav.addObject("list", list);
 		 mav.addObject("keyword", keyword);
 		 mav.setViewName("/question/essay/list");
+
+		return mav;
+	}
+	@RequestMapping("/getEssayList")
+	public ModelAndView getEssayList(HttpServletRequest request, ModelAndView mav, HttpServletResponse response,
+			@RequestParam(defaultValue = "") String keyword)
+			throws SQLException {
+		System.out.println("keyword:" + keyword);
+		List<AlgorithmQuestion> list = questionService.getEssayList(keyword);
+		System.out.println("qna  컨트롤러 에서 list:" + list);
+
+		mav.addObject("list", list);
+		mav.addObject("keyword", keyword);
+		mav.setViewName("/question/essay/list");
 
 		return mav;
 	}
