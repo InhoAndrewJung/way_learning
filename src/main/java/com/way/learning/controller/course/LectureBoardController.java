@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -165,7 +166,33 @@ public class LectureBoardController {
 
 
 
-
+	@ResponseBody
+	@RequestMapping("likeStatus")
+	public int likeStatus(int courseNo)throws Exception{
+		System.out.println("likeStatus 컨트롤러 입성");
+		System.out.println("ggg courseNo:"+courseNo);
+		
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		
+		
+		int result=lectureBoardService.isCourseRecommend(courseNo, mvo.getUserId());
+		System.out.println("컨트롤러 result:"+result);
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("changeLike")
+	public int changeLike(int courseNo)throws Exception{
+		
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		
+		
+		lectureBoardService.isCourseLike(courseNo,mvo.getUserId());
+		int cnt=lectureBoardService.selectCntCourseLike(courseNo);
+		return cnt;
+	}
 
 
 

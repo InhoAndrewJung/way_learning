@@ -16,6 +16,7 @@
 	<if test="behavior =='like'">activity=activity+1,</if>
 	<if test="behavior =='insertReply'">activity=activity+2,</if>
 	<if test="behavior =='insertBoard'">activity=activity+3,</if>
+	<if test="behavior =='insertLecture'">activity=activity+10,</if>
 	<if test="behavior =='checkAnswer'">activity=activity+2,</if>
 	
 	
