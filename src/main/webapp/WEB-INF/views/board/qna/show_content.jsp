@@ -35,7 +35,7 @@ $(document).ready(function() {
 				$(result).each(function(index,item) {
 					
 					//$('#boardGood'+item).css({'width':500});
-					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;	
+					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
 				});
 
 				

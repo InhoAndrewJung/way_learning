@@ -149,6 +149,12 @@ public class CourseServiceImpl implements CourseService {
 
 	}
 	
+	public List<Course> selectAccetpedCourseList() throws Exception{
+
+		return courseDAO.selectAccetpedCourseList();
+
+	}
+	
 	
 
 }
