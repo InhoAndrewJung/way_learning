@@ -35,7 +35,10 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Simplify the dialog windows.
 
-	config.extraPlugins = 'autogrow';
+	
+	
+
+	
 	config.autoGrow_onStartup = true;
 	
 	
@@ -45,10 +48,10 @@ CKEDITOR.editorConfig = function( config ) {
 	config.codeSnippet_theme='github';
 
 
+	//config.extraPlugins = 'autogrow,youtube';
 	config.extraPlugins = 'html5video';
-
-	config.extraPlugins = 'youtube';
-
+	
+	
 	  
 	  
 };
