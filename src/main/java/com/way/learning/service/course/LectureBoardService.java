@@ -14,5 +14,9 @@ public interface LectureBoardService {
 	public LectureBoard selectLecture(int lectureNo,int courseNo);
 	public int deleteLecture(int lectureNo,int courseNo);
 	public int updateLecture(LectureBoard lvo);
+	public int isCourseLike(int courseNo, String userId);
+	public int isCourseRecommend(int courseNo, String userId);
+	public int selectCntCourseLike(int courseNo);
+	
 
 }

@@ -17,6 +17,7 @@ public interface CourseService {
 	public List<String> selectCourseTag(int courseNo) throws Exception;
 	public int deleteCourse(int courseNo) throws Exception;
 	public int updateCourse(Course cvo, HttpServletRequest request) throws Exception;
+	public List<Course> selectAccetpedCourseList() throws Exception;
 
 
 

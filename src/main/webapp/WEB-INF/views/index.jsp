@@ -20,6 +20,36 @@
 	}
 </script>
 
+<script>
+
+$(document).ready(function() {
+$.ajax({
+	type: "post",
+	url: "${pageContext.request.contextPath}/course/selectAccetpedCourseList",
+	data:"${_csrf.parameterName}=${_csrf.token}",
+	success: function(result){
+		
+$('#acceptedCourse').html(result);
+		
+	
+			
+			//$('#boardGood'+item).css({'width':500});
+			// $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
+		
+
+		
+		//alert("likeUp ajax result:"+result);
+		
+		
+		
+	}
+	
+});
+
+});
+</script>
+
+
 </head>
 <body>
 <h2>Spring Security를 이용한 Register Member</h2>
@@ -52,7 +82,7 @@
 		</sec:authorize>
 		
 		<!--  일반 회원이거나 관리자인 두 경우. 두개 이상의 role을 비교할때 hasAnyRole()-->
-		<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')">
+		<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MEMBER','ROLE_AUTHOR')">
 		
 			
 			
@@ -78,7 +108,7 @@
 			
 			<b>코스용</b><br>
 			<li><a href="${pageContext.request.contextPath}/course/writeCourse">코스등록</a><li>
-			<li><a href="${pageContext.request.contextPath}/course/showCourseList">내가 등록한 코스 리스트 </a><li>
+			<li><a href="${pageContext.request.contextPath}/course/showMyCourseList">내가 등록한 코스 리스트 </a><li>
 			
 			<b>강의용</b><br>
 			<li><a href="${pageContext.request.contextPath}/lectureBoard/writeLecture">강의등록</a><li>
@@ -94,6 +124,13 @@
   /logout url로 요청한다(따로 정의하지 않으면...)
 2. _csrf 를 요청 파라미터로 보내야 한다.
 -->
+
+
+<b>승인된 코스 !!!</b>
+<div id="acceptedCourse"></div>
+
+
+
 <form id="logoutFrm" action="${path}/member/logout" method="post" style:"display:none">
 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 </form>

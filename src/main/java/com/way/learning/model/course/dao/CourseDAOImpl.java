@@ -77,9 +77,13 @@ public class CourseDAOImpl implements CourseDAO {
 	}
 
 
+	
 
+	public List<Course> selectAccetpedCourseList() throws Exception{
 
+		return sqlSession.selectList("courseMapper.selectAccetpedCourseList");
 
+	}
 
 
 

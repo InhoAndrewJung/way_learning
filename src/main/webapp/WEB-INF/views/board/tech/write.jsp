@@ -131,5 +131,7 @@ $(document).ready(function() {
     </tr>
    </table>
   </form>
+  
+  <a href="${pageContext.request.contextPath}">홈으로</a>
   </div>
 </html>

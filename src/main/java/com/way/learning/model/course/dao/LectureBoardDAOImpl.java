@@ -81,11 +81,76 @@ public class LectureBoardDAOImpl implements LectureBoardDAO {
 
 	public int updateLecture(LectureBoard lvo) {
 
-		
+
 
 		return sqlSession.delete("lectureBoardMapper.updateLecture", lvo);
 
 	}
+	
+	public int isCourseRecommend(int courseNo, String userId) {
+		Map<String,Object> map = new HashMap<String,Object>();
+	
+		map.put("courseNo", courseNo);
+		map.put("userId", userId);
+		int result=sqlSession.selectOne("lectureBoardMapper.isCourseLike", map);
+		
+		System.out.println("isCourseRecommend dao imple 결과:"+result);
+		return result;
+
+	}
+
+	
+	public int isCourseLike( int courseNo, String userId) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		System.out.println("isCourseLike daoImple courseNo:"+courseNo);
+		map.put("courseNo", courseNo);
+		map.put("userId", userId);
+		int result=sqlSession.selectOne("lectureBoardMapper.isCourseLike", map);
+		System.out.println("isCourseLike dao imple 결과:"+result);
+		return result;
+
+	}
+	
+	
+	
+	
+	public int insertCourseLike(int courseNo, String userId) {
+		Map<String,Object> map = new HashMap<String,Object>();
+	
+		map.put("courseNo", courseNo);
+		map.put("userId", userId);
+		int result=sqlSession.insert("lectureBoardMapper.insertCourseLike", map);
+		System.out.println("insertCourseLike dao imple 결과:"+result);
+		return result;
+
+	}
+	
+	
+	public int deleteCourseLike(int courseNo, String userId) {
+		Map<String,Object> map = new HashMap<String,Object>();
+	
+		map.put("courseNo", courseNo);
+		map.put("userId", userId);
+		int result=sqlSession.delete("lectureBoardMapper.deleteCourseLike", map);
+		System.out.println("deleteCourseLike dao imple 결과:"+result);
+		return result;
+
+	}
+	
+	
+	public int selectCntCourseLike(int courseNo) {
+	
+		int result=sqlSession.selectOne("lectureBoardMapper.selectCntCourseLike", courseNo);
+		System.out.println("selectCntCourseLike dao imple 결과:"+result);
+		return result;
+
+	}
+
+	
+	
+	
+
+
 
 
 
