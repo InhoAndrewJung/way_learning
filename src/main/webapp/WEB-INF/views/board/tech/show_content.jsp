@@ -147,12 +147,12 @@ function boardLikeChange(boardNo){
 
 <style>
 
-    .cke_top
+/*     .cke_top
     {
         display: none !important;
     }
 
-.cke_bottom {display: !important;}
+.cke_bottom {display: !important;} */
 #profile{width:50px; height:50px; border-radius: 50%}
 a{text-decoration:none; cursor: pointer;}
 #tag{font-size:10px;border:1px solid grey;border-radius:10%; background-color:grey; color:white; margin-left:10px;}
@@ -221,9 +221,19 @@ ${delete_result}
 							<td colspan="4">
 							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" >${requestScope.bvo.content}</textarea>
 								<script>
-			          CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false, readonly:true }); // 태그의 id
-			          CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});
-		                        </script> 
+			          /* CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false, readonly:true }); */ // 태그의 id
+			          /*  CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});  */
+		             // CKEDITOR.replace("content");  
+		             // <script>
+		      		CKEDITOR.replace( 'content', {
+		      			extraPlugins: 'autogrow',
+		      			autoGrow_minHeight: 300,
+		      			autoGrow_maxHeight: 10000,
+		      			autoGrow_bottomSpace: 50,
+		      			removePlugins: 'resize'
+		      		} );
+		      	</script>
+			          
 							
 							</td>
 							<td align="center">
