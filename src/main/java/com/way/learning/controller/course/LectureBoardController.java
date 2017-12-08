@@ -27,7 +27,7 @@ import com.way.learning.model.member.vo.Member;
 import com.way.learning.service.course.LectureBoardService;
 
 @Controller
-@RequestMapping("/lecture/*")
+@RequestMapping("/lectureBoard/*")
 public class LectureBoardController {
 
 	@Autowired
@@ -66,25 +66,102 @@ public class LectureBoardController {
 
 
 	@RequestMapping("showLectureList")
-	public ModelAndView showCourseList(int courseNo,ModelAndView mav) throws Exception{
+	public ModelAndView showCourseList(int courseNo, ModelAndView mav) throws Exception{
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 
-		List<String> list=lectureBoardService.selectLectureName(courseNo);
-		Course	 cvo     =lectureBoardService.selectMyCourse(courseNo, mvo.getUserId());
-		mav.setViewName("course/lecture/lectureList");
-		mav.addObject("list",list);
-		mav.addObject("cvo"	, cvo);
-		System.out.println("showLectureList:"+list);
+		List<LectureBoard> lecList=lectureBoardService.selectLectureList(courseNo);
 
-		return new ModelAndView("course/lecture/lectureList","list",list);
+		//LectureBoard lvo=lectureBoardService.selectLecture(lecList.get(0).getLectureNo(),courseNo);
+
+		Course	 cvo  =lectureBoardService.selectMyCourse(courseNo, mvo.getUserId());
+
+		List<String> tags=lectureBoardService.selectCourseTag(courseNo);
+
+
+		//System.out.println("showLectureList lecList:"+lecList);
+
+		//System.out.println("showLectureList lvo:"+lvo);
+		//System.out.println("showLectureList cvo:"+cvo);
+		//System.out.println("showLectureList tags:"+tags);
+
+
+		mav.setViewName("course/lecture/lectureList");
+		mav.addObject("lecList",lecList);
+		//mav.addObject("lvo",lvo);
+		mav.addObject("cvo",cvo);
+		mav.addObject("tags",tags);
+
+
+		return mav;
+	}
+
+
+	@RequestMapping("showLecture")
+	public ModelAndView showLecture(int courseNo, int lectureNo,ModelAndView mav) throws Exception{
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+
+		LectureBoard lvo=lectureBoardService.selectLecture(lectureNo,courseNo);
+
+
+		mav.setViewName("course/lecture/showLecture");
+		mav.addObject("lvo",lvo);
+
+		System.out.println("showLecture lvo:"+lvo);
+
+
+		return mav;
+	}
+
+	@RequestMapping("deleteLecture")
+	public String deleteLecture(int courseNo, int lectureNo, ModelAndView mav) throws Exception{
+		System.out.println("deleteLecture courseNo:"+courseNo);
+		System.out.println("deleteLecture lectureNo:"+lectureNo);
+
+
+		int result=lectureBoardService.deleteLecture(lectureNo, courseNo);
+
+
+
+
+
+		return "redirect:/lectureBoard/showLectureList?courseNo="+courseNo;
+	}
+
+
+	@RequestMapping("updateForm")
+	public ModelAndView updateForm(int courseNo,int lectureNo, ModelAndView mav) throws Exception{
+		System.out.println("updateForm controller 입성");
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+
+		//List list=lectureBoardService.selectMyCourseNo(mvo.getUserId());	
+		LectureBoard lvo=lectureBoardService.selectLecture(lectureNo,courseNo);
+
+		System.out.println("updateForm controller 의 lvo:"+lvo);
+
+		mav.setViewName("course/lecture/updateLecture");
+		mav.addObject("lvo", lvo);
+		//mav.addObject("list", list);
+		
+		
+
+
+		return mav;
+
 	}
 
 
 
+	@RequestMapping("updateLecture")
+	public String updateLecture(LectureBoard lvo , ModelAndView mav) throws Exception{
+		System.out.println("updateLecture 입성 lvo"+lvo);
+		lectureBoardService.updateLecture(lvo);
 
 
-
+		return "redirect:/lectureBoard/showLectureList?courseNo="+lvo.getCourseNo();
+	}
 
 
 

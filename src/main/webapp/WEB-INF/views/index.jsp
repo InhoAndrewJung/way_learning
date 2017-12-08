@@ -81,8 +81,8 @@
 			<li><a href="${pageContext.request.contextPath}/course/showCourseList">내가 등록한 코스 리스트 </a><li>
 			
 			<b>강의용</b><br>
-			<li><a href="${pageContext.request.contextPath}/lecture/writeLecture">강의등록</a><li>
-			<li><a href="${pageContext.request.contextPath}/lecture/showLectureList?courseNo=1">내가 등록한 강의 리스트 </a><li>
+			<li><a href="${pageContext.request.contextPath}/lectureBoard/writeLecture">강의등록</a><li>
+			<li><a href="${pageContext.request.contextPath}/lectureBoard/showLectureList?courseNo=1">내가 등록한 강의 리스트 </a><li>
 			
 		</sec:authorize>
 		<li><a href="javascript:logout();">로그아웃</a></li>
