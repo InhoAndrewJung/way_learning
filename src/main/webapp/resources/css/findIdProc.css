@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+@charset "UTF-8";
+/* COMMON */
+ 
+a:link{ 
+ 	text-decoration: none;
+ 	color: #4c90f6;
+}
+a:visited{ 
+	text-decoration: none;
+	color: #4c90f6;
+}
+a:hover{ 
+ 	text-decoration: underline;
+}
+
+/*  */
+
+.logo{
+    font-size: 30px;
+    color: #404040;
+    font-weight: bold;
+    margin: 50px auto 50px auto;
+    width: 60%;
+    text-align: center;
+}
+
+#image_logo {
+    width: 300px;
+    cursor: pointer;
+}
+
+.container-body {
+    background: #ffffff;
+    margin: 50px auto 50px auto;
+    width: 30%;
+    height: auto;
+    
+}
+
+.title{
+	font-size: 30px;
+    text-align: center;
+    padding: 15px;
+    color: #fbc403;
+    font-weight: bold;
+}
+
+.getUserId{
+	color: #3bb15d;
+	
+}
+.go-SignIn{
+	font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    color: #4c90f6;
+    font-weight: bold;
+}
+.container-footer_pass{
+	margin: 0px auto 10px auto;
+    font-size: 20px;
+    color: #fbc403;
+    font-weight: bold;
+    text-align: center;
+}
+
+.image_findPass{
+	width: 50px;
+	margin-top: 30px;
+}
+.container-footer{
+	padding: 20px;
+	text-align: center;
+	font-size: 20px;
+	color: #fbc403;
+}
+
+
+.image_back{
+	cursor: pointer;
+	width: 40px;    
+	padding-bottom: 5px;
+	text-align: right;
+}
+

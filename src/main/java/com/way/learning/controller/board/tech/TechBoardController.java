@@ -167,10 +167,23 @@ public class TechBoardController {
 	}
 
 	@RequestMapping("updateView")
-	public ModelAndView updateView(String boardNo)
+	public ModelAndView updateView(String boardNo, ModelAndView mav)
 			throws Exception{
 		TechBoard bvo=techBoardService.showContent(boardNo);
-		return new ModelAndView("board/tech/update", "bvo",bvo);
+		List tagList= techBoardService.getTag(boardNo);
+		
+	
+		System.out.println("updateView 컨트롤러 bvo:"+bvo);
+	    System.out.println("updateView에서 태그:"+tagList);
+	
+		mav.setViewName("board/tech/update");
+		mav.addObject("bvo", bvo);
+		mav.addObject("tagList", tagList);
+		
+		
+		
+		
+		return mav;
 	}
 
 

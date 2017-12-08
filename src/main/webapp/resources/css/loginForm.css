@@ -6,6 +6,17 @@
     box-sizing: inherit;
 }
 
+hr {
+    width: 95%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #e5e9f2;
+    
+    animation-name: showCard;
+    animation-duration: 1s;
+}
+
 label {
     cursor: default;
 }
@@ -43,6 +54,7 @@ button, input, optgroup, select, textarea {
     width: 100%;
     padding-left: 12px;
     padding-right: 12px;
+    margin-top: 25px;
 }
 
 a {
@@ -52,27 +64,69 @@ a {
     cursor: pointer;
 }
 
-#forget {
-    color: -webkit-link;
-    cursor: auto;
-    text-decoration: underline;
+
+/* Animation */
+.helloWord{
+	color: #ed4d3c;
+    font-size: 100px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    width: 600px;
+    animation-name: helloWorld;
+    animation-duration: 1.5s;
+    
+    
 }
 
-/* BACKGROUND */
-.container{
-	background:#b3c6ff;
+@keyframes helloWorld{
+	3%{opacity: 1;}
+	70%{color:#4c90f6;}
 	
+}
+
+
+@keyframes titleAnimation {
+    from {right: 0px; }
+    to {right: 150px; color:white;}
+  
+}
+
+/* @keyframes borderAnimation {
+    0% {border-left: 5px solid #4c90f6;}
+    25% {border-left: 5px solid #ffffff;}
+    50% {border-left: 5px solid #4c90f6;}
+    75% {border-left: 5px solid #ffffff;}
+   	100% {border-left: 5px solid #4c90f6;}
+  
+} */
+
+@keyframes showCard{
+	
+	0% {opacity: 0;}
+	70% {opacity: 0;}
+  	100% {opacity: 1;}
 }
 
 /* HEADER */
 .login-card{
-	background-color: #ffffff;
-	margin: 50px auto;
-	width: 480px;
-	height: 520px;
-	border-radius: 3px;
-	border: 1px solid #e5e9f2;
-	margin-bottom: 32px;
+    margin: 0px auto 50px auto;
+    background: #ffffff;
+    width: 480px;
+    /* border-radius: 2px; */
+    /* border-left: 5px solid #ffffff; */
+    margin-bottom: 32px;
+    padding: 15px;
+   
+    
+  /* 	animation-name: borderAnimation;
+    animation-duration: 2s;
+    animation-delay: 0.7s;
+    animation-iteration-count: infinite; */
+    
 }
 
 .login-card_header {
@@ -87,29 +141,55 @@ a {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    border-bottom: 1px solid #eeeeee;
+   
+
+    
+    animation-name: showCard;
+    animation-duration: 1s;
 }	
 
 .login-card_logo{
-	    /* width: 161px; */
-    height: 32px;
-   /*  background-size: contain;
-    background-repeat: no-repeat; */
     background-position: center;
     margin-bottom: 12px;
+    
 }
 
-.login-card_title{
-	font-size: 18px;
-    font-weight: 500;
-    color: #2196f3;
-    text-transform: uppercase;
+
+.image_logo{
+	width: 300px;
+	cursor: pointer;
+}
+
+
+
+/* .login-card_title{
+	
+    
+    animation-name: titleAnimation;
+    animation-duration: 2.01s;
+    animation-iteration-count: infinite;
+   	animation-delay: 1.07s;
+} */
+
+/* ANIMATION Title*/
+/* @keyframes titleAnimation {
+    from {right: 0px; }
+    to { color:white;}
+  
+} */
+
+#login-card_title{
+	{animation-timing-function: ease;}
+	
 }
 
 /*  CONTENT */
 
 .login-card_content{
     padding: 24px 32px 16px 32px;
+    
+    animation-name: showCard;
+    animation-duration: 1s; 
 }
 
 .login-card_button{
@@ -118,6 +198,7 @@ a {
 
 .login-card_social{
 	text-align: center;
+	margin: 20px auto 20px auto;
 }
 
 .login-card_facebook_logo{
@@ -202,24 +283,38 @@ form {
     margin-bottom: 2px;
     line-height: 1.8;
     min-height: 1.8em;
-    text-transform: uppercase;
-    color: #bdbdbd;
-    font-weight: 500;
-    font-size: 12px;
+   
 }
 
-.dashboard-form_input {
-    border: 1px solid #e0e0e0;
-    width: 100%;
-    padding: 12px 16px;
-    height: 40px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-radius: 3px;
-    display: block;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+.dashboard-form_input_id {
+    border: 0px;
+    border-left: 5px solid #4c90f6;
+    width: 80%;
+    padding: 10px;
+    font-size: 20px;
+	color: #4c90f6;
+	font-weight: bold;
+}
+
+.dashboard-form_input_id::-webkit-input-placeholder { /* Chrome */
+  color: #4c90f6;
+  font-weight: bold;
+}
+
+
+.dashboard-form_input_pass{
+	border: 0px;
+    border-left: 5px solid #ed4d3c;
+    width: 80%;
+    padding: 10px;
+    font-size: 20px;
+	color: #ed4d3c;
+	font-weight: bold;
+}
+
+.dashboard-form_input_pass::-webkit-input-placeholder { /* Chrome */
+  color: #ed4d3c;
+  font-weight: bold;
 }
 
 .login-card_password {
@@ -233,11 +328,11 @@ form {
     background: #ffffff;
     border-radius: 4px;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 15px;
     color: #212121;
     letter-spacing: 0;
     line-height: 14px;
-    background: url(../image/question.png) no-repeat center center/contain;
+    background: url(../img/tooltip.png) no-repeat center center/contain;
     width: 20px;
     height: 20px;
     border-radius: 100px;
@@ -263,6 +358,7 @@ form {
     visibility: hidden;
     
 }
+
 
 .login-card_tooltip-content:after {
     content: '';
@@ -290,13 +386,145 @@ form {
 
 .login-card_footer {
     padding: 16px 32px;
-    border-top: 1px solid #eeeeee;
     font-size: 16px;
     text-align: center;
+    
+ 	animation-name: showCard;
+    animation-duration: 1s;
 }
 
-.container_fotter{
-	width: 100%;
+.noRegister{
+	margin-bottom: 30px;
+}
+
+.forgot{
+	margin-bottom: 10px;
+}
+
+.forgot_OR{
+	font-size:15px
+
+}
+
+/* Title Animation */
+.animated-words{
+	font-size: 20px;
+    font-weight: bold;
+    color: #2196f3;
+    position: relative;
     text-align: center;
+    width:100%;
+    
 }
+
+.animated-words h4 {
+	width: 100%;
+    position: absolute;
+    opacity: 0;
+    overflow: hidden;
+    color: #6b969d;
+
+    animation: animateWord 1s linear;
 }
+.animated-words h4:nth-child(1) { 
+  
+    animation-delay: 1s; 
+    color: #6b889d;
+    font-size: 20px;
+    
+}
+.animated-words h4:nth-child(2) { 
+    
+    animation-delay: 3s; 
+    color: #6b889d;
+    font-size: 20px;
+}
+.animated-words h4:nth-child(3) { 
+   
+    animation-delay: 5s; 
+    color: #6b889d;
+    font-size: 20px;
+}
+.animated-words h4:nth-child(4) { 
+   
+    animation-delay: 7s; 
+    color: #6b889d;
+    font-size: 20px;
+}
+.animated-words h4:nth-child(5) { 
+  
+    animation-delay: 9s; 
+    color: #6b889d;
+    font-size: 20px;
+}
+.animated-words h4:nth-child(6) { 
+  
+    animation-delay: 11s; 
+    color: #6b739d; 
+    font-size: 20px;
+    
+}
+.animated-words h4:nth-child(7) { 
+  
+    animation-delay: 13s; 
+    color: #7a6b9d;
+    font-size: 20px;
+}
+.animated-words h4:nth-child(8) { 
+ 
+    animation-delay: 15s; 
+    color: #8d6b9d;
+    font-size: 20px;
+}
+.animated-words h4:nth-child(9) { 
+  
+    animation-delay: 17s; 
+    color: #8d6b9d;
+    font-size: 20px;
+}
+.animated-words h4:nth-child(10) { 
+   
+    animation-delay: 19s; 
+    color: #8d6b9d;
+    font-size: 20px;
+}
+.animated-words h4:nth-child(11) { 
+   
+    animation-delay: 21s; 
+    color: #8d6b9d;
+    font-size: 20px;
+}
+.animated-words h4:nth-child(12) { 
+   
+    animation-delay: 23s; 
+    color: #8d6b9d;
+    font-size: 20px;
+}
+.animated-words h4:nth-child(13) { 
+   
+    animation-delay: 25s; 
+    color: #8d6b9d;
+    font-size: 20px;
+}
+/* @-webkit-keyframes animateWord {
+    0% { opacity: 0; }
+    2% { opacity: 0;  }
+    5% { opacity: 1; }
+    17% { opacity: 1;  }
+    20% { opacity: 0;  }
+    80% { opacity: 0; }
+    100% { opacity: 0; }
+} */
+
+@-webkit-keyframes animateWord {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+    
+}
+
+
+
+
+
+

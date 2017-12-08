@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="/resources/css/board.css">
+
 <title>Insert title here</title>
 
 <style type="text/css">

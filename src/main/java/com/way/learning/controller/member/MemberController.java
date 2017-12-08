@@ -58,23 +58,29 @@ public class MemberController {
 
 	// 아이디 찾기
 
-	@RequestMapping("findIdProc")
-	@ResponseBody
-	public ModelAndView findIdByEmail(HttpServletRequest request, ModelAndView mav) {
-		boolean findIdResult = false;
-		String userId = memberService.findIdByEmail(request.getParameter("email"));
-		mav.setViewName("member/findIdProc");
-		if (userId != "") {
-			findIdResult = true;
-			mav.addObject("findIdResult", findIdResult);
-			mav.addObject("userId", userId);
-			return mav;
-		} else {
-			mav.addObject("findIdResult", findIdResult);
-			return mav;
-		}
+	   @RequestMapping("findIdProc")
+	   @ResponseBody
+	   public ModelAndView findIdByEmail(HttpServletRequest request, ModelAndView mav) {
+	      
+	      String userId = memberService.findIdByEmail(request.getParameter("email"));
+	      String findIdResult=memberService.idcheck(userId);
+	      
+	      mav.setViewName("member/findIdProc");
+	      if (findIdResult.equals("ok")) {
+	         
+	         System.out.println("findIdResult"+findIdResult);
+	         mav.addObject("findIdResult", findIdResult);
+	         return mav;
+	         
+	      } else {
+	         
+	         System.out.println("findIdResult"+findIdResult);
+	         mav.addObject("findIdResult", findIdResult);
+	         mav.addObject("userId", userId);
+	         return mav;
+	      }
 
-	}
+	   }
 
 	// 비밀번호 찾기 페이지 이동
 	@RequestMapping("ExistId")

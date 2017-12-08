@@ -3,19 +3,20 @@
 
 .container-board{
 	background: #ffffff;
-    margin: 72px auto 30px auto;
+    margin: 72px auto 100px auto;
     width: 60%;
-    height: 80%;
+    height: auto;
     border: 2px solid #e5e9f2;
     box-shadow: 5px 5px 5px #cccccc;
     border-collapse: collapse;
     border-radius: 5px;
+    
 }
 
 /* HEAD */
 
 .board-head{
-	padding: 15px 15px;
+	padding: 20px 20px 10px 20px;
     
 }
 
@@ -25,8 +26,7 @@
 
 #image_profile{
   vertical-align: middle;
-   width: 32px;
-   height: 32px;
+   width: 40px;
   border-radius: 50%;
 	
 }
@@ -42,7 +42,7 @@
 }
 
 .userId{
-	font-size: 12px;
+	font-size: 20px;
     display: inline-block;
     max-width: 75px;
     overflow: hidden;
@@ -54,7 +54,7 @@
 .activity{
 	color: #999999;
     display: inline-block;
-    font-size: 12px;
+    font-size: 15px;
     margin-right: 10px;
 }
 
@@ -148,6 +148,12 @@
     color: #ffffff;
 }
 
+.board-number{
+	color: #999999;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
 h2{
 	font-size: 22px;
 }
@@ -172,8 +178,8 @@ hr{
 	word-break: normal;
     word-wrap: normal;
     overflow-x: auto;
+    overflow-y: hidden;
     font-size: 11px;
-    
     display: block;
     padding: 9.5px;
     margin: 0 0 10px;
@@ -199,19 +205,27 @@ hr{
 }
 
 .function-like{
-  	border-radius: 13px;
-  	background: #ed1c24;
+  	background: #ffffff;
   	padding: 10px 15px 10px 15px;
   	font-size: 25px;
-  	color: #ffffff;
   	display: inline-block;
-  	margin-top: 100px;
+  	margin-top: 100px;  	
+	position: relative;
 }
 
-#image_heart{
-	width: 40px;
-	
-	
+.image_empty-heart{
+	width: 70px;
+	cursor: pointer;
+}
+
+.cntBoardLike{
+	font-size: 25px;
+	position: absolute;
+	left: 51%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #ff2635;
+    cursor: pointer;
 }
 
 .function-edit{
@@ -222,11 +236,27 @@ hr{
   	color: #ffffff;
   	display: inline-block;
   	margin-top: 50px;
+  	cursor: pointer;
 }
 
 #image_edit{
-	width: 40px
+	width: 40px;
+	cursor: pointer;
 	
+}
+.function-facebook{
+	border-radius: 13px;
+  	background: #3564a3;
+  	padding: 10px 15px 14px 15px;
+  	font-size: 25px;
+  	display: inline-block;
+  	margin-top: 50px;
+	cursor: pointer;
+}
+
+.image_facebook{
+	width: 40px;
+	cursor: pointer;
 }
 
 /* TO LIST */
@@ -253,97 +283,39 @@ hr{
 	width: 30px;
 }
 
-/* REPLY */
 
-.board-footer{
-	background: #ffffff;
-    margin: 72px auto 30px auto;
+
+/* REPLY WRITE*/
+
+
+.reply-textWrite{
+    margin: 30px auto 30px auto;
     width: 60%;
-    height: 80%;
-    border: 2px solid #e5e9f2;
-    box-shadow: 5px 5px 5px #cccccc;
+    position: relative;
+    text-align: center;
+}
+
+.reply_writeText{
+	background: #ffffff;
+    width: 90%;
+    border: 5px solid #25b7d3;
     border-collapse: collapse;
-    border-radius: 5px;
-	
-}
-
-.reply-title{
-	padding: 15px;
-	background: #25b7d3;
-	border-radius: 3px 3px 0 0;
-}
-
-.board-footer{
-	
-}
-
-.footer_comment{
- 	padding: 0px 8px 5px 8px;
- 	font-size: 25px;
-  	color: #ffffff;
-  	margin-left: 10px;
-	
-}
-
-#footer_image_reply{
-	width: 25px;
-	margin-right: 10px;
-	margin-bottom: -3px;	
-}
-
-.reply-body{
-	position: relative;
-    border-right: 1px solid #e5e9f2;
-    width: 80%;
-    margin: 15px;
-    display:inline-block;
-	
-}
-
-.reply-function{
-	width: 13%;
-	position: relative;
-    padding-top: 15px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: center;
-}
-
-.reply-head {
-	padding: 15px 15px;
-}
-
-.edit-delete{
-	float : right;
-	margin : 10px;
-	
-}
-
-#image_replyEdit{
-	width: 25px;
-	padding: 10px;
+    border-radius: 10px;
+    padding: 10px 20px 10px 10px;
+    font-size: 15px;
+    padding-right: 15%;
+    resize: none;
+    overflow: hidden;
 }
 
 
-#image_eraser{
-	width: 25px;
-	padding: 10px;
+.write_button{
+	text-align: right;
+    position: absolute;
+    bottom: 15%;
+    right: 15%;
 }
 
-
-.reply-text{
-	margin: 15px;
-	
+.image_write{
+	width: 50px;
 }
-
-.reply-function{
-	width: 13%;
-	position: relative;
-    padding-top: 15px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: center;
-    margin-top: 50px;
-	
-}
-
