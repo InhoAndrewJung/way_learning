@@ -28,6 +28,25 @@ function showActiveMember(){
 }	
 
 
+function showAllCourse(){
+
+	$.ajax({
+		
+		type: "post",
+		url: "${path}/admin/selectAllCourseList",
+		data:"${_csrf.parameterName}=${_csrf.token}",
+		success: function(result){
+			
+
+			$("#showAllCourse").html(result);
+			
+		}
+		
+	});
+	
+}	
+
+
 </script>
 <body>
 <sec:authentication var="mvo" property="principal" />
@@ -40,6 +59,11 @@ function showActiveMember(){
 
 <div id="showActiveMember"></div>
 <br><br>
+
+<li><a href="#" onclick="showAllCourse()">강의 승인 선택</a></li>
+<div id="showAllCourse"></div>
+<br><br>
+
 <a href="${path}/"> 메인페이지로 이동</a>
 </body>
 </html>

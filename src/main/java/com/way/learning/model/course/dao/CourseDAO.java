@@ -15,6 +15,7 @@ public interface CourseDAO {
 	public int deleteCourse(int courseNo) throws Exception;
 	public int updateCourse(Course course) throws Exception;
 	public int delteTags(int  courseNo) throws Exception;
+	public List<Course> selectAccetpedCourseList() throws Exception;
 
 
 

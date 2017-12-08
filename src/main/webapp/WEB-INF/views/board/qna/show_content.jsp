@@ -35,7 +35,7 @@ $(document).ready(function() {
 				$(result).each(function(index,item) {
 					
 					//$('#boardGood'+item).css({'width':500});
-					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;	
+					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
 				});
 
 				
@@ -185,7 +185,7 @@ var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boar
         display: none !important;
     }
 
-.cke_bottom {display: !important;}
+
 #profile{width:50px; height:50px; border-radius: 50% }
 a{text-decoration:none; cursor: pointer;}
 #tag{font-size:10px;border:1px solid grey;border-radius:10%; background-color:grey; color:white; margin-left:10px;}
@@ -262,8 +262,13 @@ a{text-decoration:none; cursor: pointer;}
 							<td colspan="4">
 							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" >${requestScope.bvo.content}</textarea>
 								<script>
-			          CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false, readonly:true }); // 태그의 id
-			          CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});
+								 CKEDITOR.replace( 'content', {
+						      			extraPlugins: 'autogrow,youtube',						      			
+						      			autoGrow_minHeight: 400,
+						      			autoGrow_maxHeight: 10000,
+						      			autoGrow_bottomSpace: 50,
+						      			removePlugins: 'resize',						      			
+						      		} );  
 		                        </script> 
 							
 							</td>

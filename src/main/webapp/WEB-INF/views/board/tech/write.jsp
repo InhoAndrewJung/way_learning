@@ -109,16 +109,14 @@ $(document).ready(function() {
 //CKEDITOR.replace("content"); // 태그의 id
 //이미지 업로드를 할 경우
 
-	
-	
-	
- CKEDITOR.replace("content", {
-	filebrowserUploadUrl : "${pageContext.request.contextPath}/board/tech/imageUpload"
-	
-	
-}); 
-
- CKEDITOR.on('instanceLoaded', function(e) {e.editor.resize(700, 600)} );
+ CKEDITOR.replace( 'content', {
+		extraPlugins: 'autogrow,youtube',		
+		autoGrow_minHeight: 400,
+		autoGrow_maxHeight: 10000,
+		autoGrow_bottomSpace: 50,
+		filebrowserUploadUrl : "${pageContext.request.contextPath}/board/tech/imageUpload",
+		removePlugins: 'resize',		
+	} );  
 
 
 </script>
@@ -131,5 +129,7 @@ $(document).ready(function() {
     </tr>
    </table>
   </form>
+  
+  <a href="${pageContext.request.contextPath}">홈으로</a>
   </div>
 </html>

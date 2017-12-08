@@ -51,6 +51,7 @@ public class ActivityAspect { //POJO
 	//com.way.learning.service.board.tech.TechReplyServiceImpl.insertReply
 	@Around("execution( * com.way.learning.service..*ServiceImpl.insertBoard(..))"
 			+" or execution( * com.way.learning.service..*ServiceImpl.insertReply(..))"
+			+" or execution( * com.way.learning.service..*ServiceImpl.insertLecture(..))"
 			
 			)
 	public Object updateInsertActivity(ProceedingJoinPoint pjp) throws Throwable{

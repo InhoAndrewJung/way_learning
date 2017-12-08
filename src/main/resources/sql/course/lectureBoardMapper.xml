@@ -22,6 +22,34 @@
 		values (#{lectureNo},#{courseNo},#{lectureOrder},#{lectureName},#{member.userId},#{content})
 	
 	</insert>
+	
+	<select id="isCourseLike" resultType="int">
+	select count(*) from wl_course_recommend where user_id=#{userId} and course_no=#{courseNo}
+	
+	</select>
+	
+	
+	
+	
+
+	<insert id="insertCourseLike">
+	insert into wl_course_recommend (user_id,course_no) values(#{userId},#{courseNo})
+	</insert>
+	
+	
+	<delete id="deleteCourseLike">
+		delete from wl_course_recommend where user_id=#{userId} and course_no=#{courseNo}
+	</delete>
+	
+	<select id="selectCntCourseLike" resultType="int">
+	select count(-1) from wl_course_recommend where course_no=#{courseNo}
+	</select>
+	
+
+	
+	
+	
+	
 
 
 
@@ -100,82 +128,6 @@
 
 
 
-
-<!-- 
-
-<resultMap type="Course" id="courseRM">
-	<result property="courseNo" column="course_no"/>
-	<result property="courseName" column="course_name"/>
-	<result property="description" column="description"/>
-	<result property="courseImage" column="course_image"/>
-	<result property="member.userId" column="author"/>
-	<result property="regDate" column="reg_date"/>
-	<result property="isAccept" column="is_accept"/>
-	<result property="cntGood" column="cnt_good"/>
-	<result property="member.activity" column="activity"/>
-	<result property="member.imgProfile" column="img_profile"/>
-	
-	
-</resultMap>
-
-	
-	<insert id="insertCourse">
-	
-	<selectKey keyProperty="courseNo" resultType="int" order="BEFORE">
-			SELECT
-			wl_course_SEQ.nextval FROM dual
-	</selectKey>
-		
-		
-	insert into wl_course (course_no,course_name,description,course_image,author) 
-	values(#{courseNo},#{courseName},#{description},#{courseImage},#{member.userId})
-	
-	</insert>
-	
-	<insert id="insertTags">
-	insert into  wl_course_tag (course_no,tag) values((select Max(course_no) from wl_course),#{tags})
-	</insert>
-	
-	<select id="selectMyCourseList" resultMap="courseRM" >
-	select * from wl_course where author=#{userId}
-	</select>
-	
-	<select id="selectMyCourse" resultMap="courseRM">
-	select course_no, course_name,description,course_image,author,c.reg_date,is_accept,cnt_good,activity,img_profile 
-	from wl_course c, wl_member m where  c.AUTHOR=m.USER_ID and author=#{userId} and course_No=#{courseNo}
-	
-	
-	</select>
-	
-	
-	<select id="selectCourseTag"  resultType="string">
-	select tag from wl_course_tag where course_no=#{courseNo}
-	</select>
-	
-	<delete id="deleteCourse">
-		delete from wl_course where course_no=#{courseNo}
-	</delete>
-	
-	
-	<update id="updateCourse">
-	
-	<if test="courseImage !=null">
-	update wl_course set course_name=#{courseName} ,description=#{description},course_image=#{courseImage} where course_no=#{courseNo}
-	</if>
-	<if test="courseImage ==null">
-	update wl_course set course_name=#{courseName} ,description=#{description} where course_no=#{courseNo}
-	</if>
-	
-	</update>
-	
-	<delete id="deleteTags">
-	delete wl_course_tag  where  course_no=#{courseNo}
-	</delete>
-	
-
-
-
- -->
 
 
 

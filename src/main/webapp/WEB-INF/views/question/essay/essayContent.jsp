@@ -13,7 +13,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js" type="text/javascript" charset="utf-8"></script>
-<title>Insert title here</title>
+<title>Coding everywhere.</title>
 </head>
 <body>
 	<style type="text/css" media="screen">
@@ -26,13 +26,13 @@
 </style>
 
 
-	<title>Coding everywhere.</title>
+	
 </head>
 <body>
 
 <div class="container ">
 <div class="row ">
-			 <div class="col"> <br/><br/><a href="index.jsp" style="text-decoration:none;color:black;"><h1>The Coder</h1></a></div>
+			 <div class="col"> <br/><br/><a href="index.jsp" style="text-decoration:none;color:black;"><h2>THE CODER</h2></a></div>
 		</div>
 		<div class="dropdown-divider"></div>
 
@@ -56,7 +56,7 @@
 
     <label for="write-code" class="text-muted">코드 작성</label>
      <div class="form-group">
-    <div id="codebox" name="code" >   import java.util.*;
+    <div id="codebox" name="code" >	import java.util.*;
 	import java.io.*;
 	
 	

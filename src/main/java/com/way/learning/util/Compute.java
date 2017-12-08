@@ -49,18 +49,19 @@ public class Compute {
 	}
 	
 	while(scanResult.hasNext()) {
-		result += scanResult.nextLine();
-		System.out.println("scanResult : " + result);
+		result += scanResult.nextLine()+"\r\n";
+		
 	} 
 	
 	while(expAnswer.hasNext()) {
-		answer = expAnswer.nextLine();
+		answer += expAnswer.nextLine()+"\r\n";
 	}
 	if(error.contains("error")) {
 		result="";
 	}
 	
-	
+	System.out.println("scanResult : " + result);
+	System.out.println("scanExpAnswer : " + answer);
 	data[0] = error;
 	System.out.println("data[1]: "+ result);
 	data[1] = result;
