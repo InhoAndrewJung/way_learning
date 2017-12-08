@@ -5,26 +5,50 @@
 
 
 	<insert id="insertGeneralQuestion" parameterType="generalQuestion">
-
+		<selectKey keyProperty="question_no" resultType="int" order="BEFORE">
+			SELECT
+			wl_general_question.nextval FROM dual
+		</selectKey>
 		insert into
-		wl_general_question (question_no,title,question,answer,category)
-		values(wl_general_question_SEQ.nextval,#{title},#{question}, #{answer},#{category})
+		wl_general_question
+		(question_no,title,question,answer,category)
+		values(#{question_no},#{title},#{question},
+		#{answer},#{category})
 
 	</insert>
+	<!--<insert id="insertGeneralQuestion" parameterType="generalQuestion"> 
+		insert into wl_general_question (question_no,title,question,answer,category) 
+		values(wl_general_question_SEQ.nextval,#{title},#{question}, #{answer},#{category}) 
+		</insert> -->
+
+	<select id="countArticle" resultType="int">
+		select count(*) from wl_general_question
+		<where>
+			question like '%'||#{keyword}||'%'
+			or title like
+			'%'||#{keyword}||'%'
+
+		</where>
+	</select>
+
 
 	<insert id="insertAnswerChoice" parameterType="generalChoice">
 
 		insert into
 		wl_general_answer_choice (question_no,answer_order,answer_choice)
-		values(#{questionNo},#{answerOrder}
-		,#{answerChoice})
-<!--(select
-		max(question_no) from wl_general_question)  -->
+		values((select
+		max(question_no) from
+		wl_general_question),#{answerOrder},#{answerChoice})
+
 	</insert>
-	
+
 	<insert id="insertEssayQuestion" parameterType="generalQuestion">
 
-insert into wl_algorithm_question (question_no, title, question,input,output) values(wl_algorithm_question_SEQ.nextval,#{title},#{question}, #{input},#{output})
+		insert into
+		wl_algorithm_question (question_no, title,
+		question,input,output)
+		values(wl_algorithm_question_SEQ.nextval,#{title},#{question},
+		#{input},#{output})
 
 	</insert>
 
@@ -35,8 +59,8 @@ insert into wl_algorithm_question (question_no, title, question,input,output) va
 		<result property="cntSubmit" column="cnt_submit" />
 		<result property="cntRight" column="cnt_right" />
 	</resultMap>
-	
-	
+
+
 	<resultMap type="algorithmQuestion" id="algorithmQuestionRM">
 		<result property="questionNo" column="question_no" />
 		<result property="title" column="title" />
@@ -48,71 +72,83 @@ insert into wl_algorithm_question (question_no, title, question,input,output) va
 		<result property="cntRight" column="cnt_right" />
 	</resultMap>
 
+
 	<select id="getGeneralList" resultMap="generalQuestionRM">
-		select * from wl_general_question 
-		
+		select *
+		from wl_general_question
 		<where>
-		
-		question like '%'||#{keyword}||'%'  
-		<if test="sorting =='multiple'">and category='multipleChoice'</if>
-		<if test="sorting == 'short'">and category='shortAnswer'</if>
-		 
-		</where> 
+			question like '%'||#{keyword}||'%'
+			or title like '%'||#{keyword}||'%'
+			<if test="sorting=='multiple'">and category='multipleChoice'</if>
+			<if test="sorting == 'short'">and category='shortAnswer'</if>
+		</where>
 		order by question_no desc
 	</select>
-	
-	
+
 	<select id="getEssayList" resultMap="algorithmQuestionRM">
-		select * from wl_algorithm_question where question like '%'||#{keyword}||'%'  order by question_no desc
-	 
+		select * from
+		wl_algorithm_question where question like '%'||#{keyword}||'%' order
+		by question_no desc
+
 	</select>
-	
+
 	<select id="showGeneralContent" resultMap="generalQuestionRM">
-		select * from wl_general_question where question_no=#{questionNo}
-	
+		select * from
+		wl_general_question where question_no=#{questionNo}
+
 	</select>
-	
+
 	<select id="showEssayContent" resultMap="algorithmQuestionRM">
-		select * from wl_algorithm_question where question_no=#{questionNo}
-	
+		select * from
+		wl_algorithm_question where question_no=#{questionNo}
+
 	</select>
-	
+
 	<resultMap type="generalChoice" id="generalChoiceRM">
 		<result property="questionNo" column="question_no" />
 		<result property="answerChoice" column="answer_choice" />
-		
+
 	</resultMap>
-	
-	
-	<select id="getAnswerChoice"  resultMap="generalChoiceRM">
-	select * from wl_general_answer_choice where question_no=#{questionNo} order by answer_order
-	</select>
-	
-	<select id="checkAnswer" resultType="int">
-		select count(-1) from wl_general_question where question_no=#{questionNo} and answer=#{answer}
+
+
+	<select id="getAnswerChoice" resultMap="generalChoiceRM">
+		select * from
+		wl_general_answer_choice where question_no=#{questionNo} order
+		by
+		answer_order
 	</select>
 
-<!-- 수정 , 삭제 추가 -->	
+	<select id="checkAnswer" resultType="int">
+		select count(-1) from
+		wl_general_question where question_no=#{questionNo} and
+		answer=#{answer}
+	</select>
+
+	<!-- 수정 , 삭제 추가 -->
 
 	<delete id="deleteQuestion">
-		DELETE FROM wl_general_question 
-		WHERE question_no=#{value}
+		DELETE FROM wl_general_question
+		WHERE
+		question_no=#{value}
 	</delete>
-	
+
 
 	<update id="updateQuestion">
-		UPDATE wl_general_question 
-		SET	title=#{title},question=#{question}, answer=#{answer}
-		WHERE question_no=#{questionNo}
+		UPDATE wl_general_question
+		SET
+		title=#{title},question=#{question}, answer=#{answer}
+		WHERE
+		question_no=#{questionNo}
 	</update>
-	
-	
+
+
 	<delete id="deleteAnswerChoice">
-	 delete from wl_general_answer_choice where  question_no=#{questionNo}
+		delete from wl_general_answer_choice where
+		question_no=#{questionNo}
 	</delete>
-	
-	
-	
+
+
+
 
 
 

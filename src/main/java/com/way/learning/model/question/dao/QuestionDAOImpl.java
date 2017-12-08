@@ -54,12 +54,17 @@ public class QuestionDAOImpl implements QuestionDAO {
 	@Override
 	public List<GeneralQuestion> getGeneralList(String keyword, String sorting) throws SQLException {
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("keyword", keyword);
 		map.put("sorting", sorting);
 		return sqlSession.selectList("questionMapper.getGeneralList", map);
 
 	}
-
+	public int countArticle( String keyword) {
+				
+		return sqlSession.selectOne("questionMapper.countArticle",  keyword);
+	}
+	
 	@Override
 	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException {
 

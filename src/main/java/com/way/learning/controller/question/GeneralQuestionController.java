@@ -2,9 +2,9 @@ package com.way.learning.controller.question;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.way.learning.model.member.vo.Member;
 import com.way.learning.model.question.vo.GeneralChoice;
 import com.way.learning.model.question.vo.GeneralQuestion;
+import com.way.learning.service.question.ListVO;
+import com.way.learning.service.question.PagingBean;
 import com.way.learning.service.question.QuestionService;
 
 @Controller
@@ -46,11 +47,16 @@ public class GeneralQuestionController {
 	}
 
 	@RequestMapping("/getList")
-	public ModelAndView getList(ModelAndView mav, @RequestParam(defaultValue = "") String keyword,
-			@RequestParam(defaultValue = "") String sorting) throws SQLException {
+	public ModelAndView getList(HttpServletRequest request, ModelAndView mav, HttpServletResponse response,
+			@RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "") String sorting)
+			throws SQLException {
 		System.out.println("keyword:" + keyword);
 		System.out.println("sorting:" + sorting);
+
+		int count = questionService.countArticle(keyword);
 		List<GeneralQuestion> list = questionService.getGeneralList(keyword, sorting);
+		System.out.println("qna  컨트롤러 에서 list:" + list);
+
 		mav.addObject("list", list);
 		mav.addObject("keyword", keyword);
 		mav.setViewName("/question/general/list");
@@ -58,6 +64,19 @@ public class GeneralQuestionController {
 		return mav;
 	}
 
+	/*
+	 * @RequestMapping("/getList") public ModelAndView getList(ModelAndView
+	 * mav, @RequestParam(defaultValue = "") String keyword,
+	 * 
+	 * @RequestParam(defaultValue = "") String sorting) throws SQLException {
+	 * System.out.println("keyword:" + keyword); System.out.println("sorting:" +
+	 * sorting); List<GeneralQuestion> list =
+	 * questionService.getGeneralList(keyword, sorting); mav.addObject("list",
+	 * list); mav.addObject("keyword", keyword);
+	 * mav.setViewName("/question/general/list");
+	 * 
+	 * return mav; }
+	 */
 	@RequestMapping("/multipleChoiceContent")
 	public ModelAndView multipleChoiceContent(ModelAndView mav, int questionNo, String keyword) throws SQLException {
 
@@ -143,7 +162,7 @@ public class GeneralQuestionController {
 
 		GeneralQuestion gq = questionService.showGeneralContent(questionNo);
 		mav.addObject("gq", gq);
-		
+
 		if (gq.getCategory().equals("multipleChoice")) {
 			List<GeneralChoice> aList = questionService.getAnswerChoice(questionNo);
 			mav.addObject("aList", aList);
@@ -160,10 +179,11 @@ public class GeneralQuestionController {
 	@RequestMapping("updateQuestionAction")
 	public ModelAndView updateQuestionAction(@ModelAttribute GeneralQuestion gq, String[] answerChoice,
 			ModelAndView mav) throws Exception {
-		for (String s : answerChoice) {
-			System.out.println(s);
+		if (gq.getCategory().equals("multipleChoice")) {
+			for (String s : answerChoice) {
+				System.out.println(s);
+			}
 		}
-
 		System.out.println("answerChoice:" + answerChoice);
 
 		questionService.updateQuestion(gq, answerChoice);
