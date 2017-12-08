@@ -58,16 +58,22 @@ public class MemberController {
 	@RequestMapping("findIdProc")
 	@ResponseBody
 	public ModelAndView findIdByEmail(HttpServletRequest request, ModelAndView mav) {
-		boolean findIdResult = false;
+		
 		String userId = memberService.findIdByEmail(request.getParameter("email"));
+		String findIdResult=memberService.idcheck(userId);
+		
 		mav.setViewName("member/findIdProc");
-		if (userId != "") {
-			findIdResult = true;
+		if (findIdResult.equals("ok")) {
+			
+			System.out.println("findIdResult"+findIdResult);
+			mav.addObject("findIdResult", findIdResult);
+			return mav;
+			
+		} else {
+			
+			System.out.println("findIdResult"+findIdResult);
 			mav.addObject("findIdResult", findIdResult);
 			mav.addObject("userId", userId);
-			return mav;
-		} else {
-			mav.addObject("findIdResult", findIdResult);
 			return mav;
 		}
 
