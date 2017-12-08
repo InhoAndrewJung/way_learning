@@ -226,14 +226,11 @@ ${delete_result}
 		             // CKEDITOR.replace("content");  
 		             
 		      		  CKEDITOR.replace( 'content', {
-		      			extraPlugins: 'autogrow,youtube',
-		      			
+		      			extraPlugins: 'autogrow,youtube',		      			
 		      			autoGrow_minHeight: 400,
 		      			autoGrow_maxHeight: 10000,
 		      			autoGrow_bottomSpace: 50,
-
-		      			removePlugins: 'resize',
-		      			
+		      			removePlugins: 'resize',		      			
 		      		} );  
 
 		      	</script>
