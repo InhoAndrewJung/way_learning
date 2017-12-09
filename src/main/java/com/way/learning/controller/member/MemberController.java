@@ -48,41 +48,30 @@ public class MemberController {
 	}
 
 	// 회원탈퇴 페이지이동
-	@RequestMapping("delete")
+	@RequestMapping("deleteForm")
 	public String deletePage() {
 
-		return "member/delete";
+		return "member/deleteForm";
 	}
 
 	// 회원탈퇴
 
 	@RequestMapping("deleteProc")
 	@ResponseBody
-	public ModelAndView deleteMember(HttpServletRequest request, ModelAndView mav, String userId, String password) {
+	public ModelAndView deleteMember(HttpServletRequest request, ModelAndView mav, String userId) {
 		System.out.println("deleteMember 컨트롤러...");
-		HttpSession session = request.getSession();
 
 		userId = request.getParameter("userId");
-		String checkResult = memberService.idcheck(userId);
-		password = request.getParameter("password");
-		int deleteResult = 0;
-		System.out.println("delete :" + userId + ", " + password);
-		if (checkResult.equals("fail")) {
-			deleteResult = memberService.deleteMember(password, userId);
-			if (deleteResult == 1) {
-				session.invalidate();
-				mav.setViewName("member/index");
-				mav.addObject("deleteResult", deleteResult);
-				return mav;
-			}
-		} else {
-			System.out.println("회원탈퇴실패..");
-			mav.setViewName("member/deleteProc");
-			mav.addObject("deleteResult", deleteResult);
-			return mav;
+		int deleteResult = memberService.deleteMember(userId);
 
+		if (deleteResult == 1) {
+			System.out.println("회원탈퇴 성공....");
+
+			mav.setViewName("member/deleteProc");
 		}
+
 		return mav;
+
 	}
 
 	// 아이디 찾기 페이지이동

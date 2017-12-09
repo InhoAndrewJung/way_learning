@@ -108,9 +108,9 @@ public class MemberDAOImpl implements MemberDAO {
 	// 회원탈퇴 추가
 
 	
-	public int deleteMember(String password, String userId) {
-		
-		return sqlSession.selectOne("memberMapper.deleteMember");
+	public int deleteMember(String userId) {
+
+		return sqlSession.delete("memberMapper.deleteMember",userId);
 	}
 
 	

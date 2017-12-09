@@ -36,16 +36,18 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	
 	// 20171129 김보경 로직 3개 추가
 	@Override
 	public String findIdByEmail(String email) {
-		 return memberDAO.findIdByEmail(email);
+		return memberDAO.findIdByEmail(email);
 	}
 
 	@Override
-	public int updatefindPass(String  password,String userId) {
+	public int updatefindPass(String password, String userId) {
 		return memberDAO.updatefindPass(password, userId);
 	}
+
 	public Member findMemberById(String id) {
 		return memberDAO.findMemberById(id);
 	}
@@ -167,30 +169,30 @@ public class MemberServiceImpl implements MemberService {
 
 		return authoritiesDAO.selectAuthorityByUserName(username);
 	}
-	
-	
+
 	@Override
 	public List<String> selectRightNo(String userId) {
-		return memberDAO.selectRightNo(userId);		
+		return memberDAO.selectRightNo(userId);
 	}
+
 	@Override
 	public List<String> selectWrongNo(String userId) {
-		return memberDAO.selectWrongNo(userId);		
+		return memberDAO.selectWrongNo(userId);
 	}
-	
+
 	@Override
 	public AnswerResult selectMyRecord(String userId) {
-		return memberDAO.selectMyRecord(userId);	
+		return memberDAO.selectMyRecord(userId);
 	}
-	
+
 	@Override
 	public int selectMyRanking(String userId) {
-		return memberDAO.selectMyRanking(userId);				
+		return memberDAO.selectMyRanking(userId);
 	}
-	
+
 	@Override
 	public List<AnswerResult> selectAllRanking(String sorting) {
-		return memberDAO.selectAllRanking(sorting);			
+		return memberDAO.selectAllRanking(sorting);
 	}
 
 	@Override
@@ -198,27 +200,26 @@ public class MemberServiceImpl implements MemberService {
 		int emailResult = memberDAO.emailcheck(email);
 		return emailResult;
 	}
-	
+
 	@Override
 	public List selectBoardFavorite() {
 		System.out.println("selectBoardFavorite service ");
-		
-		return memberDAO.selectBoardFavorite();	
+
+		return memberDAO.selectBoardFavorite();
 	}
-	
+
 	@Override
 	public List selectReplyFavorite() {
 		System.out.println("selectReplyFavorite service ");
-		
-		return memberDAO.selectReplyFavorite();	
-	}
-	//회원탈퇴 추가
 
-	@Override
-	public int deleteMember(String password, String userId) {
-		
-		return memberDAO.deleteMember(password, userId);
+		return memberDAO.selectReplyFavorite();
 	}
-		
+
+	// 회원탈퇴 추가
+	@Override
+	public int deleteMember(String userId){
+
+		return memberDAO.deleteMember(userId);
+	}
 
 }

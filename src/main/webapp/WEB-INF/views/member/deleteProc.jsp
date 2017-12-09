@@ -8,44 +8,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
-<title>Insert title here</title>
-</head>
 <script type="text/javascript">
-	function toMain() {
-		location.href = "${pageContext.request.contextPath}/index";
+	function logout() {
+		document.getElementById("logoutFrm").submit();
 	}
 </script>
 
+<title>Insert title here</title>
+</head>
 
 
 <body>
-
-
-
 	<div class="row">
-		<div class="col">
-			<h2>회원탈퇴가 되었습니다.</h2>
-
-		</div>
+		<h2>회원탈퇴가 되었습니다.</h2>
 	</div>
 	<br>
-	<div class="row">
-		<p class="lead col">다시 만나길 기원해요 :-)</p>
-		<hr class="my-4">
+	<p class="lead col">다시 만나길 기원해요 :-)</p>
+	<div>
+		<a href="javascript:logout();">메인화면으로 이동합니다.</a>
 	</div>
-	<div class="row">
-		<div class="lead col">
-			<input type="button" class="btn btn-primary btn-lg"
-				value="3초 후 메인으로 이동합니다." style="width: 300px;" onclick="toMain()">
-
-
-
-
-		</div>
-	</div>
-
-
+	<form id="logoutFrm" action="${path}/member/logout" method="post"style:"display:none">
+		<input type="hidden" name="${_csrf.parameterName }"
+			value="${_csrf.token }">
+	</form>
 </body>
 </html>
