@@ -110,7 +110,7 @@ public class MemberController {
 	// 비밀번호 찾기 페이지 이동
 	@RequestMapping("ExistId")
 	public String findPassPage() {
-
+		
 		return "member/ExistId";
 	}
 
@@ -119,12 +119,14 @@ public class MemberController {
 	public ModelAndView idCheckforPass(HttpServletRequest request, ModelAndView mav) {
 		String userId = request.getParameter("userId");
 		String result = memberService.idcheck(userId);
-		mav.setViewName("member/mailSender");
-		if (result == "fail") {
+	
+		if (result.equals("fail")) {
 			mav.addObject("userId", userId);
 			mav.addObject("result", result);
+			mav.setViewName("member/mailSender");
 			return mav;
 		} else {
+			mav.setViewName("member/ExistId");
 			mav.addObject("result", result);
 			return mav;
 		}
