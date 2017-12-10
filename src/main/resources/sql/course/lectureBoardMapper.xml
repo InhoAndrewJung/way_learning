@@ -23,6 +23,19 @@
 	
 	</insert>
 	
+	<select id="isMyLectureRecordExist" resultType="int">
+	select count(-1) from wl_my_lecture_record where course_no=#{courseNo} and lecture_no=#{lectureNo} and user_id=#{userId}
+	
+	</select>
+	
+	<insert id="insertMyLectureRecord">
+	insert into wl_my_lecture_record (user_id,course_no,lecture_no) values(#{userId},#{courseNo},#{lectureNo})
+	</insert>
+	
+	<insert id="deleteMyLectureRecord">
+	delete from wl_my_lecture_record where course_no=#{courseNo} and lecture_no=#{lectureNo} and user_id=#{userId}
+	</insert>
+	
 	<select id="isCourseLike" resultType="int">
 	select count(*) from wl_course_recommend where user_id=#{userId} and course_no=#{courseNo}
 	
@@ -42,7 +55,7 @@
 	</delete>
 	
 	<select id="selectCntCourseLike" resultType="int">
-	select count(-1) from wl_course_recommend where course_no=#{courseNo}
+	select cnt_course_like from wl_course where course_no=#{courseNo}
 	</select>
 	
 
@@ -89,9 +102,9 @@
 	
 	
 	
-	<select id="selectMyCourse" resultMap="courseRM">
+	<select id="selectCourse" resultMap="courseRM">
 	select course_no, course_name,description,course_image,author,c.reg_date,is_accept,cnt_course_like,activity,img_profile 
-	from wl_course c, wl_member m where  c.AUTHOR=m.USER_ID and author=#{userId} and course_No=#{courseNo}
+	from wl_course c, wl_member m where  c.AUTHOR=m.USER_ID  and course_No=#{courseNo}
 	</select>
 	
 	
@@ -120,6 +133,13 @@
 	
 	</update>
 	
+	<update id="increaseCntCourseLike">
+	 update  wl_course set cnt_course_like=cnt_course_like+1 where course_no=#{courseNo}
+	</update>
+	
+	<update id="decreaseCntCourseLike">
+	 update  wl_course set cnt_course_like=cnt_course_like-1 where course_no=#{courseNo}
+	</update>
 	
 	
 	

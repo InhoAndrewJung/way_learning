@@ -45,7 +45,7 @@ public interface QnaBoardService {
 	
 	public int selectCntBoardLike(int boardNo) throws SQLException;
 	
-	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException;	
+	public List<Integer> selectAllRecommendNo(String userId) throws SQLException;	
 	
 }
 

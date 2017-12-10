@@ -91,12 +91,15 @@ $('#acceptedCourse').html(result);
 				<li><a href="${path}/member/updateForm">정보 수정 폼</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/showAllRanking">전체 랭킹보기</a><li>
 			<li><a href="${pageContext.request.contextPath}/member/myFavoriteList">내 좋아요 목록 링크</a><li>
+			<li><a href="${pageContext.request.contextPath}/member/showMyLectureRecord">  나의 강의 기록 보기 </a><li>
+			
 			
 			<b>게시판용</b><br>
-			<li><a href="${pageContext.request.contextPath}/board/tech/write">tech게시글쓰기</a><li>	
-			<li><a href="${pageContext.request.contextPath}/board/tech/list">tech게시판목록</a><li>
 			<li><a href="${pageContext.request.contextPath}/board/qna/write">qna게시판 글쓰기</a><li>
 			<li><a href="${pageContext.request.contextPath}/board/qna/list">qna게시판목록</a><li>
+			<li><a href="${pageContext.request.contextPath}/board/tech/write">tech게시글쓰기</a><li>	
+			<li><a href="${pageContext.request.contextPath}/board/tech/list">tech게시판목록</a><li>
+			
 			
 			<b>문제 용</b> <br>
 			<li><a href="${pageContext.request.contextPath}/question/general/getList">제너럴 문제 리스트</a><li>
@@ -107,12 +110,12 @@ $('#acceptedCourse').html(result);
 			
 			
 			<b>코스용</b><br>
-			<li><a href="${pageContext.request.contextPath}/course/writeCourse">코스등록</a><li>
-			<li><a href="${pageContext.request.contextPath}/course/showMyCourseList">내가 등록한 코스 리스트 </a><li>
+			<li><a href="${pageContext.request.contextPath}/course/writeCourse">코스등록</a><li> <!-- 강사용 -->
+			<li><a href="${pageContext.request.contextPath}/course/showMyCourseList">내가 등록한 코스 리스트 </a><li> <!-- 강사용 -->
 			
 			<b>강의용</b><br>
-			<li><a href="${pageContext.request.contextPath}/lectureBoard/writeLecture">강의등록</a><li>
-			<li><a href="${pageContext.request.contextPath}/lectureBoard/showLectureList?courseNo=1">내가 등록한 강의 리스트 </a><li>
+			<li><a href="${pageContext.request.contextPath}/lectureBoard/writeLecture">강의등록</a><li> <!-- 강사용 -->
+			<li><a href="${pageContext.request.contextPath}/lectureBoard/showLectureList?courseNo=1"> 특정코스의 전체 강의 리스트 </a><li>
 			
 		</sec:authorize>
 		<li><a href="javascript:logout();">로그아웃</a></li>

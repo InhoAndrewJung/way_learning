@@ -56,6 +56,11 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 		return sqlSession.selectList("techBoardMapper.getTag",boardNo);
 	}
 	
+	public int deleteTag(int boardNo) throws SQLException{
+
+		return sqlSession.delete("techBoardMapper.deleteTag",boardNo);
+	}
+	
 	//showContent
 	public TechBoard showContent(String boardNo) throws SQLException{
 		return sqlSession.selectOne("techBoardMapper.showContent",boardNo);
@@ -162,9 +167,9 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 	}
 	
 	@Override
-	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException {
+	public List<Integer> selectAllRecommendNo(String userId) throws SQLException {
 
-		return sqlSession.selectList("techBoardMapper.selectAllRecommendNo", boardNo);
+		return sqlSession.selectList("techBoardMapper.selectAllRecommendNo", userId);
 		
 	}
 	

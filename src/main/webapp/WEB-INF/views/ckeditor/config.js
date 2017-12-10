@@ -39,6 +39,7 @@ CKEDITOR.editorConfig = function( config ) {
 	
 
 	
+
 	config.autoGrow_onStartup = true;
 	
 	
@@ -48,10 +49,11 @@ CKEDITOR.editorConfig = function( config ) {
 	config.codeSnippet_theme='github';
 
 
-	//config.extraPlugins = 'autogrow,youtube';
+
+	config.extraPlugins = 'autogrow,youtube';
 	config.extraPlugins = 'html5video';
 	
 	
-	  
+
 	  
 };

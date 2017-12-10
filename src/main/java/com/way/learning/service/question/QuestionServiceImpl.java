@@ -37,10 +37,7 @@ public class QuestionServiceImpl implements QuestionService {
 	public List<GeneralQuestion> getGeneralList(String keyword, String sorting) throws SQLException {
 		return questionDAO.getGeneralList(keyword, sorting);
 	}
-	public int countArticle(String keyword) throws SQLException {
-		
-		return questionDAO.countArticle(keyword);
-	}
+	
 	
 	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException {
 		return questionDAO.getEssayList(keyword);

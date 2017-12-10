@@ -73,8 +73,16 @@ public class TechBoardServiceImpl implements TechBoardService{
 	}
 	
 	//updateBoard
-	public void updateBoard(TechBoard vo) throws SQLException{
-		techBoardDao.updateBoard(vo);
+	public void updateBoard(TechBoard bvo) throws SQLException{
+		techBoardDao.updateBoard(bvo);
+		List<String> tag=bvo.getTag();
+		techBoardDao.deleteTag(bvo.getBoardNo());
+
+		for(String tags: tag){
+			System.out.println("서비스 태그:"+tags);
+			techBoardDao.insertTag(tags,bvo.getBoardNo());
+
+		}
 	}
 	
 	
@@ -117,9 +125,9 @@ public class TechBoardServiceImpl implements TechBoardService{
 	}
 	
 	@Override
-	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException {
+	public List<Integer> selectAllRecommendNo(String userId) throws SQLException {
 
-		return techBoardDao.selectAllRecommendNo(boardNo);
+		return techBoardDao.selectAllRecommendNo(userId);
 		
 	}
 

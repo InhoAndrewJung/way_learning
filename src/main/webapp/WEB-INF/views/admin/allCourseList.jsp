@@ -19,8 +19,8 @@ function changeAccept(isAccept,courseNo) {
 	alert("isAccept:"+isAccept);
 	alert("courseNo:"+courseNo);
 if(isAccept == '1'){
-	//alert(role)
-	 if(confirm("승인된 강의를 불 승인으로 변경하시겠습니까?")){
+
+	 if(confirm("승인된 강의를 미승인으로 변경하시겠습니까?")){
 			
 			$.ajax({
 				
@@ -46,12 +46,12 @@ if(isAccept == '1'){
 }else{
 	alert(isAccept)
 	
-	 if(confirm("해당 멤버를 강사 자격으로 등업시키겠습니까?")){
+	 if(confirm("미승인된 강의를 승인으로 변경하시겠습니까?")){
 			
 			$.ajax({
 				
 				type: "post",
-				url: "${path}/admin/changeAuthority",
+				url: "${path}/admin/changeAcceptStatus",
 				data:"${_csrf.parameterName}=${_csrf.token}&isAccept=notAccept&courseNo="+courseNo,
 				success: function(result){
 					console.log(result);

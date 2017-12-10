@@ -34,8 +34,8 @@
 	<div align="center">
 
 
-		<a href="#" onclick="sorting('multiple')">객관식 </a> &nbsp; <a href="#"
-			onclick="sorting('short')">주관식 </a> &nbsp; <br>
+		<a href="#" onclick="sorting('multiple')">객관식 </a> &nbsp; 
+		<a href="#" onclick="sorting('short')">주관식 </a> &nbsp; <br>
 		<form name="form1" method="post"
 			action="${pageContext.request.contextPath}/question/general/getList"
 			id="form1">
@@ -73,7 +73,7 @@
 
 					<td nowrap><fmt:formatNumber
 							value="${(row.cntRight / row.cntSubmit)*100 }" type="percent"
-							pattern=".00" />%</td>
+							pattern=".00"  />%</td>
 
 				</tr>
 			</c:forEach>
