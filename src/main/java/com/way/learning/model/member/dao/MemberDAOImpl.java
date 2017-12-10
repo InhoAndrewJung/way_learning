@@ -121,6 +121,12 @@ public class MemberDAOImpl implements MemberDAO {
 
 		return sqlSession.selectList("memberMapper.selectMyLectureRecord");
 	}
+	
+	public int deleteMember(String userId) {
+
+		return sqlSession.delete("memberMapper.deleteMember",userId);
+	}
+
 
 
 

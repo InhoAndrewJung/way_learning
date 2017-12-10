@@ -42,5 +42,7 @@ public interface MemberDAO {
 	public List selectLectureFavorite(String userId);
 	
 	public List selectMyLectureRecord();
+	
+	public int deleteMember(String userId) ;
 
 }
