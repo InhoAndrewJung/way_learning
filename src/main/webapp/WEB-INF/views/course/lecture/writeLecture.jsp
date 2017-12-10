@@ -98,13 +98,27 @@ a{text-decoration:none; cursor: pointer;}
 						
 						
 						
-					 CKEDITOR.replace("content", {
+					/*  CKEDITOR.replace("content", {
 						filebrowserUploadUrl : "${pageContext.request.contextPath}/lectureBoard/imageUpload"
 						
 						
 					}); 
 					
-					 CKEDITOR.on('instanceLoaded', function(e) {e.editor.resize(700, 1000)} );
+					 CKEDITOR.on('instanceLoaded', function(e) {e.editor.resize(700, 1000)} ); */
+					 
+					
+					//CKEDITOR.replace("content"); // 태그의 id
+					//이미지 업로드를 할 경우
+					 CKEDITOR.replace( 'content', {
+							extraPlugins: 'autogrow,youtube',		
+							autoGrow_minHeight: 400,
+							autoGrow_maxHeight: 10000,
+							autoGrow_bottomSpace: 50,
+							filebrowserUploadUrl : "${pageContext.request.contextPath}/lectureBoard/imageUpload",
+							removePlugins: 'resize',		
+						} );  
+
+					
 					
 					
 					</script>
@@ -120,5 +134,6 @@ a{text-decoration:none; cursor: pointer;}
 			</tr>
 		</table>
 	</form>
+	<a href="${path}/"> 메인페이지로 이동</a>
 </div>
 </html>

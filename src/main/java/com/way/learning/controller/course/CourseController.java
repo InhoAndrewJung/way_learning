@@ -44,7 +44,7 @@ public class CourseController {
 		courseService.insertCourse(cvo,request); 
 
 		System.out.println("컨트롤러 cvo:"+cvo);
-		return new ModelAndView("redirect:/","cvo",cvo);
+		return new ModelAndView("redirect:/course/showMyCourseList");
 	}
 
 

@@ -67,7 +67,7 @@ public class LectureBoardController {
 
 
 	@RequestMapping("showLectureList")
-	public ModelAndView showCourseList(int courseNo, ModelAndView mav) throws Exception{
+	public ModelAndView showCourseList(int courseNo, @RequestParam(defaultValue="0") int lectureNo, ModelAndView mav) throws Exception{
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 
@@ -75,7 +75,7 @@ public class LectureBoardController {
 
 		//LectureBoard lvo=lectureBoardService.selectLecture(lecList.get(0).getLectureNo(),courseNo);
 
-		Course	 cvo  =lectureBoardService.selectMyCourse(courseNo, mvo.getUserId());
+		Course	 cvo  =lectureBoardService.selectCourse(courseNo, mvo.getUserId());
 
 		List<String> tags=lectureBoardService.selectCourseTag(courseNo);
 
@@ -83,12 +83,13 @@ public class LectureBoardController {
 		//System.out.println("showLectureList lecList:"+lecList);
 
 		//System.out.println("showLectureList lvo:"+lvo);
-		//System.out.println("showLectureList cvo:"+cvo);
+		System.out.println("showLectureList cvo:"+cvo);
 		//System.out.println("showLectureList tags:"+tags);
 
 
 		mav.setViewName("course/lecture/lectureList");
 		mav.addObject("lecList",lecList);
+		mav.addObject("lectureNo",lectureNo);
 		//mav.addObject("lvo",lvo);
 		mav.addObject("cvo",cvo);
 		mav.addObject("tags",tags);
@@ -192,6 +193,38 @@ public class LectureBoardController {
 		lectureBoardService.isCourseLike(courseNo,mvo.getUserId());
 		int cnt=lectureBoardService.selectCntCourseLike(courseNo);
 		return cnt;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("changeMyLecutreRecord")
+	public int changeMyLecutreRecord(int courseNo,int lectureNo)throws Exception{
+		System.out.println("changeMyLecutreRecord 컨트롤러 입성");
+		
+		
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		
+		
+		int result=lectureBoardService.changeMyLecutreRecord(courseNo, lectureNo,mvo.getUserId());
+		
+		return result;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("isMyLectureRecordExist")
+	public int isMyLectureRecordExist(int courseNo,int lectureNo)throws Exception{
+		System.out.println("isMyLectureRecordExist courseNo:"+courseNo);
+		System.out.println("isMyLectureRecordExist lectureNo:"+lectureNo);
+		System.out.println("isMyLectureRecordExist 컨트롤러 입성");
+		
+		
+		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		int result=lectureBoardService.isMyLectureRecordExist(courseNo, lectureNo,mvo.getUserId());
+		
+		return result;
 	}
 
 

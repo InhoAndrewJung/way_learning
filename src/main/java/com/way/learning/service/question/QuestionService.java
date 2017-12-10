@@ -17,7 +17,7 @@ public interface QuestionService {
 
 	public List<GeneralQuestion> getGeneralList( String keyword, String sorting) throws SQLException;
 
-	public int countArticle(String keyword) throws SQLException;
+	
 
 	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException;
 

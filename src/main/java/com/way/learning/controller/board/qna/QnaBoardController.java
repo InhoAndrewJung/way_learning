@@ -47,7 +47,7 @@ public class QnaBoardController {
 	
 	@RequestMapping("insert")
 	public ModelAndView insertBoard(HttpServletRequest request, HttpServletResponse response,
-			HttpSession session, QnaBoard bvo ) throws Exception{
+			HttpSession session, QnaBoard bvo,ModelAndView mav ) throws Exception{
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("컨트로러 mvo:"+mvo);
 		
@@ -58,8 +58,12 @@ public class QnaBoardController {
 		bvo.setMember(mvo); //bvo와 mvo의 Hasing 관계가 성립된다..
 
 		qnaBoardService.insertBoard(bvo); 
+		List tagList= qnaBoardService.getTag(bvo.getBoardNo()+"");
+		mav.setViewName("board/qna/show_content");
+		mav.addObject("tagList", tagList);
+		mav.addObject("bvo",bvo);
 		System.out.println("컨트롤러 bvo:"+bvo);
-		return new ModelAndView("board/qna/show_content", "bvo",bvo);
+		return mav;
 	}
 
 	
@@ -145,13 +149,13 @@ public class QnaBoardController {
 	
 	@ResponseBody
 	@RequestMapping("likeStatus")
-	public List<Integer> likeStatus(int boardNo)throws Exception{
+	public List<Integer> likeStatus()throws Exception{
 		
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		
 		
-		List<Integer> noList=qnaBoardService.selectAllRecommendNo(boardNo);
+		List<Integer> noList=qnaBoardService.selectAllRecommendNo(mvo.getUserId());
 		
 		return noList;
 	}
@@ -177,12 +181,17 @@ public class QnaBoardController {
 
 
 	@RequestMapping("updateBoard")
-	public ModelAndView updateBoard(QnaBoard pvo,HttpSession session)
-			throws Exception{
+	public ModelAndView updateBoard(QnaBoard pvo,HttpSession session,ModelAndView mav) throws Exception{
 
 				qnaBoardService.updateBoard(pvo); //디비에 데이타를 직접 수정
-
-		return new ModelAndView("board/qna/show_content", "bvo",qnaBoardService.showContent(pvo.getBoardNo()+""));
+				
+				List tagList= qnaBoardService.getTag(pvo.getBoardNo()+"");
+				QnaBoard bvo=qnaBoardService.showContent(pvo.getBoardNo()+"");
+				mav.setViewName("board/qna/show_content");
+				mav.addObject("tagList", tagList);
+				mav.addObject("bvo",bvo);
+				System.out.println("컨트롤러 bvo:"+bvo);
+				return mav;
 	}
 	
 	

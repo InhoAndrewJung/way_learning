@@ -114,7 +114,7 @@ board_no,title,content,cnt_board_like
 	
 	<update id="updateBoard">
 		update wl_tech_board set
-		title=#{title},content=#{content}  where board_no=#{boardNo}
+		title=#{title},content=#{content},reg_date=sysdate  where board_no=#{boardNo}
 
 	</update>
 
@@ -138,6 +138,10 @@ board_no,title,content,cnt_board_like
 	<insert id="insertTag">
 		insert into wl_tech_tag values(#{boardNo},#{tag})
 	</insert>
+	
+	<delete id="deleteTag">
+	 delete from wl_tech_tag   where board_no=#{boardNo}
+	</delete>
 
 	
 	<sql id="search">
@@ -189,7 +193,7 @@ board_no,title,content,cnt_board_like
     </select>
     
     <select id="selectAllRecommendNo" resultType="int">
-     select board_no from wl_tech_board_recommend
+     select board_no from wl_tech_board_recommend where user_id=#{userId}
     
     </select>
     

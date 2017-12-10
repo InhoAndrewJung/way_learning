@@ -37,8 +37,10 @@ public interface MemberService {
 
 	public List<AnswerResult> selectAllRanking(String sorting);
 
-	public List selectBoardFavorite();
+	public List selectBoardFavorite(String userId);
 
-	public List selectReplyFavorite();
+	public List selectReplyFavorite(String userId);
+	public List selectLectureFavorite(String userId);
+	public List selectMyLectureRecord();
 
 }

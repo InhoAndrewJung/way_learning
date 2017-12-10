@@ -58,11 +58,10 @@ a{text-decoration:none; cursor: pointer;}
 	</c:forEach>
 </table><p>
 
-<a href="${pageContext.request.contextPath}">홈으로</a>
+<br><br><br><br>
+<a href="${pageContext.request.contextPath}/lectureBoard/writeLecture">강의등록</a><br><br>
 
-
-
-
+<a href="${pageContext.request.contextPath}">홈으로</a><br>
 	 </div>  
 </body>
 </html>

@@ -4,32 +4,24 @@
 
 
 
-	<insert id="insertGeneralQuestion" parameterType="generalQuestion">
+	<!-- <insert id="insertGeneralQuestion" parameterType="generalQuestion">
 		<selectKey keyProperty="question_no" resultType="int" order="BEFORE">
 			SELECT
-			wl_general_question.nextval FROM dual
+			wl_general_question_SEQ.nextval FROM dual
 		</selectKey>
 		insert into
 		wl_general_question
 		(question_no,title,question,answer,category)
-		values(#{question_no},#{title},#{question},
+		values(#{questionNo},#{title},#{question},
 		#{answer},#{category})
 
-	</insert>
-	<!--<insert id="insertGeneralQuestion" parameterType="generalQuestion"> 
+	</insert> -->
+	<insert id="insertGeneralQuestion" parameterType="generalQuestion"> 
 		insert into wl_general_question (question_no,title,question,answer,category) 
 		values(wl_general_question_SEQ.nextval,#{title},#{question}, #{answer},#{category}) 
-		</insert> -->
+		</insert>
 
-	<select id="countArticle" resultType="int">
-		select count(*) from wl_general_question
-		<where>
-			question like '%'||#{keyword}||'%'
-			or title like
-			'%'||#{keyword}||'%'
-
-		</where>
-	</select>
+	
 
 
 	<insert id="insertAnswerChoice" parameterType="generalChoice">
@@ -43,12 +35,8 @@
 	</insert>
 
 	<insert id="insertEssayQuestion" parameterType="generalQuestion">
-
-
 insert into wl_algorithm_question (question_no, title, question,input,output) values((select
 		max(question_no)+1 from wl_algorithm_question),#{title},#{question}, #{input},#{output})
-
-
 	</insert>
 
 	<resultMap type="generalQuestion" id="generalQuestionRM">
@@ -73,11 +61,10 @@ insert into wl_algorithm_question (question_no, title, question,input,output) va
 
 
 	<select id="getGeneralList" resultMap="generalQuestionRM">
-		select *
-		from wl_general_question
+		select * from wl_general_question
 		<where>
-			question like '%'||#{keyword}||'%'
-			or title like '%'||#{keyword}||'%'
+			(question like '%'||#{keyword}||'%'
+			or title like '%'||#{keyword}||'%')
 			<if test="sorting=='multiple'">and category='multipleChoice'</if>
 			<if test="sorting == 'short'">and category='shortAnswer'</if>
 		</where>

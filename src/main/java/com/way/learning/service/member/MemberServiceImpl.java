@@ -200,17 +200,30 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public List selectBoardFavorite() {
+	public List selectBoardFavorite(String userId) {
 		System.out.println("selectBoardFavorite service ");
 		
-		return memberDAO.selectBoardFavorite();	
+		return memberDAO.selectBoardFavorite(userId);	
 	}
 	
 	@Override
-	public List selectReplyFavorite() {
+	public List selectLectureFavorite(String userId) {
+		System.out.println("selectLectureFavorite service ");
+		
+		return memberDAO.selectLectureFavorite(userId);
+	}
+	
+	@Override
+	public List selectReplyFavorite(String userId) {
 		System.out.println("selectReplyFavorite service ");
 		
-		return memberDAO.selectReplyFavorite();	
+		return memberDAO.selectReplyFavorite(userId);	
+	}
+	
+	public List selectMyLectureRecord() {
+		
+
+		return memberDAO.selectMyLectureRecord();
 	}
 
 
