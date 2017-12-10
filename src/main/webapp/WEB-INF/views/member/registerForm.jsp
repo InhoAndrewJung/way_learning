@@ -73,7 +73,7 @@ $(document).ready(function(){
 					checkResultId="";
 				}else{						
 					$("#idCheckView").html("  "+userId+" ID Can Use!! ").css("background","yellow");		
-					checkResultId=id;
+					checkResultId=userId;
 				}					
 			}//callback			
 		});//ajax

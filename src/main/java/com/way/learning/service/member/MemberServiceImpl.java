@@ -220,6 +220,13 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectReplyFavorite(userId);	
 	}
 	
+	// 회원탈퇴 추가
+		@Override
+		public int deleteMember(String userId){
+
+			return memberDAO.deleteMember(userId);
+		}
+	
 	public List selectMyLectureRecord() {
 		
 

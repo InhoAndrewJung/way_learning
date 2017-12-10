@@ -58,108 +58,116 @@ public class MemberController {
 	@RequestMapping("findIdProc")
 	@ResponseBody
 	public ModelAndView findIdByEmail(HttpServletRequest request, ModelAndView mav) {
-		boolean findIdResult = false;
+
 		String userId = memberService.findIdByEmail(request.getParameter("email"));
+		String findIdResult = memberService.idcheck(userId);
+
 		mav.setViewName("member/findIdProc");
-		if (userId != "") {
-			findIdResult = true;
+		if (findIdResult.equals("ok")) {
+
+			System.out.println("findIdResult" + findIdResult);
+			mav.addObject("findIdResult", findIdResult);
+			return mav;
+
+		} else {
+
+			System.out.println("findIdResult" + findIdResult);
 			mav.addObject("findIdResult", findIdResult);
 			mav.addObject("userId", userId);
-			return mav;
-		} else {
-			mav.addObject("findIdResult", findIdResult);
 			return mav;
 		}
 
 	}
 
 	// 비밀번호 찾기 페이지 이동
-	@RequestMapping("ExistId")
-	public String findPassPage() {
-
-		return "member/ExistId";
-	}
-
-	// 비밀번호 찾기 아이디확인
-	@RequestMapping("idCheckforPass")
-	public ModelAndView idCheckforPass(HttpServletRequest request, ModelAndView mav) {
-		String userId = request.getParameter("userId");
-		String result = memberService.idcheck(userId);
-		mav.setViewName("member/mailSender");
-		if (result == "fail") {
-			mav.addObject("userId", userId);
-			mav.addObject("result", result);
-			return mav;
-		} else {
-			mav.addObject("result", result);
-			return mav;
+		@RequestMapping("ExistId")
+		public String findPassPage() {
+			
+			return "member/ExistId";
 		}
-	}
 
-	// 아이디 이메일 받아 비밀번호 이메일전송
-	@RequestMapping("mailSender")
-	public ModelAndView mailSender(HttpServletRequest request, ModelAndView mav, Member vo) throws Exception {
-
-		String result = request.getParameter("result");
-		System.out.println("컨트result:" + result);
-		final String userId = request.getParameter("userId");
-		System.out.println("파이널 userId:" + userId);
-		// 1.아이디가 있다 확인
-		if (result.equals("fail")) {
-			mav.setViewName("member/loginForm");
-
-			System.out.println("컨트userId:" + userId);
-			final String email = request.getParameter("email");
-			// 2.임시비밀번호 생성
-			final String tempPassword = "" + (int) (Math.random() * 100000 + 1);
-			// 3.임시비밀번호 암호화
-			String encodePassword = passwordEncoder.encode(tempPassword);
-			vo.setPassword(encodePassword);
-
-			// 4. 아이디에 해당하는 이메일받아옴
-			vo = memberService.findMemberById(userId);
-			// 5. 받은 이메일과 등록된 이메일이 일치한다면,
-			if (email.equals(vo.getEmail())) {
-				System.out.println("입력받은 email과 등록된 email이 일치합니다.");
-				// 6. 임시비밀번호를 db에 세팅
-				memberService.updatefindPass(encodePassword, userId);
-
-				// 7.보낼 메세지 준비
-				MimeMessagePreparator preparator = new MimeMessagePreparator() {
-
-					String body = "Your Temporary Password for " + userId + " : " + tempPassword;
-
-					@Override
-					public void prepare(MimeMessage mimeMessage) throws Exception {
-						final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-						helper.setFrom("opilior86@gmail.com");
-						helper.setTo(email);
-						helper.setSubject("[ WayLearning ] : " + userId + ", Temporary Password !");
-						helper.setText(body, true);
-					}// prepare
-				};// MimeMessagePreparator
-
-				// 없는 메일로 보낼때 예외처리
-				try {
-					// 8.메일보냄
-					mailSender.send(preparator);
-
-					System.out.println("[MailSender] : Email Sent Successfully!!");
-
-					mav.addObject("result", result);
-					// 9.메일보내기 성공 결과 리턴
-				} catch (Exception e) {
-					System.out.println(e.fillInStackTrace());
-				}
-			} else {
-				System.out.println("[MailSender] : No Such User Found !");
+		// 비밀번호 찾기 아이디확인
+		@RequestMapping("idCheckforPass")
+		public ModelAndView idCheckforPass(HttpServletRequest request, ModelAndView mav) {
+			String userId = request.getParameter("userId");
+			String result = memberService.idcheck(userId);
+		
+			if (result.equals("fail")) {
+				mav.addObject("userId", userId);
 				mav.addObject("result", result);
-				// 10.메일보내기 실패 결과 리턴
+				mav.setViewName("member/mailSender");
+				return mav;
+			} else {
+				mav.setViewName("member/ExistId");
+				mav.addObject("result", result);
+				return mav;
+			}
+		}
 
+		// 아이디 이메일 받아 비밀번호 이메일전송
+		@RequestMapping("mailSender")
+		public ModelAndView mailSender(HttpServletRequest request, ModelAndView mav, Member vo) throws Exception {
+
+			String result = request.getParameter("result");
+			System.out.println("컨트result:" + result);
+			final String userId = request.getParameter("userId");
+			System.out.println("파이널 userId:" + userId);
+			// 1.아이디가 있다 확인
+			if (result.equals("fail")) {
+				mav.setViewName("member/loginForm");
+
+				System.out.println("컨트userId:" + userId);
+				final String email = request.getParameter("email");
+				// 2.임시비밀번호 생성
+				final String tempPassword = "" + (int) (Math.random() * 100000 + 1);
+				// 3.임시비밀번호 암호화
+				String encodePassword = passwordEncoder.encode(tempPassword);
+				vo.setPassword(encodePassword);
+
+				// 4. 아이디에 해당하는 이메일받아옴
+				vo = memberService.findMemberById(userId);
+				// 5. 받은 이메일과 등록된 이메일이 일치한다면,
+				if (email.equals(vo.getEmail())) {
+					System.out.println("입력받은 email과 등록된 email이 일치합니다.");
+					// 6. 임시비밀번호를 db에 세팅
+					memberService.updatefindPass(encodePassword, userId);
+
+					// 7.보낼 메세지 준비
+					MimeMessagePreparator preparator = new MimeMessagePreparator() {
+
+						String body = "Your Temporary Password for " + userId + " : " + tempPassword;
+
+						@Override
+						public void prepare(MimeMessage mimeMessage) throws Exception {
+							final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+							helper.setFrom("opilior86@gmail.com");
+							helper.setTo(email);
+							helper.setSubject("[ WayLearning ] : " + userId + ", Temporary Password !");
+							helper.setText(body, true);
+						}// prepare
+					};// MimeMessagePreparator
+
+					// 없는 메일로 보낼때 예외처리
+					try {
+						// 8.메일보냄
+						mailSender.send(preparator);
+
+						System.out.println("[MailSender] : Email Sent Successfully!!");
+
+						mav.addObject("result", result);
+						// 9.메일보내기 성공 결과 리턴
+					} catch (Exception e) {
+						System.out.println(e.fillInStackTrace());
+					}
+				} else {
+					System.out.println("[MailSender] : No Such User Found !");
+					mav.addObject("result", result);
+					// 10.메일보내기 실패 결과 리턴
+
+				} // if
 			} // if
-		} // if
-		return mav;
-	}// mailSender
+			return mav;
+		}// mailSender
 
 	// 회원가입 폼
 	@RequestMapping("registerForm")
@@ -280,5 +288,38 @@ public class MemberController {
 
 		return mav;
 	}
+	
+	
+	// 회원탈퇴 페이지이동
+		@RequestMapping("deleteForm")
+		public String deletePage() {
+
+			return "member/deleteForm";
+		}
+
+		// 회원탈퇴
+
+		@RequestMapping("deleteProc")
+		@ResponseBody
+		public ModelAndView deleteMember(HttpServletRequest request, ModelAndView mav, String userId) {
+			System.out.println("deleteMember 컨트롤러...");
+
+			userId = request.getParameter("userId");
+			int deleteResult = memberService.deleteMember(userId);
+
+			if (deleteResult == 1) {
+				System.out.println("회원탈퇴 성공....");
+
+				mav.setViewName("member/deleteProc");
+			}
+
+			return mav;
+
+		}
+
+		
+	
+	
+	
 
 }

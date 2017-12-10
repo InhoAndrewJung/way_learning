@@ -92,7 +92,7 @@ $('#acceptedCourse').html(result);
 			<li><a href="${pageContext.request.contextPath}/member/showAllRanking">전체 랭킹보기</a><li>
 			<li><a href="${pageContext.request.contextPath}/member/myFavoriteList">내 좋아요 목록 링크</a><li>
 			<li><a href="${pageContext.request.contextPath}/member/showMyLectureRecord">  나의 강의 기록 보기 </a><li>
-			
+			<li><a href="${path}/member/deleteForm">회원 탈퇴</a></li>
 			
 			<b>게시판용</b><br>
 			<li><a href="${pageContext.request.contextPath}/board/qna/write">qna게시판 글쓰기</a><li>
