@@ -134,7 +134,21 @@
 
 
 	<select id="selectBoardFavorite" resultType="hashmap">
-		select * from
+	
+	
+	select * from
+(select  tbr.board_no, tbr.reg_date, tb.writer, title,m.img_profile,m.activity , 'tech' as table_name 
+from wl_tech_board_recommend tbr, wl_tech_board tb,wl_member m where tbr.board_no=tb.board_no and
+tbr.user_id=m.user_id and m.user_id=#{userId}
+UNION ALL 
+select  qbr.board_no, qbr.reg_date, qb.writer, title, m.img_profile, m.activity,'qna' as table_name 
+from wl_qna_board_recommend qbr, wl_qna_board qb,wl_member m where qbr.board_no=qb.board_no and
+qbr.user_id=m.user_id and m.user_id=#{userId} )a where a.reg_date   &gt; (sysdate -10) order by a.reg_date desc
+
+
+
+
+		<!-- select * from
 		(select tbr.board_no, tbr.reg_date, tb.writer,
 		title,m.img_profile,m.activity,'tech' as table_name from
 		wl_tech_board_recommend tbr, wl_tech_board tb,wl_member m where
@@ -144,13 +158,29 @@
 		select qbr.board_no, qbr.reg_date, qb.writer, title, m.img_profile,
 		m.activity,'qna' as table_name from wl_qna_board_recommend qbr,
 		wl_qna_board qb,wl_member m where qbr.board_no=qb.board_no and
-		qb.writer=m.user_id)a where a.reg_date &gt; (sysdate -4) order by
-		a.reg_date desc
+		qb.writer=m.user_id)a where a.reg_date &gt; (sysdate -10) order by
+		a.reg_date desc -->
 
 	</select>
 
 	<select id="selectReplyFavorite" resultType="hashmap">
-		select * from (select tr.board_no,trr.reply_no, tr.replyer ,
+	
+	select * from (select tr.board_no,trr.reply_no, tr.replyer ,
+(select writer from wl_tech_board where board_no=tr.board_no)writer,
+(select title from wl_tech_board where board_no=tr.board_no)title, 
+trr.reg_date,m.img_profile,m.activity,'tech' as table_name 
+from wl_tech_reply_recommend trr, wl_tech_reply tr,wl_member m where trr.reply_no=tr.reply_no and
+trr.user_id=m.user_id and m.user_id=#{userId}  
+UNION ALL 
+select qr.board_no,qrr.reply_no, qr.replyer ,
+(select writer from wl_qna_board where board_no=qr.board_no)writer,
+(select title from wl_qna_board where board_no=qr.board_no)title, 
+qrr.reg_date,m.img_profile,m.activity,'qna' as table_name
+from wl_qna_reply_recommend qrr, wl_qna_reply qr,wl_member m where qrr.reply_no=qr.reply_no and
+qrr.user_id=m.user_id and m.user_id=#{userId}   )a where a.reg_date  &gt; (sysdate -10) order by a.reg_date desc
+
+
+		<!-- select * from (select tr.board_no,trr.reply_no, tr.replyer ,
 		(select writer from wl_tech_board where board_no=tr.board_no)writer,
 		(select title from wl_tech_board where board_no=tr.board_no)title,
 		trr.reg_date,m.img_profile,m.activity,'tech' as table_name from
@@ -164,8 +194,25 @@
 		qrr.reg_date,m.img_profile,m.activity,'qna' as table_name from
 		wl_qna_reply_recommend qrr, wl_qna_reply qr,wl_member m where
 		qrr.reply_no=qr.reply_no and
-		qr.replyer=m.user_id )a where a.reg_date &gt; (sysdate -4) order by a.reg_date desc
+		qr.replyer=m.user_id )a where a.reg_date &gt; (sysdate -10) order by a.reg_date desc -->
 
+	</select>
+	
+	<select id="selectMyLectureRecord" resultType="hashmap">
+	select a.* ,
+(select count(-1) from wl_my_lecture_record where course_no=a.course_no) cnt_My_record,
+(select count(-1) from wl_lecture_board where course_no=a.course_no) cnt_Course,
+greatest(round((select count(-1) from wl_my_lecture_record where course_no=a.course_no)/(select count(-1) from wl_lecture_board where course_no=a.course_no)*100,2),0) progress
+from (select lr.course_no,lc.course_name,lecture_order,lr.lecture_no,lecture_name,lb.author 
+from wl_lecture_board lb, wl_my_lecture_record lr ,wl_course lc
+where lb.course_no=lr.course_no and lr.course_no=lc.course_no and lb.lecture_no=lr.LECTURE_NO order by course_no, lecture_order) a
+	
+	</select>
+	
+	<select id="selectLectureFavorite" resultType="hashmap">
+select cr.course_no,course_name,description,cr.reg_date,cr.user_id,author,m.img_profile,m.activity from wl_course_recommend cr, wl_course c,wl_member m where cr.course_no=c.course_no 
+and c.author=m.user_id and cr.user_id=#{userId}
+	
 	</select>
 
 

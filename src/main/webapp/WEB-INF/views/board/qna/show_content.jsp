@@ -27,7 +27,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: "post",
 			url: "${pageContext.request.contextPath}/board/qna/likeStatus",
-			data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}",
+			data:"${_csrf.parameterName}=${_csrf.token}",
 			success: function(result){
 				
 				
@@ -91,7 +91,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type:"get",
-			url: "${pageContext.request.contextPath}/lectureReply/qna/list?boardNo=${requestScope.bvo.boardNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
+			url: "${pageContext.request.contextPath}/reply/qna/list?boardNo=${requestScope.bvo.boardNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
 			success: function(result){
 				$("#listReply").html(result);	
 			}
@@ -196,7 +196,7 @@ a{text-decoration:none; cursor: pointer;}
 
 
 <body>
-<%-- 
+
 <c:if test="${replyNo !=null}">
 
 	<script>
@@ -207,7 +207,7 @@ a{text-decoration:none; cursor: pointer;}
 	},700) ;
 	</script>
 
-</c:if> --%>
+</c:if> 
 
 
 
@@ -222,7 +222,7 @@ a{text-decoration:none; cursor: pointer;}
 
 
 	
-					<table border="1" width="650" align="center">
+					<table border="1" width="1000" align="center">
 
 
 						<tr>
@@ -261,17 +261,22 @@ a{text-decoration:none; cursor: pointer;}
 
 							<td colspan="4">
 							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" >${requestScope.bvo.content}</textarea>
-								<script>
+										<script>
+			          //CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false});  // 태그의 id
+			         // CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});  
+		             // CKEDITOR.replace("content");  
+		             
+		      		  CKEDITOR.replace( 'content', {
+		      			extraPlugins: 'autogrow,youtube',		      			
+		      			autoGrow_minHeight: 400,
+		      			autoGrow_maxHeight: 10000,
+		      			autoGrow_bottomSpace: 50,
+		      			resize_enabled : false,
+		      			removePlugins : 'elementspath',
+		      			      			
+		      		} );  
 
-								 CKEDITOR.replace( 'content', {
-						      			extraPlugins: 'autogrow,youtube',						      			
-						      			autoGrow_minHeight: 400,
-						      			autoGrow_maxHeight: 10000,
-						      			autoGrow_bottomSpace: 50,
-						      			removePlugins: 'resize',						      			
-						      		} );  
-
-		                        </script> 
+		      	</script>
 							
 							</td>
 							<td align="center">

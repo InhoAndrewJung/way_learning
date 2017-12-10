@@ -145,6 +145,9 @@ a {
 			</c:if>
 		</sec:authorize>
 
+
+<br>
+
 <a href="${pageContext.request.contextPath}">홈으로</a>
 
 	</div>

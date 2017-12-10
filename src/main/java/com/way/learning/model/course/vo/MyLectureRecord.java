@@ -7,19 +7,19 @@ public class MyLectureRecord {
     private String userId;
     private int lectureNo;
     private int courseNo;
-    private int isFinish;
+
     private Date regDate;
-	public MyLectureRecord(String userId, int lectureNo, int courseNo, int isFinish, Date regDate) {
+
+	public MyLectureRecord(String userId, int lectureNo, int courseNo, Date regDate) {
 		super();
 		this.userId = userId;
 		this.lectureNo = lectureNo;
 		this.courseNo = courseNo;
-		this.isFinish = isFinish;
 		this.regDate = regDate;
 	}
-
     
-    public MyLectureRecord() {
+    
+	public MyLectureRecord() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -54,16 +54,6 @@ public class MyLectureRecord {
 	}
 
 
-	public int getIsFinish() {
-		return isFinish;
-	}
-
-
-	public void setIsFinish(int isFinish) {
-		this.isFinish = isFinish;
-	}
-
-
 	public Date getRegDate() {
 		return regDate;
 	}
@@ -77,9 +67,10 @@ public class MyLectureRecord {
 	@Override
 	public String toString() {
 		return "MyLectureRecord [userId=" + userId + ", lectureNo=" + lectureNo + ", courseNo=" + courseNo
-				+ ", isFinish=" + isFinish + ", regDate=" + regDate + "]";
+				+ ", regDate=" + regDate + "]";
 	}
-    
+	
+	
     
     
 

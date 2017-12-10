@@ -17,7 +17,7 @@ td:nth-child(odd) {
 <html>
 <body>
 	<div align="center">
-		최근 4일동안의 게시물 좋아요 목록 ...<br>
+		최근 10일동안의 게시물 좋아요 목록 ...<br>
 		<table border=1px>
 
 
@@ -44,7 +44,7 @@ td:nth-child(odd) {
 		</table>
 
 		<br>
-		<br> 최근 4일동안의 답변 좋아요 목록 <br>
+		<br> 최근 10일동안의 답변 좋아요 목록 <br>
 		<table border=1px>
 
 
@@ -63,6 +63,35 @@ td:nth-child(odd) {
 						</c:if>  <span style="float: right"><img id="profile"
 							src="${path}/resources/upload/${rl.IMG_PROFILE}" alt="이미지" />
 							${rl.WRITER} ${rl.ACTIVITY}</span></td>
+				</tr>
+
+
+
+			</c:forEach>
+
+
+		</table>
+		
+		
+		<br>
+		<br> 내가 찜한 강의 목록 <br>
+		<table border=1px>
+
+
+
+
+			<c:forEach var="ll" items="${lectureList}">
+				<tr>
+					<td>#${ll.COURSE_NAME} 강의를 추천하셨습니다.
+						${ll.REG_DATE}</td>
+				</tr>
+				<tr>
+					<td>
+							<a href="${path}/lectureBoard/showLectureList?courseNo=${ll.COURSE_NO}">${ll.DESCRIPTION}</a>
+						
+						 <span style="float: right"><img id="profile"
+							src="${path}/resources/upload/${ll.IMG_PROFILE}" alt="이미지" />
+							${ll.AUTHOR} ${ll.ACTIVITY}</span></td>
 				</tr>
 
 

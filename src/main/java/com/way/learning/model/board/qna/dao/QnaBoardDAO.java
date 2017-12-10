@@ -22,6 +22,7 @@ public interface QnaBoardDAO {
 	public List<QnaBoard> getBoardList(String pageNo, String keyword, String sorting) throws SQLException;
 	
 	public List getTag(String boardNo) throws SQLException;
+	public int deleteTag(int boardNo) throws SQLException;
 	//showContent
 	public QnaBoard showContent(String no) throws SQLException;
 	//deleteBoard
@@ -55,7 +56,7 @@ public interface QnaBoardDAO {
 	public int selectCntBoardLike(int boardNo) throws SQLException;
 	
 	
-	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException;
+	public List<Integer> selectAllRecommendNo(String userId) throws SQLException;
 	
 }
 

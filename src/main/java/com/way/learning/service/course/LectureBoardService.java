@@ -9,7 +9,7 @@ public interface LectureBoardService {
 	public List selectMyCourseNo(String userId);
 	public int insertLecture(LectureBoard lvo);
 	public List<LectureBoard> selectLectureList(int courseNo);
-	public Course selectMyCourse(int courseNo, String userId);
+	public Course selectCourse(int courseNo, String userId);
 	public List<String> selectCourseTag(int courseNo);
 	public LectureBoard selectLecture(int lectureNo,int courseNo);
 	public int deleteLecture(int lectureNo,int courseNo);
@@ -17,6 +17,8 @@ public interface LectureBoardService {
 	public int isCourseLike(int courseNo, String userId);
 	public int isCourseRecommend(int courseNo, String userId);
 	public int selectCntCourseLike(int courseNo);
+	public int changeMyLecutreRecord(int courseNo, int lectureNo,String userId); 
+	public int isMyLectureRecordExist(int courseNo, int lectureNo,String userId);
 	
 
 }

@@ -18,9 +18,10 @@
 $(document).ready(function() {
 
 	listReply(); //댓글 목록
+	showWatchResult();
 	
 	
-
+ 
 		
 		$('#btnReply').click(function(){
 			var replytext=$("#replytext").val();
@@ -52,6 +53,39 @@ $(document).ready(function() {
 	
 	
 		
+	    
+	
+	
+		$('#finishLecture').click(function(){
+			var watchLectureText=$("#finishLecture").val();
+			alert(watchLectureText)
+			var lectureNo="${lvo.lectureNo}"; 
+			var courseNo="${lvo.courseNo}"; 
+			
+		
+			var param="${_csrf.parameterName}=${_csrf.token}&replytext="+replytext+"&lectureNo="+lectureNo+"&courseNo="+courseNo;
+			
+			$.ajax({
+				type: "post",
+				url: "${pageContext.request.contextPath}/lectureBoard/changeMyLecutreRecord",
+				data: param,
+				success: function(){
+					
+					if(watchLectureText == "다 봤어요"){
+						$("#finishLecture").val("다 봤어요 취소");
+					}else{
+						$("#finishLecture").val("다 봤어요");
+					}
+				
+				}
+				
+			});
+			
+			 
+		});
+	
+	
+		
 		
 	
 });
@@ -69,6 +103,30 @@ $(document).ready(function() {
 			}
 		});
 	 }
+	
+	function showWatchResult(){
+		
+		 
+		
+		 $.ajax({
+				
+			
+			type:"get",
+			url: "${pageContext.request.contextPath}/lectureBoard/isMyLectureRecordExist?lectureNo=${lvo.lectureNo}&courseNo=${lvo.courseNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
+			success: function(result){
+				//alert("result:"+result)
+				if(result==1){
+					$("#finishLecture").val('다 봤어요 취소');
+				}else{
+					$("#finishLecture").val('다 봤어요');
+				}
+			
+				
+				
+			}
+		}); 
+		
+		}
 	
 	
 	
@@ -122,18 +180,24 @@ function updateBoard(){
 <div align="center">
 ${lvo.lectureName} <fmt:formatDate value="${lvo.regDate}" pattern="YYYY.MM.dd" />  
 
-<textarea id="content" name="content" readonly >${lvo.content} </textarea>
+<textarea id="content" name="content"  >${lvo.content} </textarea>
 								<script>
-								CKEDITOR.replace( 'content', {
-									extraPlugins: 'autogrow,youtube',
-					      			
-					      			autoGrow_minHeight: 400,
-					      			autoGrow_maxHeight: 10000,
-					      			autoGrow_bottomSpace: 50,
-					      			removePlugins: 'resize',
-					      			
-					      		} );
-		                        </script> 
+			          //CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false});  // 태그의 id
+			         // CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});  
+		             // CKEDITOR.replace("content");  
+		             
+		      		  CKEDITOR.replace( 'content', {
+		      			extraPlugins: 'autogrow,youtube',		      			
+		      			autoGrow_minHeight: 400,
+		      			autoGrow_maxHeight: 10000,
+		      			autoGrow_bottomSpace: 50,
+		      			resize_enabled : false,
+		      			removePlugins : 'elementspath',
+		      			      			
+		      		} );  
+
+		      	</script>
+<div align="center" > <input type="button" value="다 봤어요" id="finishLecture" /><!-- <span id="watchLectureCnt" > </span> --> </div>		      	
 		                        	<!-- 댓글목록 출력 -->
 	<div id=listReply></div>
 	

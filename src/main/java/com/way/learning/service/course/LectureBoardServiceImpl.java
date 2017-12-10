@@ -35,10 +35,10 @@ public class LectureBoardServiceImpl implements LectureBoardService {
 
 	}
 
-	public Course selectMyCourse(int courseNo, String userId){
+	public Course selectCourse(int courseNo, String userId){
 
 
-		return lectureBoardDAO.selectMyCourse(courseNo, userId);
+		return lectureBoardDAO.selectCourse(courseNo, userId);
 
 	}
 
@@ -49,8 +49,12 @@ public class LectureBoardServiceImpl implements LectureBoardService {
 	}
 
 	public LectureBoard selectLecture(int lectureNo,int courseNo) {
+		
+		LectureBoard lvo=lectureBoardDAO.selectLecture(lectureNo,courseNo);
+		
+		
 
-		return lectureBoardDAO.selectLecture(lectureNo,courseNo);
+		return lvo;
 
 	}
 
@@ -94,12 +98,14 @@ public class LectureBoardServiceImpl implements LectureBoardService {
 
 		if(result==0){
 			action=lectureBoardDAO.insertCourseLike(courseNo,userId  );
+			lectureBoardDAO.increaseCntCourseLike(courseNo);
 
 
 
 
 		}else if(result==1){
 			action=lectureBoardDAO.deleteCourseLike(courseNo,userId);
+			lectureBoardDAO.decreaseCntCourseLike(courseNo);
 
 		}
 
@@ -114,7 +120,30 @@ public class LectureBoardServiceImpl implements LectureBoardService {
 		return lectureBoardDAO.selectCntCourseLike(courseNo);
 
 	}
-
+	
+	@Override
+	public int changeMyLecutreRecord(int courseNo, int lectureNo,String userId)  {
+		
+		int  result=lectureBoardDAO.isMyLectureRecordExist(courseNo, lectureNo,userId);
+		if(result == 0){
+			lectureBoardDAO.insertMyLectureRecord(courseNo, lectureNo,userId);
+		}else{
+			lectureBoardDAO.deleteMyLectureRecord(courseNo, lectureNo,userId);
+		}
+		
+		return result;
+		
+	}
+	
+	@Override
+	public int isMyLectureRecordExist(int courseNo, int lectureNo,String userId)  {
+		
+	
+		return lectureBoardDAO.isMyLectureRecordExist(courseNo, lectureNo, userId);
+		
+	}
+	
+	
 
 
 

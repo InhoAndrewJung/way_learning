@@ -251,13 +251,32 @@ public class MemberController {
 
 	@RequestMapping("myFavoriteList")
 	public ModelAndView selectBoardFavorite(ModelAndView mav) throws Exception {
-
-		List boardList = memberService.selectBoardFavorite();
+		Member mvo = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List boardList = memberService.selectBoardFavorite(mvo.getUserId());
 		System.out.println("boardList:" + boardList);
-		List replyList = memberService.selectReplyFavorite();
+		
+		List replyList = memberService.selectReplyFavorite(mvo.getUserId());
+		System.out.println("replyList:" + replyList);
+		
+		List lectureList= memberService.selectLectureFavorite(mvo.getUserId());
 		mav.addObject("boardList", boardList);
 		mav.addObject("replyList", replyList);
+		mav.addObject("lectureList", lectureList);
 		mav.setViewName("/member/myFavoriteList");
+
+		return mav;
+	}
+	
+	
+	@RequestMapping("showMyLectureRecord")
+	public ModelAndView showMyLectureRecord(ModelAndView mav) throws Exception {
+		Member mvo = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List lectureList = memberService.selectMyLectureRecord();
+		System.out.println("lectureList:" + lectureList);
+		
+		
+		mav.addObject("lectureList", lectureList);
+		mav.setViewName("/member/showMyLectureRecord");
 
 		return mav;
 	}

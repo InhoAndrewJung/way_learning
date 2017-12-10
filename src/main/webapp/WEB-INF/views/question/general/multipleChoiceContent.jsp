@@ -43,7 +43,7 @@
 					<tr>
 
 						<td colspan="2"><label for="answer">${status.index+1}.</label><input
-							type="radio" name="answer" id="answer" value="${status.index}" />
+							type="radio" name="answer" id="answer" value="${status.index+1}" />
 							${row.answerChoice}</td>
 					</tr>
 				</c:forEach>

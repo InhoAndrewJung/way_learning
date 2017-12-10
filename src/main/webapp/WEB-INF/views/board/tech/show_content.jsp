@@ -22,7 +22,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: "post",
 			url: "${pageContext.request.contextPath}/board/tech/likeStatus",
-			data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}",
+			data:"${_csrf.parameterName}=${_csrf.token}",
 			success: function(result){
 				
 				
@@ -183,7 +183,7 @@ ${delete_result}
 	
 	
 	
-					<table border="1" width="650" align="center">
+					<table border="1" width="1000" align="center">
 
 
 						<tr>
@@ -220,7 +220,7 @@ ${delete_result}
 
 							<td colspan="4">
 							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" readonly >${requestScope.bvo.content}</textarea>
-								<script>
+										<script>
 			          //CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false});  // 태그의 id
 			         // CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});  
 		             // CKEDITOR.replace("content");  
@@ -230,7 +230,9 @@ ${delete_result}
 		      			autoGrow_minHeight: 400,
 		      			autoGrow_maxHeight: 10000,
 		      			autoGrow_bottomSpace: 50,
-		      			removePlugins: 'resize',		      			
+		      			resize_enabled : false,
+		      			removePlugins : 'elementspath',
+		      			      			
 		      		} );  
 
 		      	</script>
