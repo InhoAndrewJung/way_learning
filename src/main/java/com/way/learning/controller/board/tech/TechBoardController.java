@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.way.learning.model.board.qna.vo.QnaBoard;
 import com.way.learning.model.board.tech.vo.TechBoard;
 import com.way.learning.model.member.vo.Member;
 import com.way.learning.service.board.tech.ListVO;
@@ -47,7 +48,7 @@ public class TechBoardController {
 	
 	@RequestMapping("insert")
 	public ModelAndView insertBoard(HttpServletRequest request, HttpServletResponse response,
-			HttpSession session, TechBoard bvo ) throws Exception{
+			HttpSession session, TechBoard bvo,ModelAndView mav ) throws Exception{
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("컨트로러 mvo:"+mvo);
 		
@@ -58,8 +59,12 @@ public class TechBoardController {
 		bvo.setMember(mvo); //bvo와 mvo의 Hasing 관계가 성립된다..
 
 		techBoardService.insertBoard(bvo); 
+		List tagList= techBoardService.getTag(bvo.getBoardNo()+"");
+		mav.setViewName("board/tech/show_content");
+		mav.addObject("tagList", tagList);
+		mav.addObject("bvo",bvo);
 		System.out.println("컨트롤러 bvo:"+bvo);
-		return new ModelAndView("board/tech/show_content", "bvo",bvo);
+		return mav;
 	}
 
 	
@@ -145,13 +150,13 @@ public class TechBoardController {
 	
 	@ResponseBody
 	@RequestMapping("likeStatus")
-	public List<Integer> likeStatus(int boardNo)throws Exception{
+	public List<Integer> likeStatus()throws Exception{
 		
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		
 		
-		List<Integer> noList=techBoardService.selectAllRecommendNo(boardNo);
+		List<Integer> noList=techBoardService.selectAllRecommendNo(mvo.getUserId());
 		
 		return noList;
 	}
@@ -168,22 +173,33 @@ public class TechBoardController {
 	}
 
 	@RequestMapping("updateView")
-	public ModelAndView updateView(String boardNo)
+	public ModelAndView updateView(String boardNo, ModelAndView mav)
 			throws Exception{
 		TechBoard bvo=techBoardService.showContent(boardNo);
-		return new ModelAndView("board/tech/update", "bvo",bvo);
+		List tagList= techBoardService.getTag(bvo.getBoardNo()+"");
+		mav.setViewName("board/tech/update");
+		mav.addObject("tagList", tagList);
+		mav.addObject("bvo",bvo);
+		System.out.println("컨트롤러 bvo:"+bvo);
+		return mav;
 	}
 
 
 
 	@RequestMapping("updateBoard")
-	public ModelAndView updateBoard(TechBoard pvo,HttpSession session)
+	public ModelAndView updateBoard(TechBoard pvo,HttpSession session, ModelAndView mav)
 			throws Exception{
 
-				techBoardService.updateBoard(pvo); //디비에 데이타를 직접 수정
-
-		return new ModelAndView("board/tech/show_content", "bvo",techBoardService.showContent(pvo.getBoardNo()+""));
-	}
+		techBoardService.updateBoard(pvo); //디비에 데이타를 직접 수정
+		
+		List tagList= techBoardService.getTag(pvo.getBoardNo()+"");
+		TechBoard bvo=techBoardService.showContent(pvo.getBoardNo()+"");
+		mav.setViewName("board/tech/show_content");
+		mav.addObject("tagList", tagList);
+		mav.addObject("bvo",bvo);
+		System.out.println("컨트롤러 bvo:"+bvo);
+		return mav;
+}
 	
 	
 	

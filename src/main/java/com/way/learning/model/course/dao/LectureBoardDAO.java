@@ -9,7 +9,7 @@ public interface LectureBoardDAO {
 	public List selectMyCourseNo(String userId);
 	public int insertLecture(LectureBoard lvo);
 	public List<LectureBoard> selectLectureList(int courseNo);
-	public Course selectMyCourse(int courseNo, String userId);
+	public Course selectCourse(int courseNo, String userId);
 	public List<String> selectCourseTag(int courseNo) ;
 	public LectureBoard selectLecture(int lectureNo,int courseNo);
 	public int deleteLecture(int lectureNo,int courseNo);
@@ -19,5 +19,10 @@ public interface LectureBoardDAO {
 	public int insertCourseLike(int courseNo, String userId);
 	public int deleteCourseLike( int courseNo, String userId);
 	public int selectCntCourseLike(int courseNo);
+	public int increaseCntCourseLike(int courseNo);
+	public int decreaseCntCourseLike(int courseNo);
+	public int isMyLectureRecordExist(int courseNo, int lectureNo,String userId);
+	public int insertMyLectureRecord(int courseNo, int lectureNo,String userId);
+	public int deleteMyLectureRecord(int courseNo, int lectureNo,String userId);
 
 }

@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ include file="../../include/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="${path}/resources/css/show_content.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  
-
-
-<%@ include file="../../include/common.jsp" %>
 
 
 </head>
@@ -27,7 +27,7 @@ $(document).ready(function() {
 		$.ajax({
 			type: "post",
 			url: "${pageContext.request.contextPath}/board/qna/likeStatus",
-			data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}",
+			data:"${_csrf.parameterName}=${_csrf.token}",
 			success: function(result){
 				
 				
@@ -51,9 +51,16 @@ $(document).ready(function() {
 
 	
 		
-		//댓글 쓴거 전송 
-		//텍스트와,bno, 비밀글 여부를 insert.do의 파라미터값으로 넣음
+
 		$('#btnReply').click(function(){
+			reply(); 		 
+		});
+		
+		
+
+
+		
+		function reply(){
 			var replytext=$("#replytext").val();
 			var boardNo="${requestScope.bvo.boardNo}"; // view 컨트롤러에서 가져옴!
 			//비밀댓글 체크 여부
@@ -77,21 +84,17 @@ $(document).ready(function() {
 				
 			});
 			$("#replytext").val("");
-			 
-		});
-	
-	
-		
-		
-	
-});
+			
+		}
+
+	});
 			
 	//댓글 불러오는 방식
 	function listReply(){
 		
 		$.ajax({
 			type:"get",
-			url: "${pageContext.request.contextPath}/lectureReply/qna/list?boardNo=${requestScope.bvo.boardNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
+			url: "${pageContext.request.contextPath}/reply/qna/list?boardNo=${requestScope.bvo.boardNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
 			success: function(result){
 				$("#listReply").html(result);	
 			}
@@ -178,25 +181,25 @@ var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boar
 
 
 
-<style>
 
+<style>
     .cke_top
     {
         display: none !important;
     }
-
-
+.cke_bottom {display: !important;}
 #profile{width:50px; height:50px; border-radius: 50% }
 a{text-decoration:none; cursor: pointer;}
 #tag{font-size:10px;border:1px solid grey;border-radius:10%; background-color:grey; color:white; margin-left:10px;}
-
 </style>
 
 
 
 
+
+
 <body>
-<%-- 
+
 <c:if test="${replyNo !=null}">
 
 	<script>
@@ -207,10 +210,171 @@ a{text-decoration:none; cursor: pointer;}
 	},700) ;
 	</script>
 
-</c:if> --%>
+</c:if> 
 
 
 
+
+
+<div class="move-boardList">
+		<a href="${pageContext.request.contextPath}/board/qna/list?keyword=${keyword}">
+		<img src="${path}/resources/img/list.png" id="image_list">
+		</a>
+	</div>
+
+	<div class="container-board">
+
+		<div class="board-head">
+			
+			<div class="userList">
+				<img src="${path}/resources/upload/${bvo.member.imgProfile}" id="image_profile">
+						
+				<div class="userList-info">
+					<a class="userId">${requestScope.bvo.member.userId}</a>
+								
+					<div class="activity">
+								
+						<span class="fa fa-graduation-cap"></span>
+							${requestScope.bvo.member.activity}
+					</div>
+								
+						<div class="date">
+							<span class="timeago">
+								<fmt:formatDate value="${bvo.regDate}" pattern="yyyy.MM.dd HH:mm:ss" />
+							</span> 
+								
+						</div>
+							
+				</div>
+				
+			</div>
+			
+			<div class="comment-hit">
+				<span class="comment"> 
+					<img src="${path}/resources/img/reply.png" id="image_reply"> &nbsp; ${requestScope.bvo.cntReply}
+				</span> 
+				<span class="hit"> 
+					<img src="${path}/resources/img/eyes.png" id="image_eyes"> &nbsp; ${requestScope.bvo.cntView}
+				</span>
+			</div>
+			
+		</div>
+		
+		<div class="board-content">
+				<div class="content-body">
+				
+				
+					<div class="content-tag">
+					  <c:forEach var="tag" items="${tagList}">
+						  <span class="tag">${tag.TAG}</span>
+					  </c:forEach>
+					</div>
+					
+					
+					<h2 class="content-title">
+						${requestScope.bvo.title}
+					
+					</h2>
+					
+					<hr>
+					
+					<div class="content-text">
+						
+					
+						<pre class="code-text">
+						<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" readonly >${requestScope.bvo.content}</textarea>
+										<script>
+			          //CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false});  // 태그의 id
+			         // CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});  
+		             // CKEDITOR.replace("content");  
+		             
+		      		  CKEDITOR.replace( 'content', {
+		      			extraPlugins: 'autogrow,youtube',		      			
+		      			autoGrow_minHeight: 400,
+		      			autoGrow_maxHeight: 10000,
+		      			autoGrow_bottomSpace: 50,
+		      			resize_enabled : false,
+		      			removePlugins : 'elementspath',
+		      			      			
+		      		} );  
+
+		      	</script>
+						</pre>
+					</div>
+					
+					
+				</div>
+			
+				<div class="content-function">
+					
+					<div class="function-like">
+					
+					<img id="boardGood${bvo.boardNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="boardLikeUp('${bvo.boardNo}')" ><br><br>
+							<span id="cntBoardLike" class="cntBoardLike" >${bvo.cntBoardLike}</span><br><br>
+							<img  src="${path}/resources/img/arrowDown.png" style="width:20px; height:20px;cursor:pointer;" onclick="boardLikeDown('${bvo.boardNo}')">
+							
+							
+					<%-- 	<img src="${path}/resources/img/empty_heart.png" id="boardGood${bvo.boardNo}" onclick="boardLikeChange('${bvo.boardNo}')" class="image_empty-heart"> 
+						<span id="cntBoardLike" class="cntBoardLike" >${bvo.cntBoardLike}</span> --%>
+					</div>
+					
+					<sec:authorize access="isAuthenticated()">
+							<sec:authentication var="mvo" property="principal" />
+								<c:if test="${mvo.userId == requestScope.bvo.member.userId }">
+						<div class="function-edit">
+						
+									<img src="${path}/resources/img/edit.png" id="image_edit" onclick="updateBoard()">
+						</div>
+								</c:if>
+						</sec:authorize>
+						<div class="function-facebook">
+						
+						<a onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent('http://127.0.0.1:7777/learning/board/qna/showContent?boardNo=${requestScope.bvo.boardNo}&&keyword=')+'&t='+encodeURIComponent('Q&A 게시판'), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" >
+						<img src="${path}/resources/img/facebook.png" class="image_facebook">					</a>
+					
+						</div>
+						
+				</div>
+		</div>
+		
+		
+
+	</div>
+	
+	
+	<!-- 댓글목록 출력 -->
+	<div id=listReply></div>
+	
+	
+			<div class="reply-textWrite">
+				<sec:authorize access="isAuthenticated()">
+				<textarea class="reply_writeText" rows="4" cols="80" id="replytext" placeholder="댓글을 작성하세요" ></textarea>
+			<div class="write_button">
+				<img src="${path}/resources/img/write.png" class="image_write"  id="btnReply" style="cursor:pointer">
+			</div>
+			</sec:authorize>
+		</div>
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%-- 
 	
 	
 	
@@ -222,7 +386,7 @@ a{text-decoration:none; cursor: pointer;}
 
 
 	
-					<table border="1" width="650" align="center">
+					<table border="1" width="1000" align="center">
 
 
 						<tr>
@@ -261,15 +425,22 @@ a{text-decoration:none; cursor: pointer;}
 
 							<td colspan="4">
 							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" >${requestScope.bvo.content}</textarea>
-								<script>
-								 CKEDITOR.replace( 'content', {
-						      			extraPlugins: 'autogrow,youtube',						      			
-						      			autoGrow_minHeight: 400,
-						      			autoGrow_maxHeight: 10000,
-						      			autoGrow_bottomSpace: 50,
-						      			removePlugins: 'resize',						      			
-						      		} );  
-		                        </script> 
+										<script>
+			          //CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false});  // 태그의 id
+			         // CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});  
+		             // CKEDITOR.replace("content");  
+		             
+		      		  CKEDITOR.replace( 'content', {
+		      			extraPlugins: 'autogrow,youtube',		      			
+		      			autoGrow_minHeight: 400,
+		      			autoGrow_maxHeight: 10000,
+		      			autoGrow_bottomSpace: 50,
+		      			resize_enabled : false,
+		      			removePlugins : 'elementspath',
+		      			      			
+		      		} );  
+
+		      	</script>
 							
 							</td>
 							<td align="center">
@@ -319,7 +490,7 @@ a{text-decoration:none; cursor: pointer;}
 		</sec:authorize>
 	</div>
 	
-	</div>
+	</div> --%>
 </body>
 </html>
 

@@ -10,7 +10,11 @@
 <form action="${pageContext.request.contextPath}/member/findIdByEmail?${_csrf.parameterName}=${_csrf.token}"
 		id="findIdProc">
 				<c:choose>
+<<<<<<< HEAD
 					<c:when test="${findIdResult == 'fail'}">
+=======
+						<c:when test="${findIdResult == 'fail'}">
+>>>>>>> master
 						<h3>
 							찾으시는 ID는 <b>${userId}</b> 입니다....<br>
 						</h3>

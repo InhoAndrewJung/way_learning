@@ -52,7 +52,7 @@ public class GeneralQuestionController {
 		System.out.println("keyword:" + keyword);
 		System.out.println("sorting:" + sorting);
 
-		int count = questionService.countArticle(keyword);
+		
 		List<GeneralQuestion> list = questionService.getGeneralList(keyword, sorting);
 		System.out.println("qna  컨트롤러 에서 list:" + list);
 

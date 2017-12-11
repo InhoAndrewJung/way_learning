@@ -35,9 +35,15 @@ public interface MemberDAO {
 
 	public List<AnswerResult> selectAllRanking(String sorting);
 
-	public List selectBoardFavorite();
+	public List selectBoardFavorite(String userId);
 
-	public List selectReplyFavorite();
+	public List selectReplyFavorite(String userId);
+	
+	public List selectLectureFavorite(String userId);
+	
+	public List selectMyLectureRecord(String userId);
+	
+	public int deleteMember(String userId) ;
 
 	// 회원탈퇴 추가
 	public int deleteMember(String userId) ;

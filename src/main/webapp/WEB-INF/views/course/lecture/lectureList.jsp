@@ -89,7 +89,8 @@ $.ajax({
 
 var lecNo= ${lecList[0].lectureNo};
 
-function moveLecture(lectureNo){
+
+function showLecture(lectureNo){
 	lecNo=lectureNo;
 	//alert(lectureNo);
 	$.ajax({
@@ -150,7 +151,7 @@ function courseLikeChange(){
 		url: "${pageContext.request.contextPath}/lectureBoard/changeLike",
 		data: param,
 		success: function(result){
-			//alert(result)
+			alert("courseLikeChange cnt:"+result);
 			
 			
 			$("#recommendCnt").html(result);
@@ -174,22 +175,26 @@ function courseLikeChange(){
 </head>
 <body>
 
- <c:if test="${lecList != null }">
+ <c:if test="${lecList != null && lectureNo =='0' }">
 <script>
 
-moveLecture('${lecList[0].lectureNo}');
+showLecture('${lecList[0].lectureNo}');
+</script>
+
+</c:if> 
+
+ <c:if test="${lectureNo !='0' }">
+<script>
+
+showLecture('${lectureNo}');
 </script>
 
 </c:if> 
 
  
  
-<%-- <video width=400 controls>   <source src="${pageContext.request.contextPath}/resources/upload/movie.ogg" type="video/ogg"> Your browser does not support HTML5 video.</video> --%>
-<!-- <iframe src="//www.youtube.com/embed/TOq6naMEuhg?rel=0?autoplay=1&start=30&loop=1&playlist=TOq6naMEuhg" allowfullscreen="" frameborder="0" height="315" width="420"></iframe> -->
-  <%-- <iframe src="${pageContext.request.contextPath}/resources/upload/movie.mp4" ></iframe>  --%>
-<%--   <iframe src="${pageContext.request.contextPath}/resources/upload/movie.ogg" ></iframe> --%>
-<%--   <video width=400 controls>   <source src="${path}/resources/upload/movie.ogg" type="video/ogg"></source></video> --%>
-  <!-- <iframe src="https://www.naver.com">  -->
+
+
 	<table border="1" width=100% height=100%>
 
 		<tr height=10%>
@@ -205,7 +210,7 @@ moveLecture('${lecList[0].lectureNo}');
 						<td width=20%>강사 ${cvo.member.userId}<br> <fmt:formatDate
 								value="${cvo.regDate}" pattern="YYYY.MM.dd" /> <br>
 								<img src="${path}/resources/img/heart.png" width="50" alt="추천" id="recommend"  onclick="courseLikeChange()"/> 
-								<span id="recommendCnt">11</span>
+								<span id="recommendCnt">${cvo.cntCourseLike}</span>
 								
 
 						</td>
@@ -216,13 +221,13 @@ moveLecture('${lecList[0].lectureNo}');
 				</table>
 			</td>
 		</tr>
-		<tr height=90%>
-			<td width=20%>
-				<table>
+		<tr height=90% style="vertical-align:top;">
+			<td width=20% >
+				<table  >
 				   ${cvo.courseName} <br>
 					<c:forEach var="row" items="${lecList}" varStatus="status">
 						<tr>
-							<td><a href="#" onclick="moveLecture('${row.lectureNo}')">${row.lectureOrder}강 ${row.lectureName}</a>  </td>
+							<td><a href="#" onclick="showLecture('${row.lectureNo}')">${row.lectureOrder}강 ${row.lectureName}</a>  </td>
 						<tr>
 					</c:forEach>
 				</table>
@@ -242,7 +247,7 @@ moveLecture('${lecList[0].lectureNo}');
 					onclick="updateLecture()">
 			</c:if>
 		</sec:authorize>
-			<div id="lecture"></div>
+			<div id="lecture"> </div>
 			
 			
 			

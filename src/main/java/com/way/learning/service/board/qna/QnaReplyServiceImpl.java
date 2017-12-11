@@ -41,10 +41,10 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 
 	//updateReply
 	public void  updateReply(String rno, String replytext){
-			if(replytext.indexOf("Re:") ==-1){
+			/*if(replytext.indexOf("Re:") ==-1){
 				replytext	="Re:"+replytext;
 			
-			}
+			}*/
 			qnaReplyDao.updateReply(rno, replytext);
 
 	}

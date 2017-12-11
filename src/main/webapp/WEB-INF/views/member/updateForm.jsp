@@ -63,6 +63,8 @@ img {
 }
 </style>
 
+<div align="center"> 
+
 
 		<img src="${path}/resources/upload/${mvo.imgProfile}"> <br>
 		아이디 : <input type="text" name="userId"  value="${mvo.userId}" readonly>
@@ -73,5 +75,6 @@ img {
 		<br> <input type="submit" value="회원정보수정" onclick="inputCheck()">
 	</form>
 </sec:authorize>
-<h3>회원정보수정</h3>
 
+<a href="${path}/"> 메인페이지로 이동</a>
+</div>

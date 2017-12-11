@@ -17,7 +17,7 @@ public interface QuestionDAO {
 
 	public List<GeneralQuestion> getGeneralList( String keyword, String sorting) throws SQLException;
 
-	public int countArticle(String keyword);
+	
 
 	public List<AlgorithmQuestion> getEssayList(String keyword) throws SQLException;
 

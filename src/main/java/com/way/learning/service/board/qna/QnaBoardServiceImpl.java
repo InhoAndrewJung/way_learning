@@ -18,72 +18,81 @@ import com.way.learning.model.board.qna.vo.QnaBoard;
 public class QnaBoardServiceImpl implements QnaBoardService{
 	@Autowired
 	private QnaBoardDAO qnaBoardDao;
-	
+
 	public int insertBoard(QnaBoard bvo)throws SQLException{
 		System.out.println("Before BVO :: "+bvo.getBoardNo()); //0
 		System.out.println("보드 서비스 bvo:"+bvo);
 		int result=qnaBoardDao.insertBoard(bvo); //selectKey가 돌아가서 시퀀스를 vo에주입
 		System.out.println("After BVO :: "+bvo.getBoardNo()); //3
-		
+
 		Date date=qnaBoardDao.selectByNoForDate(bvo.getBoardNo());//3
 		//받아온 날짜를 bvo에 다시 세팅해준다...
 		bvo.setRegDate(date);
-		
+
 		List<String> tag=bvo.getTag();
-		
+
 		for(String tags: tag){
 			System.out.println("서비스 태그:"+tags);
 			qnaBoardDao.insertTag(tags,bvo.getBoardNo());
-			
+
 		}
 		return result;
 	}
-	
+
 	public List<QnaBoard> getBoardList(String Pageno,  String keyword, String sorting) throws SQLException{// no 
-		
+
 		return qnaBoardDao.getBoardList(Pageno,keyword, sorting);
 	}
-	
+
 	public List getTagList() throws SQLException{
-		
+
 		return qnaBoardDao.getTagList();
 	}
-	
+
 	@Override
 	public List getTag(String boardNo) throws SQLException {
 		// TODO Auto-generated method stub
 		return qnaBoardDao.getTag(boardNo);
 	}
-	
-	
+
+
 	//showContent
 	public QnaBoard showContent(String no) throws SQLException{
-		
+
 		return qnaBoardDao.showContent(no);
 	}
-		
+
 	//deleteBoard
 	public void deleteBoard(int no) throws SQLException{
 		qnaBoardDao.deleteBoard(no);
 	}
-	
+
 	//updateCount
 	public void updateCount(String no) throws SQLException{
 		qnaBoardDao.updateCount(no);
 	}
-	
+
 	//updateBoard
-	public void updateBoard(QnaBoard vo) throws SQLException{
-		qnaBoardDao.updateBoard(vo);
+	public void updateBoard(QnaBoard bvo) throws SQLException{
+		qnaBoardDao.updateBoard(bvo);
+
+		List<String> tag=bvo.getTag();
+		qnaBoardDao.deleteTag(bvo.getBoardNo());
+
+		for(String tags: tag){
+			System.out.println("서비스 태그:"+tags);
+			qnaBoardDao.insertTag(tags,bvo.getBoardNo());
+
+		}
 	}
-	
-	
-	
+
+
+
 	public int countArticle(String keyword) throws SQLException {
-		
+
 		return qnaBoardDao.countArticle(keyword);
 	}
-	
+
 	@Transactional
 	public int isBoardLike(String userId, int boardNo,String likeStatus) throws SQLException {
 		int result=qnaBoardDao.isBoardLike(userId, boardNo, likeStatus);
@@ -97,36 +106,36 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 				qnaBoardDao.insertBoardLike(userId, boardNo);
 				action=qnaBoardDao.increaseCntBoardLike(boardNo);
 			}
-			
+
 		}else if(likeStatus.equals("likeDown")){
 			if(result==1){
 				qnaBoardDao.deleteBoardLike(userId, boardNo);
 				action=qnaBoardDao.decreaseCntBoardLike(boardNo);
 			}
-			
+
 		}
 		return action;
-	
+
 	}
-	
+
 	@Override
 	public int selectCntBoardLike(int boardNo) throws SQLException {
 
 		return qnaBoardDao.selectCntBoardLike(boardNo);
-		
+
 	}
-	
+
 	@Override
-	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException {
+	public List<Integer> selectAllRecommendNo(String userId) throws SQLException {
 
-		return qnaBoardDao.selectAllRecommendNo(boardNo);
-		
+		return qnaBoardDao.selectAllRecommendNo(userId);
+
 	}
 
-	
-	
-	
-	
-		
-	
+
+
+
+
+
+
 }

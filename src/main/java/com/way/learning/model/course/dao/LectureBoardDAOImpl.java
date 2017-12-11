@@ -1,5 +1,6 @@
 package com.way.learning.model.course.dao;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,12 +40,12 @@ public class LectureBoardDAOImpl implements LectureBoardDAO {
 	}
 
 
-	public Course selectMyCourse(int courseNo, String userId){
+	public Course selectCourse(int courseNo, String userId){
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("userId", userId);
 		map.put("courseNo", courseNo);
 
-		return sqlSession.selectOne("lectureBoardMapper.selectMyCourse", map);
+		return sqlSession.selectOne("lectureBoardMapper.selectCourse", map);
 
 	}
 
@@ -145,7 +146,58 @@ public class LectureBoardDAOImpl implements LectureBoardDAO {
 		return result;
 
 	}
-
+	
+	@Override
+	public int increaseCntCourseLike(int courseNo)  {
+		
+		System.out.println("코스  좋아요 올리기:"+courseNo);
+		return sqlSession.update("lectureBoardMapper.increaseCntCourseLike", courseNo);
+		
+	}
+	
+	
+	@Override
+	public int decreaseCntCourseLike(int courseNo)  {
+		
+		System.out.println("코스 좋아요 내리기:"+courseNo);
+		return sqlSession.update("lectureBoardMapper.decreaseCntCourseLike", courseNo);
+		
+	}
+	
+	
+	@Override
+	public int isMyLectureRecordExist(int courseNo, int lectureNo,String userId)  {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("courseNo", courseNo);
+		map.put("userId", userId);
+	
+		return sqlSession.selectOne("lectureBoardMapper.isMyLectureRecordExist", map);
+		
+	}
+	
+	
+	@Override
+	public int insertMyLectureRecord(int courseNo, int lectureNo,String userId)  {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("courseNo", courseNo);
+		map.put("userId", userId);
+	
+		return sqlSession.insert("lectureBoardMapper.insertMyLectureRecord", map);
+		
+	}
+	
+	@Override
+	public int deleteMyLectureRecord(int courseNo, int lectureNo,String userId)  {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("courseNo", courseNo);
+		map.put("userId", userId);
+	
+		return sqlSession.delete("lectureBoardMapper.deleteMyLectureRecord", map);
+		
+	}
 	
 	
 	

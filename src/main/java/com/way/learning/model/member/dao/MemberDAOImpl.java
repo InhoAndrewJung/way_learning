@@ -93,19 +93,45 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List selectBoardFavorite() {
+	public List selectBoardFavorite(String userId) {
 		System.out.println("selectBoardFavorite dao ");
 
-		return sqlSession.selectList("memberMapper.selectBoardFavorite");
+		return sqlSession.selectList("memberMapper.selectBoardFavorite",userId);
 	}
 
 	@Override
-	public List selectReplyFavorite() {
+	public List selectReplyFavorite(String userId) {
 		System.out.println("selectReplyFavorite dao ");
+<<<<<<< HEAD
 
 		return sqlSession.selectList("memberMapper.selectReplyFavorite");
 	}
 	// 회원탈퇴 추가
+=======
+		
+		return sqlSession.selectList("memberMapper.selectReplyFavorite",userId);				
+	}
+	
+	@Override
+	public List selectLectureFavorite(String userId) {
+		System.out.println("selectLectureFavorite dao ");
+		
+		return sqlSession.selectList("memberMapper.selectLectureFavorite",userId);				
+	}
+	
+	@Override
+	public List selectMyLectureRecord(String userId) {
+		System.out.println("selectMyLectureRecord dao ");
+
+		return sqlSession.selectList("memberMapper.selectMyLectureRecord",userId);
+	}
+	
+	public int deleteMember(String userId) {
+
+		return sqlSession.delete("memberMapper.deleteMember",userId);
+	}
+
+>>>>>>> master
 
 	
 	public int deleteMember(String userId) {
