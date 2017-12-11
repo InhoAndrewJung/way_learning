@@ -75,6 +75,8 @@ public class QnaReplyController {
 		return cnt;
 	}
 	
+	
+	
 	@ResponseBody
 	@RequestMapping("likeStatus")
 	public List<Integer> likeStatus()throws Exception{
