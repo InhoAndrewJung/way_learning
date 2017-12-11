@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+	
+<mapper namespace="lectureBoardMapper">
+
+
+
+	<select id="selectMyCourseNo"  resultType="hashmap">
+	select course_no,course_name from wl_course where author=#{value}
+	</select>
+
+
+	<insert id="insertLecture" >
+	
+	<selectKey keyProperty="lectureNo" resultType="int" order="BEFORE">
+	 	select wl_lecture_board_SEQ.nextval from dual
+	</selectKey>
+		insert into wl_lecture_board (lecture_no,course_no,lecture_order,lecture_name,author,content) 
+		values (#{lectureNo},#{courseNo},#{lectureOrder},#{lectureName},#{member.userId},#{content})
+	
+	</insert>
+	
+	<select id="isMyLectureRecordExist" resultType="int">
+	select count(-1) from wl_my_lecture_record where course_no=#{courseNo} and lecture_no=#{lectureNo} and user_id=#{userId}
+	
+	</select>
+	
+	<insert id="insertMyLectureRecord">
+	insert into wl_my_lecture_record (user_id,course_no,lecture_no) values(#{userId},#{courseNo},#{lectureNo})
+	</insert>
+	
+	<insert id="deleteMyLectureRecord">
+	delete from wl_my_lecture_record where course_no=#{courseNo} and lecture_no=#{lectureNo} and user_id=#{userId}
+	</insert>
+	
+	<select id="isCourseLike" resultType="int">
+	select count(*) from wl_course_recommend where user_id=#{userId} and course_no=#{courseNo}
+	
+	</select>
+	
+	
+	
+	
+
+	<insert id="insertCourseLike">
+	insert into wl_course_recommend (user_id,course_no) values(#{userId},#{courseNo})
+	</insert>
+	
+	
+	<delete id="deleteCourseLike">
+		delete from wl_course_recommend where user_id=#{userId} and course_no=#{courseNo}
+	</delete>
+	
+	<select id="selectCntCourseLike" resultType="int">
+	select cnt_course_like from wl_course where course_no=#{courseNo}
+	</select>
+	
+
+	
+	
+	
+	
+
+
+
+
+
+	<resultMap type="LectureBoard" id="lectureBoardRM">
+		<result property="lectureNo" column="lecture_no" />
+		<result property="courseNo" column="course_no" />
+		<result property="lectureName" column="lecture_name" />
+		<result property="lectureOrder" column="lecture_order" />
+		<result property="member.userId" column="author" />
+		<result property="content" column="content" />
+		<result property="regDate" column="reg_date" />
+
+	</resultMap>
+	
+	
+	
+	<select id="selectLectureList" resultMap="lectureBoardRM">
+	select lecture_name,lecture_no, lecture_order from wl_lecture_board where course_no=#{courseNo} order by lecture_order
+	</select>
+	
+	<resultMap type="Course" id="courseRM">
+	<result property="courseNo" column="course_no"/>
+	<result property="courseName" column="course_name"/>
+	<result property="description" column="description"/>
+	<result property="courseImage" column="course_image"/>
+	<result property="member.userId" column="author"/>
+	<result property="regDate" column="reg_date"/>
+	<result property="isAccept" column="is_accept"/>
+	<result property="cntCourseLike" column="cnt_course_like"/>
+	<result property="member.activity" column="activity"/>
+	<result property="member.imgProfile" column="img_profile"/>
+	
+	
+</resultMap>
+	
+	
+	
+	<select id="selectCourse" resultMap="courseRM">
+	select course_no, course_name,description,course_image,author,c.reg_date,is_accept,cnt_course_like,activity,img_profile 
+	from wl_course c, wl_member m where  c.AUTHOR=m.USER_ID  and course_No=#{courseNo}
+	</select>
+	
+	
+	<select id="selectCourseTag"  resultType="string">
+	select tag from wl_course_tag where course_no=#{courseNo}
+	</select>
+	
+	
+	
+	<select id="selectLecture" resultMap="lectureBoardRM">
+	
+	select lecture_no, course_no, lecture_name ,lecture_order,author ,content,reg_date from  wl_lecture_board  where course_no=#{courseNo} and lecture_no=#{lectureNo}
+	
+	</select>
+	
+	
+	
+	<delete id="deleteLecture">
+	delete from wl_lecture_board where course_no=#{courseNo} and lecture_no=#{lectureNo}
+	
+	</delete>
+	
+	<update id="updateLecture">
+	update wl_lecture_board set  lecture_name=#{lectureName},lecture_order=#{lectureOrder},content=#{content} 
+	where course_no=#{courseNo} and lecture_no=#{lectureNo}
+	
+	</update>
+	
+	<update id="increaseCntCourseLike">
+	 update  wl_course set cnt_course_like=cnt_course_like+1 where course_no=#{courseNo}
+	</update>
+	
+	<update id="decreaseCntCourseLike">
+	 update  wl_course set cnt_course_like=cnt_course_like-1 where course_no=#{courseNo}
+	</update>
+	
+	
+	
+	
+</mapper>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

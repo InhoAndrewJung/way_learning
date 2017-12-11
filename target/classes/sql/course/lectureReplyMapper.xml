@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lectureReplyMapper">
+
+<resultMap type="lectureReply" id="lectureReplyRM">
+<result property="replyNo" column="reply_no"/>
+<result property="lectureNo" column="lecture_no"/>
+<result property="courseNo" column="course_no"/>
+<result property="member.userId" column="replyer"/>
+<result property="replytext" column="replytext"/>
+<result property="regDate" column="reg_date"/>
+<result property="member.activity" column="activity"/>
+<result property="member.imgProfile" column="IMG_PROFILE"/>
+
+
+</resultMap>
+
+	<insert id="insertReply">
+	insert into wl_lecture_reply (reply_no,lecture_no,course_no,replyer,replytext)
+	values(wl_lecture_reply_SEQ.nextval,#{lectureNo},#{courseNo},#{member.userId},#{replytext})
+	
+	</insert>
+
+	<select id="selectListReply" resultMap="lectureReplyRM">
+	select reply_no,lecture_no,course_no,replyer,replytext,r.reg_date,m.activity,m.IMG_PROFILE 
+	from wl_lecture_reply r, wl_member m where  r.REPLYER=m.USER_ID and COURSE_NO=#{courseNo} and LECTURE_NO=#{lectureNo}
+	</select>
+	
+	<update id="updateReply">
+	update wl_lecture_reply set replytext=#{replytext} where reply_no=#{replyNo} and COURSE_NO=#{courseNo} and LECTURE_NO=#{lectureNo}
+	</update>
+	
+	<select id="selectUpdatedReply" resultType="string">
+	
+	select replyText from wl_lecture_reply where reply_no=#{replyNo} and COURSE_NO=#{courseNo} and LECTURE_NO=#{lectureNo}
+	</select>
+	
+	<delete id="deleteReply" >
+		delete from wl_lecture_reply where reply_no=#{replyNo} and COURSE_NO=#{courseNo} and LECTURE_NO=#{lectureNo}
+	</delete>
+	
+	
+</mapper>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

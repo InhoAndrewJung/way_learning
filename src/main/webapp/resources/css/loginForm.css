@@ -78,7 +78,7 @@ a {
     width: 600px;
     animation-name: helloWorld;
     animation-duration: 1.5s;
-    
+    z-index: 1;
     
 }
 
@@ -186,7 +186,7 @@ a {
 /*  CONTENT */
 
 .login-card_content{
-    padding: 24px 32px 16px 32px;
+    padding: 40px 32px 16px 32px;
     
     animation-name: showCard;
     animation-duration: 1s; 
@@ -294,6 +294,7 @@ form {
     font-size: 20px;
 	color: #4c90f6;
 	font-weight: bold;
+	z-index: 2;
 }
 
 .dashboard-form_input_id::-webkit-input-placeholder { /* Chrome */
@@ -408,12 +409,13 @@ form {
 
 /* Title Animation */
 .animated-words{
-	font-size: 20px;
+	font-size: 30px;
     font-weight: bold;
     color: #2196f3;
     position: relative;
     text-align: center;
     width:100%;
+    margin-bottom: 20px;
     
 }
 

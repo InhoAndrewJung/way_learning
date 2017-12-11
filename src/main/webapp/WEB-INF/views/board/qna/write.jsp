@@ -8,6 +8,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Insert title here</title>
+
+
+
+<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+
+
+      
+    
+<%-- <link href="${pageContext.request.contextPath}/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet"> --%> 
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+ 
 <script type="text/javascript">
 function content_submit(){
 	var f=document.write_form;
@@ -32,41 +45,7 @@ function content_submit(){
 }
  
 
-
-/* 
-$(document).ready(function() {
-    var $menu = $(".menu");
-    var menuData = "menu1,menu2,menu3,menu4";
-    // 여기에 풀이를 입력해주세요.
-
-    // 문자열 메뉴 아이템 정보를 배열 메뉴 아이템 정보로 변경
-    var menuItems = menuData.split(",");
-
-    // 메뉴 개수 만큼 루프 돌기 =
-    for (var i = 0; i < menuItems.length; i++) {
-        // i번째 배열 요소를 메뉴 아이템으로 만들기
-        var newMenuItem = "<li>" + menuItems[i] + "</li>";
-        // 동적으로 메뉴 아이템 추가
-        $menu.append(newMenuItem);
-    }
-})
- */
-
- 
 </script>
-
-
-<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
-
-
-      
-    
-<%-- <link href="${pageContext.request.contextPath}/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet"> --%> 
-
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
- 
-
 
 
 </head>
@@ -108,18 +87,14 @@ $(document).ready(function() {
 <script>
 //CKEDITOR.replace("content"); // 태그의 id
 //이미지 업로드를 할 경우
-
-	
-	
-	
- CKEDITOR.replace("content", {
-	filebrowserUploadUrl : "${pageContext.request.contextPath}/board/qna/imageUpload"
-	
-	
-}); 
-
- CKEDITOR.on('instanceLoaded', function(e) {e.editor.resize(700, 600)} );
-
+ CKEDITOR.replace( 'content', {
+		extraPlugins: 'autogrow,youtube',		
+		autoGrow_minHeight: 500,
+		autoGrow_maxHeight: 10000,
+		autoGrow_bottomSpace: 50,
+		filebrowserUploadUrl : "${pageContext.request.contextPath}/board/tech/imageUpload",
+		removePlugins: 'resize',		
+	} );  
 
 </script>
      </td>
@@ -131,5 +106,6 @@ $(document).ready(function() {
     </tr>
    </table>
   </form>
+  <a href="${pageContext.request.contextPath}">홈으로</a>
   </div>
 </html>

@@ -11,21 +11,23 @@
 
 
 <%@ include file="../../include/common.jsp" %>
+
+
 </head>
+
+
 <script>
 $(document).ready(function() {
 
 	listReply(); //댓글 목록
 	
 	
-	
-	
-		
+
 		
 		$.ajax({
 			type: "post",
 			url: "${pageContext.request.contextPath}/board/qna/likeStatus",
-			data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}",
+			data:"${_csrf.parameterName}=${_csrf.token}",
 			success: function(result){
 				
 				
@@ -33,7 +35,7 @@ $(document).ready(function() {
 				$(result).each(function(index,item) {
 					
 					//$('#boardGood'+item).css({'width':500});
-					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;	
+					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
 				});
 
 				
@@ -49,19 +51,9 @@ $(document).ready(function() {
 
 	
 		
-	
-		$('#btnReply').click(function(){
-			
-		
-			reply(); 
-			
-			 
-		});
-	
-	
 		//댓글 쓴거 전송 
 		//텍스트와,bno, 비밀글 여부를 insert.do의 파라미터값으로 넣음
-		function reply(){
+		$('#btnReply').click(function(){
 			var replytext=$("#replytext").val();
 			var boardNo="${requestScope.bvo.boardNo}"; // view 컨트롤러에서 가져옴!
 			//비밀댓글 체크 여부
@@ -85,8 +77,12 @@ $(document).ready(function() {
 				
 			});
 			$("#replytext").val("");
-			
-		}
+			 
+		});
+	
+	
+		
+		
 	
 });
 			
@@ -97,14 +93,14 @@ $(document).ready(function() {
 			type:"get",
 			url: "${pageContext.request.contextPath}/reply/qna/list?boardNo=${requestScope.bvo.boardNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
 			success: function(result){
-				$("#listReply").html(result);
-				
-				
+				$("#listReply").html(result);	
 			}
 		});
 	 }
 	
-
+	
+	
+	
 
 function deleteBoard(){
 	if(confirm("해당 글을 삭제하시겠습니까?")){
@@ -144,6 +140,8 @@ function boardLikeUp(boardNo){
 		}
 	});	
 }	
+
+
 
 function boardLikeDown(boardNo){
 	
@@ -187,7 +185,7 @@ var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boar
         display: none !important;
     }
 
-.cke_bottom {display: !important;}
+
 #profile{width:50px; height:50px; border-radius: 50% }
 a{text-decoration:none; cursor: pointer;}
 #tag{font-size:10px;border:1px solid grey;border-radius:10%; background-color:grey; color:white; margin-left:10px;}
@@ -198,7 +196,25 @@ a{text-decoration:none; cursor: pointer;}
 
 
 <body>
-<h2 align="center"><b>게시글</b></h2>
+
+<c:if test="${replyNo !=null}">
+
+	<script>
+	setTimeout(function(){
+		 var heightItem=$('#replyGood'+${replyNo}+'').offset().top; 
+		$('body,html').animate({scrollTop:heightItem-100});
+		
+	},700) ;
+	</script>
+
+</c:if> 
+
+
+
+	
+	
+	
+<h2 align="center"><b>게시글 </b></h2>
 <div align="center">
  
 
@@ -206,7 +222,7 @@ a{text-decoration:none; cursor: pointer;}
 
 
 	
-					<table border="1" width="650" align="center">
+					<table border="1" width="1000" align="center">
 
 
 						<tr>
@@ -245,10 +261,22 @@ a{text-decoration:none; cursor: pointer;}
 
 							<td colspan="4">
 							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" >${requestScope.bvo.content}</textarea>
-								<script>
-			          CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false, readonly:true }); // 태그의 id
-			          CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});
-		                        </script> 
+										<script>
+			          //CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false});  // 태그의 id
+			         // CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});  
+		             // CKEDITOR.replace("content");  
+		             
+		      		  CKEDITOR.replace( 'content', {
+		      			extraPlugins: 'autogrow,youtube',		      			
+		      			autoGrow_minHeight: 400,
+		      			autoGrow_maxHeight: 10000,
+		      			autoGrow_bottomSpace: 50,
+		      			resize_enabled : false,
+		      			removePlugins : 'elementspath',
+		      			      			
+		      		} );  
+
+		      	</script>
 							
 							</td>
 							<td align="center">

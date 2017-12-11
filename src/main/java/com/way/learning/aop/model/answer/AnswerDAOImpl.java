@@ -10,37 +10,39 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AnswerDAOImpl implements AnswerDAO {
-	
+
 	@Autowired
 	private SqlSession sqlsession;
-	
+
 	public int updatePostCntSubmit(int questionNo)throws SQLException{
-		
+		//Map<String,Integer> map = new HashMap<String,Integer>();
+		//map.put("questionNo", questionNo);
 		return sqlsession.update("updateAnswerMapper.updatePostCntSubmit",questionNo);
 	}
-	
-public int updatePostCntRight(int questionNo)throws SQLException{
-		
+
+	public int updatePostCntRight(int questionNo)throws SQLException{
+		//Map<String,Integer> map = new HashMap<String,Integer>();
+		//map.put("questionNo", questionNo);
 		return sqlsession.update("updateAnswerMapper.updatePostCntRight",questionNo);
 	}
-	
-	
+
+
 	public int updateMyCntSubmit(int questionNo, String userId)throws SQLException{
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("questionNo", questionNo);
 		map.put("userId", userId);
 		return sqlsession.update("updateAnswerMapper.updateMyCntSubmit",map);
 	}
-	
+
 	public int insertMyCntsubmit(int questionNo, String userId)throws SQLException{
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("questionNo", questionNo);
 		map.put("userId", userId);
 		return sqlsession.insert("updateAnswerMapper.insertMyCntsubmit",map);
 	}
-	
-	
-	
+
+
+
 	public int updateMyCntRight(int questionNo, String userId)throws SQLException{
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("questionNo", questionNo);
@@ -54,7 +56,7 @@ public int updatePostCntRight(int questionNo)throws SQLException{
 		map.put("userId", userId);
 		return sqlsession.insert("updateAnswerMapper.insertMyCntRight",map);
 	}
-	
+
 	public int updateMyCntWrong(int questionNo, String userId)throws SQLException{
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("questionNo", questionNo);
@@ -68,16 +70,31 @@ public int updatePostCntRight(int questionNo)throws SQLException{
 		map.put("userId", userId);
 		return sqlsession.insert("updateAnswerMapper.insertMyCntWrong",map);
 	}
-		
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
+	public int updateMyCntError(int questionNo, String userId)throws SQLException{
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("questionNo", questionNo);
+		map.put("userId", userId);
+		return sqlsession.update("updateAnswerMapper.updateMyCntError",map);
+	}	
+
+	public int insertMyCntError(int questionNo, String userId)throws SQLException{
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("questionNo", questionNo);
+		map.put("userId", userId);
+		return sqlsession.insert("updateAnswerMapper.insertMyCntError",map);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

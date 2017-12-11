@@ -198,6 +198,40 @@ public class MemberServiceImpl implements MemberService {
 		int emailResult = memberDAO.emailcheck(email);
 		return emailResult;
 	}
+	
+	@Override
+	public List selectBoardFavorite(String userId) {
+		System.out.println("selectBoardFavorite service ");
+		
+		return memberDAO.selectBoardFavorite(userId);	
+	}
+	
+	@Override
+	public List selectLectureFavorite(String userId) {
+		System.out.println("selectLectureFavorite service ");
+		
+		return memberDAO.selectLectureFavorite(userId);
+	}
+	
+	@Override
+	public List selectReplyFavorite(String userId) {
+		System.out.println("selectReplyFavorite service ");
+		
+		return memberDAO.selectReplyFavorite(userId);	
+	}
+	
+	// 회원탈퇴 추가
+		@Override
+		public int deleteMember(String userId){
+
+			return memberDAO.deleteMember(userId);
+		}
+	
+	public List selectMyLectureRecord() {
+		
+
+		return memberDAO.selectMyLectureRecord();
+	}
 
 
 

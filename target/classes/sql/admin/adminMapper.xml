@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMapper">
+
+	<!-- <resultMap type="member" id="memberRM"> <result property="userId" column="user_id" 
+		/> <result property="email" column="email" /> <result property="password" 
+		column="password" /> <result property="activity" column="activity" /> <result 
+		property="imgProfile" column="img_profile" /> <result property="regDate" 
+		column="reg_date" /> </resultMap> -->
+
+	<select id="selectActiveMember" resultType="hashmap">
+		select
+		m.user_id,activity,img_profile,role from wl_member m ,wl_authorities
+		a
+		where m.user_id=a.user_id and activity &gt; 100
+	</select>
+
+	<update id="changeAuthority">
+
+		update wl_authorities set
+		<if test="role == 'ROLE_AUTHOR'">
+			role='ROLE_MEMBER'
+		</if>
+		<if test="role == 'ROLE_MEMBER'">
+			role='ROLE_AUTHOR'
+		</if>
+
+		where user_id=#{userId}
+
+	</update>
+
+	<resultMap type="Course" id="courseRM">
+		<result property="courseNo" column="course_no" />
+		<result property="courseName" column="course_name" />
+		<result property="description" column="description" />
+		<result property="courseImage" column="course_image" />
+		<result property="member.userId" column="author" />
+		<result property="regDate" column="reg_date" />
+		<result property="isAccept" column="is_accept" />
+		<result property="cntCourseLike" column="cnt_course_like" />
+		<result property="member.activity" column="activity" />
+		<result property="member.imgProfile" column="img_profile" />
+
+
+	</resultMap>
+
+
+	<select id="selectAllCourseList" resultMap="courseRM">
+		select course_no,
+		course_name,description,course_image,author,c.reg_date,is_accept,cnt_course_like,activity,img_profile
+		from wl_course c, wl_member m where c.AUTHOR=m.USER_ID
+	</select>
+	
+	
+	<update id="changeAcceptStatus">
+
+		update wl_course set
+		<if test="isAccept == 'accept'">
+			is_accept=0
+		</if>
+		<if test="isAccept == 'notAccept'">
+			is_accept=1
+		</if>
+where course_no=#{courseNo}
+		
+
+	</update>
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

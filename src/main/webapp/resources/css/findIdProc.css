@@ -85,3 +85,16 @@ a:hover{
 	text-align: right;
 }
 
+.yes{
+	color: #ed4d3c;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.no{
+	color: #01a147;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+

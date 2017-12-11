@@ -1,0 +1,258 @@
+@charset "UTF-8";
+
+.logo{
+    font-size: 30px;
+    color: #404040;
+    font-weight: bold;
+    margin: 50px auto 50px auto;
+    width: 60%;
+    text-align: center;
+}
+
+#image_logo {
+    width: 300px;
+    cursor: pointer;
+}
+
+.container-body {
+    background: #ffffff;
+    margin: 50px auto 50px auto;
+    width: 30%;
+    height: auto;
+    border: 2px solid #e5e9f2;
+    box-shadow: 5px 5px 5px #cccccc;
+    border-collapse: collapse;
+    border-radius: 5px;
+}
+
+
+.body {
+    padding: 20px;
+    position: relative;
+}
+
+.input_id{
+	border-radius: 13px;
+    padding: 10px 3% 10px 2%;
+    font-size: 20px;
+    display: inline-block;
+    margin: 10px;
+    width: 94%;
+    height: 50px;
+    margin: 10px auto 10px auto;  
+	
+}
+
+.text_id{
+	border: 0px;
+    border-left: 5px solid #4c90f6;
+    width: 55%;
+    padding: 10px;
+    font-size: 20px;
+	color: #4c90f6;
+	font-weight: bold;
+}
+
+.text_id::-webkit-input-placeholder { /* Chrome */
+  color: #4c90f6;
+  font-weight: bold;
+}
+
+.input_pass{
+    border-radius: 13px;
+    padding: 10px 3% 10px 2%;
+    font-size: 20px;
+    display: inline-block;
+    margin: 10px;
+    width: 94%;
+    height: 50px;
+    margin: 10px auto 10px auto;  
+}
+
+.text_pass{
+	border: 0px;
+    border-left: 5px solid #ed4d3c;
+    width: 55%;
+    padding: 10px;
+    font-size: 20px;
+	color: #ed4d3c;
+	font-weight: bold;
+}
+
+.text_pass::-webkit-input-placeholder { /* Chrome */
+  color: #ed4d3c;
+  font-weight: bold;
+}
+
+.input_email{
+    border-radius: 13px;
+    padding: 10px 3% 10px 2%;
+    font-size: 20px;
+    display: inline-block;
+    margin: 10px;
+    width: 94%;
+    height: 50px;
+    margin: 10px auto 10px auto;  
+}
+
+.text_email{
+	border: 0px;
+    border-left: 5px solid #3bb15d;
+    width: 80%;
+    padding: 10px;
+    font-size: 20px;
+    color:#3bb15d;
+    font-weight: bold;
+	
+}
+
+.text_email::-webkit-input-placeholder { /* Chrome */
+  color: #3bb15d;
+  font-weight: bold;
+}
+
+.update_image{
+	border-radius: 13px;
+    padding: 10px 3% 10px 2%;
+    font-size: 20px;
+    display: inline-block;
+    margin: 10px;
+    width: 94%;
+    height: 50px;
+    margin: 10px auto 10px auto;  
+}
+
+.fileName{
+	border: 0px;
+    border-left: 5px solid #fbc403;
+    width: 55%;
+    padding: 10px;
+    font-size: 20px;
+    color: #fbc403;
+}
+
+.fileName::-webkit-input-placeholder { /* Chrome */
+  color: #fbc403;
+  font-weight: bold;
+}
+
+.image_upload{
+	
+}
+
+.uploadBtn{
+    position: absolute;
+    border-radius: 13px;
+    background: url(../img/upload.png) no-repeat center center/contain;
+    padding: 5px 8px 5px 8px;
+    cursor: pointer;
+    width: 7%;
+    height: 50px;
+    bottom: 35px;
+    right: 50px;
+}
+
+
+.uploadFile{
+  display: none;
+}
+
+#file_preview{
+	width: 130px;
+    height: 130px;
+    right: 30px;
+    top: 30px;
+    position: absolute;
+    border-radius: 50%;
+    
+}
+hr{
+    width: 95%;
+    margin-bottom: 30px;
+    border: 0;
+    border-top: 1px solid #e5e9f2;
+}
+
+.content{
+	align: center;	
+	
+}
+
+.content_text{
+	background: #ffffff;
+    width: 90%;
+    border: 5px solid #25b7d3;
+    border-collapse: collapse;
+    border-radius: 10px;
+    padding: 10px 20px 10px 10px;
+    font-size: 15px;
+    padding-right: 15%;
+    resize: none;
+    overflow: hidden;
+}
+
+.container-footer{
+	padding: 20px;
+	text-align: right;
+}
+
+
+.image_check{
+	border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    background: url(../img/check.png) no-repeat center center/contain;
+}
+
+.image_cancel{
+	cursor:pointer;
+	width: 40px;    
+	padding-bottom: 5px;
+	
+}
+
+
+/* update_result page */
+
+.update_result-container-body {
+    background: #ffffff;
+    margin: 50px auto 50px auto;
+    width: 30%;
+    height: auto;
+    
+}
+
+.update_result-title{
+	font-size: 30px;
+    text-align: center;
+    padding: 15px;
+    color: #4c90f6;
+    font-weight: bold;
+}
+
+.update_result-message{
+	font-size: 20px;
+	text-align: center;
+    padding: 15px;
+    color: #fbc403;
+    font-weight: bold;
+}
+
+.container-footer{
+	padding: 20px;
+	text-align: center;
+	font-size: 20px;
+	color: #fbc403;
+}
+.update_result-container-footer{
+	text-align: center;
+}
+
+.update_result-image_main{
+	cursor: pointer;
+	width: 40px;    
+	padding-bottom: 5px;
+	text-align: right;
+}

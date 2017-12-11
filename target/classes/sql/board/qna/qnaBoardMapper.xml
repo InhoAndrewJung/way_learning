@@ -25,6 +25,10 @@
 		SELECT reg_date FROM wl_qna_board
 		WHERE board_no=#{value}
 	</select>
+	
+	
+	
+	
 
 	<!-- 전체게시글보기를 위한 resultMap -->
 	<!-- jdbctype은 insert, update, delete의 경우 nullable column인 경우에만 필수적이다. -->
@@ -45,9 +49,12 @@
 	
 	
 	   
-    SELECT board_no, title, cnt_view, reg_date ,page,  user_id,activity, cnt_reply,(select sum(cnt_board_like) from wl_qna_board where board_no=b.board_no)cnt_board_like, img_profile 
-		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id, activity,img_profile,cnt_reply
-		FROM (SELECT qb.board_no, title, cnt_view, qb.reg_date, m.user_id,m.activity, m.img_profile,(select count(*) from wl_qna_reply  where board_no=qb.board_no) cnt_reply
+    SELECT board_no, title, cnt_view, reg_date ,page,  user_id,activity, cnt_reply,
+    (select sum(cnt_board_like) from wl_qna_board where board_no=b.board_no)cnt_board_like, img_profile 
+		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id, activity,img_profile,
+		cnt_reply
+		FROM (SELECT qb.board_no, title, cnt_view, qb.reg_date, m.user_id,m.activity, m.img_profile,
+		(select count(*) from wl_qna_reply  where board_no=qb.board_no) cnt_reply
 		FROM wl_qna_board qb, wl_member m
 	  <include refid="search" />
       <if test="sorting == 'board_no'">order by board_no DESC</if> 
@@ -114,7 +121,7 @@ board_no,title,content,cnt_board_like
 	
 	<update id="updateBoard">
 		update wl_qna_board set
-		title=#{title},content=#{content}  where board_no=#{boardNo}
+		title=#{title},content=#{content},reg_date=sysdate  where board_no=#{boardNo}
 
 	</update>
 
@@ -139,6 +146,10 @@ board_no,title,content,cnt_board_like
 	<insert id="insertTag">
 		insert into wl_qna_tag values(#{boardNo},#{tag})
 	</insert>
+	
+	<delete id="deleteTag">
+	 delete from wl_qna_tag   where board_no=#{boardNo}
+	</delete>
 
 	
 	<sql id="search">
@@ -190,7 +201,7 @@ board_no,title,content,cnt_board_like
     </select>
     
     <select id="selectAllRecommendNo" resultType="int">
-     select board_no from wl_qna_board_recommend
+     select board_no from wl_qna_board_recommend where user_id=#{userId}
     
     </select>
     
