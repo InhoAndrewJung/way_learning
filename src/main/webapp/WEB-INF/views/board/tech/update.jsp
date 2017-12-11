@@ -73,7 +73,7 @@ function viewList() {
 				 <input type="hidden" name="boardNo" value="${bvo.boardNo}" />
 				
 				<div class="tag">
-				Tag <input name="tag" class="text_tag" value=" <c:out value="${tagList !=null ? }"><c:forEach var="tag" items="${tagList}" varStatus="status"> ${tag.TAG} <c:if test="${!last.status}">,</c:if> </c:forEach> </c:out>">
+				Tag <input name="tag" class="text_tag" value=" <c:out value="${tag.TAG}"><c:forEach var="tag" items="${tagList}" varStatus="status"> ${tag.TAG} <c:if test="${!last.status}">,</c:if> </c:forEach> </c:out>">
 				
 				</div>
 				

@@ -41,10 +41,10 @@ public class TechReplyServiceImpl implements TechReplyService{
 
 	//updateReply
 	public void  updateReply(String rno, String replytext){
-			if(replytext.indexOf("Re:") ==-1){
+			/*if(replytext.indexOf("Re:") ==-1){
 				replytext	="Re:"+replytext;
 			
-			}
+			}*/
 			techReplyDao.updateReply(rno, replytext);
 
 	}

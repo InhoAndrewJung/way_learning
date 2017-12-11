@@ -172,10 +172,15 @@ public class QnaBoardController {
 	}
 
 	@RequestMapping("updateView")
-	public ModelAndView updateView(String boardNo)
+	public ModelAndView updateView(String boardNo,ModelAndView mav)
 			throws Exception{
 		QnaBoard bvo=qnaBoardService.showContent(boardNo);
-		return new ModelAndView("board/qna/update", "bvo",bvo);
+		List tagList= qnaBoardService.getTag(bvo.getBoardNo()+"");
+		mav.setViewName("board/qna/update");
+		mav.addObject("tagList", tagList);
+		mav.addObject("bvo",bvo);
+		System.out.println("컨트롤러 bvo:"+bvo);
+		return mav;
 	}
 
 
