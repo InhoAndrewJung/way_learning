@@ -316,10 +316,16 @@ public class MemberController {
 			return mav;
 
 		}
-
 		
-	
-	
-	
+		@RequestMapping("myPage")
+		@ResponseBody
+		public ModelAndView myPage() {
+			Member mvo = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+
+			return new ModelAndView("member/myPage");
+
+		}
+
 
 }

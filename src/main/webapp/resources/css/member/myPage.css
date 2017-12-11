@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+*{margin:0;padding:0;}
+/* html,body{width:100%;height:100%;} */
+ul,li{list-style:none;}
+a{text-decoration:none;}
+img{border:0;}
+
+header,nav, aside,article,footer,section{display:block;}
+#wrap{widht:100%;height:100%;}
+#left{width:20%;height:100%; float:left;}
+#left ul>li{border:1px solid #f00;height:10%;}
+.leftMenu{cursor:pointer;}
+#right{ border:1px solid #ff1700; width:80%;height:100%;float:left; box-sizing:border-box;}
+#right ul>li{border:2px solid #00ff1e; height:50%;}

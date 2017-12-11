@@ -3,7 +3,7 @@
  <%-- spring security custom tag를 사용하기 위한 선언 --%>
  <%@ include file="../include/common.jsp" %>
 
-
+<div align="center">
 내가 푼 문제 :  <c:forEach var="row" items="${rightList }" varStatus="status"> ${row}번 <c:if test = "${!status.last}">,</c:if></c:forEach> <br>
 
 
@@ -27,3 +27,4 @@
 
  
 <a href="${path}/"> 메인페이지로 이동</a>
+</div>
