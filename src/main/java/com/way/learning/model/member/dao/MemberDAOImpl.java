@@ -116,10 +116,10 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public List selectMyLectureRecord() {
+	public List selectMyLectureRecord(String userId) {
 		System.out.println("selectMyLectureRecord dao ");
 
-		return sqlSession.selectList("memberMapper.selectMyLectureRecord");
+		return sqlSession.selectList("memberMapper.selectMyLectureRecord",userId);
 	}
 	
 	public int deleteMember(String userId) {

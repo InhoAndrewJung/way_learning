@@ -12,161 +12,129 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-
 </head>
-
-
 <script>
 $(document).ready(function() {
 
 	listReply(); //댓글 목록
+
+	
+	
+		
+
+	
+	$.ajax({
+		type: "post",
+		url: "${pageContext.request.contextPath}/board/tech/likeStatus",
+		data:"${_csrf.parameterName}=${_csrf.token}",
+		success: function(result){
+			$(result).each(function(index,item) {
+				 $('#boardGood'+item).attr('src' ,'/learning/resources/img/reply_heart.png') ;	
+				 document.getElementById('cntBoardLike').style.color="white"
+			});
+		}
+	});
+
+	
+	$('#btnReply').click(function(){
+		reply(); 		 
+	});
 	
 	
 
+
+	
+	function reply(){
+		var replytext=$("#replytext").val();
+		var boardNo="${requestScope.bvo.boardNo}"; // view 컨트롤러에서 가져옴!
+		//비밀댓글 체크 여부
+		
+	
+		
+	//var param과, data:param 삭제하고 url에  "${path}/reply/insert.do?replytext="+replytext+"&bno="+bno+"&secret_reply="+secret_reply,  이렇게 써도됨!!
+			
+		var param="${_csrf.parameterName}=${_csrf.token}&replytext="+replytext+"&boardNo="+boardNo;
 		
 		$.ajax({
 			type: "post",
-			url: "${pageContext.request.contextPath}/board/qna/likeStatus",
-			data:"${_csrf.parameterName}=${_csrf.token}",
-			success: function(result){
+			url: "${pageContext.request.contextPath}/reply/tech/insert",
+			data: param,
+			success: function(){
 				
+				//alert("댓글이 등록되었습니다.");
 				
-				
-				$(result).each(function(index,item) {
-					
-					//$('#boardGood'+item).css({'width':500});
-					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
-				});
-
-				
-				//alert("likeUp ajax result:"+result);
-				
-				//$("#cntBoardLike").html(result);
-				
+				listReply(); //이거안하면 새로고침해야 쓴게 나옴!!!
 			}
 			
 		});
+		$("#replytext").val("");
 		
-		
+	}
 
-	
-		
-
-		$('#btnReply').click(function(){
-			reply(); 		 
-		});
-		
-		
-
-
-		
-		function reply(){
-			var replytext=$("#replytext").val();
-			var boardNo="${requestScope.bvo.boardNo}"; // view 컨트롤러에서 가져옴!
-			//비밀댓글 체크 여부
-			
-		
-			
-		//var param과, data:param 삭제하고 url에  "${path}/reply/insert.do?replytext="+replytext+"&bno="+bno+"&secret_reply="+secret_reply,  이렇게 써도됨!!
-				
-			var param="${_csrf.parameterName}=${_csrf.token}&replytext="+replytext+"&boardNo="+boardNo;
-			
-			$.ajax({
-				type: "post",
-				url: "${pageContext.request.contextPath}/reply/qna/insert",
-				data: param,
-				success: function(){
-					
-					//alert("댓글이 등록되었습니다.");
-					
-					listReply(); //이거안하면 새로고침해야 쓴게 나옴!!!
-				}
-				
-			});
-			$("#replytext").val("");
-			
-		}
-
-	});
+});
 			
 	//댓글 불러오는 방식
 	function listReply(){
 		
 		$.ajax({
 			type:"get",
-			url: "${pageContext.request.contextPath}/reply/qna/list?boardNo=${requestScope.bvo.boardNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
+			url: "${pageContext.request.contextPath}/reply/tech/list?boardNo=${requestScope.bvo.boardNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
 			success: function(result){
-				$("#listReply").html(result);	
+				$("#listReply").html(result);
+				
+				
 			}
 		});
 	 }
 	
 	
 	
-	
+
 
 function deleteBoard(){
 	if(confirm("해당 글을 삭제하시겠습니까?")){
-		location.href="${pageContext.request.contextPath}/board/qna/delete?boardNo=${requestScope.bvo.boardNo}";
+		location.href="${pageContext.request.contextPath}/board/tech/delete?boardNo=${requestScope.bvo.boardNo}";
 	}
 	
 }
 
 function updateBoard(){
 	if(confirm("해당 글을 수정하시겠습니까?")){
-		location.href="${pageContext.request.contextPath}/board/qna/updateView?boardNo=${requestScope.bvo.boardNo}";
+		location.href="${pageContext.request.contextPath}/board/tech/updateView?boardNo=${requestScope.bvo.boardNo}";
 	}
 }
 
-/* function showModify(rno){
-	alert("gg");
-	$('#modifyResult').html('<input type="text"  id="reply"  value="ddddddd" />');
+
+
+function boardLikeChange(boardNo){
 	
-	
-
-}  */
-
-function boardLikeUp(boardNo){
-
-	var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}&likeStatus=likeUp";
+	var param="${_csrf.parameterName}=${_csrf.token}&boardNo="+boardNo;
 	
 	$.ajax({
 		type: "post",
-		url: "${pageContext.request.contextPath}/board/qna/changeLike",
+		url: "${pageContext.request.contextPath}/board/tech/changeLike",
 		data: param,
 		success: function(result){
 			
-			//alert("likeUp ajax result:"+result);
+			
 			
 			$("#cntBoardLike").html(result);
-			$('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
+			
+			 var src=$('#boardGood'+boardNo).attr('src') ;
+				 
+			 if(src =='/learning/resources/img/reply_heart.png'){
+				 $('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/empty_heart.png') ;
+				 document.getElementById('cntBoardLike').style.color="#ff2635"
+			 }else if(src =='/learning/resources/img/empty_heart.png'){
+				 $('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/reply_heart.png') ;
+				 document.getElementById('cntBoardLike').style.color="white"
+			 }
+		
+				
 		}
 	});	
 }	
 
-
-
-function boardLikeDown(boardNo){
-	
-var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}&likeStatus=likeDown";
-	
-	$.ajax({
-		type: "post",
-		url: "${pageContext.request.contextPath}/board/qna/changeLike",
-		data: param,
-		success: function(result){
-			
-			//alert("likeDown ajax result:"+result);
-			
-			$("#cntBoardLike").html(result);
-			$('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/arrowUp.png') ;	
-			
-		}
-		
-	});
-	
-
-}	
 
 
 
@@ -177,7 +145,6 @@ var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boar
 
 
 <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
-
 
 
 
@@ -196,28 +163,22 @@ a{text-decoration:none; cursor: pointer;}
 
 
 
-
-
 <body>
 
 <c:if test="${replyNo !=null}">
 
-	<script>
-	setTimeout(function(){
-		 var heightItem=$('#replyGood'+${replyNo}+'').offset().top; 
-		$('body,html').animate({scrollTop:heightItem-100});
-		
-	},700) ;
-	</script>
+<script>
+setTimeout(function(){
+	 var heightItem=$('#replyGood'+${replyNo}+'').offset().top; 
+	$('body,html').animate({scrollTop:heightItem-100});
+	
+},700) ;
+</script>
 
-</c:if> 
-
-
-
-
+</c:if>
 
 <div class="move-boardList">
-		<a href="${pageContext.request.contextPath}/board/qna/list?keyword=${keyword}">
+		<a href="${pageContext.request.contextPath}/board/tech/list?keyword=${keyword}">
 		<img src="${path}/resources/img/list.png" id="image_list">
 		</a>
 	</div>
@@ -308,14 +269,8 @@ a{text-decoration:none; cursor: pointer;}
 				<div class="content-function">
 					
 					<div class="function-like">
-					
-					<img id="boardGood${bvo.boardNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="boardLikeUp('${bvo.boardNo}')" ><br><br>
-							<span id="cntBoardLike" class="cntBoardLike" >${bvo.cntBoardLike}</span><br><br>
-							<img  src="${path}/resources/img/arrowDown.png" style="width:20px; height:20px;cursor:pointer;" onclick="boardLikeDown('${bvo.boardNo}')">
-							
-							
-					<%-- 	<img src="${path}/resources/img/empty_heart.png" id="boardGood${bvo.boardNo}" onclick="boardLikeChange('${bvo.boardNo}')" class="image_empty-heart"> 
-						<span id="cntBoardLike" class="cntBoardLike" >${bvo.cntBoardLike}</span> --%>
+						<img src="${path}/resources/img/empty_heart.png" id="boardGood${bvo.boardNo}" onclick="boardLikeChange('${bvo.boardNo}')" class="image_empty-heart"> 
+						<span id="cntBoardLike" class="cntBoardLike" >${bvo.cntBoardLike}</span>
 					</div>
 					
 					<sec:authorize access="isAuthenticated()">
@@ -329,7 +284,7 @@ a{text-decoration:none; cursor: pointer;}
 						</sec:authorize>
 						<div class="function-facebook">
 						
-						<a onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent('http://127.0.0.1:7777/learning/board/qna/showContent?boardNo=${requestScope.bvo.boardNo}&&keyword=')+'&t='+encodeURIComponent('Q&A 게시판'), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" >
+						<a onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent('http://127.0.0.1:7777/learning/board/tech/showContent?boardNo=${requestScope.bvo.boardNo}&&keyword=')+'&t='+encodeURIComponent('Q&A 게시판'), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" >
 						<img src="${path}/resources/img/facebook.png" class="image_facebook">					</a>
 					
 						</div>
@@ -355,36 +310,15 @@ a{text-decoration:none; cursor: pointer;}
 			</sec:authorize>
 		</div>
 		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			
 
 
 <%-- 
+<h2 align="center"><b>게시글</b></h2>
+${delete_result}
+	<div align="center">
 	
 	
-	
-<h2 align="center"><b>게시글 </b></h2>
-<div align="center">
- 
-
-
-
-
 	
 					<table border="1" width="1000" align="center">
 
@@ -412,10 +346,8 @@ a{text-decoration:none; cursor: pointer;}
 							제목:${requestScope.bvo.title}
 							</td>
 							<td>
-							<img id="boardGood${bvo.boardNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="boardLikeUp('${bvo.boardNo}')" ><br><br>
+							<img id="boardGood${bvo.boardNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="boardLikeChange('${bvo.boardNo}')" ><br><br>
 							<span id="cntBoardLike" >${bvo.cntBoardLike}</span><br><br>
-							<img  src="${path}/resources/img/arrowDown.png" style="width:20px; height:20px;cursor:pointer;" onclick="boardLikeDown('${bvo.boardNo}')">
-							
 							
 							</td>
 
@@ -424,7 +356,7 @@ a{text-decoration:none; cursor: pointer;}
 						<tr>
 
 							<td colspan="4">
-							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" >${requestScope.bvo.content}</textarea>
+							<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요" readonly >${requestScope.bvo.content}</textarea>
 										<script>
 			          //CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false});  // 태그의 id
 			         // CKEDITOR.on('instanceLoaded', function(e){e.editor.resize(700, 700)});  
@@ -441,21 +373,21 @@ a{text-decoration:none; cursor: pointer;}
 		      		} );  
 
 		      	</script>
+			          
 							
 							</td>
 							<td align="center">
-							<a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent('http://127.0.0.1:7777/learning/board/qna/showContent?boardNo=${requestScope.bvo.boardNo}&&keyword=')+'&t='+encodeURIComponent('Q&A 게시판'), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" ><img
+							<a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent('http://127.0.0.1:7777/learning/board/tech/showContent?boardNo=${requestScope.bvo.boardNo}&&keyword=')+'&t='+encodeURIComponent('Q&A 게시판'), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" ><img
 					src="${path}/resources/img/facebook.png"
 					style="width: 20px; height: 20px; cursor: pointer;"></a>
-							
 							</td>
-								
+
 						</tr>
 
 					</table>
-							
+
 							<a
-								href="${pageContext.request.contextPath}/board/qna/list?keyword=${keyword}"><img
+								href="${pageContext.request.contextPath}/board/tech/list?keyword=${keyword}"><img
 									alt="목록"
 									src="${pageContext.request.contextPath}/resources/img/list_btn.jpg"></a>
 								<!-- 현재 로그인한 사람이 자신의 글 상세보기 할때는 삭제와 수정버튼이 보여지도록 작성하면됨! --> <sec:authorize
@@ -473,7 +405,7 @@ a{text-decoration:none; cursor: pointer;}
 									</c:if>
 								</sec:authorize>
 				
-	<!--  댓글 작성하는 양식  form 안씀-->
+	
 	
 	
 	<!-- 댓글목록 출력 -->

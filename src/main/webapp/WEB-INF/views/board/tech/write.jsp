@@ -35,7 +35,7 @@
 	}
 
 	function viewList() {
-		location.href = "${pageContext.request.contextPath}/board/qna/list";
+		location.href = "${pageContext.request.contextPath}/board/tech/list";
 	}
 </script>
 
@@ -58,7 +58,7 @@
 <body>
 
 	<form
-		action="${pageContext.request.contextPath}/board/qna/insert?${_csrf.parameterName}=${_csrf.token}"
+		action="${pageContext.request.contextPath}/board/tech/insert?${_csrf.parameterName}=${_csrf.token}"
 		method="post" name="write_form" enctype="multipart/form-data">
 
 		<div class="container">
@@ -106,7 +106,7 @@
 											autoGrow_minHeight : 400,
 											autoGrow_maxHeight : 10000,
 											autoGrow_bottomSpace : 50,
-											filebrowserUploadUrl : "${pageContext.request.contextPath}/board/qna/imageUpload",
+											filebrowserUploadUrl : "${pageContext.request.contextPath}/board/tech/imageUpload",
 											removePlugins : 'resize',
 										});
 					</script>
@@ -143,7 +143,7 @@
 
 <div align="center">
 <font face="HY나무L" size="5"><strong>글쓰기 <br><br></strong></font>
-  <form action="${pageContext.request.contextPath}/board/qna/insert?${_csrf.parameterName}=${_csrf.token}" method="post" name="write_form"
+  <form action="${pageContext.request.contextPath}/board/tech/insert?${_csrf.parameterName}=${_csrf.token}" method="post" name="write_form"
   	enctype="multipart/form-data">
    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">  
    
@@ -182,7 +182,7 @@
 		autoGrow_minHeight: 400,
 		autoGrow_maxHeight: 10000,
 		autoGrow_bottomSpace: 50,
-		filebrowserUploadUrl : "${pageContext.request.contextPath}/board/qna/imageUpload",
+		filebrowserUploadUrl : "${pageContext.request.contextPath}/board/tech/imageUpload",
 		removePlugins: 'resize',		
 	} );  
 

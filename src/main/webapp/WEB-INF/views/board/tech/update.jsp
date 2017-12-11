@@ -45,7 +45,7 @@ function content_submit(){
 
 /* 수정취소 */
 function viewList() {
-	 location.href = "${pageContext.request.contextPath}/board/qna/list";
+	 location.href = "${pageContext.request.contextPath}/board/tech/list";
 }
 
 </script>
@@ -55,7 +55,7 @@ function viewList() {
 
 <body>
 
-<form method=post action="${pageContext.request.contextPath}/board/qna/updateBoard?${_csrf.parameterName}=${_csrf.token}" name="edit_form"  enctype="multipart/form-data">
+<form method=post action="${pageContext.request.contextPath}/board/tech/updateBoard?${_csrf.parameterName}=${_csrf.token}" name="edit_form"  enctype="multipart/form-data">
 	<div class="container">
 	
 		<div class="titleName">
@@ -94,7 +94,7 @@ function viewList() {
 		autoGrow_minHeight: 500,
 		autoGrow_maxHeight: 10000,
 		autoGrow_bottomSpace: 50,
-		filebrowserUploadUrl : "${pageContext.request.contextPath}/board/qna/imageUpload",
+		filebrowserUploadUrl : "${pageContext.request.contextPath}/board/tech/imageUpload",
 		removePlugins: 'resize',		
 	} );  
 
@@ -130,7 +130,7 @@ function viewList() {
 <%-- 
 <div align="center">
 <font face="HY나무L" size="5"><strong>수정하기 <br><br></strong></font>
-  <form action="${pageContext.request.contextPath}/board/qna/updateBoard?${_csrf.parameterName}=${_csrf.token}" method="post" name="update_form"
+  <form action="${pageContext.request.contextPath}/board/tech/updateBoard?${_csrf.parameterName}=${_csrf.token}" method="post" name="update_form"
   	enctype="multipart/form-data">
    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">  
    
@@ -169,7 +169,7 @@ function viewList() {
 		autoGrow_minHeight: 500,
 		autoGrow_maxHeight: 10000,
 		autoGrow_bottomSpace: 50,
-		filebrowserUploadUrl : "${pageContext.request.contextPath}/board/qna/imageUpload",
+		filebrowserUploadUrl : "${pageContext.request.contextPath}/board/tech/imageUpload",
 		removePlugins: 'resize',		
 	} );  
 
