@@ -35,8 +35,8 @@ function sorting(sort){
 
 	<div align="center">
 	<a href="#"  onclick="sorting('cntSubmit')">푼문제  </a>  &nbsp; 
-	<a href="#"  onclick="sorting('cntRight')">정답수</a>  &nbsp;  <br>
-	<a href="#"  onclick="sorting('RightPercent')">정답비율순</a>  &nbsp;  <br>
+	<a href="#"  onclick="sorting('cntRight')">정답수</a>  &nbsp;  
+	<a href="#"  onclick="sorting('RightPercent')">정답비율순</a>  &nbsp; <br>
 	
 		<table border="1px" width="800px">
 

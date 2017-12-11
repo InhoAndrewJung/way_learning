@@ -4,7 +4,7 @@
  <%@ include file="../include/common.jsp" %>
 
 
-
+<div align ="center">
 내가 본 강의 목록
 <table border =1>
 <tr >
@@ -44,3 +44,4 @@
 
  
 <a href="${path}/"> 메인페이지로 이동</a>
+</div>
