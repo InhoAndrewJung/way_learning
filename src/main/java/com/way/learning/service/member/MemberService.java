@@ -42,6 +42,6 @@ public interface MemberService {
 	public List selectReplyFavorite(String userId);
 	public List selectLectureFavorite(String userId);
 	public int deleteMember(String userId);
-	public List selectMyLectureRecord();
+	public List selectMyLectureRecord(String userId);
 
 }

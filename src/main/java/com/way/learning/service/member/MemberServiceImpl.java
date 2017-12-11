@@ -227,10 +227,10 @@ public class MemberServiceImpl implements MemberService {
 			return memberDAO.deleteMember(userId);
 		}
 	
-	public List selectMyLectureRecord() {
+	public List selectMyLectureRecord(String userId) {
 		
 
-		return memberDAO.selectMyLectureRecord();
+		return memberDAO.selectMyLectureRecord(userId);
 	}
 
 

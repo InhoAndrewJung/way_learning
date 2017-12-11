@@ -279,7 +279,7 @@ public class MemberController {
 	@RequestMapping("showMyLectureRecord")
 	public ModelAndView showMyLectureRecord(ModelAndView mav) throws Exception {
 		Member mvo = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		List lectureList = memberService.selectMyLectureRecord();
+		List lectureList = memberService.selectMyLectureRecord(mvo.getUserId());
 		System.out.println("lectureList:" + lectureList);
 		
 		
