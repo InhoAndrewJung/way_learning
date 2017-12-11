@@ -9,28 +9,57 @@
 
 <title>Insert title here</title>
 <script type="text/javascript">
+
+var courseNo=$('#courseNo').val();
 function content_submit(){
 	var f=document.write_form;
-	/* if(f.title.value==""){
-		alert("제목을 입력하세요!");
-		f.title.focus();
-		return; 
-	}	
 	
-	if(f.tag.value==""){
-		alert("태그를 입력하세요!");
-		f.tag.focus();
-		return; 
-	}	 */
-	
-	/* if(f.content.value==""){
-		alert("내용을 입력하세요!");
-		f.content.focus();
+	if(f.duplicate.value == 'true'){
+		alert("이미 있는 강의 번호입니다.")
 		return;
-	} */
+	}
+	
 	f.submit();
 }
+
+
+
+function selectedCourse(){
+
+	courseNo=$('#courseNo').val();
+
+	}
+
  
+
+	
+	 function selectedOrder(){
+		
+	 var lectureOrder =$('#lectureOrder').val();
+	 
+	 $.ajax({
+			type: "post",
+			url: "${pageContext.request.contextPath}/lectureBoard/isLectureOrderExist",
+			data:"${_csrf.parameterName}=${_csrf.token}&courseNo="+courseNo+"&lectureOrder="+lectureOrder,
+			success: function(result){
+				
+			
+				if(result == 1){
+					alert("이미 존재하는 강의번호 입니다.")
+					$('#duplicate').val("true");	
+					
+				}else{
+					$('#duplicate').val("false");				
+				}
+
+			}
+			
+		});
+		
+	}  
+	
+	
+
 
 </script>
 
@@ -65,13 +94,15 @@ a{text-decoration:none; cursor: pointer;}
 			<tr>
 				<td nowrap>코스</td>
 				<td>
-			<select name="courseNo" id="courseNo">
+			<select name="courseNo" id="courseNo" onchange="selectedCourse()">
 			<c:forEach var="row" items="${list}">
-			   <option value="${row.COURSE_NO}">${row.COURSE_NAME}코스</option>
+			   <option    value="${row.COURSE_NO}">${row.COURSE_NAME}코스</option>
 			</c:forEach>
 			
 			
 			</select>
+			
+		
 
 </td>
 			</tr>
@@ -83,8 +114,10 @@ a{text-decoration:none; cursor: pointer;}
 			</tr>
 			<tr>
 				<td nowrap>강의 순서</td>
-				<td><input type="number" name="lectureOrder"  min="1" max="15"></td>
+				<td><input type="number" name="lectureOrder"   id="lectureOrder" min="1" max="15" onchange="selectedOrder()"></td>
+				<input type="hidden" name="duplicate" id="duplicate" value="true"/>
 			</tr>
+			
 			
 			<tr>
 				<td nowrap>컨텐츠</td>

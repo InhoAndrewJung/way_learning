@@ -25,8 +25,6 @@ public class CourseController {
 	public String writeCourse(){
 
 		return "course/writeCourse";
-
-
 	}
 
 

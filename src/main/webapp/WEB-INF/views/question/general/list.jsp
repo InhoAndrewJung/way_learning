@@ -71,9 +71,22 @@
 
 
 
-					<td nowrap><fmt:formatNumber
-							value="${(row.cntRight / row.cntSubmit)*100 }" type="percent"
-							pattern=".00"  />%</td>
+					<td nowrap align="center">
+					<c:choose>
+							<c:when test="${row.cntSubmit ==0 ||  row.cntRight ==0   }">
+					
+							0%
+					</c:when>
+							<c:otherwise>
+								<fmt:formatNumber value="${(row.cntRight / row.cntSubmit)*100 }"
+									type="percent" pattern=".00" />%
+
+					</c:otherwise>
+					</c:choose>
+					</td>
+
+
+
 
 				</tr>
 			</c:forEach>

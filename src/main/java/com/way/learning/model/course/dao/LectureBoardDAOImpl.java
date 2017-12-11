@@ -31,6 +31,17 @@ public class LectureBoardDAOImpl implements LectureBoardDAO {
 
 
 	}
+	
+	public int isLectureOrderExist(int courseNo,int lectureOrder) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("courseNo", courseNo);
+		map.put("lectureOrder", lectureOrder);
+
+
+
+		return sqlSession.selectOne("lectureBoardMapper.isLectureOrderExist", map);
+
+	}
 
 	public List<LectureBoard> selectLectureList(int courseNo){
 
