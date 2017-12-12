@@ -5,25 +5,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${path}/resources/css/board.css?ver=2">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.js"></script>
 <title>Insert title here</title>
 
 </head>
 <body>
 <br><br><br><br><br><br>
 
-	<div align="center">
-
-
-
-<form name="form1" method="post" action="${pageContext.request.contextPath}/question/essay/getEssayList" id="form1">
-		<input name="keyword" value=${keyword}> 
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-		
-		<input type="submit" value="조회">
-		
-</form> 
-		<table border=1px>
-			<tr>
+<div class="container">
+	
+	<div class="menu">
+		<div class="titleName">
+			
+				<img src="${path}/resources/img/algorithm.svg" id="image_title"> Algorithm
+			
+		</div>
+		<span class="search_section">
+			<form name="form1" method="post" action="${pageContext.request.contextPath}/question/essay/getEssayList" id="form1">
+				<input name="keyword" id="search_bar" value=${keyword}> 
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				
+				<input type="submit" id="search_button" value="조회">
+				
+			</form> 
+		</span>
+	</div>
+	
+		<table class="boardTable" style="text-align: center">
+			<tr class="table-center" style="height:40">
 				<td>문제번호</td>
 				<td nowrap>제목</td>
 				<td>제출</td>
@@ -31,32 +42,34 @@
 				<td>정답비율</td>
 			</tr>
 			<c:forEach var="row" items="${list}">
-				<tr>
+				<tr class="table-center" style="height:60">
 
-					<td>${row.questionNo}</td>
+					<td class="table-center_content" >${row.questionNo}</td>
 					
 					
-					<td><a href="${path}/question/essay/showEssayContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.title}</a></td>
+					<td class="table-center_content"><a href="${path}/question/essay/showEssayContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.title}</a></td>
 					
 					
-					<td>${row.cntSubmit }</td>
-					<td>${row.cntRight }</td>
+					<td class="table-center_content">${row.cntSubmit }</td>
+					<td class="table-center_content">${row.cntRight }</td>
 				
 					
 					
 					<td nowrap align="center">
-					<c:choose>
-							<c:when test="${row.cntSubmit ==0 ||  row.cntRight ==0   }">
-					
-							0%
-					</c:when>
-							<c:otherwise>
-								<fmt:formatNumber value="${(row.cntRight / row.cntSubmit)*100 }"
-									type="percent" pattern=".00" />%
 
-					</c:otherwise>
-					</c:choose>
-					</td>
+               <c:choose>
+                     <c:when test="${row.cntSubmit ==0 ||  row.cntRight ==0   }">
+               
+                     0%
+               </c:when>
+                     <c:otherwise>
+                        <fmt:formatNumber value="${(row.cntRight / row.cntSubmit)*100 }"
+                           type="percent" pattern=".00" />%
+
+               </c:otherwise>
+               </c:choose>
+               </td>
+
 
 				</tr>
 			</c:forEach>
@@ -66,7 +79,7 @@
 		<a href="${pageContext.request.contextPath}/question/essay/makeQuestion">에세이문제 생성</a>
 		</sec:authorize>
 		<a href="${path}/"> 메인페이지로 이동</a>
-	</div>
-
+	
+</div>
 </body>
 </html>
