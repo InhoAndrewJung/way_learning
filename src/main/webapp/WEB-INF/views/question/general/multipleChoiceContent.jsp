@@ -8,6 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${path}/resources/css/board.css?ver=2">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
@@ -25,22 +27,31 @@
 	}
 </script>
 <body>
-	<div align="center">
 
-		<table border=1px>
+<div class="container">
+	
+	<div class="menu">
+		<div class="titleName">
+			
+				 Question ${gq.questionNo}
+			
+		</div>
+	</div>
+	
+	<table class="boardTable">
 			<tr>
-				<td nowrap>Question ${gq.questionNo}</td>
-
-				<td nowrap><textarea name="question" id="question"
-						style="width: 500px; height: 500px;" readOnly> ${gq.question}</textarea>
-				</td>
+				
+				<td style="align-items: center; padding:5%"><textarea name="question" id="question"
+						style="width: 900px; min-height: 300px; border:0;" readOnly> ${gq.question}</textarea></td>
 
 			</tr>
-
+	</table>
+				
+	<table class="boardTable">
 			<form action="${path}/question/general/multipleChoiceResult"
 				method="post">
 				<c:forEach var="row" items="${aList}" varStatus="status" begin="0">
-					<tr>
+					<tr style="height:40;">
 
 						<td colspan="2"><label for="answer">${status.index+1}.</label><input
 							type="radio" name="answer" id="answer" value="${status.index+1}" />
@@ -49,15 +60,22 @@
 				</c:forEach>
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}"> <input type="hidden"
-					name="questionNo" value="${gq.questionNo}">
+					name="questionNo" value="${gq.questionNo}"/>
 
-				<tr>
-					<td colspan="2"><input type="submit" value="제출" /></td>
+				<tr>					
+					<td style="text-align: right;">
+						<span class="search_button" >
+							<input type="submit"  id="search_button" value="제출" style="border-radius:0px;"/>
+						</span>
+					</td>
+					
 				</tr>
 
 			</form>
 
 		</table>
+		
+		<div style="text-align:center;">
 		<a
 			href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
 			목록가기</a> <a href="${path}/"> 메인페이지로 이동</a>
@@ -70,7 +88,7 @@
 				src="${pageContext.request.contextPath}/resources/img/modify_btn.jpg"
 				onclick="updateQuestion()">
 		</c:if>
-
+</div>
 	</div>
 </body>
 </html>
