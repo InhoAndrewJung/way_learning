@@ -92,7 +92,7 @@ function sorting(sort){
 						
 						
 
-						<input type="search" id="search_bar" value=${map.keyword}>
+						<input type="search" name="keyword" id="search_bar" value=${map.keyword}>
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 							<input type="hidden" name="sorting" value="">	
 					    <input type="submit" id="search_button" value="Search">

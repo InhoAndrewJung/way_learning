@@ -16,11 +16,11 @@
 <script>
 
 function changeAccept(isAccept,courseNo) {
-	alert("isAccept:"+isAccept);
-	alert("courseNo:"+courseNo);
+	//alert("isAccept:"+isAccept);
+	//alert("courseNo:"+courseNo);
 if(isAccept == '1'){
 
-	 if(confirm("승인된 강의를 미승인으로 변경하시겠습니까?")){
+	 if(confirm("승인된 강의를 미승인 상태로 변경하시겠습니까?")){
 			
 			$.ajax({
 				
@@ -44,9 +44,9 @@ if(isAccept == '1'){
 	
 	
 }else{
-	alert(isAccept)
+	//alert(isAccept)
 	
-	 if(confirm("미승인된 강의를 승인으로 변경하시겠습니까?")){
+	 if(confirm("미승인된 강의를 승인상태로 변경하시겠습니까?")){
 			
 			$.ajax({
 				
@@ -65,13 +65,8 @@ if(isAccept == '1'){
 				}
 				
 			});
-			
 		}	
-	
-	
-}
-	
-		
+}	
 	}
 	
 

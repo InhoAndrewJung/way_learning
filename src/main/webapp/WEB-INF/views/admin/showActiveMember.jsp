@@ -16,68 +16,48 @@ a{text-decoration:none}
 </style>
 
 <script>
-
-function check(userId ,role) {
-
-if(role == 'ROLE_AUTHOR'){
-	//alert(role)
-	 if(confirm("해당 강사를 일반멤버로 강등시키겠습니까?")){
-			
-			$.ajax({
-				
-				type: "post",
-				url: "${path}/admin/changeAuthority",
-				data:"${_csrf.parameterName}=${_csrf.token}&userId="+userId+"&role="+role,
-				success: function(result){
-					console.log(result);
-						if(result == '1'){
+	function check(userId, role) {
+		if (role == 'ROLE_AUTHOR') {
+			//alert(role)
+			if (confirm("해당 강사를 일반멤버로 변경 하시겠습니까?")) {
+				$.ajax({
+					type : "post",
+					url : "${path}/admin/changeAuthority",
+					data : "${_csrf.parameterName}=${_csrf.token}&userId="+ userId + "&role=" + role,
+					success : function(result) {
+						console.log(result);
+						if (result == '1') {
 							alert("회원 자격이 변경되었습니다.");
-						}else{
-							alert("회원 자격 변경에 실패했습니다.");
-						}
-					
-						showActiveMember();
-				}
-				
-			});
-			
-		}	
-	
-	
-}else{
-	//alert(role)
-	
-	 if(confirm("해당 멤버를 강사 자격으로 등업시키겠습니까?")){
-			
-			$.ajax({
-				
-				type: "post",
-				url: "${path}/admin/changeAuthority",
-				data:"${_csrf.parameterName}=${_csrf.token}&userId="+userId+"&role="+role,
-				success: function(result){
-					console.log(result);
-						if(result == '1'){
-							alert("회원 자격이 변경되었습니다.");
-						}else{
+						} else {
 							alert("회원 자격 변경에 실패했습니다.");
 						}
 						showActiveMember();
-					
-				}
-				
-			});
-			
-		}	
-	
-	
-}
-	
-		
+					}
+				});
+			}
+		} else {
+			//alert(role)
+			if (confirm("해당 멤버를 강사 자격으로 등업시키겠습니까?")) {
+				$.ajax({
+					type : "post",
+					url : "${path}/admin/changeAuthority",
+					data : "${_csrf.parameterName}=${_csrf.token}&userId="+ userId + "&role=" + role,
+					success : function(result) {
+						console.log(result);
+						if (result == '1') {
+							alert("회원 자격이 변경되었습니다.");
+						} else {
+							alert("회원 자격 변경에 실패했습니다.");
+						}
+						showActiveMember();
+					}
+				});
+			}
+		}
 	}
-	
-
-
 </script>
+
+
 <body>
 활동점수 200점이상 멤버:<br><br><br><br><br><br><br>
 <c:forEach var="row" items="${list }">

@@ -88,8 +88,8 @@ public class MemberController {
 
 		// 비밀번호 찾기 아이디확인
 		@RequestMapping("idCheckforPass")
-		public ModelAndView idCheckforPass(HttpServletRequest request, ModelAndView mav) {
-			String userId = request.getParameter("userId");
+		public ModelAndView idCheckforPass(String userId, ModelAndView mav) {
+			
 			String result = memberService.idcheck(userId);
 		
 			if (result.equals("fail")) {
@@ -106,18 +106,16 @@ public class MemberController {
 
 		// 아이디 이메일 받아 비밀번호 이메일전송
 		@RequestMapping("mailSender")
-		public ModelAndView mailSender(HttpServletRequest request, ModelAndView mav, Member vo) throws Exception {
-
-			String result = request.getParameter("result");
+		public ModelAndView mailSender(String result,final String userId,final 
+				String email, ModelAndView mav, Member vo) throws Exception {
 			System.out.println("컨트result:" + result);
-			final String userId = request.getParameter("userId");
 			System.out.println("파이널 userId:" + userId);
 			// 1.아이디가 있다 확인
 			if (result.equals("fail")) {
 				mav.setViewName("member/loginForm");
 
 				System.out.println("컨트userId:" + userId);
-				final String email = request.getParameter("email");
+				
 				// 2.임시비밀번호 생성
 				final String tempPassword = "" + (int) (Math.random() * 100000 + 1);
 				// 3.임시비밀번호 암호화

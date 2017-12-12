@@ -63,7 +63,7 @@ $(document).ready(function() {
 			var courseNo="${lvo.courseNo}"; 
 			
 		
-			var param="${_csrf.parameterName}=${_csrf.token}&replytext="+replytext+"&lectureNo="+lectureNo+"&courseNo="+courseNo;
+			var param="${_csrf.parameterName}=${_csrf.token}&lectureNo="+lectureNo+"&courseNo="+courseNo;
 			
 			$.ajax({
 				type: "post",
@@ -79,9 +79,7 @@ $(document).ready(function() {
 				
 				}
 				
-			});
-			
-			 
+			}); 
 		});
 	
 	
