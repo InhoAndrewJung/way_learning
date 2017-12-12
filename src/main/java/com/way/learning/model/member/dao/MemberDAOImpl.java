@@ -102,12 +102,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List selectReplyFavorite(String userId) {
 		System.out.println("selectReplyFavorite dao ");
-<<<<<<< HEAD
 
-		return sqlSession.selectList("memberMapper.selectReplyFavorite");
-	}
-	// 회원탈퇴 추가
-=======
 		
 		return sqlSession.selectList("memberMapper.selectReplyFavorite",userId);				
 	}
@@ -131,13 +126,6 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.delete("memberMapper.deleteMember",userId);
 	}
 
->>>>>>> master
-
-	
-	public int deleteMember(String userId) {
-
-		return sqlSession.delete("memberMapper.deleteMember",userId);
-	}
 
 	
 	

@@ -87,20 +87,12 @@ $('#acceptedCourse').html(result);
 			
 			
 			<b>마이페이지용</b><br>
-<<<<<<< HEAD
-			<li><a href="${pageContext.request.contextPath}/member/showMyRecord">내가 푼 문제 기록</a><li>
-			<li><a href="${path}/member/updateForm">정보 수정 폼</a></li>
-			<li><a href="${path}/member/deleteForm">회원 탈퇴</a></li>
-=======
-			<li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a><li>
-			
-			<%-- <li><a href="${pageContext.request.contextPath}/member/showMyRecord">내가 푼 문제 기록</a><li>
->>>>>>> master
+
 			<li><a href="${pageContext.request.contextPath}/member/showAllRanking">전체 랭킹보기</a><li>
 			<li><a href="${pageContext.request.contextPath}/member/myFavoriteList">내 좋아요 목록 링크</a><li>
 			<li><a href="${pageContext.request.contextPath}/member/showMyLectureRecord">  나의 강의 기록 보기 </a><li>
 			<li><a href="${path}/member/updateForm">정보 수정 폼</a></li>
-			<li><a href="${path}/member/deleteForm">회원 탈퇴</a></li> --%>
+			<li><a href="${path}/member/deleteForm">회원 탈퇴</a></li> 
 			
 			<b>게시판용</b><br>
 			<li><a href="${pageContext.request.contextPath}/board/qna/write">qna게시판 글쓰기</a><li>

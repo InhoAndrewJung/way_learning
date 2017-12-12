@@ -43,8 +43,7 @@ public interface MemberDAO {
 	
 	public List selectMyLectureRecord(String userId);
 	
-	public int deleteMember(String userId) ;
-
+	
 	// 회원탈퇴 추가
 	public int deleteMember(String userId) ;
 
