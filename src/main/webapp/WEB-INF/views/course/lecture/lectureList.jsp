@@ -70,22 +70,13 @@ $.ajax({
 			
 		}
 	
-			
-			//$('#boardGood'+item).css({'width':500});
-			// $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png');	
-		
-
-		
-		//alert("likeUp ajax result:"+result);
-		
-		
-		
 	}
 	
 });
 
 });
 
+//수정 삭제때문에 lecNo을 전역변수로 설정함!
 
 var lecNo= ${lecList[0].lectureNo};
 
@@ -101,9 +92,6 @@ function showLecture(lectureNo){
 			$("#lecture").html(result);
 		}
 	});
-
-
-	
 }
 
 
@@ -175,24 +163,24 @@ function courseLikeChange(){
 </head>
 <body>
 
- <c:if test="${lecList != null && lectureNo =='0' }">
-<script>
+	<c:if test="${lecList != null && lectureNo =='0' }">
+		<script>
 
 showLecture('${lecList[0].lectureNo}');
 </script>
 
-</c:if> 
+	</c:if>
 
- <c:if test="${lectureNo !='0' }">
-<script>
+	<c:if test="${lectureNo !='0' }">
+		<script>
 
 showLecture('${lectureNo}');
 </script>
 
-</c:if> 
+	</c:if>
 
- 
- 
+
+
 
 
 	<table border="1" width=100% height=100%>
@@ -256,20 +244,7 @@ showLecture('${lectureNo}');
 
 		</tr>
 	</table>
-	<%-- <c:forEach var="row" items="${list}" varStatus="status">
-	<tr height=5%>
 	
-	<td width=30%>${status.index+1}. ${row}</td> 
-	
-	
-		
-		
-
-	</tr>
-	</c:forEach>
-	<tr> <td width=30%></td></tr>
- --%>
-
 
 
 

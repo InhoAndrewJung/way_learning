@@ -74,19 +74,9 @@ public class AnswerAspect {
 		}else if(set.getError().equals("Exception")){
 			answerService.updateMyCntError(questionNo, userId );
 		}
-		
-
-			
-			
-	
 		return result;
 	}
-	
-	
-	
-	
-	
-	
+
 }
 
 

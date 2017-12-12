@@ -11,7 +11,7 @@
 
 내 record : <br>
 <table border="1px" >
-<tr> <td nowrap>아이디:${answerResult.userId}</td></tr>
+<tr> <td nowrap>아이디:${answerResult.member.userId}</td></tr>
 
 <tr> <td>나의 순위(제출순):${myRanking}위</td></tr>
 <tr> <td>제출수:${answerResult.myCntSubmit}개</td></tr>
