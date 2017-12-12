@@ -45,6 +45,17 @@ public class MemberController {
 	public void setMailSender(JavaMailSenderImpl mailSender) {
 		this.mailSender = mailSender;
 	}
+	
+	@RequestMapping("snsLogin")
+	public String login(String id, String email, String pic) {
+		
+		String userId = id;
+		String userEmail = email;
+		String userPic = pic;
+		System.out.println("fb 유저 아이디 : "+userId+" 유저 이메일 : "+userEmail+" 유저 프로필 사진 : "+userPic);
+		return "index";
+		
+	}
 
 	// 아이디 찾기 페이지이동
 	@RequestMapping("findId")
