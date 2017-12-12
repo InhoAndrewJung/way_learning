@@ -27,6 +27,12 @@ public class LectureBoardServiceImpl implements LectureBoardService {
 		return lectureBoardDAO.insertLecture(lvo);
 
 	}
+	
+	public int isLectureOrderExist(int courseNo,int lectureOrder) {
+
+		return lectureBoardDAO.isLectureOrderExist(courseNo, lectureOrder);
+
+	}
 
 	public List<LectureBoard> selectLectureList(int courseNo){
 
