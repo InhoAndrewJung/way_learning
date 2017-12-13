@@ -6,7 +6,7 @@
 
 <div class="my_rank">
   <div class="profile_img" style="background-image:url('${path}/resources/upload/${mvo.imgProfile}')"></div>
-  <h3>${answerResult.userId}</h3>
+  <h3>${answerResult.member.userId}</h3>
   <p>제출한 문제 : ${answerResult.myCntSubmit}</p><p>${myRanking}위</p>
 </div>
 
@@ -86,7 +86,7 @@
   }
 </style>
 <script type="text/text/javascript">
-  var myId = '${answerResult.userId}'
+  var myId = '${answerResult.member.userId}'
   var myRank = ${myRanking}
   var submitCnt = ${answerResult.myCntSubmit}
   var rightCnt = ${answerResult.myCntRight}
