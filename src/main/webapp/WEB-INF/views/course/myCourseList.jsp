@@ -8,6 +8,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="${path}/resources/css/board.css?ver=2">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Insert title here</title>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.js"></script>
@@ -32,14 +34,14 @@ a{text-decoration:none; cursor: pointer;}
 <!-- 비로그인 사용자는 아래 버튼을 보여주지 않는다. -->
 
 <sec:authorize access="isAuthenticated()">
-<a href="${pageContext.request.contextPath}/board/qna/write">글작성</a>
+<a href="${pageContext.request.contextPath}/board/qna/write">내 코스</a>
 </sec:authorize>
  
  
 
 
-<table border="1" width="650" cellpadding="2">
-	<tr>
+<table class="boardTable" style="text-align: center" border="1" width="650" cellpadding="2">
+	<tr class="table-center" style="height:40px">
 		<td>코스번호</td>
 		<td>코스이름</td>
 		<td>코스설명</td>
@@ -47,7 +49,7 @@ a{text-decoration:none; cursor: pointer;}
 	</tr>
 	
 	<c:forEach var="cvo" items="${list}">
-		<tr>
+		<tr class="table-center" style="height:60px">
 		<td>${cvo.courseNo}</td>
 		<td><a href="${path}/course/showCourse?courseNo=${cvo.courseNo}">${cvo.courseName}</a></td>
 		<td>${cvo.description}</td>

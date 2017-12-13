@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="${path}/resources/css/board.css?ver=2">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <title>Insert title here</title>
 <script type="text/javascript">
@@ -41,7 +43,8 @@ function content_submit(){
 
 
 <div align="center">
-	<font face="HY나무L" size="5"><strong>글쓰기 <br>
+<br/><br/><br/><br/><br/><br/>
+	<font face="HY나무L" size="5"><strong>강의등록 <br>
 		<br></strong></font>
 	<form
 		action="${pageContext.request.contextPath}/course/insertCourse?${_csrf.parameterName}=${_csrf.token}"
@@ -49,33 +52,33 @@ function content_submit(){
 		<%--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">  --%>
 
 
-		<table>
-			<tr>
-				<td nowrap>코스명</td>
-				<td><input type="text" name="courseName"
-					placeholder="코스명을 입력해주세요" size="100"></td>
+		<table class="boardTable" style="width:300px;text-align: center">
+			<tr class="table-center" style="height:40px">
+				<td nowrap>코스이름</td>
+				<td><input class="input-blue" type="text" name="courseName"
+					placeholder="코스명을 입력해주세요" size="100" ></td>
 			</tr>
 
-			<tr>
-				<td nowrap>코스 설명을 입력하세요</td>
-				<td><input type="text" name="description" maxlength="200" size="200"
+			<tr class="table-center" style="height:40px">
+				<td nowrap>코스 설명</td>
+				<td><input  class="input-blue" type="text" name="description" maxlength="200" size="100" 
 					placeholder="코스 설명을 입력해주세요"></td>
 			</tr>
-			<tr>
-				<td nowrap> 태그를 입력하세요</td>
-				<td><input type="text" name="tags" maxlength="200" size="200"
+			<tr class="table-center" style="height:40px">
+				<td nowrap> 태  그</td>
+				<td><input  class="input-blue" type="text" name="tags" maxlength="200" size="100" 
 					placeholder="코스 태그를 입력해주세요"></td>
 			</tr>
-			<tr>
-				<td nowrap>코스 이미지 등록</td>
+			<tr class="table-center" style="height:40px">
+				<td nowrap>코스 이미지</td>
 				<td><input type="file" name="uploadFile" ></td>
 			</tr>
 
 		
-			<tr>
+			<tr class="table-center"  style="height:40px">
 				<td colspan="2"><img
 					src="${pageContext.request.contextPath}/resources/img/confirm.gif"
-					onclick="content_submit()" alt="확인">확인</td>
+					onclick="content_submit()" alt="확인"></td>
 			</tr>
 		</table>
 	</form>
