@@ -14,6 +14,7 @@ import com.way.learning.model.course.vo.Course;
 import com.way.learning.model.member.vo.Member;
 import com.way.learning.service.course.CourseService;
 
+
 @Controller
 @RequestMapping("/course/*")
 public class CourseController {
@@ -25,8 +26,6 @@ public class CourseController {
 	public String writeCourse(){
 
 		return "course/writeCourse";
-
-
 	}
 
 

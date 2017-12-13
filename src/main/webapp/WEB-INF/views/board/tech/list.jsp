@@ -92,7 +92,7 @@ function sorting(sort){
 						
 						
 
-						<input type="search" id="search_bar" value=${map.keyword}>
+						<input type="search"   name="keyword" id="search_bar" value=${map.keyword}>
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 							<input type="hidden" name="sorting" value="">	
 					    <input type="submit" id="search_button" value="Search">
@@ -179,7 +179,7 @@ function sorting(sort){
 								<div class="activity">
 								
 									<span class="fa fa-graduation-cap"></span>
-									25
+									${bvo.member.activity}
 								</div>
 								
 								<div class="date">

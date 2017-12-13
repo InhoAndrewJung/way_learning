@@ -5,12 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Insert title here</title>
 </head>
 <script>
 
-function showActiveMember(){
 
+
+ var toggleMember=1;
+ var toggleLecture=1;
+ 
+function showActiveMember(change){
+	
+	
+		
+	
 	$.ajax({
 		
 		type: "post",
@@ -18,17 +27,28 @@ function showActiveMember(){
 		data:"${_csrf.parameterName}=${_csrf.token}",
 		success: function(result){
 			
-
-			$("#showActiveMember").html(result);
+			if(change != null) toggleMember=1;
+			if (toggleMember==1){
+				
+				$("#showActiveMember").html(result);	
+				toggleMember=0;
+				
+			}else if(toggleMember==0){
 			
+				$("#showActiveMember").html("");	
+				toggleMember=1;
+				
+			}
 		}
 		
 	});
 	
+	
+	
 }	
 
 
-function showAllCourse(){
+function showAllCourse(change){
 
 	$.ajax({
 		
@@ -36,10 +56,16 @@ function showAllCourse(){
 		url: "${path}/admin/selectAllCourseList",
 		data:"${_csrf.parameterName}=${_csrf.token}",
 		success: function(result){
-			
+			if(change != null) toggleLecture=1;
+			if (toggleLecture==1){
 
 			$("#showAllCourse").html(result);
-			
+			toggleLecture=0;
+			}else if(toggleLecture==0){
+				$("#showAllCourse").html("");
+				toggleLecture=1;
+				
+			}
 		}
 		
 	});
@@ -55,12 +81,12 @@ function showAllCourse(){
  <br><br>
  
 
-<li><a href="#" onclick="showActiveMember()">활동멤버 선택</a></li>
+<li><a href="#" id="showActive" onclick="showActiveMember()">활동멤버 선택</a></li>
 
 <div id="showActiveMember"></div>
 <br><br>
 
-<li><a href="#" onclick="showAllCourse()">강의 승인 선택</a></li>
+<li><a href="#" id="showAll" onclick="showAllCourse()">강의 승인 선택</a></li>
 <div id="showAllCourse"></div>
 <br><br>
 

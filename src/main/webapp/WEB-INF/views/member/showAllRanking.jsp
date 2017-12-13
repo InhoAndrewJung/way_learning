@@ -42,6 +42,7 @@ function sorting(sort){
 
 			<tr>
 				<td>등수</td>
+				<td>이미지주소</td>
 				<td>아이디</td>
 				<td>푼문제</td>
 				<td>정답수</td>
@@ -53,7 +54,8 @@ function sorting(sort){
 				<br>
 				<tr>
 					<td>${row.ranking }</td>
-					<td>${row.userId }</td>
+					<td>${row.member.imgProfile }</td>
+					<td>${row.member.userId }</td>
 					<td>${row.myCntSubmit}</td>
 					<td>${row.myCntRight}</td>
 					<td>${row.myRightPercent}%</td>
