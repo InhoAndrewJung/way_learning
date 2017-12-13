@@ -1,0 +1,83 @@
+.loop_green {background: linear-gradient(#95d6b6, #699cb8);}
+.loop_blue {background: linear-gradient(#2c74fd, #beb2d7);opacity:0.4;}
+
+.loop_square {
+  position:relative;
+  width: 300px;
+  height: 300px;
+  visibility: visible;
+  opacity: 0.7;
+  transition: all 0.3s ease 0.1s;
+  z-index: 0;
+}
+  .loop_square_60s {-webkit-animation: spin 60s linear infinite;animation: spin 60s linear infinite;}
+  .loop_square_40s {-webkit-animation: spin 40s linear infinite;animation: spin 40s linear infinite;}
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
+.loop_circle {
+  position:relative;
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  visibility: visible;
+  opacity: 0.5;
+  transition: all 0.3s ease 0.1s;
+  z-index: 0;
+}
+  .loop_circle_10s {-webkit-animation: move-around 10s linear infinite;animation: move-around 10s linear infinite;}
+  .loop_circle_8s {-webkit-animation: move-around 8s linear infinite;animation: move-around 8s linear infinite;}
+  #loop_circle_bg {
+    opacity: 1;
+    background: url(mb_quiz_img.png),linear-gradient(#95d6b6, #699cb8);
+    background-size:100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border:3px solid #95d6b6;
+  }
+  @-webkit-keyframes move-around {
+    0% { -webkit-transform: scale(1,1); }
+    50% { -webkit-transform: scale(1.1,1.1); }
+    100% { -webkit-transform: scale(1,1); }
+  }
+
+  @keyframes move-around {
+    0% { -webkit-transform: scale(1,1); }
+    50% { -webkit-transform: scale(1.1,1.1); }
+    100% { -webkit-transform: scale(1,1); }
+  }
+
+.loop_flip {
+  position:relative;
+  float:left;
+  width: 200px;
+  height: 200px;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0s ease 0s;
+  z-index: 0;
+  -webkit-animation: flip 12s linear infinite;
+  animation: flip 12s linear infinite;
+  background-image:url(mb_quiz_emoji_0.png);
+  background-size:100%;
+}
+
+@-webkit-keyframes flip {
+  0% { -webkit-transform: scaleX(1); }
+  50% { -webkit-transform: scaleX(-1);}
+  100% { -webkit-transform: scaleX(1);}
+}
+
+@keyframes flip {
+  0% { -webkit-transform: scaleX(1); }
+  50% { -webkit-transform: scaleX(-1);}
+  100% { -webkit-transform: scaleX(1);}
+}

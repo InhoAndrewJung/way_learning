@@ -70,12 +70,12 @@
 		WHERE
 		user_id=#{userId}
 	</update>
-	
+
 	<!--회원탈퇴 추가 -->
 	<delete id="deleteMember" >
-		DELETE from wl_member 
-		WHERE user_id=#{userId} 
-		
+		DELETE from wl_member
+		WHERE user_id=#{userId}
+
 	</delete>
 
 
@@ -134,6 +134,7 @@
 		<if test="sorting == 'RightPercent'">
 			rank() over(order by round(( sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2)
 			desc)
+<<<<<<< HEAD
 		</if>
        as ranking from wl_answer_result group by user_id
 	</select> -->
@@ -150,8 +151,29 @@
 
 		<if test="sorting == 'cntRight'">
 			rank() over(order by sum(MY_CNT_RIGHT) desc)
+=======
+>>>>>>> master
+		</if>
+       as ranking from wl_answer_result group by user_id
+	</select> -->
+	
+	
+	<select id="selectAllRanking" parameterType="string" resultMap="answerResultRM">
+		select m.user_id ,m.activity,m.img_profile, sum(MY_CNT_SUBMIT) MY_CNT_SUBMIT, sum(MY_CNT_RIGHT)
+		MY_CNT_RIGHT,sum(MY_CNT_WRONG) MY_CNT_WRONG, round((
+		sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2) my_right_Percent ,
+
+<<<<<<< HEAD
+=======
+		<if test="sorting == 'cntSubmit'">
+			rank() over(order by sum(MY_CNT_SUBMIT) desc)
 		</if>
 
+		<if test="sorting == 'cntRight'">
+			rank() over(order by sum(MY_CNT_RIGHT) desc)
+		</if>
+
+>>>>>>> master
 		<if test="sorting == 'RightPercent'">
 			rank() over(order by round(( sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2)
 			desc)
@@ -169,69 +191,63 @@
 
 
 	<select id="selectBoardFavorite" resultType="hashmap">
-	
-	
+
+
 	select * from
-(select  tbr.board_no, tbr.reg_date, tb.writer, title,m.img_profile,m.activity , 'tech' as table_name 
+(select  tbr.board_no, tbr.reg_date, tb.writer, title,m.img_profile,m.activity , 'tech' as table_name
 from wl_tech_board_recommend tbr, wl_tech_board tb,wl_member m where tbr.board_no=tb.board_no and
 tbr.user_id=m.user_id and m.user_id=#{userId}
-UNION ALL 
-select  qbr.board_no, qbr.reg_date, qb.writer, title, m.img_profile, m.activity,'qna' as table_name 
+UNION ALL
+select  qbr.board_no, qbr.reg_date, qb.writer, title, m.img_profile, m.activity,'qna' as table_name
 from wl_qna_board_recommend qbr, wl_qna_board qb,wl_member m where qbr.board_no=qb.board_no and
 qbr.user_id=m.user_id and m.user_id=#{userId} )a where a.reg_date   &gt; (sysdate -10) order by a.reg_date desc
 
 	</select>
 
 	<select id="selectReplyFavorite" resultType="hashmap">
-	
+
 	select * from (select tr.board_no,trr.reply_no, tr.replyer ,
 (select writer from wl_tech_board where board_no=tr.board_no)writer,
-(select title from wl_tech_board where board_no=tr.board_no)title, 
-trr.reg_date,m.img_profile,m.activity,'tech' as table_name 
+(select title from wl_tech_board where board_no=tr.board_no)title,
+trr.reg_date,m.img_profile,m.activity,'tech' as table_name
 from wl_tech_reply_recommend trr, wl_tech_reply tr,wl_member m where trr.reply_no=tr.reply_no and
-trr.user_id=m.user_id and m.user_id=#{userId}  
-UNION ALL 
+trr.user_id=m.user_id and m.user_id=#{userId}
+UNION ALL
 select qr.board_no,qrr.reply_no, qr.replyer ,
 (select writer from wl_qna_board where board_no=qr.board_no)writer,
-(select title from wl_qna_board where board_no=qr.board_no)title, 
+(select title from wl_qna_board where board_no=qr.board_no)title,
 qrr.reg_date,m.img_profile,m.activity,'qna' as table_name
 from wl_qna_reply_recommend qrr, wl_qna_reply qr,wl_member m where qrr.reply_no=qr.reply_no and
 qrr.user_id=m.user_id and m.user_id=#{userId})a where a.reg_date  &gt; (sysdate -10) order by a.reg_date desc
 	</select>
-	
+
 	<select id="selectMyLectureRecord" resultType="hashmap">
-	select a.* ,
+
+select a.* ,
 (select count(-1) from wl_my_lecture_record where course_no=a.course_no) cnt_My_record,
 (select count(-1) from wl_lecture_board where course_no=a.course_no) cnt_Course,
 greatest(round((select count(-1) from wl_my_lecture_record where course_no=a.course_no)/(select count(-1) from wl_lecture_board where course_no=a.course_no)*100,2),0) progress
-from (select lr.course_no,lc.course_name,lecture_order,lr.lecture_no,lecture_name,lb.author 
+from (select lr.course_no,lc.course_name,lecture_order,lr.lecture_no,lecture_name,lb.author,lc.course_image 
 from wl_lecture_board lb, wl_my_lecture_record lr ,wl_course lc
 where lb.course_no=lr.course_no and lr.course_no=lc.course_no and lb.lecture_no=lr.LECTURE_NO  and user_id=#{userId} order by course_no, lecture_order) a
 	
+<!-- =======
+		select a.* ,
+		(select count(-1) from wl_my_lecture_record where course_no=a.course_no) cnt_My_record,
+		(select count(-1) from wl_lecture_board where course_no=a.course_no) cnt_Course,
+		greatest(round((select count(-1) from wl_my_lecture_record where course_no=a.course_no)/(select count(-1) from wl_lecture_board where course_no=a.course_no)*100,2),0) progress
+		from (select lr.course_no,lc.course_name,lecture_order,lr.lecture_no,lecture_name,lb.author,lc.course_image
+		from wl_lecture_board lb, wl_my_lecture_record lr ,wl_course lc
+		where lb.course_no=lr.course_no and lr.course_no=lc.course_no and lb.lecture_no=lr.LECTURE_NO  and user_id=#{userId} order by course_no, lecture_order) a
+
+>>>>>>> 1ded3f3008abb35dce971eb41c4c71a86123f8b9 -->
 	</select>
-	
+
 	<select id="selectLectureFavorite" resultType="hashmap">
-select cr.course_no,course_name,description,cr.reg_date,cr.user_id,author,m.img_profile,m.activity from wl_course_recommend cr, wl_course c,wl_member m where cr.course_no=c.course_no 
+select cr.course_no,course_name,description,cr.reg_date,cr.user_id,author,m.img_profile,m.activity from wl_course_recommend cr, wl_course c,wl_member m where cr.course_no=c.course_no
 and c.author=m.user_id and cr.user_id=#{userId}
-	
+
 	</select>
 
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

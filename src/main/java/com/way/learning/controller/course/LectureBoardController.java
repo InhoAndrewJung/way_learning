@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.way.learning.model.course.dao.LectureBoardDAO;
 import com.way.learning.model.course.vo.Course;
 import com.way.learning.model.course.vo.LectureBoard;
 import com.way.learning.model.member.vo.Member;
@@ -62,6 +61,18 @@ public class LectureBoardController {
 
 
 		return new ModelAndView("redirect:/","lvo",lvo);
+	}
+	
+	@ResponseBody
+	@RequestMapping("isLectureOrderExist")
+	public int isLectureOrderExist(@RequestParam(defaultValue="0") int courseNo, @RequestParam(defaultValue="0") int lectureOrder ) throws Exception{
+		System.out.println("isLectureOrderExist courseNo:"+courseNo);
+		System.out.println("isLectureOrderExist lectureOrder:"+lectureOrder);
+
+		int result=lectureBoardService.isLectureOrderExist(courseNo, lectureOrder);
+System.out.println("isLectureOrderExist result:"+result);
+
+		return result;
 	}
 
 
