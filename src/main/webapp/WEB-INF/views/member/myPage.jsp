@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="${path}/resources/css/member/myPage.css">
 <script>
 showContent('updateForm');
+
 function showContent(page){
 $.ajax({
 		type: "post",
@@ -14,6 +15,49 @@ $.ajax({
 		}
 	});
 }
+
+
+
+function showActiveMember(){
+	
+	
+		
+	
+	$.ajax({
+		
+		type: "post",
+		url: "${path}/admin/selectActiveMember",
+		data:"${_csrf.parameterName}=${_csrf.token}",
+		success: function(result){
+
+				$("#showContent").html(result);	
+		}
+		
+	});
+	
+	
+	
+}	
+
+
+function showAllCourse(){
+
+	$.ajax({
+		
+		type: "post",
+		url: "${path}/admin/selectAllCourseList",
+		data:"${_csrf.parameterName}=${_csrf.token}",
+		success: function(result){
+			$("#showContent").html(result);
+	
+		}
+		
+	});
+	
+}	
+
+
+
 </script>
 <section class="page_block">
 	<%-- <header class="page_block_top">
@@ -54,6 +98,10 @@ $.ajax({
 	<section class="nav_lesson_list nav_mypage_list">
 		<h1>MYPAGE</h1>
 		<ul>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<li onclick="showActiveMember()" id="showActive" >활동멤버 선택</li>
+			<li onclick="showAllCourse()"  id="showAll">강의 승인 선택</li>
+			</sec:authorize>
 			<li onclick="showContent('showMyRecord')">내가 푼 문제 기록</li>
 			<li onclick="showContent('showAllRanking')">전체 랭킹보기</li>
 			<li onclick="showContent('myFavoriteList')">내 좋아요 목록 링크</li>
