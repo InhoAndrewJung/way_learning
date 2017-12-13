@@ -1,11 +1,6 @@
 package com.way.learning.model.question.vo;
 
 import com.way.learning.model.member.vo.Member;
-
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 public class AnswerResult {
 
 	private Member member;
@@ -32,26 +27,14 @@ public class AnswerResult {
 		this.myCntError = myCntError;
 	}
 	
-<<<<<<< HEAD
-=======
-	
->>>>>>> master
 	public AnswerResult() {
 		// TODO Auto-generated constructor stub
 	}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 	public Member getMember() {
 		return member;
 	}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 	public void setMember(Member member) {
 		this.member = member;
 	}
@@ -96,10 +79,6 @@ public class AnswerResult {
 		this.myCntRight = myCntRight;
 	}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 	public int getRanking() {
 		return ranking;
 	}
@@ -119,26 +98,14 @@ public class AnswerResult {
 		this.myRightPercent = myRightPercent;
 	}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 	public int getMyCntError() {
 		return myCntError;
 	}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 	public void setMyCntError(int myCntError) {
 		this.myCntError = myCntError;
 	}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 	@Override
 	public String toString() {
 		return "AnswerResult [member=" + member + ", questionNo=" + questionNo + ", myCntSubmit=" + myCntSubmit

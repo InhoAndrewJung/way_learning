@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../include/common.jsp"%>
+<%@ include file="../include/header.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,10 +34,16 @@ function content_submit(){
 	f.submit();
 }
  
-
 </script>
 
-
+<style>
+.image_check{
+	cursor:pointer;
+	width: 50px;
+    margin-right: 20px;
+    float:right;
+}
+</style>
 
 </head>
 
@@ -44,7 +51,7 @@ function content_submit(){
 
 <div align="center">
 <br/><br/><br/><br/><br/><br/>
-	<font face="HY나무L" size="5"><strong>강의등록 <br>
+	<font face="HY나무L" size="5"><strong>코스등록 <br>
 		<br></strong></font>
 	<form
 		action="${pageContext.request.contextPath}/course/insertCourse?${_csrf.parameterName}=${_csrf.token}"
@@ -77,11 +84,14 @@ function content_submit(){
 		
 			<tr class="table-center"  style="height:40px">
 				<td colspan="2"><img
-					src="${pageContext.request.contextPath}/resources/img/confirm.gif"
-					onclick="content_submit()" alt="확인"></td>
+						src="${pageContext.request.contextPath}/resources/img/check.png"
+						onclick="content_submit()" class="image_check"></td>
 			</tr>
 		</table>
 	</form>
-	<a href="${path}/"> 메인페이지로 이동</a>
+	<!-- 메인으로 이동 -->
+				<a href="${path}/">
+					<img src="${pageContext.request.contextPath}/resources/img/house.png" id="image_list">
+				</a>
 </div>
 </html>
