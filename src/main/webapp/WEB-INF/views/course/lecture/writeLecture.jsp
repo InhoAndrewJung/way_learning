@@ -3,7 +3,9 @@
 
 <%@ include file="../../include/common.jsp"%>
 <%@ include file="../../include/header.jsp"%>
-<link rel="stylesheet" href="${path}/resources/css/board.css">
+
+<link rel="stylesheet" href="${path}/resources/css/board/board.css">
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,8 +13,8 @@
 
 <title>Insert title here</title>
 <script type="text/javascript">
-
-var courseNo=$('#courseNo').val();
+var courseNo=${list[0].COURSE_NO};
+alert(courseNo);
 function content_submit(){
 	var f=document.write_form;
 	
@@ -23,18 +25,14 @@ function content_submit(){
 	
 	f.submit();
 }
-
-
-
 function selectedCourse(){
-
+	
+	alert(courseNo);
 	courseNo=$('#courseNo').val();
 	
 
 	}
-
  
-
 	
 	 function selectedOrder(){
 		
@@ -54,7 +52,6 @@ function selectedCourse(){
 				}else{
 					$('#duplicate').val("false");				
 				}
-
 			}
 			
 		});
@@ -62,8 +59,6 @@ function selectedCourse(){
 	}  
 	
 	
-
-
 </script>
 
 
@@ -73,7 +68,6 @@ function selectedCourse(){
 
 
 <style>
-
    
 #profile{width:50px; height:50px; border-radius: 50% }
 a{text-decoration:none; cursor: pointer;}
@@ -158,7 +152,6 @@ a{text-decoration:none; cursor: pointer;}
 							filebrowserUploadUrl : "${pageContext.request.contextPath}/lectureBoard/imageUpload",
 							removePlugins: 'resize',		
 						} );  
-
 					
 					
 					

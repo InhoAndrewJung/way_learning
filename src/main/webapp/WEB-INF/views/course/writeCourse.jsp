@@ -34,7 +34,6 @@ function content_submit(){
 	f.submit();
 }
  
-
 </script>
 
 <style>

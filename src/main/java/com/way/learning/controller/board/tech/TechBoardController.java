@@ -176,11 +176,13 @@ public class TechBoardController {
 	public ModelAndView updateView(String boardNo, ModelAndView mav)
 			throws Exception{
 		TechBoard bvo=techBoardService.showContent(boardNo);
+
 		List tagList= techBoardService.getTag(bvo.getBoardNo()+"");
 		mav.setViewName("board/tech/update");
 		mav.addObject("tagList", tagList);
 		mav.addObject("bvo",bvo);
 		System.out.println("컨트롤러 bvo:"+bvo);
+
 		return mav;
 	}
 

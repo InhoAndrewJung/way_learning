@@ -1,8 +1,6 @@
 package com.way.learning.model.question.vo;
 
 import com.way.learning.model.member.vo.Member;
-
-
 public class AnswerResult {
 
 	private Member member;
@@ -29,16 +27,13 @@ public class AnswerResult {
 		this.myCntError = myCntError;
 	}
 	
-	
 	public AnswerResult() {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Member getMember() {
 		return member;
 	}
-
 
 	public void setMember(Member member) {
 		this.member = member;
@@ -84,7 +79,6 @@ public class AnswerResult {
 		this.myCntRight = myCntRight;
 	}
 
-
 	public int getRanking() {
 		return ranking;
 	}
@@ -104,16 +98,13 @@ public class AnswerResult {
 		this.myRightPercent = myRightPercent;
 	}
 
-
 	public int getMyCntError() {
 		return myCntError;
 	}
 
-
 	public void setMyCntError(int myCntError) {
 		this.myCntError = myCntError;
 	}
-
 
 	@Override
 	public String toString() {

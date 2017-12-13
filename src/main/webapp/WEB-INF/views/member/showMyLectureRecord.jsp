@@ -52,7 +52,6 @@
     font-size:0.8em;
     margin-bottom:25px;
   }
-
   .course_progress {
     position:relative;
     margin:10px 0;
@@ -97,7 +96,6 @@
   </c:forEach>
   var target = document.getElementById('course_list')
   lectures.forEach(drawCourse)
-
   function drawCourse(item, idx){
     var course = courses.get(item.courseName)
     if(typeof course == 'undefined'){
@@ -122,10 +120,8 @@
       progressValue.appendChild(document.createTextNode(item.progress+'% / 총 '+item.cnt+'강'))
       progressGraphBox.appendChild(progressGraph)
       progressGraphBox.appendChild(progressValue)
-
       progress.appendChild(progressGraphBox)
       progress.appendChild(progressValue)
-
       article.appendChild(courseImage)
       article.appendChild(title)
       article.appendChild(author)
