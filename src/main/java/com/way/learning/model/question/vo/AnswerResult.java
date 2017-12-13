@@ -2,6 +2,7 @@ package com.way.learning.model.question.vo;
 
 import com.way.learning.model.member.vo.Member;
 
+
 public class AnswerResult {
 
 	private Member member;
