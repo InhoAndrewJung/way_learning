@@ -3,7 +3,9 @@
 
 <%@ include file="../../include/common.jsp"%>
 <%@ include file="../../include/header.jsp"%>
+
 <link rel="stylesheet" href="${path}/resources/css/board/board.css">
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,6 +30,7 @@ function selectedCourse(){
 	alert(courseNo);
 	courseNo=$('#courseNo').val();
 	
+
 	}
  
 	
@@ -68,6 +71,7 @@ function selectedCourse(){
    
 #profile{width:50px; height:50px; border-radius: 50% }
 a{text-decoration:none; cursor: pointer;}
+
 .image_check{
 	cursor:pointer;
 	width: 50px;

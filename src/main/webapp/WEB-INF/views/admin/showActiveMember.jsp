@@ -3,7 +3,7 @@
 <%@ include file="../include/common.jsp"%>
 <title>Insert title here</title>
 </head>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 
 .boardTable{
@@ -191,7 +191,7 @@ a {
 							<div class="activity">
 								
 									<span class="fa fa-graduation-cap"></span>
-									${bvo.member.activity}
+									${row.ACTIVITY}
 							</div>
 						</c:if>
  						</div>
@@ -209,7 +209,7 @@ a {
 							<div class="activity">
 								
 									<span class="fa fa-graduation-cap"></span>
-									${bvo.member.activity}
+									${row.ACTIVITY}
 							</div>
 						</c:if>
 					</div>

@@ -37,12 +37,14 @@ function content_submit(){
 </script>
 
 <style>
+
 .image_check{
 	cursor:pointer;
 	width: 50px;
     margin-right: 20px;
     float:right;
 }
+
 </style>
 
 </head>
