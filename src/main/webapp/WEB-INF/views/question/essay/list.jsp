@@ -39,9 +39,9 @@ function makeQuestion(){
 			</form> 
 		</span>
 	</div>
-	
+	<br/>
 		<table class="boardTable" style="text-align: center">
-			<tr class="table-center" style="height:40">
+			<tr class="table-center" style="height:40px">
 				<td>문제번호</td>
 				<td nowrap>제목</td>
 				<td>제출</td>
@@ -49,7 +49,7 @@ function makeQuestion(){
 				<td>정답비율</td>
 			</tr>
 			<c:forEach var="row" items="${list}">
-				<tr class="table-center" style="height:60">
+				<tr class="table-center" style="height:60px">
 
 					<td class="table-center_content" >${row.questionNo}</td>
 					
