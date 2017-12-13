@@ -82,7 +82,9 @@
 
 	<!-- 마이 페이지 관련 -->
 	<resultMap type="answerResult" id="answerResultRM">
-		<result property="userId" column="user_id" />
+		<result property="member.userId" column="user_id" />
+		<result property="member.activity" column="activity" />
+		<result property="member.imgProfile" column="img_profile" />
 		<result property="questionNo" column="question_no" />
 		<result property="myCntSubmit" column="my_cnt_submit" />
 		<result property="myCntWrong" column="my_cnt_wrong" />
@@ -116,27 +118,53 @@
 		where user_id=#{userId}
 	</select>
 
-	<select id="selectAllRanking" parameterType="string" resultMap="answerResultRM">
+	<!-- <select id="selectAllRanking" parameterType="string" resultMap="answerResultRM">
 		select user_id ,sum(MY_CNT_SUBMIT) MY_CNT_SUBMIT, sum(MY_CNT_RIGHT)
 		MY_CNT_RIGHT,sum(MY_CNT_WRONG) MY_CNT_WRONG, round((
 		sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2) my_right_Percent ,
 
 		<if test="sorting == 'cntSubmit'">
-			rank() over(order by sum(MY_CNT_SUBMIT) desc)as ranking from
-			wl_answer_result group by user_id
+			rank() over(order by sum(MY_CNT_SUBMIT) desc)
 		</if>
 
 		<if test="sorting == 'cntRight'">
-			rank() over(order by sum(MY_CNT_RIGHT) desc)as ranking from
-			wl_answer_result group by user_id
+			rank() over(order by sum(MY_CNT_RIGHT) desc)
 		</if>
 
 		<if test="sorting == 'RightPercent'">
 			rank() over(order by round(( sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2)
-			desc)as ranking from wl_answer_result group by user_id
+			desc)
+		</if>
+       as ranking from wl_answer_result group by user_id
+	</select> -->
+	
+	
+	<select id="selectAllRanking" parameterType="string" resultMap="answerResultRM">
+		select m.user_id ,m.activity,m.img_profile, sum(MY_CNT_SUBMIT) MY_CNT_SUBMIT, sum(MY_CNT_RIGHT)
+		MY_CNT_RIGHT,sum(MY_CNT_WRONG) MY_CNT_WRONG, round((
+		sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2) my_right_Percent ,
+
+		<if test="sorting == 'cntSubmit'">
+			rank() over(order by sum(MY_CNT_SUBMIT) desc)
 		</if>
 
+		<if test="sorting == 'cntRight'">
+			rank() over(order by sum(MY_CNT_RIGHT) desc)
+		</if>
+
+		<if test="sorting == 'RightPercent'">
+			rank() over(order by round(( sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2)
+			desc)
+		</if>
+       as ranking from wl_answer_result ar ,wl_member m where ar.user_id=m.user_id group by m.user_id ,m.activity,m.img_profile
 	</select>
+	
+	
+	<!-- select m.user_id ,m.activity,m.img_profile, sum(MY_CNT_SUBMIT) MY_CNT_SUBMIT, sum(MY_CNT_RIGHT)
+		MY_CNT_RIGHT,sum(MY_CNT_WRONG) MY_CNT_WRONG, round((
+		sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2) my_right_Percent ,
+			rank() over(order by sum(MY_CNT_SUBMIT) desc)
+       as ranking from wl_answer_result ar ,wl_member m where ar.user_id=m.user_id group by m.user_id ,m.activity,m.img_profile; -->
 
 
 
@@ -151,22 +179,6 @@ UNION ALL
 select  qbr.board_no, qbr.reg_date, qb.writer, title, m.img_profile, m.activity,'qna' as table_name 
 from wl_qna_board_recommend qbr, wl_qna_board qb,wl_member m where qbr.board_no=qb.board_no and
 qbr.user_id=m.user_id and m.user_id=#{userId} )a where a.reg_date   &gt; (sysdate -10) order by a.reg_date desc
-
-
-
-
-		<!-- select * from
-		(select tbr.board_no, tbr.reg_date, tb.writer,
-		title,m.img_profile,m.activity,'tech' as table_name from
-		wl_tech_board_recommend tbr, wl_tech_board tb,wl_member m where
-		tbr.board_no=tb.board_no and
-		tb.writer=m.user_id
-		UNION ALL
-		select qbr.board_no, qbr.reg_date, qb.writer, title, m.img_profile,
-		m.activity,'qna' as table_name from wl_qna_board_recommend qbr,
-		wl_qna_board qb,wl_member m where qbr.board_no=qb.board_no and
-		qb.writer=m.user_id)a where a.reg_date &gt; (sysdate -10) order by
-		a.reg_date desc -->
 
 	</select>
 
@@ -184,25 +196,7 @@ select qr.board_no,qrr.reply_no, qr.replyer ,
 (select title from wl_qna_board where board_no=qr.board_no)title, 
 qrr.reg_date,m.img_profile,m.activity,'qna' as table_name
 from wl_qna_reply_recommend qrr, wl_qna_reply qr,wl_member m where qrr.reply_no=qr.reply_no and
-qrr.user_id=m.user_id and m.user_id=#{userId}   )a where a.reg_date  &gt; (sysdate -10) order by a.reg_date desc
-
-
-		<!-- select * from (select tr.board_no,trr.reply_no, tr.replyer ,
-		(select writer from wl_tech_board where board_no=tr.board_no)writer,
-		(select title from wl_tech_board where board_no=tr.board_no)title,
-		trr.reg_date,m.img_profile,m.activity,'tech' as table_name from
-		wl_tech_reply_recommend trr, wl_tech_reply tr,wl_member m where
-		trr.reply_no=tr.reply_no and
-		tr.replyer=m.user_id
-		UNION ALL
-		select qr.board_no,qrr.reply_no, qr.replyer ,
-		(select writer from wl_qna_board where board_no=qr.board_no)writer,
-		(select title from wl_qna_board where board_no=qr.board_no)title,
-		qrr.reg_date,m.img_profile,m.activity,'qna' as table_name from
-		wl_qna_reply_recommend qrr, wl_qna_reply qr,wl_member m where
-		qrr.reply_no=qr.reply_no and
-		qr.replyer=m.user_id )a where a.reg_date &gt; (sysdate -10) order by a.reg_date desc -->
-
+qrr.user_id=m.user_id and m.user_id=#{userId})a where a.reg_date  &gt; (sysdate -10) order by a.reg_date desc
 	</select>
 	
 	<select id="selectMyLectureRecord" resultType="hashmap">

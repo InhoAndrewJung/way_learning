@@ -179,7 +179,7 @@ function sorting(sort){
 								<div class="activity">
 								
 									<span class="fa fa-graduation-cap"></span>
-									25
+									${bvo.member.activity}
 								</div>
 								
 								<div class="date">
