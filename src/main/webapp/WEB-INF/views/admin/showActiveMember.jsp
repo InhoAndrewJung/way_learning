@@ -9,7 +9,7 @@
 .boardTable{
 	background: #ffffff;
     margin: 20px auto 70px auto;
-    width: 40%;
+    width: 80%;
     border-radius: 3px;
     border: 2px solid #e5e9f2;
     box-shadow: 5px 5px 5px #cccccc;
@@ -144,7 +144,7 @@ a {
 						} else {
 							alert("회원 자격 변경에 실패했습니다.");
 						}
-						showActiveMember('change');
+						showActiveMember();
 					}
 				});
 			}
@@ -163,7 +163,7 @@ a {
 						} else {
 							alert("회원 자격 변경에 실패했습니다.");
 						}
-						showActiveMember('change');
+						showActiveMember();
 					}
 				});
 			}
@@ -175,10 +175,10 @@ a {
 <body>
 
 	<div align="center">
-		활동점수 200점이상 멤버 현황
-
+		
+활동점수 200점이상 멤버 현황
 		<table class="boardTable" border=1px>
-
+			
 			<tr>
 				<td class="left_title">강 &nbsp; &nbsp; &nbsp;사</td>
 				<td class="right_title"><c:forEach var="row" items="${list}">
