@@ -51,7 +51,7 @@
 			
 		</div>
 		
-		<span class="search_section">
+		<span class="search_section" style="width:80%">
 			<form name="form1" method="post" action="${pageContext.request.contextPath}/question/general/getList" id="form1">
 				
 		
@@ -62,8 +62,8 @@
 				<input type="hidden"  name="sorting"  value=""> 
 				</span>
 				
-				<input name="keyword" id="search_bar" style="margin-right:6px;" value=${keyword}> 
-				<input type="submit" id="search_button"  style="padding:6px;"value="조회">
+				<input name="keyword" id="search_bar"  style="margin-right:6px;" value=${keyword}> 
+				<input type="submit" id="search_button"  style="padding:8px;" value="조회">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				
 				

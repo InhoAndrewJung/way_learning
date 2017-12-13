@@ -1,18 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
-
-
 <%@ include file="../include/common.jsp"%>
-</head>
+<%@ include file="../include/header.jsp"%>
 <script>
 
 
@@ -98,21 +87,21 @@ a {
 			<tr>
 
 				<td>코스이름: ${cvo.courseName} <br></td>
-				
+
 				<td>코스설명: ${cvo.description}</td>
 
 
 			</tr>
-			
+
 			<tr>
 
 				<td colspan="2"> 태그들:
 				<c:forEach var="tag" items="${tags }" varStatus="status">
-				  <span id="tag" >${tag }</span>  
+				  <span id="tag" >${tag }</span>
 				</c:forEach>
 				</td>
-				
-				
+
+
 
 
 			</tr>
@@ -121,7 +110,7 @@ a {
 				<td colspan="2">코스이미지: <img id="profile"
 					src="${path}/resources/upload/${cvo.courseImage}"> <br>
 				</td>
-				
+
 
 
 
@@ -153,33 +142,3 @@ a {
 	</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

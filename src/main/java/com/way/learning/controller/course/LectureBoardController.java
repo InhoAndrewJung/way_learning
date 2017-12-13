@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.way.learning.model.course.dao.LectureBoardDAO;
 import com.way.learning.model.course.vo.Course;
 import com.way.learning.model.course.vo.LectureBoard;
 import com.way.learning.model.member.vo.Member;
