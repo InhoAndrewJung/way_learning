@@ -1,0 +1,51 @@
+.modal_back {
+  width:0px; height:0px;
+  position:fixed;
+  left:0;top:0;
+  display:block;
+  transition:all 0.5s ease .1s, width 0s ease 0s, height 0s ease 0s;
+  background:rgba(0,0,0,0.7);
+  opacity:0;
+  overflow: hidden;
+  z-index:998;
+  /* add 'scroll-lock' class to body tag for prevent scroll bar */
+
+}
+
+.modal_back_on { width:100%; height:100%; opacity:1;padding-top:10px;}
+
+.modal_card>span{
+  content:"";
+  font-size:2em;
+  color:#666;
+  display:block;
+  position:absolute;
+  top:5px;
+  right:10px;
+  overflow: auto;
+  cursor: pointer;
+}
+.modal_card {
+  position: relative;
+  max-width: 750px;
+  max-height:90%;
+  margin:auto auto;
+  width:80%;
+  background: linear-gradient(#ffffff, #f2f5f8);
+  padding:30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  z-index:999;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.modal_card h1 { font-size: 3em; margin:0px; padding:0px; margin-bottom:30px;}
+.modal_card h2 { font-size:2.2em; }
+.modal_card h3 { font-size:1.2em;}
+.modal_card h1 img{width:100px; height:100px; vertical-align: bottom; margin-right:30px;}
+.modal_card p {width:100%;word-break:break-all;}
+
+
+.modal_quiz_desc {width:55%; float: right;}
+.modal_quiz_desc::after {clear:both;}
