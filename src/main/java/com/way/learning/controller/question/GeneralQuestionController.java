@@ -101,12 +101,9 @@ public class GeneralQuestionController {
 		System.out.println("questionNo:" + questionNo);
 		System.out.println("answer:" + answer);
 		int result = questionService.checkAnswer(questionNo, answer);
-		if (result == 1) {
-			mav.addObject("result", "맞았습니다");
-		} else {
-			mav.addObject("result", "틀렸습니다. 다시풀어보세요");
-
-		}
+		
+		mav.addObject("result", result);
+		
 		mav.addObject("questionNo", questionNo);
 		mav.addObject("multipleChoice", "multipleChoice");
 		mav.setViewName("/question/general/generalResult");

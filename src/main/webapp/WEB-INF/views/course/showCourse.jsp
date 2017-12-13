@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/common.jsp"%>
 <%@ include file="../include/header.jsp"%>
-<link rel="stylesheet" href="${path}/resources/css/board.css">
+<link rel="stylesheet" href="${path}/resources/css/board/board.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
 

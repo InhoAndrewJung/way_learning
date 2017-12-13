@@ -69,14 +69,14 @@
 
 		</table>
 		<div style="text-align:center;">
-		<c:if test="${mvo.userId == requestScope.bvo.member.userId }">
+		
 			<img alt="삭제"
 				src="${pageContext.request.contextPath}/resources/img/delete_btn.jpg"
 				onclick="deleteQuestion()">
 			<img alt="수정"
 				src="${pageContext.request.contextPath}/resources/img/modify_btn.jpg"
 				onclick="updateQuestion()">
-		</c:if>
+		
 		<br>
 		
 			<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
