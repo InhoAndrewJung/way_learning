@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${path}/resources/css/board.css?ver=2">
+<link rel="stylesheet" href="${path}/resources/css/board/board.css?ver=2">
 <title>Insert title here</title>
 </head>
 <body>

@@ -1,19 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<%@ include file="../include/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<title>회원탈퇴</title>
+<title>Insert title here</title>
+<link rel="stylesheet" href="${path}/resources/css/member/findIdProc.css">
+<script type="text/javascript">
+function submit(){
+	document.getElementById("deleteForm").submit();
+}
 
-
+function toMain() {
+	 location.href = "${pageContext.request.contextPath}";
+}
+</script>
 </head>
 <body>
+<<<<<<< HEAD
 
 <div align="center">
 
@@ -23,29 +29,40 @@
 		id="deleteForm">
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}">
+=======
+<div class="container">
+	<div class="logo"><img src="${path}/resources/img/google.png" id="image_logo" onclick="toMain()"></div>
+						
+	<form name="deleteForm" method="post" action="${pageContext.request.contextPath}/member/deleteProc"	id="deleteForm">			
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+>>>>>>> master
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="mvo" property="principal" />
 			<input type="hidden" name="userId" value="${mvo.userId}">
-		</sec:authorize>
-		<h2 align="center">회원탈퇴 페이지</h2>
-		<hr>
-		<table width="260" border="1" align="center">
-			<tr>
-				<td colspan="2" align="center"><b>회원 탈퇴</b></td>
-			</tr>
-			<tr>
-				<td>정말 탈퇴 하시겠습니까?</td>
-			</tr>
-
-			<td colspan="2" align="center"><input type="submit" value="회원탈퇴">
-			 <input type="button" value="취소 "></td>
-			</tr>
+		</sec:authorize>													
+			<div class="container-body">
+		
+				<div class="body">
 			
-		</table>
+					<div class="title">
+					정말로 떠나실 건가요 ??
+					</div>
+				</div>
+			</div>
+			
+			<div class="container-footer">
+				<p onclick="submit()" class="yes">YES..</p><br>
+				<p onclick="toMain()" class="no">Not Yet!</p>
+			</div>
 	</form>
+<<<<<<< HEAD
 
 	<a href="${path}/"> 메인페이지로 이동</a>
 	</div>
 
+=======
+	
+</div>
+>>>>>>> master
 </body>
 </html>

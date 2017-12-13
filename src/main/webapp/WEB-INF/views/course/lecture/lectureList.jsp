@@ -3,7 +3,7 @@
 <%@ include file="../../include/common.jsp"%>
 <%@ include file="../../include/header.jsp"%>
 	<script src="${path}/ckeditor/ckeditor.js"></script>
-	<link rel="stylesheet" href="${path}/resources/css/reply_list.css?ver=2">
+	<link rel="stylesheet" href="${path}/resources/css/board/reply_list.css?ver=2">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
 	</style>

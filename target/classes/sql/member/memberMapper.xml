@@ -122,15 +122,12 @@
 		select user_id ,sum(MY_CNT_SUBMIT) MY_CNT_SUBMIT, sum(MY_CNT_RIGHT)
 		MY_CNT_RIGHT,sum(MY_CNT_WRONG) MY_CNT_WRONG, round((
 		sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2) my_right_Percent ,
-
 		<if test="sorting == 'cntSubmit'">
 			rank() over(order by sum(MY_CNT_SUBMIT) desc)
 		</if>
-
 		<if test="sorting == 'cntRight'">
 			rank() over(order by sum(MY_CNT_RIGHT) desc)
 		</if>
-
 		<if test="sorting == 'RightPercent'">
 			rank() over(order by round(( sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2)
 			desc)
@@ -217,7 +214,6 @@ where lb.course_no=lr.course_no and lr.course_no=lc.course_no and lb.lecture_no=
 		from (select lr.course_no,lc.course_name,lecture_order,lr.lecture_no,lecture_name,lb.author,lc.course_image
 		from wl_lecture_board lb, wl_my_lecture_record lr ,wl_course lc
 		where lb.course_no=lr.course_no and lr.course_no=lc.course_no and lb.lecture_no=lr.LECTURE_NO  and user_id=#{userId} order by course_no, lecture_order) a
-
 >>>>>>> 1ded3f3008abb35dce971eb41c4c71a86123f8b9 -->
 	</select>
 

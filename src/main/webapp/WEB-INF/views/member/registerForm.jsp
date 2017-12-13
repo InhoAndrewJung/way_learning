@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ include file="../include/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <script type="text/javascript" src="./js/jquery-1.11.3.js"></script> -->
+<link rel="stylesheet" href="${path}/resources/css/member/registerForm.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -58,7 +60,7 @@ $(document).ready(function(){
 		var userId=$(this).val().trim();
 		//alert(id);
 		if(userId.length<4 || userId.length>10){
-			$("#idCheckView").html("4>id length OR id length>10").css("background","pink");
+			$("#idCheckView").html("4<=ID<=10").css("color","#ed4d3c");
 			checkResultId="";
 			return;
 		}
@@ -69,10 +71,10 @@ $(document).ready(function(){
 			data:"${_csrf.parameterName}=${_csrf.token}&&userId="+userId,	
 			success:function(data){						
 				if(data=="fail"){
-				$("#idCheckView").html("  "+userId+" ID Can't Use!! ").css("background","red");
+				$("#idCheckView").html(" X ").css("color","#ed4d3c");
 					checkResultId="";
 				}else{						
-					$("#idCheckView").html("  "+userId+" ID Can Use!! ").css("background","yellow");		
+					$("#idCheckView").html("  O ").css("color","#3bb15d");		
 					checkResultId=userId;
 				}					
 			}//callback			
@@ -91,43 +93,111 @@ $(document).ready(function(){
 			success:function(data){		
 				//alert(data);
 				if(data!=0){
-				$("#emailCheckView").html("  "+email+" EMAIL Can't Use!! ").css("background","red");
+				$("#emailCheckView").html(" X ").css("color","#ed4d3c");
 				checkResultEmail="";
 				}else{						
-					$("#emailCheckView").html("  "+email+" EMAIL Can Use!! ").css("background","yellow");		
+					$("#emailCheckView").html(" O ").css("color","#3bb15d");		
 					checkResultEmail=email;
 				}					
 			}//callback			
 		});//ajax
 	});//keyup
 	
+	var uploadFile = $('.update_image .uploadFile');
+/* 	uploadFile.on('change', function(){
+		if(window.FileReader){
+			var filename = $(this)[0].files[0].name;
+		} else {
+			var filename = $(this).val().split('/').pop().split('\\').pop();
+		}
+		document.getElementById('fileName').value = filename;
+	}); */
+	
+	uploadFile.on('change', function(){
+        if ($(this)[0].files && $(this)[0].files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('file_preview').src = e.target.result;
+            }
+            reader.readAsDataURL($(this)[0].files[0]);
+        }
+        
+        if(window.FileReader){
+			var filename = $(this)[0].files[0].name;
+		} else {
+			var filename = $(this).val().split('/').pop().split('\\').pop();
+		}
+		document.getElementById('fileName').value = filename;
+		document.getElementById('file_preview').style.display ="inline";
+	    //$('#file_preview').attr('style', 'display:inline');
+	});
+	
 	
 });//ready
+
+
+
+
+
+function toMain() {
+	 location.href = "${pageContext.request.contextPath}";
+}
+
+/* var uploadFile = $('.update_image .uploadFile'); */
+
+
+
 </script>
+
 </head>
 <body>
-<h2>Member Register Form</h2><p>
-<form method="post" action="${pageContext.request.contextPath}/member/registerMember?${_csrf.parameterName}=${_csrf.token}" id="regForm"  enctype="multipart/form-data">
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-ID <input type="text" name="userId" id="userId"><span id="idCheckView"></span><br><br>
-PASSWORD <input type="password" name="password" ><br><br>
-email <input type="text" name="email"><span id="emailCheckView"></span><br><br>
-img_profile <input type="file" name="uploadFile" id="uploadFile" />
 
-<input type="submit" value="Register Member">
-</form>
+<div class="container">
+	<div class="logo"><img src="${path}/resources/img/google.png" id="image_logo" onclick="toMain()"></div>
+		
+	<div class="container-body">
+		<form method="post" action="${pageContext.request.contextPath}/member/registerMember?${_csrf.parameterName}=${_csrf.token}" id="regForm"  enctype="multipart/form-data">
+			<div class="body">
+				
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+			 	<div class="input_id">
+			 		<input name="userId"  placeholder="ID" id="userId" class="text_id">
+					 <span id="idCheckView"></span>
+				</div>
+			
+				<div class="input_pass">
+					<input type="password" name="password" placeholder="Password" class="text_pass">
+			
+				</div>
+			
+				<div class="input_email">
+					<input name="email" placeholder="E-mail" class="text_email">
+					<span id="emailCheckView"></span>
+				</div>
+			
+				<div class="update_image">
+					<input class="fileName" placeholder="File" id="fileName" readonly="readonly">
+					<label for="uploadFile" class="uploadBtn"></label>
+					<input type="file" name="uploadFile" id="uploadFile" class="uploadFile">
+					<img id="file_preview">
+			
+				</div>
+				
+			</div>
+			
+			
+			<div class="container-footer">
+			
+				<hr>
+				<input type="submit" value="" class="image_check">
+				<img src="/learning/resources/img/cancel.png" class="image_cancel" onclick="toMain()">
+		
+			</div>
+		
+		</form>
+	</div>
+		
+</div>
+	
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

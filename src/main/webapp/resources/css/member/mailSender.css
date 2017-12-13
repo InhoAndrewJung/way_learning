@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+.logo{
+    font-size: 30px;
+    color: #404040;
+    font-weight: bold;
+    margin: 50px auto 50px auto;
+    width: 60%;
+    text-align: center;
+}
+
+#image_logo {
+    width: 300px;
+    cursor: pointer;
+}
+
+.container-body {
+    background: #ffffff;
+    margin: 50px auto 50px auto;
+    width: 30%;
+    height: auto;
+    
+}
+
+.title{
+	font-size: 25px;
+    text-align: center;
+    padding: 15px 15px 25px 15px;
+    color: #fbc403;
+    font-weight: bold;
+}
+
+
+.input_email{
+    border-radius: 13px;
+    padding: 10px 3% 10px 2%;
+    font-size: 20px;
+    display: inline-block;
+    margin: 10px;
+    width: 94%;
+    height: 50px;
+    margin: 10px auto 10px auto;  
+}
+
+.text_email{
+	border: 0px;
+    border-left: 5px solid #3bb15d;
+    width: 80%;
+    padding: 10px;
+    font-size: 20px;
+    color:#3bb15d;
+    font-weight: bold;
+	
+}
+
+.text_email::-webkit-input-placeholder { /* Chrome */
+  color: #3bb15d;
+  font-weight: bold;
+}
+
+.container-footer{
+	padding: 20px;
+	text-align: right;
+}
+
+
+.image_check{
+	border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    background: url(../img/check.png) no-repeat center center/contain;
+}
+
+.image_cancel{
+	cursor:pointer;
+	width: 40px;    
+	padding-bottom: 5px;
+	
+}
+

@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../../include/common.jsp"%>
+<%@ include file="../../include/header.jsp"%>
+
+<link rel="stylesheet" href="${path}/resources/css/board/board.css">
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,8 +13,8 @@
 
 <title>Insert title here</title>
 <script type="text/javascript">
-
-var courseNo=$('#courseNo').val();
+var courseNo=${list[0].COURSE_NO};
+alert(courseNo);
 function content_submit(){
 	var f=document.write_form;
 	
@@ -21,17 +25,14 @@ function content_submit(){
 	
 	f.submit();
 }
-
-
-
 function selectedCourse(){
-
+	
+	alert(courseNo);
 	courseNo=$('#courseNo').val();
+	
 
 	}
-
  
-
 	
 	 function selectedOrder(){
 		
@@ -51,7 +52,6 @@ function selectedCourse(){
 				}else{
 					$('#duplicate').val("false");				
 				}
-
 			}
 			
 		});
@@ -59,8 +59,6 @@ function selectedCourse(){
 	}  
 	
 	
-
-
 </script>
 
 
@@ -70,17 +68,21 @@ function selectedCourse(){
 
 
 <style>
-
    
 #profile{width:50px; height:50px; border-radius: 50% }
 a{text-decoration:none; cursor: pointer;}
 
-
+.image_check{
+	cursor:pointer;
+	width: 50px;
+    margin-right: 20px;
+    float:right;
+}
 </style>
 
 </head>
 
-렉쳐등록하기!!!
+
 
 <div align="center">
 	<font face="HY나무L" size="5"><strong>글쓰기 <br>
@@ -90,11 +92,11 @@ a{text-decoration:none; cursor: pointer;}
 		
 
 
-		<table>
-			<tr>
+		<table class="boardTable">
+			<tr class="table-center" style="height:40px">
 				<td nowrap>코스</td>
 				<td>
-			<select name="courseNo" id="courseNo" onchange="selectedCourse()">
+			<select class="input-blue" name="courseNo" id="courseNo" onchange="selectedCourse()">
 			<c:forEach var="row" items="${list}">
 			   <option    value="${row.COURSE_NO}">${row.COURSE_NAME}코스</option>
 			</c:forEach>
@@ -107,21 +109,21 @@ a{text-decoration:none; cursor: pointer;}
 </td>
 			</tr>
 
-			<tr>
+			<tr class="table-center" style="height:40px">
 				<td nowrap>강의명</td>
-				<td><input type="text" name="lectureName" maxlength="50" size="50"
+				<td><input class="input-blue" type="text" name="lectureName" maxlength="50" size="50"
 					placeholder="강의명을 입력해주세요"></td>
 			</tr>
-			<tr>
+			<tr class="table-center" style="height:40px">
 				<td nowrap>강의 순서</td>
-				<td><input type="number" name="lectureOrder"   id="lectureOrder" min="1" max="15" onchange="selectedOrder()"></td>
+				<td><input class="input-blue" type="number" name="lectureOrder"   id="lectureOrder" min="1" max="15" onchange="selectedOrder()"></td>
 				<input type="hidden" name="duplicate" id="duplicate" value="true"/>
 			</tr>
 			
 			
-			<tr>
+			<tr class="table-center" style="height:40px">
 				<td nowrap>컨텐츠</td>
-				<td> <textarea id="content" name="content"rows="10" cols="80" ></textarea>
+				<td> <textarea class="input-blue" id="content" name="content"rows="10" cols="80" ></textarea>
 						
 						<!-- 텍스트 에리어를 스마트 에디터로 변경 -->
 					<script>
@@ -150,7 +152,6 @@ a{text-decoration:none; cursor: pointer;}
 							filebrowserUploadUrl : "${pageContext.request.contextPath}/lectureBoard/imageUpload",
 							removePlugins: 'resize',		
 						} );  
-
 					
 					
 					
@@ -160,13 +161,21 @@ a{text-decoration:none; cursor: pointer;}
 			</tr>
 
 		
-			<tr>
-				<td colspan="2"><img
-					src="${pageContext.request.contextPath}/resources/img/confirm.gif"
-					onclick="content_submit()" alt="확인">확인</td>
+			<tr  style="height:40px">
+			
+				<td colspan="2">
+				<div align="center">	<img
+						src="${pageContext.request.contextPath}/resources/img/check.png"
+						onclick="content_submit()" class="image_check">
+					</div>
+					</td>
+			
 			</tr>
 		</table>
 	</form>
-	<a href="${path}/"> 메인페이지로 이동</a>
+	<!-- 메인으로 이동 -->
+				<a href="${path}/">
+					<img src="${pageContext.request.contextPath}/resources/img/house.png" id="image_list">
+				</a>
 </div>
 </html>
