@@ -23,6 +23,11 @@
 	
 	</insert>
 	
+	<select id="isLectureOrderExist" resultType="int">
+	select count(-1) from  wl_lecture_board  where course_no=#{courseNo} and lecture_order=#{lectureOrder}
+	
+	</select>
+	
 	<select id="isMyLectureRecordExist" resultType="int">
 	select count(-1) from wl_my_lecture_record where course_no=#{courseNo} and lecture_no=#{lectureNo} and user_id=#{userId}
 	
