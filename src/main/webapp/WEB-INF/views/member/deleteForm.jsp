@@ -14,10 +14,9 @@
 
 </head>
 <body>
-<<<<<<< HEAD
-=======
+
 <div align="center">
->>>>>>> master
+
 
 	<form name="deleteForm" method="post"
 		action="${pageContext.request.contextPath}/member/deleteProc"
@@ -44,11 +43,9 @@
 			
 		</table>
 	</form>
-<<<<<<< HEAD
-	
-=======
+
 	<a href="${path}/"> 메인페이지로 이동</a>
 	</div>
->>>>>>> master
+
 </body>
 </html>
