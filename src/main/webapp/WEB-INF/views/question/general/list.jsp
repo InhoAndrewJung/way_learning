@@ -14,15 +14,23 @@
 <script>
 	
 	function sorting(sort) {
+		
 		if (sort == 'multiple') {
+			alert("multiple")
 			$('input[name=sorting]').val('multiple');
 
 		} else if (sort == 'short') {
+			alert("short")
 			$('input[name=sorting]').val('short');
 
 		}
 		$('#form1').submit();
 
+	}
+	
+	function makeQuestion(){
+		location.href="${pageContext.request.contextPath}/question/general/makeQuestion";
+		
 	}
 </script>
 </head>
@@ -50,11 +58,15 @@
 				<span class="search_button">
 				<a href="#" onclick="sorting('multiple')">객관식 </a> 
 				<a href="#" onclick="sorting('short')">주관식 </a> 
+				
+				<input type="hidden"  name="sorting"  value=""> 
 				</span>
-				<input name="keyword" id="search_bar" value=${keyword}> 
+				
+				<input name="keyword" id="search_bar" style="margin-right:6px;" value=${keyword}> 
+				<input type="submit" id="search_button"  style="padding:6px;"value="조회">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				
-				<input type="submit" id="search_button" value="조회">
+				
 				
 			</form> 
 			</span>
@@ -115,11 +127,12 @@
 		<!-- 비로그인 사용자는 일반문제 생성을 보여주지 않는다. -->
 		<sec:authorize access="isAuthenticated()">
 		<div style="text-align:center;">
-			<a
-				href="${pageContext.request.contextPath}/question/general/makeQuestion">일반문제
-				생성</a>
+			 <input type="button" id="search_button"  style="padding:6px;border-radius: 5%;"value="일반 문제 생성" onclick="makeQuestion()">
 		</sec:authorize>
-		<a href="${path}/"> 메인페이지로 이동</a>
+		<!-- 메인으로 이동 -->
+				<a href="${path}/">
+					<img src="${pageContext.request.contextPath}/resources/img/house.png" id="image_list">
+				</a>	
 		</div>
 	
 

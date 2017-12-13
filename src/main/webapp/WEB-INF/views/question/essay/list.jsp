@@ -9,7 +9,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.2.1.js"></script>
 <title>Insert title here</title>
+<script>
+function makeQuestion(){
+	location.href="${pageContext.request.contextPath}/question/essay/makeQuestion";
+	
+}
 
+</script>
 </head>
 <body>
 <br><br><br><br><br><br>
@@ -75,11 +81,21 @@
 			</c:forEach>
 		</table>
 		<!-- 비로그인 사용자는 일반문제 생성을 보여주지 않는다. -->
+		<div align="center">
+		
 		<sec:authorize access="isAuthenticated()">
-		<a href="${pageContext.request.contextPath}/question/essay/makeQuestion">에세이문제 생성</a>
+		
+		 <input type="button" id="search_button"  style="padding:6px;border-radius: 5%;"value="에세이 문제 생성" onclick="makeQuestion()">
+		
 		</sec:authorize>
-		<a href="${path}/"> 메인페이지로 이동</a>
-	
+		
+		<!-- 메인으로 이동 -->
+				<a href="${path}/">
+					<img src="${pageContext.request.contextPath}/resources/img/house.png" id="image_list">
+				</a>	
+				
+		
+	</div>
 </div>
 </body>
 </html>

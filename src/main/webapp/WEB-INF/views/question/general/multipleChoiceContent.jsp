@@ -76,10 +76,6 @@
 		</table>
 		
 		<div style="text-align:center;">
-		<a
-			href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
-			목록가기</a> <a href="${path}/"> 메인페이지로 이동</a>
-
 		<c:if test="${mvo.userId == requestScope.bvo.member.userId }">
 			<img alt="삭제"
 				src="${pageContext.request.contextPath}/resources/img/delete_btn.jpg"
@@ -88,6 +84,15 @@
 				src="${pageContext.request.contextPath}/resources/img/modify_btn.jpg"
 				onclick="updateQuestion()">
 		</c:if>
+		<br>
+		<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
+			<img src="${pageContext.request.contextPath}/resources/img/list.png" id="image_list"></a> 
+			<!-- 메인으로 이동 -->
+				<a href="${path}/">
+					<img src="${pageContext.request.contextPath}/resources/img/house.png" id="image_list">
+				</a>	
+
+		
 </div>
 	</div>
 </body>

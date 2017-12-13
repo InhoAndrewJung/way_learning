@@ -92,8 +92,9 @@
 		
 		</c:forEach>
 		<div id="answerChoicePlus"></div>
-		
+		<c:if test="${gq.category == 'multipleChoice'}">
 		<input type="button" id="btnAnswerPlus" value="선택지 추가" /><br>
+		</c:if>
 		</span>
 	</td>
 </tr>
@@ -110,7 +111,10 @@
 </form>
 </table>
 <div style="text-align:center;">
-<a href="${path}/"> 메인페이지로 이동</a>
+<!-- 메인으로 이동 -->
+				<a href="${path}/">
+					<img src="${pageContext.request.contextPath}/resources/img/house.png" id="image_list">
+				</a>	
 </div>
 </body>
 </html>

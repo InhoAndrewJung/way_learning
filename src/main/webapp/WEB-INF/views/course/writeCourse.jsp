@@ -79,5 +79,6 @@ function content_submit(){
 			</tr>
 		</table>
 	</form>
+	<a href="${path}/"> 메인페이지로 이동</a>
 </div>
 </html>
