@@ -186,7 +186,8 @@
 			});
 		</script>
   </section>
-  <section class="subnav_item"><h3>TEST</h3></section>
+  <section class="subnav_item">
+  <h3>TEST</h3></section>
   <section class="subnav_item"><h3>BOARD</h3></section>
   <section class="subnav_item si_profile">
     <div>
@@ -243,6 +244,23 @@
 <script>
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <h2>Spring Security를 이용한 Register Member</h2>

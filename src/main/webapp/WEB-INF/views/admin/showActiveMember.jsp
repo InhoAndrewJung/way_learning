@@ -182,8 +182,9 @@ a {
 			<tr>
 				<td class="left_title">강 &nbsp; &nbsp; &nbsp;사</td>
 				<td class="right_title"><c:forEach var="row" items="${list}">
-
+						<div>
 						<c:if test="${row.ROLE =='ROLE_AUTHOR'}">
+						
 							<a href="#" onclick="check('${row.USER_ID}','${row.ROLE}')" data-tooltip="클릭시 회원 등급이 변경됩니다."><img id="profile"
 								src="${path}/resources/upload/${row.IMG_PROFILE}" alt="이미지"  />
 							${row.USER_ID}</a>
@@ -193,14 +194,14 @@ a {
 									${bvo.member.activity}
 							</div>
 						</c:if>
-
+ 						</div>
 
 					</c:forEach></td>
 			</tr>
 			<tr>
 				<td class="left_title">일반 멤버</td>
 				<td><c:forEach var="row" items="${list}">
-
+					<div>
 						<c:if test="${row.ROLE =='ROLE_MEMBER'}">
 							<img id="profile"
 								src="${path}/resources/upload/${row.IMG_PROFILE}" alt="이미지" />
@@ -211,7 +212,7 @@ a {
 									${bvo.member.activity}
 							</div>
 						</c:if>
-
+					</div>
 					</c:forEach></td>
 			</tr>
 
