@@ -107,12 +107,14 @@ span.tag{
 }
 .btn_course_recommanded:before {
   content:"♥ ";
+  font-size: 0.7em;
   color:red;
   display:inline;
 }
 .btn_course_recommanded:after {
   content:"내가 추천한 코스";
   color:white;
+  font-size: 0.7em;
   display:inline;
 }
 .btn_course_recommanded span {font-size:0;}
