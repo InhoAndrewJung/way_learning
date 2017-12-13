@@ -23,6 +23,13 @@
         width : 100%;
         height : 450px;
     }
+    
+    #image_list{
+	width: 60px;
+	
+}
+    
+    
 </style>
 
 
@@ -108,7 +115,17 @@
     	$("#context").val(editor.getValue());
     }
 </script>
-<a href="${pageContext.request.contextPath}/question/essay/getList?keyword=${keyword}"> 목록가기</a>
-		<a href="${path}/"> 메인페이지로 이동</a>
-</body>
+		<div align="center">
+			<a
+				href="${pageContext.request.contextPath}/question/essay/getList?keyword=${keyword}">
+				<img src="${pageContext.request.contextPath}/resources/img/list.png"
+				id="image_list">
+			</a>
+			<!-- 메인으로 이동 -->
+			<a href="${path}/"> <img
+				src="${pageContext.request.contextPath}/resources/img/house.png"
+				id="image_list">
+			</a>
+
+		</div></body>
 </html>
