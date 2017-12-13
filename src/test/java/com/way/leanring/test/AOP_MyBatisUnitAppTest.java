@@ -1,27 +1,16 @@
-package com.way.leanring;
+package com.way.leanring.test;
 
+import java.io.Reader;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
-import com.way.learning.model.board.qna.vo.QnaBoard;
-import com.way.learning.model.board.qna.vo.QnaReply;
-import com.way.learning.model.board.tech.vo.TechBoard;
-import com.way.learning.model.board.tech.vo.TechReply;
-import com.way.learning.model.course.vo.Course;
-import com.way.learning.model.course.vo.LectureBoard;
-import com.way.learning.model.course.vo.LectureReply;
-import com.way.learning.model.member.vo.Authority;
-import com.way.learning.model.member.vo.Member;
-import com.way.learning.model.question.vo.AlgorithmQuestion;
-import com.way.learning.model.question.vo.AnswerResult;
-import com.way.learning.model.question.vo.GeneralChoice;
-import com.way.learning.model.question.vo.GeneralQuestion;
-
-public class MyBatisUnitAppTest {
+public class AOP_MyBatisUnitAppTest {
 	@Test
 	public void unitTest() throws Exception {
 		Reader r = Resources.getResourceAsReader("config/SqlMapConfig.xml");
@@ -41,15 +30,15 @@ public class MyBatisUnitAppTest {
 		System.out.println(updateActivity + "업데이트 성공 !");
 //AOP : updateAnswerMapper.xml
 		int questionNo=1;
-		int int updatePostCntSubmit= session.update("updateAnswerMapper.updatePostCntSubmit", questionNo);
-		System.out.println(int updatePostCntSubmit + "업데이트 성공 !");
+		int updatePostCntSubmit= session.update("updateAnswerMapper.updatePostCntSubmit", questionNo);
+		System.out.println(updatePostCntSubmit + "업데이트 성공 !");
 		
 		
-		int questionNo=1;
+		int questionNo2=1;
 		 int updatePostCntRight= session.update("updateAnswerMapper.updatePostCntRight",questionNo);
-		System.out.println( int updatePostCntRight + "업데이트 성공 !");
+		System.out.println( updatePostCntRight + "업데이트 성공 !");
 		
-		int questionNo=1; String userId="";
+		int questionNo3=1; String userId="";
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("questionNo", questionNo);
 		map.put("userId", userId);

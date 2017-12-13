@@ -14,6 +14,7 @@
 	
 	<typeAliases>
 		<package name="com.way.learning.model"/>
+		<package name="com.way.learning.test"/>
 	</typeAliases>
 	
 	<!-- <mappers>

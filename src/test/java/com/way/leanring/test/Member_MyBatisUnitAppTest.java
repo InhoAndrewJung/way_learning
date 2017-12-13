@@ -1,27 +1,23 @@
-package com.way.leanring;
+package com.way.leanring.test;
 
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
+
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
-import com.way.learning.model.board.qna.vo.QnaBoard;
-import com.way.learning.model.board.qna.vo.QnaReply;
-import com.way.learning.model.board.tech.vo.TechBoard;
-import com.way.learning.model.board.tech.vo.TechReply;
-import com.way.learning.model.course.vo.Course;
-import com.way.learning.model.course.vo.LectureBoard;
-import com.way.learning.model.course.vo.LectureReply;
 import com.way.learning.model.member.vo.Authority;
 import com.way.learning.model.member.vo.Member;
-import com.way.learning.model.question.vo.AlgorithmQuestion;
 import com.way.learning.model.question.vo.AnswerResult;
-import com.way.learning.model.question.vo.GeneralChoice;
-import com.way.learning.model.question.vo.GeneralQuestion;
 
-public class MyBatisUnitAppTest {
+public class Member_MyBatisUnitAppTest {
 	@Test
 	public void unitTest() throws Exception {
 		Reader r = Resources.getResourceAsReader("config/SqlMapConfig.xml");
