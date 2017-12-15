@@ -58,13 +58,13 @@
 	
 	<insert id="insertReplyLike">
 	
-	insert into wl_tech_reply_recommend (user_id,reply_no) values(#{userId}, #{replyNo})
+	insert into wl_tech_reply_recommend (user_id,reply_no,board_no) values(#{userId}, #{replyNo},#{boardNo})
 	
 	</insert>
 	
 	<delete id="deleteReplyLike">
 	
-	delete from wl_tech_reply_recommend where user_id=#{userId} and reply_no= #{replyNo}
+	delete from wl_tech_reply_recommend where user_id=#{userId} and reply_no= #{replyNo} and board_no=#{boardNo}
 	</delete>
 	
 	<update id="increaseCntReplyLike">
@@ -81,7 +81,7 @@
 	<!-- 좋아요 관련 로직 끝 -->
 
 	<select id="selectAllRecommendNo" resultType="int">
-     select reply_No from wl_tech_reply_recommend
+     select reply_No from wl_tech_reply_recommend where board_no=#{boardNo}
     
     </select>
 	
