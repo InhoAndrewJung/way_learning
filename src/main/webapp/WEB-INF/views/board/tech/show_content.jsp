@@ -77,9 +77,12 @@ function shareSns(){
   var url = "http://127.0.0.1:7777/learning"
   window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url+"/board/tech/showContent?boardNo=${requestScope.bvo.boardNo}")+"&t="+encodeURIComponent('Q&A 게시판'), 'Facebook으로 공유하기', "menubar=no,toolbar=no,resizable=no,scrollbars=yes,height=300,width=600")
 }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> master
 </script>
 <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <style>
@@ -87,6 +90,7 @@ function shareSns(){
   .cke_bottom {display: !important;}
   a{text-decoration:none; cursor: pointer;}
 </style>
+
 
 
 

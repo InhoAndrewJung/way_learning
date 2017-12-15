@@ -101,6 +101,9 @@ setTimeout(function(){
 </c:if>
 
 
+
+</script>
+
 <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <style>
   .cke_top { display: none !important; }
