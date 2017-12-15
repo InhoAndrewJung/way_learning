@@ -1,57 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../include/common.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<%@ include file="../../include/header.jsp"%>
 <link rel="stylesheet" href="${path}/resources/css/board/board.css?ver=2">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<title>Insert title here</title>
 
 
 <script type="text/javascript">
 
 	$(document).ready(function() {
-		
+
 		var count= $('input[name=answerChoice]').length+1
-		
+
 		var ac ='<label for="answerChoice">선택지'+count+':</label><input type="text" name="answerChoice" id="answerChoice" /><br>';
 		$('#btnAnswerPlus').click(function() {
 			count=count+1;
-			
-			
-			
+
+
+
 			$('#answerChoicePlus').html(ac)
 		ac+='<label for="answerChoice">선택지'+count+':</label><input type="text" name="answerChoice" id="answerChoice" /><br>';
-						/* 	 $('#btnAnswerPlus').one('click',function() {		
+						/* 	 $('#btnAnswerPlus').one('click',function() {
 			$('#answerChoicePlus').slideToggle();
 		})	  */
-				
-		})	
+
+		})
 	});//document
-	
-	
+
+
 	function hide(){
 		$('#change').hide();
-		
+
 	}
-	
+
 	function show(){
 		$('#change').show();
-		
-	}
-		
 
-	
-	
+	}
+
+
+
+
 </script>
 
-
-</head>
-
-	
-<body>
 <div class="container">
 <form action="${path}/question/general/insertQuestion" method="post">
 <div style="text-align:center;">
@@ -109,5 +100,5 @@
 <a href="${path}/"> 메인페이지로 이동</a>
 </div>
 </div>
-</body>
-</html>
+
+<%@ include file="../../include/footer.jsp"%>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -20,12 +19,6 @@
 
   <script type="text/javascript">
   function navSet(){
-    //document.getElementById('root_container').style.display = "block"
-    document.getElementById('subnav_blackbox').style.transition = "all 0.2s ease 0.2s"
-    document.getElementById('subnav_blackbox').style.opacity = "0"
-    setTimeout(function() {
-      document.getElementById('subnav_blackbox').style.display = "none"
-    },400)
     document.getElementById('nav').classList.toggle('nav_init')
     document.getElementById('loader').classList.toggle('loader_init')
     document.getElementById('nav_line').classList.toggle('nav_line_init')
@@ -33,7 +26,7 @@
     var list = document.getElementsByClassName('nav_item')
     for(var i=list.length-1;i>=0;i--){
        setTimeoutForNavSet(list[i], i)
-       list[i].addEventListener("mouseover", navMouseOver);
+       list[i].addEventListener("click", subnav);
     }
     document.getElementById('nav_line_2').classList.toggle('nav_line_2_init')
     document.getElementById('nav_profile').classList.toggle('nav_profile_init')
@@ -43,59 +36,47 @@
       document.body.classList.remove('scroll-lock')
     },1500)
   }
-
-
   function setTimeoutForNavSet(i, idx) {
     setTimeout(function() {
       i.classList.toggle('nav_item_init')
     }, 100*idx)
   }
-  function navMouseOver() {
-    setTimeout(function() {
-      openSubnav()
-    }, 600)
-  }
+	function subnav() {
+		closeSubnav()
+		var targetName = event.target.dataset.snTarget
+		var rect = event.target.getBoundingClientRect();
+		var submenu = document.querySelector('[data-sn-name='+targetName+']')
+		if(submenu.dataset.snName=='mypage') {
+			$('#profile_img').hide()
+			$('#profile_info').hide()
+		}
+		submenu.classList.toggle('sn-open')
+	}
+	function closeSubnav() {
+		$('[data-sn-name]').each(function(idx, item){
+			item.classList.remove('sn-open')
+			if(item.dataset.snName=='mypage'){
+				$('#profile_img').show()
+				$('#profile_info').show()
+			}
+		})
+	}
 
-  function openSubnav() {
-    document.body.classList.add('scroll-lock')
-    document.getElementById('subnav_box').classList.add('subnav_box_open')
-    document.getElementById('subnav_blackbox').style.display = "block"
-    document.getElementById('subnav_blackbox').style.opacity = "0.7"
-    blurRtCont("add")
-  }
-  function closeSubnav(event, flag) {
-    if(event.clientY>=document.getElementById('subnav_box').offsetHeight || flag == true) {
-      document.getElementById('subnav_box').classList.remove('subnav_box_open')
-      document.getElementById('subnav_blackbox').style.opacity = "0"
-      document.body.classList.remove('scroll-lock')
-
-      setTimeout(function() {
-        document.getElementById('subnav_blackbox').style.display = "none"
-        blurRtCont("remove")
-      },400)
-    }
-  }
-
-  function blurRtCont(command) {
-    if(command==="add")
-      document.getElementById('root_container').classList.add('blur-5px')
-      else document.getElementById('root_container').classList.remove('blur-5px')
-  }
 
   window.onscroll = function() {navControll()};
 
   function navControll() {
-      if (document.body.scrollTop > 72 || document.documentElement.scrollTop > 72) {
-          document.getElementById("nav_bg").classList.add("nav_bg_scroll")
-          document.getElementById("nav_logo").classList.add("nav_logo_scroll")
-          document.getElementById("profile_info").classList.add("color-white")
-          navItemScrollOn();
-      } else {
-          document.getElementById("nav_bg").classList.remove("nav_bg_scroll")
-          document.getElementById("nav_logo").classList.remove("nav_logo_scroll")
-          document.getElementById("profile_info").classList.remove("color-white")
-          navItemScrollOff();
-      }
+		if (document.body.scrollTop > 72 || document.documentElement.scrollTop > 72) {
+			document.getElementById("nav_bg").classList.add("nav_bg_scroll")
+			document.getElementById("nav_logo").classList.add("nav_logo_scroll")
+			document.getElementById("profile_info").classList.add("color-white")
+			navItemScrollOn();
+		} else {
+			document.getElementById("nav_bg").classList.remove("nav_bg_scroll")
+			document.getElementById("nav_logo").classList.remove("nav_logo_scroll")
+			document.getElementById("profile_info").classList.remove("color-white")
+			navItemScrollOff();
+		}
   }
   function navItemScrollOn(){
     var list = document.getElementsByClassName('nav_item')
@@ -118,7 +99,20 @@
 	function home() {
 		location.href="${path}/"
 	}
-
+	function board(board){
+		event.stopPropagation()
+		location.href="${path}/board/"+board+"/list"
+	}
+	function course(){
+		event.stopPropagation()
+		var courseNo = event.target.dataset.courseNo
+		location.href="${path}/lectureBoard/showLectureList?courseNo="+courseNo
+	}
+	function quiz(quiz){
+		event.stopPropagation()
+		if(quiz=='essay') location.href="${path}/question/essay/getList"
+		else location.href="${path}/question/general/getList?sorting="+quiz
+	}
   </script>
   </head>
   <body>
@@ -131,98 +125,105 @@
     <div id="nav_logo" class="nav_logo" onclick="home()">
     </div>
     <ul id="nav_ul">
-      <a href="${pageContext.request.contextPath}/course/showMyCourseList"><li class="nav_item">COURSE</li></a>
-      <a href="${pageContext.request.contextPath}/question/general/getList"><li class="nav_item">TEST</li></a>
-      <a href="${pageContext.request.contextPath}/board/tech/list"><li class="nav_item">BOARD</li></a>
+      <li class="nav_item" data-sn-target="course">
+				COURSE
+				<section class="subnav_item" data-sn-name="course">
+			    <div class="si_course" id="si_course"></div>
+					<script type="text/javascript">
+						$(document).ready(function() {
+							$.ajax({
+								type: "post",
+								url: "${pageContext.request.contextPath}/course/selectAccetpedCourseList",
+								data:"${_csrf.parameterName}=${_csrf.token}",
+								success: function(result){
+									var list = result.list
+									for(var i=0;i<list.length;i++){
+										console.log(list[i])
+										var target = document.getElementById('si_course')
+										var article = document.createElement('article')
+										article.dataset.courseNo = list[i].courseNo
+										article.addEventListener('click', course)
+											 var h4 = document.createElement('h4')
+											 h4.dataset.courseNo = list[i].courseNo
+											 h4.appendChild(document.createTextNode(list[i].courseName))
+											 var p = document.createElement('p')
+											 p.dataset.courseNo = list[i].courseNo
+											 p.appendChild(document.createTextNode(list[i].description))
+										article.appendChild(h4)
+										article.appendChild(p)
+										target.appendChild(article)
+									}
+								}
+							});
+						});
+					</script>
+			  </section>
+			</li>
+      <li class="nav_item" data-sn-target="test">
+				TEST
+				<section class="subnav_item" data-sn-name="test">
+					<article onclick="quiz('multiple')"><h3>객관식</h3></article>
+					<article onclick="quiz('short')"><h3>주관식</h3></article>
+					<article onclick="quiz('essay')"><h3>알고리즘</h3></article>
+				</section>
+			</li>
+      <li class="nav_item" data-sn-target="board">
+				BOARD
+				<section class="subnav_item" data-sn-name="board">
+					<article onclick="board('tech')"><h3>TECH</h3></article>
+					<article onclick="board('qna')"><h3>QnA</h3></article>
+				</section>
+			</li>
     </ul>
 		<sec:authorize access="isAnonymous()">
-			<div id="nav_profile" class="nav_profile">
-				<span id="profile_img" class="profile_img" style="background:url(${path}/resources/img/man.png);background-size:100%;background-color:white;"></span>
-				<span id="profile_info" class="profile_info">
+			<div id="nav_profile" class="nav_profile" onclick="subnav()" data-sn-target="mypage">
+				<span id="profile_img" data-sn-target="mypage" class="profile_img" style="background:url(${path}/resources/img/man.png);background-size:100%;background-color:white;"></span>
+				<span id="profile_info" data-sn-target="mypage" class="profile_info">
 					login
-				</span>
-			</div>
 		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
-			<div id="nav_profile" class="nav_profile">
-				<span id="profile_img" class="profile_img" style="background:url(${path}/resources/upload/${mvo.imgProfile});background-size:100%;background-color:white;"></span>
-				<span id="profile_info" class="profile_info">
+			<div id="nav_profile" class="nav_profile" onclick="subnav()" data-sn-target="mypage">
+				<span id="profile_img" data-sn-target="mypage" class="profile_img" style="background:url(${path}/resources/upload/${mvo.imgProfile});background-size:100%;background-color:white;"></span>
+				<span id="profile_info" data-sn-target="mypage" class="profile_info">
 					${mvo.userId}
-				</span>
-			</div>
 		</sec:authorize>
-
+				</span>
+				<section class="subnav_item si_profile" data-sn-name="mypage">
+					<div>
+						<sec:authorize access="isAnonymous()">
+							<img src="${path}/resources/img/man.png" />
+							<h3>LOGIN</h3>
+							<span class="si_btn si_btn_mp" onclick="login()">LOGIN</span>
+						</sec:authorize>
+						<sec:authorize access="isAuthenticated()">
+							<img src="${path}/resources/upload/${mvo.imgProfile}" />
+							<h3>${mvo.userId}</h3>
+							<span class="si_btn si_btn_mp" onclick="mypage()">MY PAGE</span>
+							<span class="si_btn si_btn_so" onclick="logout()">SIGN OUT</span>
+						</sec:authorize>
+						<form id="logoutFrm" action="${path}/member/logout" method="post" style:"display:none">
+							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+						</form>
+						<script type="text/javascript">
+							function logout() {
+								document.getElementById("logoutFrm").submit();
+							}
+							function mypage() {
+								location.href = "${pageContext.request.contextPath}/member/myPage"
+							}
+							function login() {
+									location.href = "${pageContext.request.contextPath}/member/loginForm"
+							}
+							$(document).ready(function() {
+								document.body.scrollTop = document.documentElement.scrollTop = 0
+								document.body.classList.add('scroll-lock')
+								setTimeout(function(){navSet()}, 700)
+							});
+						</script>
+					</div>
+				</section>
+			</div>
   </nav>
-  <div id="subnav_box" class="subnav_box" onmouseout="closeSubnav(event)">
-  <div><img src="${path}/resources/img/logo_white.png" style="width:100px;"/></div>
-
-  <section class="subnav_item">
-    <h3>COURSES</h3>
-    <div class="si_course" id="si_course">
-    </div>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$.ajax({
-					type: "post",
-					url: "${pageContext.request.contextPath}/course/selectAccetpedCourseList",
-					data:"${_csrf.parameterName}=${_csrf.token}",
-					success: function(result){
-						var list = result.list
-						for(var i=0;i<list.length;i++){
-							console.log(list[i])
-							var target = document.getElementById('si_course')
-							var article = document.createElement('article')
-								 var h4 = document.createElement('h4')
-								 h4.appendChild(document.createTextNode(list[i].courseName))
-								 var p = document.createElement('p')
-								 p.appendChild(document.createTextNode(list[i].description))
-							article.appendChild(h4)
-							article.appendChild(p)
-							target.appendChild(article)
-						}
-
-					}
-				});
-			});
-		</script>
-  </section>
-  <section class="subnav_item">
-  <h3>TEST</h3></section>
-  <section class="subnav_item"><h3>BOARD</h3></section>
-  <section class="subnav_item si_profile">
-    <div>
-			<sec:authorize access="isAnonymous()">
-				<img src="${path}/resources/img/man.png" />
-				<h3>LOGIN</h3>
-			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
-				<img src="${path}/resources/upload/${mvo.imgProfile}" />
-				<h3>${mvo.userId}</h3>
-			</sec:authorize>
-      <span class="si_btn si_btn_mp" onclick="mypage()">MY PAGE</span>
-      <span class="si_btn si_btn_so" onclick="logout()">SIGN OUT</span>
-      <form id="logoutFrm" action="${path}/member/logout" method="post" style:"display:none">
-      	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-      </form>
-      <script type="text/javascript">
-      	function logout() {
-      		document.getElementById("logoutFrm").submit();
-      	}
-        function mypage() {
-          location.href = "${pageContext.request.contextPath}/member/myPage"
-        }
-        $(document).ready(function() {
-          document.body.scrollTop = document.documentElement.scrollTop = 0
-          document.body.classList.add('scroll-lock')
-          setTimeout(function(){navSet()}, 700)
-        });
-      </script>
-    </div>
-  </section>
-
-  <div class="subnav_box_bottom"><span onclick="closeSubnav(event, true)">CLOSE</span></div>
-  </div>
-  <div id="subnav_blackbox" class="subnav_blackbox"></div>
 
   <section id="root_container">
   <section id="top_block" class="top_block" style="background-image:url('https://cdn-images-1.medium.com/max/2000/1*LZZ9Sr4XL7j2-LjSJ5uq9Q.jpeg');"></section>
