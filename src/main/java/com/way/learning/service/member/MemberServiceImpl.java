@@ -116,44 +116,28 @@ public class MemberServiceImpl implements MemberService {
 		// 비밀번호 암호화
 		String encodedPassword = passwordEncoder.encode(vo.getPassword());
 		vo.setPassword(encodedPassword);
-		System.out.println("멤버서비스 vo:" + vo);
-
 		// 파일 업로드 로직을 추가
 		HttpSession session = request.getSession();
 		MultipartFile mFile = vo.getUploadFile();
 		System.out.println(mFile.getSize() + "============" + mFile.isEmpty());
 		if (mFile.isEmpty() == false) { // 파일 업로드를 했다면
-
 			String fileName = mFile.getOriginalFilename();
-
 			Date today = new Date();
 			SimpleDateFormat df = new SimpleDateFormat("YYYYMMddHHmmssSSS");
 			String now = df.format(today);
-
 			String newfilename = now + "_" + fileName;
 			vo.setImgProfile(newfilename); // vo의 완벽한 세팅이 완료
-
 			String root = session.getServletContext().getRealPath("/");
 			String path = root + "\\resources\\upload\\";
-
 			File copyFile = new File(path + newfilename);
 			mFile.transferTo(copyFile); // upload 폴더에 newfilename이 저장
-
 		} else {
 			String defaultImg = "defaultUser.svg";
 			vo.setImgProfile(defaultImg);
-
 		}
-
 		memberDAO.registerMember(vo);
-
 		// 권한등록
-		/*
-		 * AuthorityVO authority=new AuthorityVO(vo.getId(),"ROLE_MEMBER");
-		 * memberDAO.registerRole(authority);
-		 */
 		authoritiesDAO.insertAuthority(new Authority(vo.getUserId(), Constants.ROLE_MEMBER));
-
 	}
 
 	@Override

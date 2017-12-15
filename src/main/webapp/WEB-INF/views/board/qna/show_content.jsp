@@ -81,7 +81,12 @@ function shareSns(){
   var url = "http://127.0.0.1:7777/learning"
   window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url+"/board/qna/showContent?boardNo=${requestScope.bvo.boardNo}")+"&t="+encodeURIComponent('Q&A 게시판'), 'Facebook으로 공유하기', "menubar=no,toolbar=no,resizable=no,scrollbars=yes,height=300,width=600")
 }
+
+
+
+
 </script>
+
 <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <style>
   .cke_top { display: none !important; }
@@ -89,6 +94,17 @@ function shareSns(){
   a{text-decoration:none; cursor: pointer;}
 </style>
 
+<c:if test="${replyNo !=null}">
+
+	<script>
+	setTimeout(function(){
+		 var heightItem=$('#replyGood'+${replyNo}+'').offset().top; 
+		$('body,html').animate({scrollTop:heightItem-100});
+		
+	},700) ;
+	</script>
+
+</c:if>
 <div class="move-boardList">
   <div class="titleName" style="margin-top:40px;text-align:left;">
   	<img src="${pageContext.request.contextPath}/resources/img/question.png" id="image_title"> Q & A

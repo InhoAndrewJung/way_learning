@@ -36,6 +36,20 @@
 				<button type="button" class="btn btn-primary">문제 다시풀기</button></a>
 		</c:if>
 
+
+		<a href="${pageContext.request.contextPath}/question/general/getList">
+			<img src="${pageContext.request.contextPath}/resources/img/list.png"
+			id="image_list">
+		</a>
+		<!-- 메인으로 이동 -->
+		<a href="${path}/"> <img
+			src="${pageContext.request.contextPath}/resources/img/house.png"
+			id="image_list">
+		</a>
+
+
+
+
 	</div>
 
 <%@ include file="../../include/footer.jsp"%>
