@@ -10,6 +10,7 @@ body {
   overflow-x:hidden;
   padding-top:50px;
 }
+html, body, textarea, input {font-family: NanumGothic, 'Nanum Gothic', sans-serif;}
 h1 {
   font-family: NanumGothicExtraBold;
 }
@@ -24,6 +25,41 @@ a:visited { text-decoration: none;}
   font-size: 2.2em;
   color: #343434;
 }
+
+.rp-btn-up, .rp-btn-down {
+  width:20px; height:20px; display:block;margin:5px auto;
+}
+.rp-cnt-like {display:block;width:100%;text-align:center;}
+
+
+.util-width-100 { width: 100% !important; }
+.common-card {
+  border-radius: 7px;
+  border: 1px solid #e5e9f2;
+  box-shadow: 1px 2px 12px -3px #cccccc;
+  background-color:#fff;
+  border-collapse: collapse;
+}
+.common-container {
+  width:60%;
+  min-width:650px;
+  margin: 72px auto;
+}
+.reply-textarea {
+  width:100%;
+  min-height:100px;
+  font-size: 1.1em;
+  resize: none;
+  overflow: hidden;
+  border: 5px solid #25b7d3;
+  border-collapse: collapse;
+  border-radius: 10px;
+  padding: 10px 20px 10px 10px;
+}
+.reply-textarea:focus {outline:none;}
+
+.hover-scale {transition: all 0.2s ease 0s;}
+.hover-scale:hover{transform:scale(1.05, 1.05)}
 
 @media all and (max-width: 800px) {
     /* MOBILE DEVICE */
@@ -238,7 +274,7 @@ nav {
 .nav_item_scroll {transition:all 0.2s ease 0s;color:#91c6e5;}
 .nav_item_scroll:hover {color:#d7dee4 !important;}
 
-#nav_ul li:hover {
+#nav_ul li:hover:not(article) {
   font-weight:bold;
   color:#25506b;
 }
@@ -393,43 +429,47 @@ nav {
   content:"";  position: fixed; z-index:997;
 width:100%;height:100%;left:0;top:0; background:black;opacity:0.7;
 }
-.si_course::-webkit-scrollbar {
-display:none;
-}
+
 
 .subnav_item {
-  display:inline-block;
-  width:200px;
-  height:300px;
-  color:white;
+  width: 200px;
+  color: #253f5d;
   vertical-align: top;
-  padding-bottom:20px;
-  margin:0 2px 10px 2px;
-  border-radius: 15px;
-  background-color:#253f5d;
+  margin: 0 2px 10px 2px;
+  border: 1px solid #253f5d;
+  border-radius: 0 0 3px 3px;
+  background-color: #fff;
+  position: absolute;
+  z-index: 3;
+  overflow: hidden;
+  border-top: none;
+  left: 50%;
+  top: 36px;
+  transform: translateX(-50%);
+  height:auto;
+  display:none;
 }
-.subnav_item h3{margin-top:15px;margin-bottom:10px;}
+.subnav_item:hover {font-weight: normal;}
+.sn-open { display: inline-block;}
 
-.si_course {height:250px; overflow: auto;}
-.si_course article {padding:10px;border-bottom:1px #697889 solid;}
-.si_course h4, .si_course p { text-align: left; font-size:0.8em; padding:0; margin:0;}
-.si_course article::before { content:"> "; width:0px; transition: width 0.2s ease 0s; overflow:hidden;
-float:left;height:30px;margin-left:0px;vertical-align: middle;line-height:30px;}
-.si_course article:hover::before { width:15px;}
-.si_course article:hover h4 { color:#7db9c8;}
-.si_course p { font-size:0.6em;}
-.si_course::before{
-  position:absolute; width:200px;height:10px; top:100px;content:""; display:block;
-  background: linear-gradient(rgba(37,63,93,1), rgba(37,63,93,0));}
 
-.si_course::after{
-  position:absolute; width:200px;height:10px;top:345px; content:""; display:block;
-  background: linear-gradient(rgba(37,63,93,0), rgba(37,63,93,1));}
+.subnav_item article {padding:10px;border-bottom:1px #697889 solid;cursor:pointer;}
+.subnav_item h4, .si_course p { text-align: left; font-size:0.8em; padding:0; margin:0;}
+.subnav_item h3 {font-size:1em;margin:0;}
+.subnav_item article::before { content:"> "; width:0px; transition: width 0.2s ease 0s; overflow:hidden;
+float:left;height:30px;margin-left:0px;vertical-align: middle;}
+.subnav_item article:hover::before { width:15px;}
+.subnav_item article:hover h4 { color:#7db9c8;}
+.subnav_item p { font-size:0.6em;}
 
+.si_course { overflow-y:auto !important; max-height:400px;}
+.si_course article::before {line-height:30px;}
+
+.si_profile {margin-top: 7px; left: -80px;}
 .si_profile div {padding:10px;}
 .si_profile img {margin-top:15px;width:180px; height:180px; border-radius: 7px;transition: all 0.2s ease 0s;}
 .si_profile img:hover {transform: scale(1.02,1.02);}
-.si_profile h3 {margin-top:0px;}
+.si_profile h3 {margin:10px 0; font-size:1.2em; text-align: center;}
 
 
 .btn_apply {
@@ -466,9 +506,9 @@ width:100%; left:0px;top:0px; border-radius: 50px;}
   cursor: pointer;
   transition: all 0.2s ease 0s;
   font-size:0.9em;
-  /*font-family: NanumGothicExtraBold;*/
   line-height: 25px;
   vertical-align: middle;
+  text-align: center;
 }
 .si_btn:hover{transform:scale(1,1);color:rgba(0,0,0,0);}
 .si_btn::after {content:"";display:block;position: absolute;left:50%;width:0px; top:0;height:100%;transition: all 0.2s ease 0s;

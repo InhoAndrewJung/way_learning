@@ -6,24 +6,19 @@ li{
 }
 
 .container{
-	
+
 
 }
 .container-body{
-	width: 90%;
-	margin: 50px auto 50px auto;
+	text-align: center;
 }
 .first-rankCard{
-	background: #ffffff;
 	margin: 20px auto 30px auto;
-	width: 25%;
-	height: auto;
-	border: 2px solid #e5e9f2;
-	box-shadow: 2px 2px 2px #cccccc;
-	border-collapse: collapse;
-	border-radius: 5px;
-	position: relative;
-	padding: 10px 20px 50px 20px;
+  width: 25%;
+  min-width: 300px;
+  height: auto;
+  position: relative;
+  padding: 10px 20px 50px 20px;
 }
 .first-crown{
 	width: 80px;
@@ -55,12 +50,12 @@ li{
 	right: 5%;
 }
 .user-image{
-	
+
 }
 .first-image_face{
-	width: 100px;
-	height: 80px;
-	border-radius: 50%;
+	width: 80px;
+  height: 80px;
+  border-radius: 50%;
 }
 .first-user-name{
 	color: #404040;
@@ -133,18 +128,13 @@ li{
 	margin-bottom: -18px;
 }
 .rankCard{
-	background: #ffffff;
-	margin: 20px auto 30px auto;
-	width: 20%;
-	height: auto;
-	border: 2px solid #e5e9f2;
-	box-shadow: 2px 2px 2px #cccccc;
-	border-collapse: collapse;
-	border-radius: 5px;
-	position: relative;
-	padding: 10px 10px 10px 10px;
-	display: inline-block;
-	margin-right: 30px;
+	margin: 15px;
+  width: 20%;
+  min-width: 200px;
+  height: auto;
+  position: relative;
+  padding: 10px 10px 10px 10px;
+  display: inline-block;
 }
 .rank{
 	text-align: center;
@@ -174,6 +164,7 @@ li{
 
 .image_face{
 	width: 50px;
+	height:50px;
 	border-radius: 50%;
 }
 .user-name{
@@ -227,7 +218,7 @@ li{
 .cntPercent-text{
 	color: #ff8000;
 	font-size: 15px;
-	font-weight: bold;	
+	font-weight: bold;
 	display: block;
 }
 .cntPercent-no{
@@ -236,5 +227,3 @@ li{
 	font-weight: bold;
 	display: block;
 }
-
-

@@ -4,6 +4,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/board.css?ver=2">
+
 <c:if test="${not empty list}">
   <div class="reply-title">
     <span class="footer_comment">
@@ -13,7 +15,7 @@
 </c:if>
 <c:forEach var="row"  items="${list}">
 <div class="reply-center">
-  <div class="reply-body" style="width:100%">
+  <div class="reply-body">
     <div class="reply-head">
       <div class="userList">
         <img src="${pageContext.request.contextPath}/resources/upload/${row.member.imgProfile}" id="image_profile">
@@ -53,5 +55,6 @@
     <a id="modifyCancel${row.replyNo}" class="modifyCancel" onclick="modifyCancel('${row.replytext}','${row.replyNo}')">
     <img src="${pageContext.request.contextPath}/resources/img/cancel.png" class="image_replyCancel"></a>
   </div>
-    <hr>
+  <hr>
+</div>
 </c:forEach>

@@ -1,17 +1,17 @@
 @charset "UTF-8";
 /* COMMON */
 
-a:link, a:visited  { 
+a:link, a:visited  {
 	color : #4c90f6;
 }
 
 /* TABLE */
 .container-board{
-	width: 45%;
+	width: 100%;
 	display: inline-block;
 }
 .container-reply{
-	width: 45%;
+	width: 100%;
 	display: inline-block;
 }
 .title{
@@ -38,12 +38,12 @@ a:link, a:visited  {
 }
 .boardTable{
 	background: #ffffff;
-    margin: 20px auto 70px auto;
-    width: 60%;
-    border-radius: 3px;
-    border: 2px solid #e5e9f2;
-    box-shadow: 2px 2px 2px #cccccc;
-    border-collapse: collapse;
+  margin: 0 auto 30px auto;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e5e9f2;
+  box-shadow: 1px 2px 12px -3px #cccccc;
+  border-collapse: collapse;
 }
 
 .table-center{
@@ -56,6 +56,7 @@ a:link, a:visited  {
 
 .table-title{
 	width: 60%;
+	max-width: 280px;
 	display: inline-block;
 	line-height: 80px;
 	margin-left: 20px;
@@ -127,7 +128,7 @@ a:link, a:visited  {
 	margin: 70px 30px 0 30px;
     font-weight: 500;
     text-align: center;
-    
+
 }
 
 .move-page li{
@@ -138,7 +139,7 @@ a:link, a:visited  {
 
 .page-pre{
 	margin-right: 16px;
-	
+
 }
 
 .page-next{
@@ -165,15 +166,15 @@ a:link, a:visited  {
 
 .page-pre .page_jump:hover span, .page-next .page_jump:hover span{
 	border-color: #00a0d2;
-	
+
 }
 
 #image_nextPage{
 	width: 25px;
-		
+
 }
 
-.page-first, .page-last{	
+.page-first, .page-last{
     border-color: #00a0d2;
     color: #00a0d2;
     background: #fff;
@@ -182,7 +183,7 @@ a:link, a:visited  {
     line-height: 50px;
     border: 2px solid #4d4d4d;
     border-radius: 5px;
-    
+
 }
 
 .page-active{
@@ -194,7 +195,7 @@ a:link, a:visited  {
     border: 2px solid #4d4d4d;
     border-radius: 5px;
     margin: 5px;
-    
+
 }
 
 .number_page{
@@ -203,7 +204,7 @@ a:link, a:visited  {
     display: inline-block;
 }
 
-.page-active_now{	
+.page-active_now{
     color: #ffffff;
     background: #00a0d2;
     height: 50px;
@@ -212,7 +213,7 @@ a:link, a:visited  {
     border: 2px solid #ffffff;
     border-radius: 10px;
     margin: 5px;
-    
+
 }
 
 
@@ -226,8 +227,5 @@ a:link, a:visited  {
 
 a{
 	text-decoration: none;
-	
+
 }
-
-
-

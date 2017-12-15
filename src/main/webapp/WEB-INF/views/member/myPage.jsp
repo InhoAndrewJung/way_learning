@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="${path}/resources/css/member/myPage.css">
 <script>
 showContent('updateForm');
-
 function showContent(page){
 $.ajax({
 		type: "post",
@@ -15,71 +14,28 @@ $.ajax({
 		}
 	});
 }
-
-
-
 function showActiveMember(){
-	
-	
-		
-	
 	$.ajax({
-		
 		type: "post",
 		url: "${path}/admin/selectActiveMember",
 		data:"${_csrf.parameterName}=${_csrf.token}",
 		success: function(result){
-
-				$("#showContent").html(result);	
+				$("#showContent").html(result);
 		}
-		
 	});
-	
-	
-	
-}	
-
-
+}
 function showAllCourse(){
-
 	$.ajax({
-		
 		type: "post",
 		url: "${path}/admin/selectAllCourseList",
 		data:"${_csrf.parameterName}=${_csrf.token}",
 		success: function(result){
 			$("#showContent").html(result);
-	
 		}
-		
 	});
-	
-}	
-
-
-
+}
 </script>
 <section class="page_block">
-	<%-- <header class="page_block_top">
-		<div class="lesson_course_img" style="background-image:url('${path}/resources/upload/${cvo.courseImage}')"></div><!--
- --><div class="lesson_course_info">
-			<div class="lesson_course_tags">
-				<c:forEach var="tag" items="${tags}" varStatus="status">
-						<span class="tag">${tag}</span>
-				</c:forEach>
-			</div>
-			<p>${cvo.description}</p>
-			<span class="lesson_course_long">총 26강 / 12시간 40분</span>
-			<div class="author">
-				<h3>강의 작성자</h3>
-				<span class="author_name">${cvo.member.userId}</span>
-				<span class="auth_date"><fmt:formatDate
-						value="${cvo.regDate}" pattern="YYYY.MM.dd" /></span>
-				<div class="author_img" style="background-image:url('${path}/resources/upload/${cvo.member.imgProfile}')"></div>
-				<div class="btn_course_recommand" onclick="courseLikeChange()">이 코스 추천하기</div>
-			</div>
-		</div>
-	</header> --%>
 	<style type="text/css">
 	.mypage_content {
 		margin-top: 50px;
@@ -111,7 +67,6 @@ function showAllCourse(){
 		</ul>
 	</section>
 	<section class="mypage_content" id="showContent">
-
 	</section>
 </section>
 

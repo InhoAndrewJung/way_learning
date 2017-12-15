@@ -6,82 +6,7 @@
 <h2 class="mypage_title">내가 본 강의 목록</h2>
 
 <style type="text/css">
-  .course_list {
-  }
-  .mycourse {
-    border: 1px #ccc solid;
-    border-radius: 15px;
-    position: relative;
-    margin:20px 0;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-    overflow: hidden;
-    transition: all 0.2s ease 0s;
-    text-align: center;
-  }
-  .mycourse:hover { transform:scale(1.02, 1.02);}
-  /*.mycourse:before {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    transition: all 0.1s ease 0s;
-    z-index: -1;
-  }
-  .mycourse:hover:before {
-    background-color:#fcf4ff;
-  }*/
-  .mycourse img {
-    float: left;
-    width: 70px;
-    margin: 10px 50px;
-    cursor: pointer;
-  }
-  .mycourse h3 {
-    font-size: 1.7em;
-    font-weight: bold;
-    text-align: left;
-    margin: 10px;
-    cursor: pointer;
-  }
-  .mycourse>span {
-    text-align: left;
-    display:block;
-    color:#666;
-    font-size:0.8em;
-    margin-bottom:25px;
-  }
-  .course_progress {
-    position:relative;
-    margin:10px 0;
-  }
-  .course_progress>span {
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: white;
-    font-size: 0.7em;
-    width: 100%;
-    line-height: 22px;
-    text-shadow: 0px 0px 2px #000000;
-  }
-  .course_progress section{
-    width:90%;
-    border:1px #999 solid;
-    border-radius:20px;
-    height:20px;
-    overflow: hidden;
-    margin: 0 auto;
-  }
-  .course_progress_bar {
-    width:0;
-    height:20px;
-    background: linear-gradient(170deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-    float: left;
-    border-radius: 9px;
-    transition: all 0.5s ease 0s;
-  }
+
 </style>
 <section class="course_list" id="course_list">
 </section>
@@ -101,7 +26,7 @@
     if(typeof course == 'undefined'){
       courses.set(item.courseName, [item])
       var article = document.createElement('article')
-      article.className = "mycourse"
+      article.className = "mycourse common-card"
       var title = document.createElement('h3')
       title.dataset.path = 'lectureBoard/showLectureList?courseNo='+item.courseNo
       title.appendChild(document.createTextNode(item.courseName))
