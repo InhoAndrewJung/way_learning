@@ -11,6 +11,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <sec:authentication var="mvo" property="principal" />
 <script src= "http://code.jquery.com/jquery-3.1.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/css_kei.css">
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/lesson.css">
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/loader.css">
@@ -31,6 +32,12 @@
     document.getElementById('nav_line_2').classList.toggle('nav_line_2_init')
     document.getElementById('nav_profile').classList.toggle('nav_profile_init')
 
+		var courses = document.getElementById('courses').children
+    for(var i=courses.length-1;i>=0;i--){
+     	 setTimeoutForCourseSet(courses[i], i)
+       courses[i].addEventListener("mouseover", coursesMouseOver);
+    }
+
     setTimeout(function(){
       document.getElementById('loader_box').style.display = "none"
       document.body.classList.remove('scroll-lock')
@@ -41,6 +48,14 @@
       i.classList.toggle('nav_item_init')
     }, 100*idx)
   }
+	function setTimeoutForCourseSet(i, idx) {
+		setTimeout(function() {
+			i.classList.toggle('course_init')
+		}, 100*idx)
+	}
+	function coursesMouseOver(event) {
+
+	}
 	function subnav() {
 		closeSubnav()
 		var targetName = event.target.dataset.snTarget
@@ -90,12 +105,43 @@
        list[i].classList.remove("nav_item_scroll")
     }
   }
+
+
+  function mb_quiz(selectId){
+    var result = document.getElementById('mb_quiz_result')
+    var emoji = document.getElementById('loop_flip')
+    if(selectId == "test4") {
+      result.classList.add('mb_quiz_right')
+      emoji.style.backgroundImage="url(${path}/resources/img/mb_quiz_emoji_1.png)"
+      setTimeout(function() {
+        toggleModal('modal_quiz')
+        result.classList.remove('mb_quiz_right')
+      },1000)
+
+    } else {
+      result.classList.add('mb_quiz_wrong')
+      emoji.style.backgroundImage="url(${path}/resources/img/mb_quiz_emoji_0.png)"
+      setTimeout(function() {
+        result.classList.remove('mb_quiz_wrong')
+      },1000)
+    }
+  }
   function scrollToTop() {
     if (document.body.scrollTop !== 0 || document.documentElement.scrollTop !== 0) {
         window.scrollBy(0, -100);
         requestAnimationFrame(scrollToTop);
     }
   }
+  function toggleModal(modalId){
+    document.getElementById(modalId).classList.toggle('modal_back_on')
+    document.body.classList.toggle('scroll-lock')
+  }
+  function showDialog() {
+    document.getElementById('mb_apply_dialog').classList.toggle('mb_apply_dialog_view')
+  }
+	function logout() {
+		document.getElementById("logoutFrm").submit();
+	}
 	function home() {
 		location.href="${path}/"
 	}
@@ -106,7 +152,8 @@
 	function course(){
 		event.stopPropagation()
 		var courseNo = event.target.dataset.courseNo
-		location.href="${path}/lectureBoard/showLectureList?courseNo="+courseNo
+		if(courseNo == 'new') location.href="${path}/course/writeCourse"
+		else location.href="${path}/lectureBoard/showLectureList?courseNo="+courseNo
 	}
 	function quiz(quiz){
 		event.stopPropagation()
@@ -139,8 +186,25 @@
 									var list = result.list
 									for(var i=0;i<list.length;i++){
 										console.log(list[i])
+										makeCourseCard(list[i])
 										var target = document.getElementById('si_course')
 										var article = document.createElement('article')
+									<sec:authorize access="isAuthenticated()">
+										var myId = "${mvo.userId}"
+										var teacherId = list[i].member.userId
+										if(myId == teacherId){
+											var addBtn = document.createElement('SPAN')
+											addBtn.addEventListener('click', newLecture)
+											addBtn.innerText = '강좌 추가'
+											addBtn.className = 'new-lecture-btn'
+											addBtn.dataset.courseNo = list[i].courseNo
+											article.appendChild(addBtn)
+											function newLecture(){
+												event.stopPropagation()
+												location.href="${path}/lectureBoard/writeLecture?cno="+event.target.dataset.courseNo
+											}
+										}
+										</sec:authorize>
 										article.dataset.courseNo = list[i].courseNo
 										article.addEventListener('click', course)
 											 var h4 = document.createElement('h4')
@@ -153,6 +217,16 @@
 										article.appendChild(p)
 										target.appendChild(article)
 									}
+									var target = document.getElementById('si_course')
+									var article = document.createElement('article')
+									article.dataset.courseNo = 'new'
+									article.className ='new-course-article'
+									article.addEventListener('click', course)
+										 var h3 = document.createElement('h3')
+										 h3.dataset.courseNo = 'new'
+										 h3.appendChild(document.createTextNode("새로운 코스 등록하기"))
+									article.appendChild(h3)
+									target.appendChild(article)
 								}
 							});
 						});
@@ -224,132 +298,120 @@
 				</section>
 			</div>
   </nav>
-
   <section id="root_container">
   <section id="top_block" class="top_block" style="background-image:url('https://cdn-images-1.medium.com/max/2000/1*LZZ9Sr4XL7j2-LjSJ5uq9Q.jpeg');"></section>
   <hr id="nav_line" class="nav_line" />
   <hr id="nav_line_2" class="nav_line_2" />
 
 
-<style type="text/css">
-	a{text-decoration:  none;}
-	ul,li{list-style:none;}
-</style>
-<script src= "http://code.jquery.com/jquery-3.1.0.min.js"></script>
-<script type="text/javascript">
-	function logout() {
-		document.getElementById("logoutFrm").submit();
-	}
-</script>
+	<section class="main_block">
+    <ul class="courses" id="courses">
+      <li class="course new_course" onclick="course()" data-course-no="new">
+        <div class="course_img" data-course-no="new"></div>
+        <h3 data-course-no="new">내 코스 등록하기</h3>
+        <hr data-course-no="new" />
+        <p data-course-no="new" class="course_desc" style="line-height:80px;height: 69px;">
+          자신의 코스를 등록해보세요!
+        </p>
+      </li>
+			<script type="text/javascript">
+				function makeCourseCard(courseObj) {
+					var target=document.getElementById('courses')
+					var li = document.createElement('LI')
+					li.className = "course course_nor"
+						var courseImg = document.createElement('DIV')
+						courseImg.className = "course_img"
+						courseImg.setAttribute('style', 'background-image:url(${path}/resources/upload/'+courseObj.courseImage+')')
+						courseImg.dataset.courseNo = courseObj.courseNo
+						var title = document.createElement('H3')
+						title.appendChild(document.createTextNode(courseObj.courseName))
+						title.dataset.courseNo = courseObj.courseNo
+						var hr = document.createElement('hr')
+						hr.dataset.courseNo = courseObj.courseNo
+						var p = document.createElement('p')
+						p.dataset.courseNo = courseObj.courseNo
+						p.className = "course_desc"
+						p.appendChild(document.createTextNode(courseObj.description))
+						var span = document.createElement('span')
+						span.dataset.courseNo = courseObj.courseNo
+						span.className = "course_scale"
+						span.appendChild(document.createTextNode(new Date(courseObj.regDate).toDateString()))
+					li.dataset.courseNo = courseObj.courseNo
+					li.addEventListener('click', course)
+					li.appendChild(courseImg)
+					li.appendChild(title)
+					li.appendChild(hr)
+					li.appendChild(p)
+					li.appendChild(span)
 
-<script>
+					target.appendChild(li)
+				}
+			</script>
+    </ul>
+  </section>
+  <section class="main_block mb_apply">
+    <h1>in is there anyone</h1>
+    <p>ystem, and expound the actual teachings of the great explorer
+       of the truth, the master-builder of human happiness. No one rejects,
+      dislikes, or avoids pleasure itself, because it is pleasure, but because
+      those who do not know how to pursue pleasure rationally encounter
+      consequen</p>
+      <input type="button" value="→ 수강신청" onclick="showDialog()"/>
+      <div class="loop_square loop_green loop_square_60s" style="width:1200px; height:1200px; left:-1000px;top:-1000px;"></div>
+      <div class="loop_square loop_blue loop_square_40s" style="width:1200px; height:1200px; left:-1400px;top:-1500px;z-index:1;"></div>
+      <div class="mb_apply_dialog" id="mb_apply_dialog" onclick="showDialog()"><div></div></div>
+  </section>
 
-</script>
+  <section class="main_block mb_quiz">
+    <div class="mb_quiz_content">
+      <h1>WHO IS THE WINNER?</h1>
+      <p>
+        <input type="radio" id="test1" name="radio-group" onchange="mb_quiz(this.id)">
+        <label for="test1">Apple</label>
+      </p>
+      <p>
+        <input type="radio" id="test2" name="radio-group" onchange="mb_quiz(this.id)">
+        <label for="test2">SAMSUNG</label>
+      </p>
+      <p>
+        <input type="radio" id="test3" name="radio-group" onchange="mb_quiz(this.id)">
+        <label for="test3">TOYOYA</label>
+      </p>
+      <p>
+        <input type="radio" id="test4" name="radio-group" onchange="mb_quiz(this.id)">
+        <label for="test4">BLACKBERRY</label>
+      </p>
+    </div>
+    <div class="mb_quiz_result" id="mb_quiz_result"></div>
+    <div class="loop_flip loop_green" id="loop_flip" style="width:350px; height:350px; left:50%;top:5%;margin-left:-500px;"></div>
+  <div class="loop_circle loop_green loop_circle_10s" style="width:100px; height:100px; left:50%;top:25%;"></div>
+  <div class="loop_circle loop_blue loop_circle_8s" style="width:160px; height:160px; left:47%;top:28%;z-index:1;"></div>
+  <div class="loop_circle loop_blue loop_circle_10s" id="loop_circle_bg" style="width:300px; height:300px; left:60%;top:-50%;z-index:1;"></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2>Spring Security를 이용한 Register Member</h2>
-<sec:authorize access="isAnonymous()">
-<ul>
-	<li><a href="${path}/member/registerForm">회원 가입 하기</a></li>
-	<li><a href="${path}/member/loginForm">로그인 하기</a></li>
-
-
-</ul>
-</sec:authorize>
-<sec:authorize access="isAuthenticated()">
-	<sec:authentication var="mvo" property="principal" />
-	<b>${mvo.userId}님 환영합니다.</b><p>
-
-	<b>${mvo}님 환영합니다.</b><p>
-
-	<!--
-		authentication의 getPrincipal().getName() ::
-		Principal은 Provider 에서 Authentication에 넣어준 VO(생성자의 첫 매개변수)
-	 -->
-</sec:authorize>
-<p></p>
-<!-- 인증됬으면 -->
-	<sec:authorize access="isAuthenticated()">
-		<!-- 관리자인 경우 -->
-		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<li><a href="${path}/admin/main">ADMIN Cafe Enterance</a></li>
-
-		</sec:authorize>
-
-		<!--  일반 회원이거나 관리자인 두 경우. 두개 이상의 role을 비교할때 hasAnyRole()-->
-		<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_MEMBER','ROLE_AUTHOR')">
-
-
-
-			<b>마이페이지용</b><br>
-			<li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a><li>
-
-			<%-- <li><a href="${pageContext.request.contextPath}/member/showMyRecord">내가 푼 문제 기록</a><li>
-			<li><a href="${pageContext.request.contextPath}/member/showAllRanking">전체 랭킹보기</a><li>
-			<li><a href="${pageContext.request.contextPath}/member/myFavoriteList">내 좋아요 목록 링크</a><li>
-			<li><a href="${pageContext.request.contextPath}/member/showMyLectureRecord">  나의 강의 기록 보기 </a><li>
-			<li><a href="${path}/member/updateForm">정보 수정 폼</a></li>
-			<li><a href="${path}/member/deleteForm">회원 탈퇴</a></li> --%>
-
-			<b>게시판용</b><br>
-			<li><a href="${pageContext.request.contextPath}/board/qna/write">qna게시판 글쓰기</a><li>
-			<li><a href="${pageContext.request.contextPath}/board/qna/list">qna게시판목록</a><li>
-			<li><a href="${pageContext.request.contextPath}/board/tech/write">tech게시글쓰기</a><li>
-			<li><a href="${pageContext.request.contextPath}/board/tech/list">tech게시판목록</a><li>
-
-
-			<b>문제 용</b> <br>
-			<li><a href="${pageContext.request.contextPath}/question/general/getList">제너럴 문제 리스트</a><li>
-			<li><a href="${pageContext.request.contextPath}/question/general/makeQuestion">제너럴 문제 만들기</a><li>
-			<li><a href="${pageContext.request.contextPath}/question/essay/getList">에세이 문제 리스트</a><li>
-			<li><a href="${pageContext.request.contextPath}/question/essay/makeQuestion">에세이 만들기</a><li>
-
-
-
-			<b>코스용</b><br>
-			<li><a href="${pageContext.request.contextPath}/course/writeCourse">코스등록</a><li> <!-- 강사용 -->
-			<li><a href="${pageContext.request.contextPath}/course/showMyCourseList">내가 등록한 코스 리스트 </a><li> <!-- 강사용 -->
-
-			<b>강의용</b><br>
-			<li><a href="${pageContext.request.contextPath}/lectureBoard/writeLecture">강의등록</a><li> <!-- 강사용 -->
-			<li><a href="${pageContext.request.contextPath}/lectureBoard/showLectureList?courseNo=1"> 특정코스의 전체 강의 리스트 </a><li>
-
-		</sec:authorize>
-		<li><a href="javascript:logout();">로그아웃</a></li>
-	</sec:authorize>
-<p>
-
-<!--
-1. 로그아웃은 스프링 시큐러티 4부터는 로그아웃시 post 방식으로 이동하며
-  /logout url로 요청한다(따로 정의하지 않으면...)
-2. _csrf 를 요청 파라미터로 보내야 한다.
--->
-
-
-<b>승인된 코스 !!!</b>
-<div id="acceptedCourse"></div>
+  </section>
+  <section class="main_block mb_movie">
+    <iframe width="100%" height="100%" src="http://www.youtube.com/embed/RF5_MPSNAtU?showinfo=0&fs=0&rel=0" frameborder="0" allowfullscreen></iframe>
+  </section>
 
 
 
 <form id="logoutFrm" action="${path}/member/logout" method="post" style:"display:none">
 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 </form>
-</body>
-</html>
+<!-- MODAL -->
+<section id="modal_quiz" class="modal_back">
+  <section class="modal_card">
+    <span onclick="toggleModal('modal_quiz')">&#x2717;</span>
+    <h1><img src="${path}/resources/img/confetti.png" />Wow! GREAT!</h1>
+    <p>AETAETASFASD~~~!@!~@!~@!~@SDFASFSEFQ#RSEFSDFSD</p>
+    <h3>How about this Course?</h3>
+    <iframe width="40%" height="200" src="https://www.youtube.com/embed/BkRZfxznaOo" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    <article class="modal_quiz_desc">
+      <h2>Spring MVC 박살내기</h2>
+      <p>blah blah </p>
+    </article>
+    <div class="btn_apply">COURSE APPLY</div>
+  </section>
+</section>
+
+	<%@ include file="include/footer.jsp"%>
