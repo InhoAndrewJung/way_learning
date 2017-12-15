@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <script>
 $(document).ready(function() {
 	listReply(); //댓글 목록
@@ -47,7 +48,6 @@ function listReply(){
 		url: "${pageContext.request.contextPath}/lectureReply/listReply?lectureNo=${lvo.lectureNo}&courseNo=${lvo.courseNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
 		success: function(result){
 			$("#listReply").html(result);
-			console.log(result)
 		}
 	});
  }
@@ -138,7 +138,7 @@ function deleteReply(replyNo){
 		border-radius:3px;
 	}
 	.reply-head {padding: 15px 15px 4px 15px;}
-	.reply-body {border-right:none;margin:0;}
+	.reply-body {border-right:none !important;margin:0 !important;width:100% !important}
 	.reply-center hr {
 		margin-top: 10px;
     width: 97%;
@@ -151,7 +151,7 @@ function deleteReply(replyNo){
 		width: 90%;
 		padding:0 5%;
 	}
-	.reply-text textarea, .reply-textWrite textarea {
+	.reply-text textarea {
 		width: 95%;
     margin: 0px auto;
     resize: none;
@@ -163,17 +163,12 @@ function deleteReply(replyNo){
     min-height: 70px;
 		padding:10px;
 	}
-	.reply-textWrite {
-		position:relative;
-	}
+	.reply-textWrite {min-width:unset !important; width:100% !important}
 	.reply-textWrite textarea {
-		width:76%;
+		min-height:130px;
 		padding-right:20%;
-		border: 5px solid #25b7d3;
 	}
-	.reply-textWrite div {
-		right:5%;
-	}
+	.reply_writeText{width:77% !important;}
 	.reply-textWrite textarea:focus{outline: none;}
 	.userId { max-width:70%;}
 </style>
@@ -202,7 +197,7 @@ function deleteReply(replyNo){
 <div align="center" >
 	<input type="button" value="다 봤어요" id="finishLecture" /><!-- <span id="watchLectureCnt" > </span> --> </div>
 		                        	<!-- 댓글목록 출력 -->
-	<div id="listReply"></div>
+	<div id="listReply" class="util-width-100"></div>
 		<sec:authorize access="isAuthenticated()">
 			<div class="reply-textWrite">
 				<textarea class="reply_writeText" id="replytext" placeholder="댓글을 작성하세요"></textarea>

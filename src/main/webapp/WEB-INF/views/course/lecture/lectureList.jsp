@@ -3,10 +3,6 @@
 <%@ include file="../../include/common.jsp"%>
 <%@ include file="../../include/header.jsp"%>
 	<script src="${path}/ckeditor/ckeditor.js"></script>
-	<link rel="stylesheet" href="${path}/resources/css/board/reply_list.css?ver=2">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<style>
-	</style>
 	<script>
 		$(document).ready(function() {
 			$.ajax({
@@ -75,9 +71,6 @@
  <c:if test="${lectureNo !='0' }">
 	<script>showLecture('${lectureNo}');</script>
 </c:if>
-
-  <section id="root_container">
-
   <section class="page_block">
     <header class="page_block_top">
       <div class="lesson_course_img" style="background-image:url('${path}/resources/upload/${cvo.courseImage}')"></div><!--

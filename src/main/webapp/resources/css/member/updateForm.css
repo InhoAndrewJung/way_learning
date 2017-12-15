@@ -17,7 +17,6 @@
 .container-body {
     background: #ffffff;
     margin: 50px auto 50px auto;
-    width: 30%;
     height: auto;
     border: 2px solid #e5e9f2;
     box-shadow: 2px 2px 2px #cccccc;
@@ -39,8 +38,8 @@
     margin: 10px;
     width: 94%;
     height: 50px;
-    margin: 10px auto 10px auto;  
-	
+    margin: 10px auto 10px auto;
+
 }
 
 .text_id{
@@ -66,7 +65,7 @@
     margin: 10px;
     width: 94%;
     height: 50px;
-    margin: 10px auto 10px auto;  
+    margin: 10px auto 10px auto;
 }
 
 .text_pass{
@@ -92,7 +91,7 @@
     margin: 10px;
     width: 94%;
     height: 50px;
-    margin: 10px auto 10px auto;  
+    margin: 10px auto 10px auto;
 }
 
 .text_email{
@@ -103,7 +102,7 @@
     font-size: 20px;
     color:#3bb15d;
     font-weight: bold;
-	
+
 }
 
 .text_email::-webkit-input-placeholder { /* Chrome */
@@ -119,7 +118,7 @@
     margin: 10px;
     width: 94%;
     height: 50px;
-    margin: 10px auto 10px auto;  
+    margin: 10px auto 10px auto;
 }
 
 .fileName{
@@ -137,13 +136,13 @@
 }
 
 .image_upload{
-	
+
 }
 
 .uploadBtn{
     position: absolute;
     border-radius: 13px;
-    background: url(../img/upload.png) no-repeat center center/contain;
+    background: url(../../img/upload.png) no-repeat center center/contain;
     padding: 5px 8px 5px 8px;
     cursor: pointer;
     width: 7%;
@@ -164,7 +163,7 @@
     top: 30px;
     position: absolute;
     border-radius: 50%;
-    
+
 }
 hr{
     width: 95%;
@@ -174,8 +173,8 @@ hr{
 }
 
 .content{
-	align: center;	
-	
+	align: center;
+
 }
 
 .content_text{
@@ -203,14 +202,14 @@ hr{
     width: 50px;
     height: 50px;
     margin-right: 20px;
-    background: url(../img/check.png) no-repeat center center/contain;
+    background: url(../../img/check.png) no-repeat center center/contain;
 }
 
 .image_cancel{
 	cursor:pointer;
-	width: 40px;    
+	width: 40px;
 	padding-bottom: 5px;
-	
+
 }
 
 
@@ -221,7 +220,7 @@ hr{
     margin: 50px auto 50px auto;
     width: 30%;
     height: auto;
-    
+
 }
 
 .update_result-title{
@@ -252,7 +251,7 @@ hr{
 
 .update_result-image_main{
 	cursor: pointer;
-	width: 40px;    
+	width: 40px;
 	padding-bottom: 5px;
 	text-align: right;
 }

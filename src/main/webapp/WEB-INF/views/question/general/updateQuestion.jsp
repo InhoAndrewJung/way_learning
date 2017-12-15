@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../include/common.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<%@ include file="../../include/header.jsp"%>
 <link rel="stylesheet" href="${path}/resources/css/board/board.css?ver=2">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>Insert title here</title>
@@ -17,36 +14,29 @@
 		var ac ='<label for="answerChoice">선택지'+count+':</label><input type="text" name="answerChoice" id="answerChoice" /><br>';
 		$('#btnAnswerPlus').click(function() {
 			count=count+1;
-			
-			
-			
+
+
+
 			$('#answerChoicePlus').html(ac)
 		ac+='<label for="answerChoice">선택지'+count+':</label><input type="text" name="answerChoice" id="answerChoice" /><br>';
-				})	
+				})
 	});//document
-	
- 	
+
+
 	function hide(){
 		$('#change').hide();
-		
+
 	}
-	
+
 	function show(){
 		$('#change').show();
-		
+
 	}
-		 
 
-	
-	
+
+
+
 </script>
-
-
-</head>
-
-	
-<body>
-<%-- ${gq.category} --%>
 
 
 
@@ -67,9 +57,9 @@
 		<label for="answerChoice">제목:<input type="text" name="title" id="title" value="${gq.title}" /><br>
 	</label>
 	</td>
-</tr>	
+</tr>
 <tr class="table-center"  style="height:40">
-	
+
 	<td>
 	<span>
 		<label for="question">문제:</label>
@@ -89,7 +79,7 @@
 
 		<c:forEach var="tag" items="${aList}" varStatus="status" begin="0">
 		<label for="answerChoice">선택지 ${status.index+1}:<input type="text" name="answerChoice" id="answerChoice"  value="${tag.answerChoice}"/><br>
-		
+
 		</c:forEach>
 		<div id="answerChoicePlus"></div>
 		<c:if test="${gq.category == 'multipleChoice'}">
@@ -114,7 +104,8 @@
 <!-- 메인으로 이동 -->
 				<a href="${path}/">
 					<img src="${pageContext.request.contextPath}/resources/img/house.png" id="image_list">
-				</a>	
+				</a>
 </div>
-</body>
-</html>
+
+
+<%@ include file="../../include/footer.jsp"%>

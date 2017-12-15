@@ -2,16 +2,16 @@
 
 @charset "UTF-8";
 /* COMMON */
- 
-a:link{ 
+
+a:link{
  	text-decoration: none;
  	color: #4c90f6;
 }
-a:visited{ 
+a:visited{
 	text-decoration: none;
 	color: #4c90f6;
 }
-a:hover{ 
+a:hover{
  	text-decoration: underline;
 }
 
@@ -34,9 +34,8 @@ a:hover{
 .container-body {
     background: #ffffff;
     margin: 50px auto 50px auto;
-    width: 30%;
     height: auto;
-    
+
 }
 
 .title{
@@ -49,7 +48,7 @@ a:hover{
 
 .getUserId{
 	color: #3bb15d;
-	
+
 }
 .go-SignIn{
 	font-size: 20px;
@@ -80,7 +79,7 @@ a:hover{
 
 .image_back{
 	cursor: pointer;
-	width: 40px;    
+	width: 40px;
 	padding-bottom: 5px;
 	text-align: right;
 }
@@ -97,4 +96,3 @@ a:hover{
 	cursor: pointer;
 	font-weight: bold;
 }
-
