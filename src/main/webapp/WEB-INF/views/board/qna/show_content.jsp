@@ -87,23 +87,6 @@ function shareSns(){
 
 </script>
 
-
-<c:if test="${replyNo !=null}">
-
-<script>
-setTimeout(function(){
-	 var heightItem=$('#replyGood'+${replyNo}+'').offset().top;
-	$('body,html').animate({scrollTop:heightItem-100});
-
-},700) ;
-</script>
-
-</c:if>
-
-
-
-</script>
-
 <script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <style>
   .cke_top { display: none !important; }
@@ -111,6 +94,17 @@ setTimeout(function(){
   a{text-decoration:none; cursor: pointer;}
 </style>
 
+<c:if test="${replyNo !=null}">
+
+	<script>
+	setTimeout(function(){
+		 var heightItem=$('#replyGood'+${replyNo}+'').offset().top; 
+		$('body,html').animate({scrollTop:heightItem-100});
+		
+	},700) ;
+	</script>
+
+</c:if>
 <div class="move-boardList">
   <div class="titleName" style="margin-top:40px;text-align:left;">
   	<img src="${pageContext.request.contextPath}/resources/img/question.png" id="image_title"> Q & A
