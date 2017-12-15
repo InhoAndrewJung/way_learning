@@ -33,7 +33,7 @@
 			<tr>
 				<td>${row.questionNo}</td>
 				<td style="text-align:left;" nowrap>
-					<a href="${path}/question/algorithm/essayContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.title }</a>
+					<a href="${path}/question/essay/showEssayContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.title }</a>
 				</td>
 				<td>${row.cntSubmit }</td>
 				<td>${row.cntRight }</td>
