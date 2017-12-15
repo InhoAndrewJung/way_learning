@@ -89,7 +89,7 @@ a {
 		</c:if>
 
 
-		<a href="${pageContext.request.contextPath}/question/general/getEssayList">
+		<a href="${pageContext.request.contextPath}/question/general/getList">
 			<img src="${pageContext.request.contextPath}/resources/img/list.png"
 			id="image_list">
 		</a>

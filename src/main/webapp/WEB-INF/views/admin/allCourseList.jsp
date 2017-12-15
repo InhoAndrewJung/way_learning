@@ -15,62 +15,43 @@
 
 <script>
 
-function changeAccept(isAccept,courseNo) {
-	//alert("isAccept:"+isAccept);
-	//alert("courseNo:"+courseNo);
-if(isAccept == '1'){
-
-	 if(confirm("승인된 강의를 미승인 상태로 변경하시겠습니까?")){
-			
-			$.ajax({
-				
-				type: "post",
-				url: "${path}/admin/changeAcceptStatus",
-				data:"${_csrf.parameterName}=${_csrf.token}&isAccept=accept&courseNo="+courseNo,
-				success: function(result){
-					console.log(result);
-						if(result == '1'){
-							alert("강의 승인여부가 변경되었습니다.");
-						}else{
-							alert("강의 승인여부  변경에 실패했습니다.");
+function changeAccept(isAccept, courseNo) {
+	if (isAccept == '1') {
+		if (confirm("승인된 강의를 미승인 상태로 변경하시겠습니까?")) {
+					$.ajax({
+						type : "post",
+						url : "${path}/admin/changeAcceptStatus",
+						data : "${_csrf.parameterName}=${_csrf.token}&isAccept=accept&courseNo="
+								+ courseNo,
+						success : function(result) {
+							console.log(result);
+							if (result == '1')
+								alert("강의 승인여부가 변경되었습니다.");
+							else
+								alert("강의 승인여부  변경에 실패했습니다.");
+							showAllCourse('change');
 						}
-					
-						showAllCourse('change');
-				}
-				
-			});
-			
-		}	
-	
-	
-}else{
-	//alert(isAccept)
-	
-	 if(confirm("미승인된 강의를 승인상태로 변경하시겠습니까?")){
-			
-			$.ajax({
-				
-				type: "post",
-				url: "${path}/admin/changeAcceptStatus",
-				data:"${_csrf.parameterName}=${_csrf.token}&isAccept=notAccept&courseNo="+courseNo,
-				success: function(result){
-					console.log(result);
-						if(result == '1'){
-							alert("강의 승인여부가 변경되었습니다.");
-						}else{
-							alert("강의 승인여부  변경에 실패했습니다.");
+					});
+		}
+	} else {
+		if (confirm("미승인된 강의를 승인상태로 변경하시겠습니까?")) {
+					$.ajax({
+						type : "post",
+						url : "${path}/admin/changeAcceptStatus",
+						data : "${_csrf.parameterName}=${_csrf.token}&isAccept=notAccept&courseNo="
+								+ courseNo,
+						success : function(result) {
+							console.log(result);
+							if (result == '1')
+								alert("강의 승인여부가 변경되었습니다.");
+							else
+								alert("강의 승인여부  변경에 실패했습니다.");
+							showAllCourse('change');
 						}
-						showAllCourse('change');
-					
-				}
-				
-			});
-		}	
-}	
+					});
+		}
 	}
-	
-
-
+}
 </script>
 
 <style>
