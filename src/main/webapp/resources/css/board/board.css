@@ -171,7 +171,7 @@ a:link, a:visited  {
 /* PAGeeee */
 
 .move-page{
-	margin: 70px 30px 0 30px;
+	margin: -30px 30px 0 30px;
   font-weight: 500;
   text-align: center;
 	-webkit-padding-start: 0;
@@ -183,17 +183,16 @@ a:link, a:visited  {
 	height: 46px;
   width: 46px;
   line-height: 46px;
-  border: 2px solid;
   border-radius: 5px;
-  margin: 5px;
+  margin: 2px;
 }
 
 .page-pre{
-	margin-right: -16px !important;
+	margin-right: -1px !important;
 	border:none !important;
 }
 .page-next{
-	margin-left: -16px !important;
+	margin-left: -1px !important;
 	border:none !important;
 }
 
@@ -489,8 +488,6 @@ a:link, a:visited  {
 
 .image_write{	width: 50px; }
 
-@charset "UTF-8";
-
 
 /* HEAD */
 
@@ -653,7 +650,7 @@ a:link, a:visited  {
 
 .reply-text{
 	margin: 15px;
-
+	word-break: break-all;
 }
 
 .reply-function{
@@ -722,11 +719,6 @@ a:link, a:visited  {
     border-radius: 5px;
 }
 
-
-.body-head {
-    padding: 20px;
-}
-
 .title{
 	color: #25b7d3;
   height: 40px;
@@ -789,18 +781,6 @@ hr {
 
 }
 
-.container-body {
-    background: #ffffff;
-    margin: 72px auto 100px auto;
-    width: 60%;
-    height: auto;
-    border: 2px solid #e5e9f2;
-    box-shadow: 2px 2px 2px #cccccc;
-    border-collapse: collapse;
-    border-radius: 5px;
-}
-
-
 .body-head {
     padding: 20px;
 }
@@ -808,15 +788,15 @@ hr {
 
 .content_text{
 	background: #ffffff;
-    width: 90%;
-    border: 5px solid #25b7d3;
-    border-collapse: collapse;
-    border-radius: 10px;
-    padding: 10px 20px 10px 10px;
-    font-size: 15px;
-    padding-right: 15%;
-    resize: none;
-    overflow: hidden;
+  width: 90%;
+  border: 5px solid #25b7d3;
+  border-collapse: collapse;
+  border-radius: 10px;
+  padding: 10px 20px 10px 10px;
+  font-size: 15px;
+  padding-right: 15%;
+  resize: none;
+  overflow: hidden;
 }
 
 .container-footer{
@@ -824,23 +804,6 @@ hr {
 	text-align: right;
 	margin-top: 50px;
 }
-
-
-.image_check{
-	cursor:pointer;
-	width: 50px;
-    margin-right: 20px;
-}
-
-.image_cancel{
-	cursor:pointer;
-	width: 40px;
-	padding-bottom: 5px;
-}
-
-
-
-
 .question-textarea {
 	font-size:1.2em;
 	width:100%;
@@ -860,3 +823,11 @@ hr {
 	padding: 10px;
 }
 .quiz-result-input:focus {outline: none;}
+
+.lecture-order-input {
+	height: 40px;
+	border: none;
+	font-size: 1em;
+	text-align: right;
+	color: #107588;
+}

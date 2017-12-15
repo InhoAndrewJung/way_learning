@@ -37,7 +37,7 @@
   .loop_circle_8s {-webkit-animation: move-around 8s linear infinite;animation: move-around 8s linear infinite;}
   #loop_circle_bg {
     opacity: 1;
-    background: url(mb_quiz_img.png),linear-gradient(#95d6b6, #699cb8);
+    background: url(../img/mb_quiz_img.png),linear-gradient(#95d6b6, #699cb8);
     background-size:100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -66,7 +66,7 @@
   z-index: 0;
   -webkit-animation: flip 12s linear infinite;
   animation: flip 12s linear infinite;
-  background-image:url(mb_quiz_emoji_0.png);
+  background-image:url(../img/mb_quiz_emoji_0.png);
   background-size:100%;
 }
 

@@ -41,17 +41,19 @@ function changeAccept(isAccept,courseNo){
 	}
 }
 </script>
+<h2 class="mypage_title">강의 승인 선택</h2>
 <c:forEach var="cvo" items="${list}"  varStatus="status" >
 <div class="common-card util-width-100 mycourse">
 	<img src="${path}/resources/upload/${cvo.courseImage}" style="margin-top:20px;">
 	<p>
-		<strong>코 스 명</strong> ${cvo.courseName}
+		<strong>코 스 명</strong> <a href="${pageContext.request.contextPath}/lectureBoard/showLectureList?courseNo=${cvo.courseNo}">${cvo.courseName}</a>
 	</p>
 	<p>
-		<strong>코스설명 </strong><a href="${pageContext.request.contextPath}/lectureBoard/showLectureList?courseNo=${cvo.courseNo}"><span onclick="move()">${cvo.description}</span></a>
+		<strong>코스설명 </strong> ${cvo.description}
 	</p>
 	<p>
-		<strong>승인여부 </strong><c:if test="${cvo.isAccept =='1'}"> 승인</c:if>  <c:if test="${cvo.isAccept =='0'}"> 미승인</c:if><input type="button" id="changeAccept"  onclick="changeAccept('${cvo.isAccept}','${cvo.courseNo}')" value="변경" />
+		<strong>승인여부 </strong><c:if test="${cvo.isAccept =='1'}"> 승인</c:if>  <c:if test="${cvo.isAccept =='0'}"> 미승인</c:if>
+		<span class="course-accept-btn" type="button" onclick="changeAccept('${cvo.isAccept}','${cvo.courseNo}')">변경</span>
 	</p>
 </div>
 </c:forEach>

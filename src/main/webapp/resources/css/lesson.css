@@ -227,3 +227,9 @@ pre {
   color:#666;
   padding-right:2%;
 }
+.lesson-finish-btn{
+  width:100px;
+  height:30px;
+  line-height: 30px;
+  margin-bottom:20px;
+}
