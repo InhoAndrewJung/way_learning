@@ -52,7 +52,7 @@ function showAllCourse(){
 	}
 	</style>
 	<section class="nav_lesson_list nav_mypage_list">
-		<h1>MYPAGE</h1>
+		<h1 style="color:white;"></h1>
 		<ul>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<li onclick="showActiveMember()" id="showActive" >활동멤버 선택</li>

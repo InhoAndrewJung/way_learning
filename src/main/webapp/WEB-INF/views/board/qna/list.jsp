@@ -29,10 +29,6 @@
 					<a href="${pageContext.request.contextPath}/board/qna/write">
             <img src="${path}/resources/img/write.png" class="hover-scale"></a>
 				</sec:authorize>
-				<!-- 메인으로 이동 -->
-				<a href="/learning">
-					<img src="/learning/resources/img/house.png" class="hover-scale">
-				</a>
 			</div>
 			<div class="search_menu">
 			<!-- sorting 부분 -->
