@@ -88,6 +88,8 @@ function shareSns(){
   a{text-decoration:none; cursor: pointer;}
 </style>
 
+
+
 <c:if test="${replyNo !=null}">
 
 <script>
