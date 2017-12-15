@@ -169,10 +169,13 @@ public class QnaBoardDAOImpl implements QnaBoardDAO{
 	}
 
 	@Override
-	public List<Integer> selectAllRecommendNo(String userId) throws SQLException {
-		
+	public int selectBoardRecommendNo(String userId , int boardNo) throws SQLException {
+		Map<String,Object> map = new HashMap<String,Object>();
 
-		return sqlSession.selectList("qnaBoardMapper.selectAllRecommendNo", userId);
+		map.put("userId", userId);
+		map.put("boardNo", boardNo);
+
+		return sqlSession.selectOne("qnaBoardMapper.selectBoardRecommendNo", map);
 
 	}
 

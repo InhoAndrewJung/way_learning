@@ -36,9 +36,9 @@ public interface QnaReplyDAO {
 
 	public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException;
 	
-	public void insertReplyLike(String userId, int replyNo) throws SQLException;
+	public void insertReplyLike(String userId, int replyNo,int boardNo) throws SQLException;
 	
-	public void deleteReplyLike(String userId, int replyNo) throws SQLException;
+	public void deleteReplyLike(String userId, int replyNo,int boardNo) throws SQLException;
 	
 	public int increaseCntReplyLike(int replyNo) throws SQLException;
 	
@@ -46,7 +46,7 @@ public interface QnaReplyDAO {
 	
 	public int selectCntReplyLike(int replyNo) throws SQLException;
 	
-	public List<Integer> selectAllRecommendNo() throws SQLException;
+	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException;
 
 
 

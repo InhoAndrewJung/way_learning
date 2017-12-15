@@ -8,7 +8,7 @@ $(document).ready(function() {
 	$.ajax({
 		type: "post",
 		url: "${path}/reply/tech/likeStatus",
-		data:"${_csrf.parameterName}=${_csrf.token}",
+		data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${list[0].boardNo}",
 		success: function(result){
 			$(result).each(function(index,item) {
 				 $('#replyGood'+item).attr('src' ,'/learning/resources/img/reply_heart.png');
@@ -18,7 +18,7 @@ $(document).ready(function() {
 	});
 });
 function replyLikeUp(replyNo){
-	var param="${_csrf.parameterName}=${_csrf.token}&likeStatus=likeUp&replyNo="+replyNo;
+	var param="${_csrf.parameterName}=${_csrf.token}&likeStatus=likeUp&boardNo=${list[0].boardNo}&replyNo="+replyNo;
 	$.ajax({
 		type: "post",
 		url: "${pageContext.request.contextPath}/reply/tech/changeLike",

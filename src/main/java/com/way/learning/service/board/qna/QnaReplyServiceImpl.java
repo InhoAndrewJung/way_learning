@@ -67,7 +67,7 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 	
 	
 	@Transactional
-	public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException {
+	public int isReplyLike(String userId, int replyNo,String likeStatus,int boardNo) throws SQLException {
 		int result=qnaReplyDao.isReplyLike(userId, replyNo, likeStatus);
 		System.out.println("서비스 isReplyLike likeStatus:"+likeStatus);
 		System.out.println("서비스 isReplyLike userId:"+userId);
@@ -76,13 +76,13 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 		int action=0;
 		if(likeStatus.equals("likeUp")){
 			if(result==0){
-				qnaReplyDao.insertReplyLike(userId, replyNo);
+				qnaReplyDao.insertReplyLike(userId, replyNo,boardNo);
 				action=qnaReplyDao.increaseCntReplyLike(replyNo);
 			}
 			
 		}else if(likeStatus.equals("likeDown")){
 			if(result==1){
-				qnaReplyDao.deleteReplyLike(userId, replyNo);
+				qnaReplyDao.deleteReplyLike(userId, replyNo,boardNo);
 			action=qnaReplyDao.decreaseCntReplyLike(replyNo);
 			}
 			
@@ -99,9 +99,9 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 	}
 	
 	@Override
-	public List<Integer> selectAllRecommendNo() throws SQLException {
+	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException {
 
-		return qnaReplyDao.selectAllRecommendNo();
+		return qnaReplyDao.selectAllRecommendNo(boardNo);
 		
 	}
 	

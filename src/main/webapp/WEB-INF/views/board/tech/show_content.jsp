@@ -8,14 +8,15 @@ $(document).ready(function() {
 	$.ajax({
 		type: "post",
 		url: "${pageContext.request.contextPath}/board/tech/likeStatus",
-		data:"${_csrf.parameterName}=${_csrf.token}",
+		data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}",
 		success: function(result){
-			$(result).each(function(index,item) {
-				 $('#boardGood'+item).attr('src' ,'/learning/resources/img/reply_heart.png') ;
+		
+				 $('#boardGood'+result).attr('src' ,'/learning/resources/img/reply_heart.png') ;
 				 document.getElementById('cntBoardLike').style.color="white"
-			});
+		
 		}
 	});
+	
 	$('#btnReply').click(function(){
 		reply();
 	});

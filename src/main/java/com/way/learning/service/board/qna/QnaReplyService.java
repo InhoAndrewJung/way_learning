@@ -34,11 +34,11 @@ public interface QnaReplyService {
 	//deleteReply
 	public int  deleteReply(String replyNo);
 	
-	public int isReplyLike(String userId, int replyNo,String likeStatus) throws SQLException;
+	public int isReplyLike(String userId, int replyNo,String likeStatus,int boardNo) throws SQLException;
 	
 	public int selectCntReplyLike(int replyNo) throws SQLException;
 	
-	public List<Integer> selectAllRecommendNo() throws SQLException;
+	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException;
 
 	
 

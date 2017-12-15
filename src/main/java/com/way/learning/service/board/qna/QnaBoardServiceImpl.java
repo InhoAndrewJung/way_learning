@@ -126,9 +126,9 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 	}
 
 	@Override
-	public List<Integer> selectAllRecommendNo(String userId) throws SQLException {
+	public int selectBoardRecommendNo(String userId, int boardNo) throws SQLException {
 
-		return qnaBoardDao.selectAllRecommendNo(userId);
+		return qnaBoardDao.selectBoardRecommendNo(userId,boardNo);
 
 	}
 
