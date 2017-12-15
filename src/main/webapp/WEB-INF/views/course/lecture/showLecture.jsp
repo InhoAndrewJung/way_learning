@@ -22,8 +22,9 @@ $(document).ready(function() {
 		$("#replytext").val("");
 	});
 		$('#finishLecture').click(function(){
-			var watchLectureText=$("#finishLecture").val();
-			alert(watchLectureText)
+			var thisLec = document.querySelector('[data-lec-no="${lvo.lectureNo}"]')
+			var lectureWatched=finishTarget.dataset.finished;
+
 			var lectureNo="${lvo.lectureNo}";
 			var courseNo="${lvo.courseNo}";
 			var param="${_csrf.parameterName}=${_csrf.token}&replytext="+replytext+"&lectureNo="+lectureNo+"&courseNo="+courseNo;
@@ -32,10 +33,14 @@ $(document).ready(function() {
 				url: "${pageContext.request.contextPath}/lectureBoard/changeMyLecutreRecord",
 				data: param,
 				success: function(){
-					if(watchLectureText == "다 봤어요"){
-						$("#finishLecture").val("다 봤어요 취소");
+					if(lectureWatched=="false"){
+						finishTarget.dataset.finished=true
+						finishTarget.innerText="다 봤어요 취소"
+						thisLec.classList.add('finish_lesson')
 					}else{
-						$("#finishLecture").val("다 봤어요");
+						finishTarget.dataset.finished=false
+						finishTarget.innerText="다 봤어요"
+						thisLec.classList.remove('finish_lesson')
 					}
 				}
 			});
@@ -56,11 +61,12 @@ function showWatchResult(){
 		type:"get",
 		url: "${pageContext.request.contextPath}/lectureBoard/isMyLectureRecordExist?lectureNo=${lvo.lectureNo}&courseNo=${lvo.courseNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
 		success: function(result){
-			//alert("result:"+result)
 			if(result==1){
-				$("#finishLecture").val('다 봤어요 취소');
+				finishTarget.dataset.finished=true
+				finishTarget.innerText="다 봤어요 취소"
 			}else{
-				$("#finishLecture").val('다 봤어요');
+				finishTarget.dataset.finished=false
+				finishTarget.innerText="다 봤어요"
 			}
 		}
 	});
@@ -194,8 +200,11 @@ function deleteReply(replyNo){
 	} );
 	console.log(CKEDITOR)
 </script>
+<hr>
 <div align="center" >
-	<input type="button" value="다 봤어요" id="finishLecture" /><!-- <span id="watchLectureCnt" > </span> --> </div>
+	<span class="common-hover-btn lesson-finish-btn" id="finishLecture" data-finished="true">다 봤어요</span>
+	<script type="text/javascript">var finishTarget = document.getElementById('finishLecture')</script>
+</div>
 		                        	<!-- 댓글목록 출력 -->
 	<div id="listReply" class="util-width-100"></div>
 		<sec:authorize access="isAuthenticated()">

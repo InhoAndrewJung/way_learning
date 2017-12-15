@@ -86,7 +86,8 @@
 		function course(){
 			event.stopPropagation()
 			var courseNo = event.target.dataset.courseNo
-			location.href="${path}/lectureBoard/showLectureList?courseNo="+courseNo
+			if(courseNo == 'new') location.href="${path}/course/writeCourse"
+			else location.href="${path}/lectureBoard/showLectureList?courseNo="+courseNo
 		}
 		function quiz(quiz){
 			event.stopPropagation()
@@ -118,9 +119,22 @@
 									success: function(result){
 										var list = result.list
 										for(var i=0;i<list.length;i++){
-											console.log(list[i])
+											var myId = "${mvo.userId}"
+											var teacherId = list[i].member.userId
 											var target = document.getElementById('si_course')
 											var article = document.createElement('article')
+											if(myId == teacherId){
+												var addBtn = document.createElement('SPAN')
+												addBtn.addEventListener('click', newLecture)
+												addBtn.innerText = '강좌 추가'
+												addBtn.className = 'new-lecture-btn'
+												addBtn.dataset.courseNo = list[i].courseNo
+												article.appendChild(addBtn)
+												function newLecture(){
+													event.stopPropagation()
+													location.href="${path}/lectureBoard/writeLecture?cno="+event.target.dataset.courseNo
+												}
+											}
 											article.dataset.courseNo = list[i].courseNo
 											article.addEventListener('click', course)
 												 var h4 = document.createElement('h4')
@@ -133,6 +147,16 @@
 											article.appendChild(p)
 											target.appendChild(article)
 										}
+										var target = document.getElementById('si_course')
+										var article = document.createElement('article')
+										article.dataset.courseNo = 'new'
+										article.className ='new-course-article'
+										article.addEventListener('click', course)
+											 var h3 = document.createElement('h3')
+											 h3.dataset.courseNo = 'new'
+											 h3.appendChild(document.createTextNode("새로운 코스 등록하기"))
+										article.appendChild(h3)
+										target.appendChild(article)
 									}
 								});
 							});

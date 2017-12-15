@@ -45,20 +45,20 @@ public class TechBoardController {
 		System.out.println("보드롸이트 컨트롤러 입성");
 		return "board/tech/write";
 	}
-	
+
 	@RequestMapping("insert")
 	public ModelAndView insertBoard(HttpServletRequest request, HttpServletResponse response,
 			HttpSession session, TechBoard bvo,ModelAndView mav ) throws Exception{
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("컨트로러 mvo:"+mvo);
-		
+
 		if(mvo==null){ //로그인 상태가 아니다...글쓰기로 못간다..
-			return new ModelAndView("redirect:/");			
+			return new ModelAndView("redirect:/");
 		}
 		//로그인 한 상태라면
 		bvo.setMember(mvo); //bvo와 mvo의 Hasing 관계가 성립된다..
 
-		techBoardService.insertBoard(bvo); 
+		techBoardService.insertBoard(bvo);
 		List tagList= techBoardService.getTag(bvo.getBoardNo()+"");
 		mav.setViewName("board/tech/show_content");
 		mav.addObject("tagList", tagList);
@@ -67,23 +67,23 @@ public class TechBoardController {
 		return mav;
 	}
 
-	
+
 
 	@RequestMapping("list")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response, @RequestParam(defaultValue="1") String pageNo ,
 			@RequestParam(defaultValue="")  String keyword, @RequestParam(defaultValue="board_no") String sorting, ModelAndView mav)
 			throws Exception{
-		
-		
-		
+
+
+
 		List<TechBoard> list=techBoardService.getBoardList(pageNo,keyword, sorting);
-		
-		int count=techBoardService.countArticle(keyword); 
-		
-		
+
+		int count=techBoardService.countArticle(keyword);
+
+
 		PagingBean pagingBean = new PagingBean(count, Integer.parseInt(pageNo));
 		ListVO lvo = new ListVO(list, pagingBean); //특정한 페이지에서 불러오는 전체 게시글임!!
-		
+
 		List tagList=techBoardService.getTagList();
 		System.out.println("sorting:"+sorting);
 		System.out.println("pageNo:"+pageNo);
@@ -91,18 +91,18 @@ public class TechBoardController {
 		System.out.println("컨트롤러 에서 list:"+list);
 		System.out.println("컨트롤러에서 lvo:"+lvo);
 		System.out.println("컨트롤러에서 lvo 사이즈:"+lvo.getList().size());
-		
+
 		Map<String, Object> map = new HashMap<String,Object>();
-		
+
 		map.put("lvo", lvo);
 		map.put("count", count);
 
 		map.put("keyword", keyword);
 		map.put("tagList", tagList);
-		
+
 		mav.setViewName("board/tech/list");
 		mav.addObject("map", map);
-		
+
 		return mav;
 	}
 
@@ -110,20 +110,20 @@ public class TechBoardController {
 	public ModelAndView showContent( String boardNo, @RequestParam(defaultValue="")  String keyword, ModelAndView mav,String replyNo)
 			throws Exception{
 
-	
+
 		//조회수 증가 로직을 추가
-		
+
 		techBoardService.updateCount(boardNo);
 
 		TechBoard bvo=techBoardService.showContent(boardNo);
 		List tagList= techBoardService.getTag(boardNo);
-		
+
 		System.out.println("showContent컨트롤러 keyword:"+keyword);
 		System.out.println("show boardNo:"+boardNo);
 		System.out.println("show 컨트롤러 bvo:"+bvo);
 	    System.out.println("show에서 태그:"+tagList);
 	    System.out.println("show에서 replyNo:"+replyNo);
-	
+
 		mav.setViewName("board/tech/show_content");
 		mav.addObject("bvo", bvo);
 		mav.addObject("tagList", tagList);
@@ -131,33 +131,33 @@ public class TechBoardController {
 		mav.addObject("keyword", keyword);
 		return mav;
 	}
-	
-	
-	
+
+
+
 	@ResponseBody
 	@RequestMapping("changeLike")
 	public int changeLike(int boardNo)throws Exception{
-		
+
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		
-		
+
+
+
 		techBoardService.isBoardLike(mvo.getUserId(), boardNo);
 		int cnt=techBoardService.selectCntBoardLike(boardNo);
 		return cnt;
 	}
-	
-	
+
+
 	@ResponseBody
 	@RequestMapping("likeStatus")
 	public List<Integer> likeStatus()throws Exception{
-		
+
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		
-		
+
+
+
 		List<Integer> noList=techBoardService.selectAllRecommendNo(mvo.getUserId());
-		
+
 		return noList;
 	}
 
@@ -165,8 +165,8 @@ public class TechBoardController {
 	public ModelAndView delete(HttpSession session, int boardNo)
 			throws Exception{
 		//로그인한 사람만 상세글 정보를 볼수있는 권한을 부여한다.
-		
-	
+
+
 		//실제 DB에서 삭제됨
 		techBoardService.deleteBoard(boardNo);
 		return new ModelAndView("redirect:/board/tech/list");
@@ -193,7 +193,7 @@ public class TechBoardController {
 			throws Exception{
 
 		techBoardService.updateBoard(pvo); //디비에 데이타를 직접 수정
-		
+
 		List tagList= techBoardService.getTag(pvo.getBoardNo()+"");
 		TechBoard bvo=techBoardService.showContent(pvo.getBoardNo()+"");
 		mav.setViewName("board/tech/show_content");
@@ -202,15 +202,15 @@ public class TechBoardController {
 		System.out.println("컨트롤러 bvo:"+bvo);
 		return mav;
 }
-	
-	
-	
-	
-	
+
+
+
+
+
 	//ck 에디터 사용!!!
 		@RequestMapping("imageUpload")
 		public void imageUpload(HttpServletRequest request, HttpSession session,
-				HttpServletResponse response, 
+				HttpServletResponse response,
 				@RequestParam MultipartFile upload ,ModelAndView mav)
 					throws Exception {
 			//imageUload.do를 통해  MultipartFile upload매개변수에 파일이 들어옴
@@ -229,21 +229,21 @@ public class TechBoardController {
 			String now=df.format(today);
 
 			String newfilename = now+"_"+fileName;
-			
+
 			System.out.println("newfilename:"+newfilename);
 			//바이트 배열로 변환
 			byte[] bytes=upload.getBytes();
 			//이미지를 업로드할 디렉토리(배포 경로로 설정)
-			
+
 			//String root = session.getServletContext().getRealPath("/");
 			//String path = root+"\\WEB-INF\\views\\images\\"+fileName;
-			
-			
+
+
 			String uploadPath = session.getServletContext().getRealPath("/")+"\\WEB-INF\\views\\images\\" + newfilename;
-			
+
 					/*"C:\\Tomcat 8.5\\wtpwebapps\\SpringMVC16_SpringSecurity_RegisterMember\\WEB-INF\\views\\images\\" + newfilename;*/
-			
-			
+
+
 
 			out=new FileOutputStream(new File(uploadPath)); //java.io
 			//서버에 저장됨
@@ -254,7 +254,7 @@ public class TechBoardController {
 			System.out.println("callback:"+callback);
 			printWriter=response.getWriter();
 			String fileUrl
-				=request.getContextPath()+"/images/"+newfilename; 
+				=request.getContextPath()+"/images/"+newfilename;
 			System.out.println("fileUrl:"+fileUrl);
 		/*	mav.addObject("callback", callback);
 			mav.addObject("fileUrl", fileUrl);
@@ -267,39 +267,7 @@ public class TechBoardController {
 	+ "</script>");
 			//스트림 닫기
 			printWriter.flush();
-			
+
 			/*return mav;*/
 		}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
