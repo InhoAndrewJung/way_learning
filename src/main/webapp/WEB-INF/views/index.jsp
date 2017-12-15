@@ -187,10 +187,11 @@
 									for(var i=0;i<list.length;i++){
 										console.log(list[i])
 										makeCourseCard(list[i])
-										var myId = "${mvo.userId}"
-										var teacherId = list[i].member.userId
 										var target = document.getElementById('si_course')
 										var article = document.createElement('article')
+									<sec:authorize access="isAuthenticated()">
+										var myId = "${mvo.userId}"
+										var teacherId = list[i].member.userId
 										if(myId == teacherId){
 											var addBtn = document.createElement('SPAN')
 											addBtn.addEventListener('click', newLecture)
@@ -203,6 +204,7 @@
 												location.href="${path}/lectureBoard/writeLecture?cno="+event.target.dataset.courseNo
 											}
 										}
+										</sec:authorize>
 										article.dataset.courseNo = list[i].courseNo
 										article.addEventListener('click', course)
 											 var h4 = document.createElement('h4')
