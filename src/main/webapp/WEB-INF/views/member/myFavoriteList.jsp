@@ -54,10 +54,12 @@
 			<div class="table-center">
 				<div class="table-title">
 					<c:if test="${rl.TABLE_NAME =='qna' }">
-						<a href="${path}/board/qna/showContent?boardNo=${rl.BOARD_NO}">${rl.TITLE}</a>
+
+						<a href="${path}/board/qna/showContent?boardNo=${rl.BOARD_NO}&replyNo=${rl.REPLY_NO}">${rl.TITLE}</a>
 					</c:if>
 					<c:if test="${rl.TABLE_NAME =='tech' }">
-						<a href="${path}/board/tech/showContent?boardNo=${rl.BOARD_NO}">${rl.TITLE}</a>
+						<a href="${path}/board/tech/showContent?boardNo=${rl.BOARD_NO}&replyNo=${rl.REPLY_NO}">${rl.TITLE}</a>
+
 					</c:if>
 				</div>
 

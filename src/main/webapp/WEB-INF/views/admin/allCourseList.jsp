@@ -2,7 +2,8 @@
 <%@ include file="../include/common.jsp" %>
 
 <script>
-function changeAccept(isAccept,courseNo) {
+
+function changeAccept(isAccept,courseNo){
 	if(isAccept == '1'){
 		if(confirm("승인된 강의를 미승인 상태로 변경하시겠습니까?")){
 			$.ajax({

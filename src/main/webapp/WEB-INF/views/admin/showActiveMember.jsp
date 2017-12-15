@@ -13,11 +13,9 @@
 							+ userId + "&role=" + role,
 					success : function(result) {
 						console.log(result);
-						if (result == '1') {
-							alert("회원 자격이 변경되었습니다.");
-						} else {
-							alert("회원 자격 변경에 실패했습니다.");
-						}
+						if (result == '1') alert("회원 자격이 변경되었습니다.");
+						 else alert("회원 자격 변경에 실패했습니다.");
+						
 						showActiveMember();
 					}
 				});
@@ -32,11 +30,9 @@
 							+ userId + "&role=" + role,
 					success : function(result) {
 						console.log(result);
-						if (result == '1') {
-							alert("회원 자격이 변경되었습니다.");
-						} else {
-							alert("회원 자격 변경에 실패했습니다.");
-						}
+						if (result == '1') alert("회원 자격이 변경되었습니다.");
+						 else alert("회원 자격 변경에 실패했습니다.");
+						
 						showActiveMember();
 					}
 				});
