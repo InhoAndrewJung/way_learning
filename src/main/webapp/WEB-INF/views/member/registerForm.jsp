@@ -27,33 +27,18 @@ $(document).ready(function(){
 			alert("이메일을 입력하세요");
 			return false;
 		}
-		$("#regForm").submit(function(){
-			if($("#regForm :input[name=email]").val().trim().match(regExp)!=null){
-				var isGood=true;
-			}else{
-				var isGood=false;
-			}
-			if(isGood){
-				return true;
-			}else{
-				alert("입력된 주소를 확인해주세요");
-			return;
-			}
-		});//submit
-
-
-		if($("#regForm :input[name=address]").val().trim()==""){
-			alert("주소를 입력하세요");
-			return false;
-		}
-
-
-
 		if(checkResultId==""){
 			alert("아이디 중복확인을 하세요");
 			return false;
 		}
 
+		
+
+
+
+
+
+		
 	});//submit
 	$("#regForm :input[name=userId]").keyup(function(){
 		var userId=$(this).val().trim();

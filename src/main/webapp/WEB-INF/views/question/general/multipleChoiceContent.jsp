@@ -45,7 +45,7 @@
 					<input type="submit"  id="search_button" value="제출" style="border-radius:0px;"/>
 				</span>
 			</form>
-		</table>
+		
 
 		<div style="text-align:center;">
 			<img alt="삭제"

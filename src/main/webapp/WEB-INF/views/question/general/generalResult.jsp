@@ -15,7 +15,7 @@
 			<tr>
 				<td style="padding:30px">
 					<c:choose>
-						<c:when test="${result}">
+						<c:when test="${result =='1'}">
 							<strong>정답</strong>
 						</c:when>
 						<c:otherwise>
