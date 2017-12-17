@@ -3,7 +3,7 @@
 <%@include file="../include/common.jsp"%>
 <link rel="stylesheet" href="${path}/resources/css/member/myPage.css">
 <script>
-showContent('updateForm');
+showContent('showMyRecord');
 function showContent(page){
 $.ajax({
 		type: "post",

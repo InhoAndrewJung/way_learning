@@ -50,7 +50,7 @@ function toggleBtnView(replyNo) {
   $('a[id=modifyCancel'+replyNo+']').toggle();
 }
 function showModify(replyNo){
-	var replytext=$('div[title=modifyResult'+replyNo+']').html();
+	var replytext=$('div[title=modifyResult'+replyNo+']').text();
   $('div[title=modifyResult'+replyNo+']').html('<textarea class="replyEdit_writeText" rows="3" cols="85" id="reply'+replyNo+'" >'+replytext+' </textarea>');
   toggleBtnView(replyNo)
 }
@@ -63,14 +63,17 @@ function showModify(replyNo){
 				data: param,
 				success:function(result){
 					//alert("result:"+result.replyText);
-					$('span[title=modifyResult'+replyNo+']').html(result.replyText);
+					$('div[title=modifyResult'+replyNo+']').html(result.replyText);
 				}
 			});
 			toggleBtnView(replyNo)
 	}
-function modifyCancel(replytext,replyNo){
+function modifyCancel(replyNo){
+	 var replytext=$('#reply'+replyNo+'').val();
+	 alert("modifycancel:"+replytext)
   toggleBtnView(replyNo)
-  $('span[title=modifyResult'+replyNo+']').html(replytext);
+  
+  $('div[title=modifyResult'+replyNo+']').html(replytext);
 }
 function deleteReply(replyNo,boardNo){
   if(confirm("정말 삭제하시겠습니까?")){
@@ -132,7 +135,7 @@ function deleteReply(replyNo,boardNo){
           <a  id="modifyDo${row.replyNo}" class="edit_done" onclick="modify('${row.replyNo}')">
             <img src="${path}/resources/img/replyEdit.png" class="image_replyEditDone">
           </a>
-          <a id="modifyCancel${row.replyNo}" class="modifyCancel" onclick="modifyCancel('${row.replytext}','${row.replyNo}')">
+          <a id="modifyCancel${row.replyNo}" class="modifyCancel" onclick="modifyCancel('${row.replyNo}')">
             <img src="${path}/resources/img/cancel.png" class="image_replyCancel">
           </a>
         </div>

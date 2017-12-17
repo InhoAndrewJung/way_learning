@@ -43,7 +43,7 @@ function toggleBtnView(replyNo) {
   $('a[id=modifyCancel'+replyNo+']').toggle();
 }
 function showModify(replyNo){
-  var replytext=$('div[title=modifyResult'+replyNo+']').html();
+  var replytext=$('div[title=modifyResult'+replyNo+']').text();
   $('div[title=modifyResult'+replyNo+']').html('<textarea class="reply-textarea" id="reply'+replyNo+'" >'+replytext+' </textarea>');
   toggleBtnView(replyNo)
 }
@@ -60,7 +60,8 @@ function modify(replyNo){
   });
   toggleBtnView(replyNo)
 }
-function modifyCancel(replytext,replyNo){
+function modifyCancel(replyNo){
+	var replytext=$('#reply'+replyNo+'').val();
   toggleBtnView(replyNo)
   $('div[title=modifyResult'+replyNo+']').html(replytext);
 }
@@ -123,7 +124,7 @@ function deleteReply(replyNo,boardNo){
         <a  id="modifyDo${row.replyNo}" class="edit_done" onclick="modify('${row.replyNo}')">
           <img src="${path}/resources/img/replyEdit.png" class="image_replyEditDone">
         </a>
-        <a id="modifyCancel${row.replyNo}" class="modifyCancel" onclick="modifyCancel('${row.replytext}','${row.replyNo}')">
+        <a id="modifyCancel${row.replyNo}" class="modifyCancel" onclick="modifyCancel('${row.replyNo}')">
           <img src="${path}/resources/img/cancel.png" class="image_replyCancel">
         </a>
       </div>
