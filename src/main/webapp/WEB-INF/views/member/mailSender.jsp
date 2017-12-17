@@ -53,7 +53,7 @@ function passCheck() {
 			</div>
 			<div class="container-footer">
 				
-				<input type="submit" value="" class="image_check" onclick="passCheck()">
+				<input type="image" src="${pageContext.request.contextPath}/resources/img/check.png" class="image_check" onclick="passCheck()">
 				<img src="/learning/resources/img/cancel.png" class="image_cancel" onclick="toLogin()">
 		
 			</div>
