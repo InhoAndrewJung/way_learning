@@ -6,20 +6,38 @@
 
 <div class="common-container">
 	<div class="move-boardList">
-		<div class="titleName" style="text-align:left;">Question ${questionNo}</div>
+		<div class="general-titleName">Question ${questionNo}</div>
 		<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
 			<img src="${pageContext.request.contextPath}/resources/img/list.png" id="image_list">
 		</a>
 	</div>
-	<table class="common-card util-width-100" style="margin-bottom:40px;">
+	<table class="util-width-100">
 			<tr>
 				<td style="padding:30px">
 					<c:choose>
 						<c:when test="${result =='1'}">
-							<strong>정답</strong>
+						<div class="general-answer">
+							<span class="general-image"></span><br><br>
+							<span class="general-msg">GOOD JOB, BRO!<br>
+								정답입니다!
+							</span>							
+						</div>	
 						</c:when>
 						<c:otherwise>
-							<strong>오답</strong>
+						<div class="general-wrongAnswer">
+							<span class="general-image"></span><br><br>
+							<span class="general-msg">Try Again!</span><br><br>
+							<c:if test="${multipleChoice != null}">
+								<a href="${path}/question/general/multipleChoiceContent?questionNo=${questionNo}">		
+										<img src="/learning/resources/img/back-arrow.png" class="general-imgBack">
+								</a>
+							</c:if>
+							<c:if test="${shortAnswer !=null}">
+								<a href="${path}/question/general/shortAnswerContent?questionNo=${questionNo}">
+									<img src="/learning/resources/img/back-arrow.png" class="general-imgBack">
+								</a>
+							</c:if>
+						</div>
 						</c:otherwise>
 					</c:choose>
 				</td>
@@ -27,17 +45,10 @@
 	</table>
 
 
-		<c:if test="${multipleChoice != null}">
-			<a href="${path}/question/general/multipleChoiceContent?questionNo=${questionNo}">
-				<button type="button" class="btn btn-primary">문제 다시풀기</button> </a>
-		</c:if>
-		<c:if test="${shortAnswer !=null}">
-			<a href="${path}/question/general/shortAnswerContent?questionNo=${questionNo}">
-				<button type="button" class="btn btn-primary">문제 다시풀기</button></a>
-		</c:if>
+		
 
 
-		<a href="${pageContext.request.contextPath}/question/general/getList">
+		<%-- <a href="${pageContext.request.contextPath}/question/general/getList">
 			<img src="${pageContext.request.contextPath}/resources/img/list.png"
 			id="image_list">
 		</a>
@@ -45,7 +56,7 @@
 		<a href="${path}/"> <img
 			src="${pageContext.request.contextPath}/resources/img/house.png"
 			id="image_list">
-		</a>
+		</a> --%>
 
 
 
