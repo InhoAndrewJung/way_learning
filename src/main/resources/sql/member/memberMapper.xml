@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
-
+<!-- 
 	<resultMap type="member" id="memberRM">
 		<result property="userId" column="user_id" />
 		<result property="email" column="email" />
@@ -36,11 +36,7 @@
 		user_id=#{userId}
 	</update>
 
-	<insert id="registerMember" parameterType="member">
-		insert into
-		wl_member(user_id,password,email,img_profile)
-		values(#{userId},#{password},#{email},#{imgProfile})
-	</insert>
+	
 	<select id="idcheck" resultType="int">
 		select count(*) from wl_member
 		where user_id=#{value}
@@ -71,7 +67,7 @@
 		user_id=#{userId}
 	</update>
 
-	<!--회원탈퇴 추가 -->
+	회원탈퇴 추가
 	<delete id="deleteMember" >
 		DELETE from wl_member
 		WHERE user_id=#{userId}
@@ -80,7 +76,7 @@
 
 
 
-	<!-- 마이 페이지 관련 -->
+	마이 페이지 관련
 	<resultMap type="answerResult" id="answerResultRM">
 		<result property="member.userId" column="user_id" />
 		<result property="member.activity" column="activity" />
@@ -118,7 +114,7 @@
 		where user_id=#{userId}
 	</select>
 
-	<!-- <select id="selectAllRanking" parameterType="string" resultMap="answerResultRM">
+	<select id="selectAllRanking" parameterType="string" resultMap="answerResultRM">
 		select user_id ,sum(MY_CNT_SUBMIT) MY_CNT_SUBMIT, sum(MY_CNT_RIGHT)
 		MY_CNT_RIGHT,sum(MY_CNT_WRONG) MY_CNT_WRONG, round((
 		sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2) my_right_Percent ,
@@ -133,7 +129,7 @@
 			desc)
 		</if>
        as ranking from wl_answer_result group by user_id
-	</select> -->
+	</select>
 	
 	
 	<select id="selectAllRanking" parameterType="string" resultMap="answerResultRM">
@@ -157,11 +153,11 @@
 	</select>
 	
 	
-	<!-- select m.user_id ,m.activity,m.img_profile, sum(MY_CNT_SUBMIT) MY_CNT_SUBMIT, sum(MY_CNT_RIGHT)
+	select m.user_id ,m.activity,m.img_profile, sum(MY_CNT_SUBMIT) MY_CNT_SUBMIT, sum(MY_CNT_RIGHT)
 		MY_CNT_RIGHT,sum(MY_CNT_WRONG) MY_CNT_WRONG, round((
 		sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2) my_right_Percent ,
 			rank() over(order by sum(MY_CNT_SUBMIT) desc)
-       as ranking from wl_answer_result ar ,wl_member m where ar.user_id=m.user_id group by m.user_id ,m.activity,m.img_profile; -->
+       as ranking from wl_answer_result ar ,wl_member m where ar.user_id=m.user_id group by m.user_id ,m.activity,m.img_profile;
 
 
 
@@ -206,7 +202,7 @@ from (select lr.course_no,lc.course_name,lecture_order,lr.lecture_no,lecture_nam
 from wl_lecture_board lb, wl_my_lecture_record lr ,wl_course lc
 where lb.course_no=lr.course_no and lr.course_no=lc.course_no and lb.lecture_no=lr.LECTURE_NO  and user_id=#{userId} order by course_no, lecture_order) a
 	
-<!-- =======
+=======
 		select a.* ,
 		(select count(-1) from wl_my_lecture_record where course_no=a.course_no) cnt_My_record,
 		(select count(-1) from wl_lecture_board where course_no=a.course_no) cnt_Course,
@@ -214,14 +210,18 @@ where lb.course_no=lr.course_no and lr.course_no=lc.course_no and lb.lecture_no=
 		from (select lr.course_no,lc.course_name,lecture_order,lr.lecture_no,lecture_name,lb.author,lc.course_image
 		from wl_lecture_board lb, wl_my_lecture_record lr ,wl_course lc
 		where lb.course_no=lr.course_no and lr.course_no=lc.course_no and lb.lecture_no=lr.LECTURE_NO  and user_id=#{userId} order by course_no, lecture_order) a
->>>>>>> 1ded3f3008abb35dce971eb41c4c71a86123f8b9 -->
+>>>>>>> 1ded3f3008abb35dce971eb41c4c71a86123f8b9
 	</select>
 
 	<select id="selectLectureFavorite" resultType="hashmap">
 select cr.course_no,course_name,description,cr.reg_date,cr.user_id,author,m.img_profile,m.activity from wl_course_recommend cr, wl_course c,wl_member m where cr.course_no=c.course_no
 and c.author=m.user_id and cr.user_id=#{userId}
 
-	</select>
+	</select> -->
 
-
+<insert id="registerMember" parameterType="member">
+		insert into
+		wl_member(user_id,password,email,img_profile)
+		values(#{userId},#{password},#{email},#{imgProfile})
+	</insert>
 </mapper>

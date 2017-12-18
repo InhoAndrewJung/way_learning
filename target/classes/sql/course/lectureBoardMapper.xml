@@ -7,11 +7,11 @@
 <mapper namespace="lectureBoardMapper">
 
 
-
+<!-- 
 	<select id="selectMyCourseNo"  resultType="hashmap">
 	select course_no,course_name from wl_course where author=#{value}
 	</select>
-
+ -->
 
 	<insert id="insertLecture" >
 	
@@ -23,7 +23,7 @@
 	
 	</insert>
 	
-	<select id="isLectureOrderExist" resultType="int">
+	<!-- <select id="isLectureOrderExist" resultType="int">
 	select count(-1) from  wl_lecture_board  where course_no=#{courseNo} and lecture_order=#{lectureOrder}
 	
 	</select>
@@ -146,7 +146,7 @@
 	 update  wl_course set cnt_course_like=cnt_course_like-1 where course_no=#{courseNo}
 	</update>
 	
-	
+	 -->
 	
 	
 </mapper>	

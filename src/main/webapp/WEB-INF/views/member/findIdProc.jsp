@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="${path}/resources/css/member/findIdProc.css">
 </head>
 <body>
-<<<<<<< HEAD
+<%-- <<<<<<< HEAD
 <form action="${pageContext.request.contextPath}/member/findIdByEmail?${_csrf.parameterName}=${_csrf.token}"
 		id="findIdProc">
 				<c:choose>
@@ -29,7 +29,7 @@
 						<a href="${pageContext.request.contextPath}/member/findId">아이디 다시 찾기</a>
 					</c:otherwise>
 				</c:choose>
-=======
+======= --%>
 <form action="${pageContext.request.contextPath}/member/findIdByEmail?${_csrf.parameterName}=${_csrf.token}" id="findIdProc">
 <div class="container">
 	<div class="logo"><img src="${path}/resources/img/google.png" id="image_logo" onclick="toMain()"></div>
@@ -39,7 +39,7 @@
 			<div class="container-body">
 		
 					<div class="body">
->>>>>>> master
+
 			
 							<div class="title">
 							Your ID is<p class="getUserId">${userId}</p>

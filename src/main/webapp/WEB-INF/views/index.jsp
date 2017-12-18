@@ -298,9 +298,7 @@
 
 
 			<b>마이페이지용</b><br>
-<<<<<<< HEAD
 
-=======
 			<li><a href="${pageContext.request.contextPath}/member/myPage">마이페이지</a><li>
 
 			<%-- <li><a href="${pageContext.request.contextPath}/member/showMyRecord">내가 푼 문제 기록</a><li>
@@ -315,7 +313,6 @@
 =======
 			<li><a href="${path}/member/deleteForm">회원 탈퇴</a></li> --%>
 
->>>>>>> master
 			<b>게시판용</b><br>
 			<li><a href="${pageContext.request.contextPath}/board/qna/write">qna게시판 글쓰기</a><li>
 			<li><a href="${pageContext.request.contextPath}/board/qna/list">qna게시판목록</a><li>

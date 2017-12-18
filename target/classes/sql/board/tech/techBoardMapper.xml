@@ -5,9 +5,7 @@
 
 	
 <mapper namespace="techBoardMapper">
-
-	
-	
+<!-- 
 	
 	<insert id="write" parameterType="techBoard">
 		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
@@ -26,8 +24,8 @@
 		WHERE board_no=#{value}
 	</select>
 
-	<!-- 전체게시글보기를 위한 resultMap -->
-	<!-- jdbctype은 insert, update, delete의 경우 nullable column인 경우에만 필수적이다. -->
+	전체게시글보기를 위한 resultMap
+	jdbctype은 insert, update, delete의 경우 nullable column인 경우에만 필수적이다.
 	<resultMap type="techBoard" id="boardListRM">
 		<result property="boardNo" column="board_no" />
 		<result property="title" column="title" />
@@ -88,7 +86,7 @@ select board_no,tag from wl_tech_tag where board_no=#{value}
 		
 	</select>
 
-	<!-- 특정 no에 해당하는 상세글보는 resultaMap -->
+	특정 no에 해당하는 상세글보는 resultaMap
 	<resultMap type="techBoard" id="boardRM" extends="boardListRM">
 		<result property="content" column="content" />
 		<result property="member.userId" column="user_id" />
@@ -118,7 +116,7 @@ board_no,title,content,cnt_board_like
 
 	</update>
 
-	<!-- 페이징 처리스 추가 -->
+	페이징 처리스 추가
 
 	<select id="totalCount" resultType="int">
 		select count(-1) from
@@ -164,7 +162,7 @@ board_no,title,content,cnt_board_like
 
 	</sql>
 	
-	<!-- 좋아요 관련 로직 시작 -->
+	좋아요 관련 로직 시작
 	<select id="isBoardLike" resultType="int">
 	 select count(-1) from wl_tech_board_recommend where user_id=#{userId} and board_no=#{boardNo}
 	</select>
@@ -195,10 +193,10 @@ board_no,title,content,cnt_board_like
     <select id="selectAllRecommendNo" resultType="int">
      select board_no from wl_tech_board_recommend where user_id=#{userId}
     
-    </select>
+    </select> -->
     
-	<!-- 좋아요 관련 로직 끝 -->
-	
+<!-- 	좋아요 관련 로직 끝 -->
+	 
 </mapper>	
 
 

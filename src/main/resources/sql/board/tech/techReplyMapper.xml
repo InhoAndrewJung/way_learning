@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="techReplyMapper">
 
-	<insert id="insertReply" >
+<!-- 	<insert id="insertReply" >
 	
 		 insert into wl_tech_reply (reply_no, board_no, replyer, replytext)
  values( wl_tech_reply_SEQ.nextval , #{boardNo},#{member.userId},#{replytext})
@@ -51,7 +51,7 @@
 	</delete>
 	
 	
-	<!-- 좋아요 관련 로직 시작 -->
+	좋아요 관련 로직 시작
 	<select id="isReplyLike" resultType="int">
 	 select count(-1) from wl_tech_reply_recommend where user_id=#{userId} and reply_no=#{replyNo}
 	</select>
@@ -69,22 +69,22 @@
 	
 	<update id="increaseCntReplyLike">
 		update wl_tech_reply set cnt_reply_like=cnt_reply_like+1 where reply_no=#{replyNo}
-	</update>
+	</update> -->
 	
 	<update id="decreaseCntReplyLike">
 		update wl_tech_reply set cnt_reply_like=greatest(cnt_reply_like-1,0) where reply_no=#{replyNo}
 	</update>
 	
-    <select id="selectCntReplyLike" resultType="int">
+  <!--   <select id="selectCntReplyLike" resultType="int">
     select cnt_reply_like from wl_tech_reply where reply_no=#{replyNo}
     </select>
-	<!-- 좋아요 관련 로직 끝 -->
+	좋아요 관련 로직 끝
 
 	<select id="selectAllRecommendNo" resultType="int">
      select reply_No from wl_tech_reply_recommend
     
     </select>
-	
+	 -->
 	
 </mapper>	
 

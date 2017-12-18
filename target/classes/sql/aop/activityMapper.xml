@@ -6,7 +6,7 @@
 
 <mapper namespace="activityMapper">
 
-
+<!-- 
 	<update id="updateActivity">
 	
 	update wl_member 
@@ -25,7 +25,7 @@
 	
 		
 	</update>
-
+ -->
 </mapper>	
 
 

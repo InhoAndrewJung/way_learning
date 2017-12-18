@@ -19,23 +19,13 @@ function toMain() {
 </script>
 </head>
 <body>
-<<<<<<< HEAD
 
-<div align="center">
-
-
-	<form name="deleteForm" method="post"
-		action="${pageContext.request.contextPath}/member/deleteProc"
-		id="deleteForm">
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}">
-=======
 <div class="container">
 	<div class="logo"><img src="${path}/resources/img/google.png" id="image_logo" onclick="toMain()"></div>
 						
 	<form name="deleteForm" method="post" action="${pageContext.request.contextPath}/member/deleteProc"	id="deleteForm">			
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
->>>>>>> master
+
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="mvo" property="principal" />
 			<input type="hidden" name="userId" value="${mvo.userId}">
@@ -55,14 +45,13 @@ function toMain() {
 				<p onclick="toMain()" class="no">Not Yet!</p>
 			</div>
 	</form>
-<<<<<<< HEAD
+
 
 	<a href="${path}/"> 메인페이지로 이동</a>
 	</div>
 
-=======
-	
-</div>
->>>>>>> master
+
+
+
 </body>
 </html>

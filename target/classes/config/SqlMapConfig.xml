@@ -1,24 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<properties resource="config/jdbc.properties" />
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
 
-	 <settings>
-		<setting name="jdbcTypeForNull" value="NULL"/>
-		
-	</settings> 
-	
-	<!-- <typeAliases>
-		<typeAlias type="com.kosta.spring.model.member.vo.MemberVO" alias="member"/>
-		<typeAlias type="com.kosta.spring.model.member.vo.AuthorityVO" alias="authority"/>
-	</typeAliases> -->
-	
+	</settings>
+
+<!-- 
 	<typeAliases>
-		<package name="com.way.learning.model"/>
-		<package name="com.way.learning.test"/>
-	</typeAliases>
+		<typeAlias type="com.way.learning.model.member.vo.Member"
+			alias="member" />
+		<typeAlias type="com.kosta.spring.model.member.vo.Authority"
+			alias="authority" />
+	</typeAliases> -->
+
+	<typeAliases>
+		
 	
-	<!-- <mappers>
-		<mapper resource="sql/memberMapper.xml"/>
-		<mapper resource="sql/authoritiesMapper.xml"/>
-	</mappers> -->
+		<package name="com.way.learning.model.vo" />
+		
+
+		<!--
+		 <package name="com.way.learning.model.board.qna.vo" />
+		 <package name="com.way.learning.model.question.vo" />
+		 <package name="com.way.learning.model.board.tech.vo" />
+		 <package name="com.way.learning.model.member.vo" />
+		 <package name="com.way.learning.model.board.tech.vo" /> 
+		 <package name="com.way.learning.model.course.vo" /> 
+		 <package name="com.way.learning.model.member.vo" />
+			 -->
+
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="${JDBC.Driver}" />
+				<property name="url" value="${JDBC.ConnectionURL}" />
+				<property name="username" value="${JDBC.Username}" />
+				<property name="password" value="${JDBC.Password}" />
+
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="sql/member/memberMapper.xml" />
+			 
+		<!-- 
+		<mapper resource="sql/aop/updateAnswerMapper.xml" />
+		<mapper resource="sql/board/tech/techReplyMapper.xml" />
+		<mapper resource="sql/board/qna/qnaBoardMapper.xml" /> 
+	    <mapper resource="sql/board/tech/techBoardMapper.xml" /> 
+		<mapper resource="sql/member/authoritiesMapper.xml" /> 
+		<mapper resource="sql/course/couseMapper.xml" /> 
+		<mapper resource="sql/admin/adminMapper.xml" />
+		<mapper resource="sql/question/questionMapper.xml" />
+	 	<mapper resource="sql/aop/activityMapper.xml" />
+		<mapper resource="sql/board/qna/qnaReplyMapper.xml" /> 
+		<mapper resource="sql/course/lectureBoardMapper.xml" /> 
+		<mapper resource="sql/course/lectureReplyMapper.xml" /> 
+			
+			-->
+
+
+
+	</mappers>
 </configuration>
+
+
+
+
+
+
+
+
+

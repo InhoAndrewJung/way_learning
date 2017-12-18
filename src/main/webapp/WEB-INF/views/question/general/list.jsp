@@ -75,7 +75,11 @@
 	</div>
 <br/>
 
-
+<!-- 비로그인 사용자는 일반문제 생성을 보여주지 않는다. -->
+		<sec:authorize access="isAuthenticated()">
+		<div style="text-align:center;">
+			 <input type="button" id="search_button"  style="padding:6px;border-radius: 5%;"value="일반 문제 생성" onclick="makeQuestion()">
+		</sec:authorize>
 
 		
 		
@@ -126,11 +130,7 @@
 			</c:forEach>
 		</table>
 
-		<!-- 비로그인 사용자는 일반문제 생성을 보여주지 않는다. -->
-		<sec:authorize access="isAuthenticated()">
-		<div style="text-align:center;">
-			 <input type="button" id="search_button"  style="padding:6px;border-radius: 5%;"value="일반 문제 생성" onclick="makeQuestion()">
-		</sec:authorize>
+		
 		<!-- 메인으로 이동 -->
 				<a href="${path}/">
 					<img src="${pageContext.request.contextPath}/resources/img/house.png" id="image_list">

@@ -25,6 +25,19 @@ public class Member {
 		this.userType = userType;
 		this.uploadFile = uploadFile;
 	}
+	
+	
+	public Member(String userId, String email, String password, int activity, String imgProfile, Date regDate) {
+		super();
+		this.userId = userId;
+		this.email = email;
+		this.password = password;
+		this.activity = activity;
+		this.imgProfile = imgProfile;
+		this.regDate = regDate;
+	}
+
+
 	//메일전송용 생성자
 	public Member(String userId, String password) {
 		super();

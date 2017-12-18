@@ -18,18 +18,18 @@
 	</if>
 	set  cnt_submit=cnt_submit+1  where question_no=#{value}
 	
-	
-	 <!-- <if test="value lte 999">
+
+	 <if test="value lte 999">
 	update wl_general_question set  cnt_submit=cnt_submit+1  where question_no=#{value}
 	</if>
 	
 	<if test="value gte 1000">
 	update wl_algorithm_question set  cnt_submit=cnt_submit+1  where question_no=#{value}
-	</if> -->
+	</if>
 	
 	
 </update>
-
+	 <!--
 <update id="updatePostCntRight"  parameterType="int">
 	update
 	<if test="value lte 999">
@@ -89,7 +89,7 @@ update wl_answer_result set my_cnt_Error=my_cnt_Error+1 where question_no=#{ques
 insert into wl_answer_result (user_id,question_no, my_cnt_Error) values(#{userId} ,#{questionNo},1)
 </insert>
 
-
+ -->
 
 </mapper>	
 
