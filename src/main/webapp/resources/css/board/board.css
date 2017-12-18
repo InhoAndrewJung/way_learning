@@ -373,68 +373,73 @@ a:link, a:visited  {
 }
 
 .content-function{
-	width: 13%;
-	position: relative;
-    padding-top: 15px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: center;
-
+	width: 80px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+	padding-top: 16px;
 }
+.content-function>div { margin-top: 20px;}
 
 .function-like{
-  	background: #ffffff;
-  	font-size: 25px;
-  	display: inline-block;
-  	margin-top: 100px;
 	position: relative;
 }
 
 .image_empty-heart{
-	width: 70px;
+	width: 55px;
 	cursor: pointer;
 }
 
 .cntBoardLike{
-	font-size: 25px;
+	font-size: 1em;
 	position: absolute;
 	font-weight: bold;
 	left: 51%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: #572cff;
-  cursor: pointer;
+	top: 45%;
+	transform: translate(-50%, -50%);
+	color: #572cff;
+	cursor: pointer;
 }
 
 .function-edit{
-  	border-radius: 13px;
-  	background: #25b7d3;
-  	padding: 10px 15px 10px 15px;
-  	font-size: 25px;
-  	color: #ffffff;
-  	display: inline-block;
-  	margin-top: 50px;
-  	cursor: pointer;
+	border-radius: 5px;
+  background: #25b7d3;
+  padding: 5px 7px;
+  display: inline-block;
+  cursor: pointer;
 }
 
 #image_edit{
-	width: 40px;
+	width: 30px;
 	cursor: pointer;
 
 }
 .function-facebook{
-	border-radius: 13px;
-  	background: #3564a3;
-  	padding: 10px 15px 14px 15px;
-  	font-size: 25px;
-  	display: inline-block;
-  	margin-top: 50px;
-	cursor: pointer;
+	border-radius: 5px;
+  background: #3564a3;
+  padding: 3px 7px 5px 7px;
+  cursor: pointer;
+	display:inline-block;
 }
 
 .image_facebook{
-	width: 40px;
+	width: 30px;
 	cursor: pointer;
+}
+
+.board-btn-up,
+.board-btn-down{
+	width:20px;
+	height:20px;
+	display:block;
+	cursor: pointer;
+	margin:5px auto;
+}
+.board-qna-likes{
+	font-size: 1em;
+  font-weight: bold;
+  color: #572cff;
+  cursor: pointer;
 }
 
 /* TO LIST */
@@ -547,18 +552,17 @@ a:link, a:visited  {
 }
 
 .reply_function-like{
-	width: 65px;
+	width: 35px;
 	cursor: pointer;
 }
 
 .reply_cntLike{
-	font-size: 25px;
-	position: absolute;
-	left: 49%;
-    top: 45%;
-    transform: translate(-50%, -50%);
-    color: #ff2635;
-    cursor: pointer;
+	font-size: 0.8em;
+  font-weight: bold;
+  display: block;
+  color: #585858;
+  cursor: pointer;
+  margin-top: -5px;
 }
 
 
@@ -606,6 +610,13 @@ a:link, a:visited  {
 
 .reply-center{
 	margin-bottom: 20px;
+  transition: all 0.4s ease 0s;
+}
+.reply-highlight {
+	box-shadow: 0 0 15px -1px #0c7dc7;
+	background-color:white;
+	transform:scale(1.02, 1.02);
+	border-radius: 15px;
 }
 
 .reply-body{
@@ -617,15 +628,6 @@ a:link, a:visited  {
 
 }
 
-.reply-function{
-	width: 13%;
-	position: relative;
-    padding-top: 15px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: center;
-}
-
 .reply-head {
 	padding: 15px 15px;
 }
@@ -633,7 +635,7 @@ a:link, a:visited  {
 .edit-delete{
 	float : right;
 	margin : 10px;
-
+	margin-top: -40px;
 }
 
 .image_replyEdit{
@@ -654,13 +656,12 @@ a:link, a:visited  {
 }
 
 .reply-function{
-	width: 13%;
-	position: relative;
-  padding-top: 15px;
+	width: 80px;
   display: inline-block;
   vertical-align: top;
   text-align: center;
-  margin-top: 35px
+  padding-top: 40px;
+  position: relative;
 }
 
 

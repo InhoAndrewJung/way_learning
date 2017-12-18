@@ -10,15 +10,13 @@ $(document).ready(function() {
 		url: "${pageContext.request.contextPath}/board/qna/likeStatus",
 		data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}",
 			success: function(result){
-				
 					 $('#boardGood'+result).attr('src' ,'/learning/resources/img/arrowUpGood.png');
-				
 			}
 		});
 		$('#btnReply').click(function(){
 			reply();
 		});
-		
+
     function reply(){
   		var replytext=$("#replytext").val();
   		var boardNo="${requestScope.bvo.boardNo}"; // view 컨트롤러에서 가져옴!
@@ -99,9 +97,14 @@ function shareSns(){
 
 	<script>
 	setTimeout(function(){
-		 var heightItem=$('#replyGood'+${replyNo}+'').offset().top; 
-		$('body,html').animate({scrollTop:heightItem-100});
-		
+		 var heightItem=$('#replyGood'+${replyNo}+'').offset().top;
+		$('body,html').animate({scrollTop:heightItem-300});
+		var target= document.getElementById('replyGood'+${replyNo}).parentElement.parentElement
+		target.classList.add('reply-highlight')
+		setTimeout(function() {
+			target.classList.remove('reply-highlight')
+		},1000)
+
 	},700) ;
 	</script>
 
@@ -159,17 +162,16 @@ function shareSns(){
     </div>
     <div class="content-function">
       <div class="function-like">
-				<img id="boardGood${bvo.boardNo}" src="${path}/resources/img/arrowUp.png" style="width:20px; height:20px;cursor:pointer; " onclick="boardLikeUp('${bvo.boardNo}')" ><br><br>
-				<span id="cntBoardLike" class="cntBoardLike" >${bvo.cntBoardLike}</span><br><br>
-				<img  src="${path}/resources/img/arrowDown.png" style="width:20px; height:20px;cursor:pointer;" onclick="boardLikeDown('${bvo.boardNo}')">
+				<img class="board-btn-up" id="boardGood${bvo.boardNo}" src="${path}/resources/img/arrowUp.png" onclick="boardLikeUp('${bvo.boardNo}')" >
+				<span id="cntBoardLike" class="board-qna-likes" >${bvo.cntBoardLike}</span>
+				<img class="board-btn-down" src="${path}/resources/img/arrowDown.png" onclick="boardLikeDown('${bvo.boardNo}')">
       </div>
       <sec:authorize access="isAuthenticated()">
-          <sec:authentication var="mvo" property="principal" />
-        
-            <c:if test="${mvo.userId == requestScope.bvo.member.userId }">
-              <div class="function-edit"><img src="${path}/resources/img/edit.png" id="image_edit" onclick="updateBoard()"></div>
-            </c:if>
-      </sec:authorize>
+        <sec:authentication var="mvo" property="principal" />
+        <c:if test="${mvo.userId == requestScope.bvo.member.userId }">
+          <div class="function-edit"><img src="${path}/resources/img/edit.png" id="image_edit" onclick="updateBoard()"></div>
+        </c:if>
+	    </sec:authorize>
       <div class="function-facebook">
         <a onclick="shareSns()" alt="Share on Facebook"><img src="${path}/resources/img/facebook.png" class="image_facebook"></a>
       </div>

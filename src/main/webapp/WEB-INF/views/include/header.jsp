@@ -87,6 +87,7 @@
 			event.stopPropagation()
 			var courseNo = event.target.dataset.courseNo
 			if(courseNo == 'new') location.href="${path}/course/writeCourse"
+			else if(courseNo == 'my') location.href="${path}/course/showMyCourseList"
 			else location.href="${path}/lectureBoard/showLectureList?courseNo="+courseNo
 		}
 		function quiz(quiz){
@@ -151,6 +152,16 @@
 										}
 										<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_AUTHOR')">
 										var target = document.getElementById('si_course')
+										var courseMgnArticle = document.createElement('article')
+										courseMgnArticle.dataset.courseNo = 'my'
+										courseMgnArticle.className ='my-course-article'
+										courseMgnArticle.addEventListener('click', course)
+											 var h32 = document.createElement('h3')
+											 h32.dataset.courseNo = 'my'
+											 h32.appendChild(document.createTextNode("내 코스 관리"))
+										courseMgnArticle.appendChild(h32)
+										target.appendChild(courseMgnArticle)
+
 										var article = document.createElement('article')
 										article.dataset.courseNo = 'new'
 										article.className ='new-course-article'
@@ -160,6 +171,8 @@
 											 h3.appendChild(document.createTextNode("새로운 코스 등록하기"))
 										article.appendChild(h3)
 										target.appendChild(article)
+
+
 										</sec:authorize>
 									}
 								});

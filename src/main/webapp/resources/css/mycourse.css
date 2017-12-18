@@ -1,0 +1,60 @@
+.mycourse-image{
+  width: 270px;
+  height: 270px;
+  border-radius: 50%;
+  display: block;
+  margin: 10px auto 30px auto;
+}
+
+.mycourse-title {
+  margin-bottom: 20px;
+  font-size: 2.2em;
+  color: #616161;
+  display:inline-block;
+}
+
+.mycourse-description {
+  font-size:1em;
+  text-indent: 1em;
+  text-align: left;
+  line-height:2em;
+  color:#454545;
+  padding: 0 2%;
+}
+
+.mycourse-favorite {
+  color:#db1a1a;
+  font-size: 2em;
+  margin: 20px;
+}
+
+.mycourse-tags {
+  text-align: left;
+  padding:0 2%;
+}
+
+.mypage_content label:not([for=uploadFile]) {
+  float: left;
+  width: 100px;
+  text-align: right;
+  padding: 10px;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.mypage_content input[type=file] {display:block;}
+.mypage_content input[type=number],
+.mypage_content input[type=text] {
+  padding: 10px;
+  width: 443px;
+  margin: 15px;
+  display: block;
+}
+.mypage_content textarea {
+  width: 443px;
+  resize: none;
+  min-height: 100px;
+  padding: 10px;
+  margin-left: -15px;
+  line-height: 1.5em;
+}

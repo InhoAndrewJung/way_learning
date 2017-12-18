@@ -10,13 +10,13 @@ $(document).ready(function() {
 		url: "${pageContext.request.contextPath}/board/tech/likeStatus",
 		data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}",
 		success: function(result){
-		
-				 $('#boardGood'+result).attr('src' ,'/learning/resources/img/reply_heart.png') ;
-				 document.getElementById('cntBoardLike').style.color="white"
-		
+			if(result!=0){
+				$('#boardGood'+result).attr('src' ,'${pageContext.request.contextPath}/resources/img/reply_heart.png') ;
+				document.getElementById('cntBoardLike').style.color="white"
+			} else { document.getElementById('cntBoardLike').style.color="#c70310" }
 		}
 	});
-	
+
 	$('#btnReply').click(function(){
 		reply();
 	});
@@ -66,7 +66,7 @@ function boardLikeChange(boardNo){
 			 var src=$('#boardGood'+boardNo).attr('src') ;
 			 if(src =='/learning/resources/img/reply_heart.png'){
 				 $('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/empty_heart.png') ;
-				 document.getElementById('cntBoardLike').style.color="#ff2635"
+				 document.getElementById('cntBoardLike').style.color="#c70310"
 			 }else if(src =='/learning/resources/img/empty_heart.png'){
 				 $('#boardGood'+boardNo).attr('src' ,'/learning/resources/img/reply_heart.png') ;
 				 document.getElementById('cntBoardLike').style.color="white"
@@ -95,7 +95,12 @@ function shareSns(){
 <script>
 setTimeout(function(){
 	 var heightItem=$('#replyGood'+${replyNo}+'').offset().top;
-	$('body,html').animate({scrollTop:heightItem-100});
+	$('body,html').animate({scrollTop:heightItem-300});
+	var target= document.getElementById('replyGood'+${replyNo}).parentElement.parentElement
+	target.classList.add('reply-highlight')
+	setTimeout(function() {
+		target.classList.remove('reply-highlight')
+	},1000)
 
 },700) ;
 </script>
