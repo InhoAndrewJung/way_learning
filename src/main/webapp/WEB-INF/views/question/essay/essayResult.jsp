@@ -7,7 +7,7 @@
 	<div class="common-container">
 		<div class="move-boardList">
 			<div class="titleName" style="text-align:left;">Question ${questionNo}</div>
-			<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
+			<a href="${pageContext.request.contextPath}/question/essay/getList?keyword=${keyword}">
 				<img src="${pageContext.request.contextPath}/resources/img/list.png" id="image_list">
 			</a>
 		</div>
