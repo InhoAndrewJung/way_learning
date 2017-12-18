@@ -118,22 +118,7 @@
 		where user_id=#{userId}
 	</select>
 
-	<!-- <select id="selectAllRanking" parameterType="string" resultMap="answerResultRM">
-		select user_id ,sum(MY_CNT_SUBMIT) MY_CNT_SUBMIT, sum(MY_CNT_RIGHT)
-		MY_CNT_RIGHT,sum(MY_CNT_WRONG) MY_CNT_WRONG, round((
-		sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2) my_right_Percent ,
-		<if test="sorting == 'cntSubmit'">
-			rank() over(order by sum(MY_CNT_SUBMIT) desc)
-		</if>
-		<if test="sorting == 'cntRight'">
-			rank() over(order by sum(MY_CNT_RIGHT) desc)
-		</if>
-		<if test="sorting == 'RightPercent'">
-			rank() over(order by round(( sum(MY_CNT_RIGHT)/sum(MY_CNT_SUBMIT)*100),2)
-			desc)
-		</if>
-       as ranking from wl_answer_result group by user_id
-	</select> -->
+	
 	
 	
 	<select id="selectAllRanking" parameterType="string" resultMap="answerResultRM">
@@ -175,7 +160,7 @@ tbr.user_id=m.user_id and m.user_id=#{userId}
 UNION ALL
 select  qbr.board_no, qbr.reg_date, qb.writer, title, m.img_profile, m.activity,'qna' as table_name
 from wl_qna_board_recommend qbr, wl_qna_board qb,wl_member m where qbr.board_no=qb.board_no and
-qbr.user_id=m.user_id and m.user_id=#{userId} )a where a.reg_date   &gt; (sysdate -10) order by a.reg_date desc
+qbr.user_id=m.user_id and m.user_id=#{userId} )a where a.reg_date   &gt; (sysdate -3) order by a.reg_date desc
 
 
 
@@ -197,15 +182,15 @@ select qr.board_no,qrr.reply_no, qr.replyer ,
 (select title from wl_qna_board where board_no=qr.board_no)title,
 qrr.reg_date,m.img_profile,m.activity,'qna' as table_name
 from wl_qna_reply_recommend qrr, wl_qna_reply qr,wl_member m where qrr.reply_no=qr.reply_no and
-qrr.user_id=m.user_id and m.user_id=#{userId})a where a.reg_date  &gt; (sysdate -10) order by a.reg_date desc
+qrr.user_id=m.user_id and m.user_id=#{userId})a where a.reg_date  &gt; (sysdate -3) order by a.reg_date desc
 	</select>
 
 	<select id="selectMyLectureRecord" resultType="hashmap">
 
 select a.* ,
-(select count(-1) from wl_my_lecture_record where course_no=a.course_no) cnt_My_record,
+(select count(-1) from wl_my_lecture_record where course_no=a.course_no and  user_id=#{userId} ) cnt_My_record,
 (select count(-1) from wl_lecture_board where course_no=a.course_no) cnt_Course,
-greatest(round((select count(-1) from wl_my_lecture_record where course_no=a.course_no)/(select count(-1) from wl_lecture_board where course_no=a.course_no)*100,2),0) progress
+greatest(round((select count(-1) from wl_my_lecture_record where course_no=a.course_no and  user_id=#{userId} )/(select count(-1) from wl_lecture_board where course_no=a.course_no)*100,2),0) progress
 from (select lr.course_no,lc.course_name,lecture_order,lr.lecture_no,lecture_name,lb.author,lc.course_image 
 from wl_lecture_board lb, wl_my_lecture_record lr ,wl_course lc
 where lb.course_no=lr.course_no and lr.course_no=lc.course_no and lb.lecture_no=lr.LECTURE_NO  and user_id=#{userId} order by course_no, lecture_order) a

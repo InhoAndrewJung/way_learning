@@ -7,7 +7,6 @@
 function submit(){
 	document.getElementById("deleteForm").submit();
 }
-
 function toMain() {
 	 location.href = "${pageContext.request.contextPath}";
 }

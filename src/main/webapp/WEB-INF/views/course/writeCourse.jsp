@@ -87,5 +87,7 @@ function content_submit(){
 				<a href="${path}/">
 					<img src="${pageContext.request.contextPath}/resources/img/house.png" id="image_list">
 				</a>
+				
+				<a href="${pageContext.request.contextPath}/course/showMyCourseList">내코스보기</a><br><br>
 </div>
 </html>

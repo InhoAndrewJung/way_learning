@@ -16,9 +16,9 @@
 
 <div class="common-container">
 	<div class="move-boardList">
-		<div class="titleName" style="text-align:left;">Question ${gq.questionNo}</div>
+		<div class="question-titleName" style="text-align:left;">Question ${gq.questionNo}</div>
 		<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
-			<img src="${pageContext.request.contextPath}/resources/img/list.png" id="image_list">
+			<img src="${pageContext.request.contextPath}/resources/img/general-list.png" class="general-toList">
 		</a>
 	</div>
 	<table class=" common-card util-width-100" style="margin-bottom:40px;">
@@ -31,30 +31,26 @@
 					</script>
 			</tr>
 	</table>
-
+		<div class="common-container">
 			<form action="${path}/question/general/multipleChoiceResult" method="post">
 				<c:forEach var="row" items="${aList}" varStatus="status" begin="0">
-					<p>
+					<p style="text-align:left; padding-left: 30px;">
 						<input type="radio" name="answer" id="answer${status.index+1}" value="${status.index+1}" />
 						<label class="quiz-result-label" for="answer${status.index+1}">${row.answerChoice}</label>
 					</p>
 				</c:forEach>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				<input type="hidden" name="questionNo" value="${gq.questionNo}"/>
-				<span class="search_button" >
-					<input type="submit"  id="search_button" value="제출" style="border-radius:0px;"/>
-				</span>
+			
+				<input type="submit" value="제출" class="general-submit"/>		
 			</form>
-		
-
-		<div style="text-align:center;">
-			<img alt="삭제"
-				src="${pageContext.request.contextPath}/resources/img/delete_btn.jpg"
-				onclick="deleteQuestion()">
-			<img alt="수정"
-				src="${pageContext.request.contextPath}/resources/img/modify_btn.jpg"
-				onclick="updateQuestion()">
+			<div>
+			<hr style="margin:10px">
+			<input type="button" value="수정" onclick="updateQuestion()" class="general-edit">
+			<input type="button" value="삭제" onclick="deleteQuestion()" class="general-delete">
+			</div>
+		</div>
 </div>
-	</div>
+
 
 	<%@ include file="../../include/footer.jsp"%>
