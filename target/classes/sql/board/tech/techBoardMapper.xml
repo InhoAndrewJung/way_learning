@@ -41,30 +41,22 @@
 		<result property="cntBoardLike" column="cnt_board_like" />
 	</resultMap>
 
-	<select id="getBoardList" resultMap="boardListRM" parameterType="string">
-	
-	
-	   
-    SELECT board_no, title, cnt_view, reg_date, user_id, activity ,page,  cnt_reply,(select sum(cnt_board_like) from wl_tech_board where board_no=b.board_no)cnt_board_like, img_profile 
-		FROM (SELECT board_no, title,  cnt_view, reg_date, CEIL(rownum/20) page, user_id, activity,img_profile,cnt_reply
-		FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date, m.user_id,m.activity, m.img_profile,(select count(*) from wl_tech_reply  where board_no=tb.board_no) cnt_reply
-		FROM wl_tech_board tb, wl_member m
-	  <include refid="search" />
-      <if test="sorting == 'board_no'">order by board_no DESC</if> 
-      <if test="sorting == 'recommend'">order by cnt_board_like  DESC</if> 		
-      <if test="sorting == 're'">order by cnt_reply  DESC</if> 		
-     	
-      <if test="sorting == 'view'">order by cnt_view DESC</if> 
-		)
-		) b
-				where page=#{pageNo}
-		
-		
-		
-		
-	 	
-      
-	</select>
+<select id="getBoardList" resultMap="boardListRM" parameterType="string">
+
+SELECT board_no, title, cnt_view, reg_date, user_id, activity ,page,cnt_reply,(select sum(cnt_board_like) 
+FROM wl_tech_board where board_no=b.board_no)cnt_board_like, img_profile
+FROM (SELECT board_no, title, cnt_view, reg_date, CEIL(rownum/20) page,user_id, activity,img_profile,cnt_reply
+FROM (SELECT tb.board_no, title, cnt_view, tb.reg_date,
+m.user_id,m.activity, m.img_profile,(select count(*) from wl_tech_reply where board_no=tb.board_no) cnt_reply
+FROM wl_tech_board tb, wl_member m
+<include refid="search" />
+<if test="sorting == 'board_no'">order by board_no DESC</if>
+<if test="sorting == 'recommend'">order by cnt_board_like DESC</if>
+<if test="sorting == 're'">order by cnt_reply DESC</if>
+<if test="sorting == 'view'">order by cnt_view DESC</if>
+)) b  where page=#{pageNo}
+
+</select>
 	
 	
 	<select id="getTagList" resultType="hashmap" parameterType="string">
@@ -144,25 +136,18 @@ board_no,title,content,cnt_board_like
 	</delete>
 
 	
-	<sql id="search">
-		
-			<where>
-			 tb.writer=m.user_id  
-				
-				
-				
-				and 
-				(m.user_id like '%'||#{keyword}||'%' 
-				or content like '%'||#{keyword}||'%'
-				or title like '%'||#{keyword}||'%'
-				or tb.board_no in(select board_no from wl_tech_reply where replytext  like '%'||#{keyword}||'%')
-				or tb.board_no in(select board_no from wl_tech_tag where tag  like '%'||#{keyword}||'%')
-				)
-				
-
-			</where>
-
-	</sql>
+<sql id="search">
+<where>
+ tb.writer=m.user_id  	
+	and 
+	(m.user_id like '%'||#{keyword}||'%' 
+	or content like '%'||#{keyword}||'%'
+	or title like '%'||#{keyword}||'%'
+	or tb.board_no in(select board_no from wl_tech_reply where replytext  like '%'||#{keyword}||'%')
+	or tb.board_no in(select board_no from wl_tech_tag where tag  like '%'||#{keyword}||'%')
+	)
+</where>
+</sql>
 	
 	<!-- 좋아요 관련 로직 시작 -->
 	<select id="isBoardLike" resultType="int">
@@ -192,8 +177,8 @@ board_no,title,content,cnt_board_like
     select cnt_board_like from wl_tech_board where board_no=#{boardNo}
     </select>
     
-    <select id="selectAllRecommendNo" resultType="int">
-     select board_no from wl_tech_board_recommend where user_id=#{userId}
+    <select id="selectBoardRecommendNo" resultType="int">
+    select  nvl(max(board_no),0)board_no  from wl_tech_board_recommend where user_id=#{userId} and board_no=#{boardNo}
     
     </select>
     

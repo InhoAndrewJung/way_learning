@@ -8,7 +8,7 @@ $(document).ready(function() {
 	$.ajax({
 		type: "post",
 		url: "${path}/reply/tech/likeStatus",
-		data:"${_csrf.parameterName}=${_csrf.token}",
+		data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${list[0].boardNo}",
 		success: function(result){
 			$(result).each(function(index,item) {
 				 $('#replyGood'+item).attr('src' ,'/learning/resources/img/reply_heart.png');
@@ -18,7 +18,7 @@ $(document).ready(function() {
 	});
 });
 function replyLikeUp(replyNo){
-	var param="${_csrf.parameterName}=${_csrf.token}&likeStatus=likeUp&replyNo="+replyNo;
+	var param="${_csrf.parameterName}=${_csrf.token}&likeStatus=likeUp&boardNo=${list[0].boardNo}&replyNo="+replyNo;
 	$.ajax({
 		type: "post",
 		url: "${pageContext.request.contextPath}/reply/tech/changeLike",
@@ -43,7 +43,7 @@ function toggleBtnView(replyNo) {
   $('a[id=modifyCancel'+replyNo+']').toggle();
 }
 function showModify(replyNo){
-  var replytext=$('div[title=modifyResult'+replyNo+']').html();
+  var replytext=$('div[title=modifyResult'+replyNo+']').text();
   $('div[title=modifyResult'+replyNo+']').html('<textarea class="reply-textarea" id="reply'+replyNo+'" >'+replytext+' </textarea>');
   toggleBtnView(replyNo)
 }
@@ -60,7 +60,8 @@ function modify(replyNo){
   });
   toggleBtnView(replyNo)
 }
-function modifyCancel(replytext,replyNo){
+function modifyCancel(replyNo){
+	var replytext=$('#reply'+replyNo+'').val();
   toggleBtnView(replyNo)
   $('div[title=modifyResult'+replyNo+']').html(replytext);
 }
@@ -123,7 +124,7 @@ function deleteReply(replyNo,boardNo){
         <a  id="modifyDo${row.replyNo}" class="edit_done" onclick="modify('${row.replyNo}')">
           <img src="${path}/resources/img/replyEdit.png" class="image_replyEditDone">
         </a>
-        <a id="modifyCancel${row.replyNo}" class="modifyCancel" onclick="modifyCancel('${row.replytext}','${row.replyNo}')">
+        <a id="modifyCancel${row.replyNo}" class="modifyCancel" onclick="modifyCancel('${row.replyNo}')">
           <img src="${path}/resources/img/cancel.png" class="image_replyCancel">
         </a>
       </div>

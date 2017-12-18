@@ -72,7 +72,7 @@ public class ActivityAspect { //POJO
 	
 	
 	@Around("execution( * com.way.learning.service..*ServiceImpl.checkAnswer(..))")
-	public Object questionActivity(ProceedingJoinPoint pjp) throws Throwable{
+	public Object updateQuestionActivity(ProceedingJoinPoint pjp) throws Throwable{
 		
 			
 			Object result= pjp.proceed();

@@ -8,7 +8,7 @@ $(document).ready(function() {
 	$.ajax({
 		type: "post",
 		url: "${path}/reply/qna/likeStatus",
-		data:"${_csrf.parameterName}=${_csrf.token}",
+		data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${list[0].boardNo}",
 		success: function(result){
 			$(result).each(function(index,item) {
 				 $('#replyGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png') ;
@@ -17,9 +17,10 @@ $(document).ready(function() {
 	});
 });
 </script>
+
 <script>
 function replyLikeUp(replyNo){
-	var param="${_csrf.parameterName}=${_csrf.token}&likeStatus=likeUp&replyNo="+replyNo;
+	var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${list[0].boardNo}&likeStatus=likeUp&replyNo="+replyNo;
 	$.ajax({
 		type: "post",
 		url: "${pageContext.request.contextPath}/reply/qna/changeLike",
@@ -31,7 +32,7 @@ function replyLikeUp(replyNo){
 	});
 }
 function replyLikeDown(replyNo){
-	var param="${_csrf.parameterName}=${_csrf.token}&likeStatus=likeDown&replyNo="+replyNo;
+	var param="${_csrf.parameterName}=${_csrf.token}&boardNo=${list[0].boardNo}&likeStatus=likeDown&replyNo="+replyNo;
 	$.ajax({
 		type: "post",
 		url: "${pageContext.request.contextPath}/reply/qna/changeLike",
@@ -49,7 +50,7 @@ function toggleBtnView(replyNo) {
   $('a[id=modifyCancel'+replyNo+']').toggle();
 }
 function showModify(replyNo){
-	var replytext=$('div[title=modifyResult'+replyNo+']').html();
+	var replytext=$('div[title=modifyResult'+replyNo+']').text();
   $('div[title=modifyResult'+replyNo+']').html('<textarea class="replyEdit_writeText" rows="3" cols="85" id="reply'+replyNo+'" >'+replytext+' </textarea>');
   toggleBtnView(replyNo)
 }
@@ -62,14 +63,17 @@ function showModify(replyNo){
 				data: param,
 				success:function(result){
 					//alert("result:"+result.replyText);
-					$('span[title=modifyResult'+replyNo+']').html(result.replyText);
+					$('div[title=modifyResult'+replyNo+']').html(result.replyText);
 				}
 			});
 			toggleBtnView(replyNo)
 	}
-function modifyCancel(replytext,replyNo){
+function modifyCancel(replyNo){
+	 var replytext=$('#reply'+replyNo+'').val();
+	 alert("modifycancel:"+replytext)
   toggleBtnView(replyNo)
-  $('span[title=modifyResult'+replyNo+']').html(replytext);
+  
+  $('div[title=modifyResult'+replyNo+']').html(replytext);
 }
 function deleteReply(replyNo,boardNo){
   if(confirm("정말 삭제하시겠습니까?")){
@@ -131,7 +135,7 @@ function deleteReply(replyNo,boardNo){
           <a  id="modifyDo${row.replyNo}" class="edit_done" onclick="modify('${row.replyNo}')">
             <img src="${path}/resources/img/replyEdit.png" class="image_replyEditDone">
           </a>
-          <a id="modifyCancel${row.replyNo}" class="modifyCancel" onclick="modifyCancel('${row.replytext}','${row.replyNo}')">
+          <a id="modifyCancel${row.replyNo}" class="modifyCancel" onclick="modifyCancel('${row.replyNo}')">
             <img src="${path}/resources/img/cancel.png" class="image_replyCancel">
           </a>
         </div>

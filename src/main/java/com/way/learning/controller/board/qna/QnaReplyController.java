@@ -64,13 +64,13 @@ public class QnaReplyController {
 	
 	@ResponseBody
 	@RequestMapping("changeLike")
-	public int changeLike(int replyNo, String likeStatus)throws Exception{
+	public int changeLike(int replyNo, String likeStatus,int boardNo)throws Exception{
 		
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		
 		
-		qnaReplyService.isReplyLike(mvo.getUserId(), replyNo,likeStatus);
+		qnaReplyService.isReplyLike(mvo.getUserId(), replyNo,likeStatus,boardNo);
 		int cnt=qnaReplyService.selectCntReplyLike(replyNo);
 		return cnt;
 	}
@@ -79,13 +79,13 @@ public class QnaReplyController {
 	
 	@ResponseBody
 	@RequestMapping("likeStatus")
-	public List<Integer> likeStatus()throws Exception{
+	public List<Integer> likeStatus(int boardNo)throws Exception{
 		
 		
 		System.out.println("likestatus 컨트롤러!:");
 		
 		
-		List<Integer> replyGoodNoList=qnaReplyService.selectAllRecommendNo();
+		List<Integer> replyGoodNoList=qnaReplyService.selectAllRecommendNo(boardNo);
 		
 		return replyGoodNoList;
 	}

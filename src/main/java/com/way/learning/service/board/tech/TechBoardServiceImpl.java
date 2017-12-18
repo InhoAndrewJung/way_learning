@@ -125,9 +125,9 @@ public class TechBoardServiceImpl implements TechBoardService{
 	}
 	
 	@Override
-	public List<Integer> selectAllRecommendNo(String userId) throws SQLException {
+	public int selectBoardRecommendNo(String userId, int boardNo) throws Exception {
 
-		return techBoardDao.selectAllRecommendNo(userId);
+		return techBoardDao.selectBoardRecommendNo(userId,boardNo);
 		
 	}
 

@@ -64,26 +64,26 @@ public class TechReplyController {
 	
 	@ResponseBody
 	@RequestMapping("changeLike")
-	public int changeLike(int replyNo)throws Exception{
+	public int changeLike(int replyNo ,int boardNo)throws Exception{
 		
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		
 		
-		techReplyService.isReplyLike(mvo.getUserId(), replyNo);
+		techReplyService.isReplyLike(mvo.getUserId(), replyNo,boardNo);
 		int cnt=techReplyService.selectCntReplyLike(replyNo);
 		return cnt;
 	}
 	
 	@ResponseBody
 	@RequestMapping("likeStatus")
-	public List<Integer> likeStatus()throws Exception{
+	public List<Integer> likeStatus(int boardNo)throws Exception{
 		
 		
 		System.out.println("likestatus 컨트롤러!:");
 		
 		
-		List<Integer> replyGoodNoList=techReplyService.selectAllRecommendNo();
+		List<Integer> replyGoodNoList=techReplyService.selectAllRecommendNo(boardNo);
 		
 		return replyGoodNoList;
 	}

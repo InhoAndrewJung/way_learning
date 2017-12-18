@@ -67,7 +67,7 @@ public class TechReplyServiceImpl implements TechReplyService{
 	
 	
 	@Transactional
-	public int isReplyLike(String userId, int replyNo) throws SQLException {
+	public int isReplyLike(String userId, int replyNo,int boardNo) throws SQLException {
 		int result=techReplyDao.isReplyLike(userId, replyNo);
 		
 		System.out.println("서비스 isReplyLike userId:"+userId);
@@ -76,13 +76,13 @@ public class TechReplyServiceImpl implements TechReplyService{
 		int action=0;
 		
 			if(result==0){
-				techReplyDao.insertReplyLike(userId, replyNo);
+				techReplyDao.insertReplyLike(userId, replyNo,boardNo);
 				action=techReplyDao.increaseCntReplyLike(replyNo);
 			}
 			
 		
 			else if(result==1){
-				techReplyDao.deleteReplyLike(userId, replyNo);
+				techReplyDao.deleteReplyLike(userId, replyNo,boardNo);
 			action=techReplyDao.decreaseCntReplyLike(replyNo);
 			}
 			
@@ -99,9 +99,9 @@ public class TechReplyServiceImpl implements TechReplyService{
 	}
 	
 	@Override
-	public List<Integer> selectAllRecommendNo() throws SQLException {
+	public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException {
 
-		return techReplyDao.selectAllRecommendNo();
+		return techReplyDao.selectAllRecommendNo(boardNo);
 		
 	}
 	

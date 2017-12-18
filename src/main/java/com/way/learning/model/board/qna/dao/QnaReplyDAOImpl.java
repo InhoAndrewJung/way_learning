@@ -87,22 +87,24 @@ public class QnaReplyDAOImpl implements QnaReplyDAO {
 		
 		
 		@Override
-		public void insertReplyLike(String userId, int replyNo) throws SQLException {
+		public void insertReplyLike(String userId, int replyNo,int boardNo) throws SQLException {
 			Map<String,Object> map = new HashMap<String,Object>();
 			
 			map.put("userId", userId);
 			map.put("replyNo", replyNo);
+			map.put("boardNo", boardNo);
 			
 			 sqlSession.insert("qnaReplyMapper.insertReplyLike", map);
 			
 		}
 		
 		@Override
-		public void deleteReplyLike(String userId, int replyNo) throws SQLException {
+		public void deleteReplyLike(String userId, int replyNo,int boardNo) throws SQLException {
 			Map<String,Object> map = new HashMap<String,Object>();
 			
 			map.put("userId", userId);
 			map.put("replyNo", replyNo);
+			map.put("boardNo", boardNo);
 			
 			 sqlSession.delete("qnaReplyMapper.deleteReplyLike", map);
 			
@@ -138,9 +140,9 @@ public class QnaReplyDAOImpl implements QnaReplyDAO {
 		
 		
 		@Override
-		public List<Integer> selectAllRecommendNo() throws SQLException {
+		public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException {
 
-			return sqlSession.selectList("qnaReplyMapper.selectAllRecommendNo");
+			return sqlSession.selectList("qnaReplyMapper.selectAllRecommendNo",boardNo);
 			
 		}
 

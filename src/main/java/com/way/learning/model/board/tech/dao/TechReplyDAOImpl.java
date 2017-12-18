@@ -87,22 +87,24 @@ public class TechReplyDAOImpl implements TechReplyDAO {
 		
 		
 		@Override
-		public void insertReplyLike(String userId, int replyNo) throws SQLException {
+		public void insertReplyLike(String userId, int replyNo,int boardNo) throws SQLException {
 			Map<String,Object> map = new HashMap<String,Object>();
 			
 			map.put("userId", userId);
 			map.put("replyNo", replyNo);
+			map.put("boardNo", boardNo);
 			
 			 sqlSession.insert("techReplyMapper.insertReplyLike", map);
 			
 		}
 		
 		@Override
-		public void deleteReplyLike(String userId, int replyNo) throws SQLException {
+		public void deleteReplyLike(String userId, int replyNo,int boardNo) throws SQLException {
 			Map<String,Object> map = new HashMap<String,Object>();
 			
 			map.put("userId", userId);
 			map.put("replyNo", replyNo);
+			map.put("boardNo", boardNo);
 			
 			 sqlSession.delete("techReplyMapper.deleteReplyLike", map);
 			
@@ -138,9 +140,9 @@ public class TechReplyDAOImpl implements TechReplyDAO {
 		
 		
 		@Override
-		public List<Integer> selectAllRecommendNo() throws SQLException {
+		public List<Integer> selectAllRecommendNo(int boardNo) throws SQLException {
 
-			return sqlSession.selectList("techReplyMapper.selectAllRecommendNo");
+			return sqlSession.selectList("techReplyMapper.selectAllRecommendNo",boardNo);
 			
 		}
 

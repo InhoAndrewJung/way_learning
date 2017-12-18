@@ -431,6 +431,7 @@ width:100%;height:100%;left:0;top:0; background:black;opacity:0.7;
 
 
 .subnav_item article {padding:10px;border-bottom:1px #697889 solid;cursor:pointer;position: relative;}
+.subnav_item article:nth-last-of-type(1) {border-bottom: 2px #1b3d62 solid;}
 .subnav_item h4, .si_course p { text-align: left; font-size:0.8em; padding:0; margin:0;}
 .subnav_item h3 {font-size:1em;margin:0;}
 .subnav_item article:not(.new-course-article)::before { content:"> "; width:0px; transition: width 0.2s ease 0s; overflow:hidden;
