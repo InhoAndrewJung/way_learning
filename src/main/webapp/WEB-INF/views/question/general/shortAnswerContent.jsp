@@ -19,7 +19,7 @@
 	<div class="move-boardList">
 		<div class="question-titleName" style="text-align:left;">Question ${gq.questionNo}</div>
 		<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
-			<img src="${pageContext.request.contextPath}/resources/img/general-list.png" class="">
+			<img src="${pageContext.request.contextPath}/resources/img/general-list.png" class="general-toList">
 		</a>
 	</div>
 	<table class=" common-card util-width-100" style="margin-bottom:40px;">

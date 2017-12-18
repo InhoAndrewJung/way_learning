@@ -8,7 +8,7 @@
 	<div class="move-boardList">
 		<div class="general-titleName">Question ${questionNo}</div>
 		<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
-			<img src="${pageContext.request.contextPath}/resources/img/list.png" id="image_list">
+			<img src="${pageContext.request.contextPath}/resources/img/general-list.png" class="general-toList">
 		</a>
 	</div>
 	<table class="util-width-100">
