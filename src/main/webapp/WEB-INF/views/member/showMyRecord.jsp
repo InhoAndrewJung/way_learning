@@ -10,7 +10,6 @@
 				<img src="${pageContext.request.contextPath}/resources/upload/${mvo.imgProfile}" id="myrecord-image_profile">
 				<div class="userList-info">
 					<a class="myrecord-userId">${mvo.userId}</a>
-
 					<div class="myrecord-activity">
 						<span class="fa fa-graduation-cap"></span>
 						${mvo.activity}
@@ -39,37 +38,29 @@
       </div>
     </section>
   </div>
-	<div class="container-body">
-			<div class="head">
-				<div class="myrecord-title">
-					<span class="myrecord-rank">
-						<div class="rank_no">${myRanking}</div>
-						<div class="rank_text">Rank</div>
-					 </span>
-					<span class="total">
-						<div class="total_no">${answerResult.myCntSubmit}</div>
-						<div class="total_text">Total</div>
+			<div class="myrecord">
+				<span class="myrecord-rank">
+					<div class="myrecord-no">${myRanking}</div>
+					<div class="myrecord-text">Rank</div>
+				 </span>
+				<span class="myrecord-total">
+					<div class="myrecord-no">${answerResult.myCntSubmit}</div>
+					<div class="myrecord-text">Total</div>
+				</span>
+				<span class="myrecord-correct">
+						<div class="myrecord-no">${answerResult.myCntRight}</div>
+						<div class="myrecord-text">Correct</div>
 					</span>
 
-				</div>
-			</div>
-			<div class="body">
-				<span class="correct">
-						<div class="correct_no">${answerResult.myCntRight}</div>
-						<div class="correct_text">Correct</div>
-					</span>
-
-			 	<span class="wrong">
-						<div class="wrong_no">${answerResult.myCntWrong}</div>
-						<div class="wrong_text">Wrong</div>
+			 	<span class="myrecord-wrong">
+						<div class="myrecord-no">${answerResult.myCntWrong}</div>
+						<div class="myrecord-text">Wrong</div>
 				</span>
 
-				<span class="error">
-						<div class="error_no">${answerResult.myCntError}</div>
-						<div class="error_text">Error</div>
+				<span class="myrecord-error">
+						<div class="myrecord-no">${answerResult.myCntError}</div>
+						<div class="myrecord-text">Error</div>
 				</span>
-
-
 			</div>
 
 
@@ -126,16 +117,16 @@ setTimeout(drawProgress, 50)
 			<div class="container-footer">
 				<hr>
 				<div class="detail">
-					<div class="detail_correct">
-						<span class="detail_correct-text">Complete</span><br>
+					<div class="detail-correct">
+						<div>Complete</div>
 						<c:forEach var="row" items="${rightList }" varStatus="status">
-						<span class="detail_correct-no"> ${row} </span>
+						<span> ${row} </span>
 						 <c:if test = "${!status.last}"></c:if></c:forEach>
 					</div>
-					<div class="detail_wrong">
-						<span class="detail_wrong-text">Not Yet!</span><br>
+					<div class="detail-wrong">
+						<div>Not Yet!</div>
 						 <c:forEach var="row" items="${wrongList }" varStatus="status">
-						 <span class="detail_wrong-no">${row}</span>
+						 <span>${row}</span>
 						 <c:if test = "${!status.last}"></c:if></c:forEach>
 					</div>
 				</div>

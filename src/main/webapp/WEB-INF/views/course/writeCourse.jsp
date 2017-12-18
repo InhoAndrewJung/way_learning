@@ -3,29 +3,24 @@
 
 <%@ include file="../include/common.jsp"%>
 <%@ include file="../include/header.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${path}/resources/css/board.css?ver=2">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<title>Insert title here</title>
+<link rel="stylesheet" href="${path}/resources/css/board.css?ver=2">
+
 <script type="text/javascript">
 function content_submit(){
 	var f=document.write_form;
 	if(f.courseName.value==""){
 		alert("코스명을 입력하세요!");
 		f.courseName.focus();
-		return; 
-	}	
-	
+		return;
+	}
+
 	if(f.tags.value==""){
 		alert("태그를 입력하세요!");
 		f.tags.focus();
-		return; 
-	}	
-	
+		return;
+	}
+
 	/* if(f.content.value==""){
 		alert("내용을 입력하세요!");
 		f.content.focus();
@@ -33,7 +28,7 @@ function content_submit(){
 	} */
 	f.submit();
 }
- 
+
 </script>
 
 <style>
@@ -46,9 +41,6 @@ function content_submit(){
 }
 
 </style>
-
-</head>
-
 
 
 <div align="center">
@@ -70,12 +62,12 @@ function content_submit(){
 
 			<tr class="table-center" style="height:40px">
 				<td nowrap>코스 설명</td>
-				<td><input  class="input-blue" type="text" name="description" maxlength="200" size="100" 
+				<td><input  class="input-blue" type="text" name="description" maxlength="200" size="100"
 					placeholder="코스 설명을 입력해주세요"></td>
 			</tr>
 			<tr class="table-center" style="height:40px">
 				<td nowrap> 태  그</td>
-				<td><input  class="input-blue" type="text" name="tags" maxlength="200" size="100" 
+				<td><input  class="input-blue" type="text" name="tags" maxlength="200" size="100"
 					placeholder="코스 태그를 입력해주세요"></td>
 			</tr>
 			<tr class="table-center" style="height:40px">
@@ -83,7 +75,7 @@ function content_submit(){
 				<td><input type="file" name="uploadFile" ></td>
 			</tr>
 
-		
+
 			<tr class="table-center"  style="height:40px">
 				<td colspan="2"><img
 						src="${pageContext.request.contextPath}/resources/img/check.png"
