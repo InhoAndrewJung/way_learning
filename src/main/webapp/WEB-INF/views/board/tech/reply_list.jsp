@@ -12,7 +12,6 @@ $(document).ready(function() {
 		success: function(result){
 			$(result).each(function(index,item) {
 				 $('#replyGood'+item).attr('src' ,'/learning/resources/img/reply_heart.png');
-				 $('#cntReplyLike'+item).attr('style', 'color:white');
 			});
 		}
 	});
@@ -28,10 +27,8 @@ function replyLikeUp(replyNo){
 			var src=$('#replyGood'+replyNo).attr('src') ;
 			if(src =='/learning/resources/img/reply_heart.png'){
 			 $('#replyGood'+replyNo).attr('src' ,'/learning/resources/img/empty_heart.png') ;
-			 $('#cntReplyLike'+replyNo).attr('style', 'color:#ff2635');
 			 } else if(src =='/learning/resources/img/empty_heart.png'){
 				 $('#replyGood'+replyNo).attr('src' ,'/learning/resources/img/reply_heart.png') ;
-				 $('#cntReplyLike'+replyNo).attr('style', 'color:white');
 			 }
 		}
 	});

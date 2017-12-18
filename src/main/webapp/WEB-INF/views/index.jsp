@@ -153,6 +153,7 @@
 		event.stopPropagation()
 		var courseNo = event.target.dataset.courseNo
 		if(courseNo == 'new') location.href="${path}/course/writeCourse"
+		else if(courseNo == 'my') location.href="${path}/course/showMyCourseList"
 		else location.href="${path}/lectureBoard/showLectureList?courseNo="+courseNo
 	}
 	function quiz(quiz){
@@ -219,7 +220,17 @@
 									}
 									//관리자와 강사만 코스추가 가능하게 변경함
 								<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_AUTHOR')">
-									 var target = document.getElementById('si_course')
+									var target = document.getElementById('si_course')
+									var courseMgnArticle = document.createElement('article')
+ 									courseMgnArticle.dataset.courseNo = 'my'
+ 									courseMgnArticle.className ='my-course-article'
+ 									courseMgnArticle.addEventListener('click', course)
+ 										 var h32 = document.createElement('h3')
+ 										 h32.dataset.courseNo = 'my'
+ 										 h32.appendChild(document.createTextNode("내 코스 관리"))
+ 									courseMgnArticle.appendChild(h32)
+ 									target.appendChild(courseMgnArticle)
+
 									var article = document.createElement('article')
 									article.dataset.courseNo = 'new'
 									article.className ='new-course-article'
@@ -228,7 +239,7 @@
 										 h3.dataset.courseNo = 'new'
 										 h3.appendChild(document.createTextNode("새로운 코스 등록하기"))
 									article.appendChild(h3)
-									target.appendChild(article) 
+									target.appendChild(article)
 									</sec:authorize>
 								}
 							});
@@ -315,7 +326,7 @@
         <div class="course_img" data-course-no="new"></div>
         <h3 data-course-no="new">내 코스 등록하기</h3>
         <hr data-course-no="new" />
-        <p data-course-no="new" class="course_desc" style="line-height:80px;height: 69px;;font-size:0.8em">
+        <p data-course-no="new" class="course_desc" style="line-height:80px;font-size:1em">
           자신의 코스를 등록해보세요!
         </p>
       </li>
@@ -338,17 +349,12 @@
 						p.dataset.courseNo = courseObj.courseNo
 						p.className = "course_desc"
 						p.appendChild(document.createTextNode(courseObj.description))
-						var span = document.createElement('span')
-						span.dataset.courseNo = courseObj.courseNo
-						span.className = "course_scale"
-						span.appendChild(document.createTextNode(new Date(courseObj.regDate).toDateString()))
 					li.dataset.courseNo = courseObj.courseNo
 					li.addEventListener('click', course)
 					li.appendChild(courseImg)
 					li.appendChild(title)
 					li.appendChild(hr)
 					li.appendChild(p)
-					li.appendChild(span)
 
 					target.appendChild(li)
 				}
