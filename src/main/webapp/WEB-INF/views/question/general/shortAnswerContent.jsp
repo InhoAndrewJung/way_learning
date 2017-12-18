@@ -17,9 +17,9 @@
 </script>
 <div class="common-container">
 	<div class="move-boardList">
-		<div class="titleName" style="text-align:left;">Question ${gq.questionNo}</div>
+		<div class="question-titleName" style="text-align:left;">Question ${gq.questionNo}</div>
 		<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
-			<img src="${pageContext.request.contextPath}/resources/img/list.png" id="image_list">
+			<img src="${pageContext.request.contextPath}/resources/img/general-list.png" class="general-toList">
 		</a>
 	</div>
 	<table class=" common-card util-width-100" style="margin-bottom:40px;">
@@ -35,23 +35,22 @@
 
 	<div class="common-container">
 		<form action="${path}/question/general/shortAnswerResult" method="post">
-			<input type="text" name="answer" id="answer" placeholder="정답을 입력하세요" class="quiz-result-input common-card util-width-100" required="required"/>
-			<input type="submit" id="search_button" value="제출" style="border-radius:0px;"/>
+			<input type="text" name="answer" id="answer" placeholder="정답을 입력하세요" class="quiz-result-input" required="required"/>
+			<input type="submit" value="제출" class="general-submit">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<input type="hidden" name="questionNo" value="${gq.questionNo}">
 		</form>
+		<hr style="margin:10px">
+		<div>
+		<input type="button" value="수정" onclick="updateQuestion()" class="general-edit">
+		<input type="button" value="삭제" onclick="deleteQuestion()" class="general-delete">
+		
+		</div>
 	</div>
 
 
 
-	<div style="text-align:center;">
-		<img alt="삭제"
-			src="${pageContext.request.contextPath}/resources/img/delete_btn.jpg"
-			onclick="deleteQuestion()">
-		<img alt="수정"
-			src="${pageContext.request.contextPath}/resources/img/modify_btn.jpg"
-			onclick="updateQuestion()">
-	</div>
+	
 
 </div>
 

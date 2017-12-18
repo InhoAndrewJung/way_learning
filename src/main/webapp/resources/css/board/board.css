@@ -21,7 +21,7 @@ a:link, a:visited  {
 }
 
 .titleName{
-	font-size: 30px;
+	font-size: 35px;
 	color: #404040;
 	font-weight: bold;
 }
@@ -51,6 +51,7 @@ a:link, a:visited  {
 	width: 40%;
 	display: inline-block;
 	padding:10px 10px;
+	font-size: 15px;
 }
 
 .search_button a{
@@ -65,6 +66,7 @@ a:link, a:visited  {
 	padding: 5px 8px 5px 8px;
 	font-weight: bold;
 	color: #ffffff;
+	font-size: 15px;
 }
 
 .search_section{
@@ -804,6 +806,14 @@ hr {
 	text-align: right;
 	margin-top: 50px;
 }
+.question-titleName{
+	font-size: 35px;
+    color: #404040;
+    font-weight: bold;
+    border-left: 5px solid #14a7cc;
+    padding-left: 15px;
+}
+
 .question-textarea {
 	font-size:1.2em;
 	width:100%;
@@ -820,7 +830,12 @@ hr {
 }
 .quiz-result-input {
 	font-size: 1em;
-	padding: 10px;
+	width: 94% !important;
+	padding: 15px 3%;
+	border-radius: 7px;
+	border: 1px solid #e5e9f2;
+	background-color: #fff;
+	border-collapse: collapse;
 }
 .quiz-result-input:focus {outline: none;}
 
@@ -830,4 +845,101 @@ hr {
 	font-size: 1em;
 	text-align: right;
 	color: #107588;
+}
+
+
+/* 제너럴 문제제출 */
+.general-toList{
+	border-radius: 7px;
+    background: #14a7cc;
+    width: 55px;
+    color: #fefefe;
+    border: 0px;
+    cursor: pointer;
+    padding: 0px 10px;
+}
+
+.common-container{
+	text-align: center;
+	
+}
+
+.general-submit{
+	border-radius: 7px;
+	font-size: 17px;
+	font-weight: bold;
+	margin-top: 15px;
+	background: #2196f3;
+	width: 95%;
+	padding: 10px 10px 10px 10px;
+	color: #fefefe;
+	border: 0px;
+	cursor: pointer;
+	padding: 14px 32px;
+}
+
+.general-edit{
+	border-radius: 7px;
+	font-size: 17px;
+	font-weight: bold;
+	margin-top: 15px;
+	background: #3e899c;
+	width: 95%;
+	padding: 10px 10px 10px 10px;
+	color: #fefefe;
+	border: 0px;
+	cursor: pointer;
+	padding: 14px 32px;
+}
+.general-delete{
+	border-radius: 7px;
+	font-size: 17px;
+	font-weight: bold;
+	margin-top: 15px;
+	background: #ed4d3c;
+	width: 95%;
+	padding: 10px 10px 10px 10px;
+	color: #fefefe;
+	border: 0px;
+	cursor: pointer;
+	padding: 14px 32px;
+}
+/* 제너럴 정답 */
+
+.general-titleName{
+	font-size: 35px;
+    display: inline-block;
+    font-weight: bold;
+    float: left;
+}
+.general-answer{
+	text-align: center;
+}
+.general-image{
+	 background: url(../../img/goodjob.png) no-repeat center center/contain;
+	 width: 300px;
+	 height: 150px;
+	 display: inline-block;
+}
+.general-msg{
+	font-size: 35px;
+    color: #446fec;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+}
+.general-wrongAnswer{
+	text-align: center;
+}
+.general-wrongAnswer .general-image{
+	background: url(../../img/crying.png) no-repeat center center/contain;
+}
+
+.general-wrongAnswer .general-msg{
+	color: #fbbc05;
+}
+
+.general-imgBack{
+	width: 100px;
+	height: 100px;
 }
