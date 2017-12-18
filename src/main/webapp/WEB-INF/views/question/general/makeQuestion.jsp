@@ -42,15 +42,15 @@
 
 
 </script>
-
-<div class="container">
+<body>
+<div class="common-container">
 <form action="${path}/question/general/insertQuestion" method="post">
 <div style="text-align:center;">
-<label for="category">객관식</label><input type="radio" name="category" id="category1" value="multipleChoice" onchange="show()" checked="checked"/>
-<label for="category">주관식</label><input type="radio" name="category" id="category2" value="shortAnswer" onchange="hide()" /><br>
+<input type="radio" name="category" id="category1" value="multipleChoice" onchange="show()" checked="checked"/><label for="category1">객관식</label>
+<input type="radio" name="category" id="category2" value="shortAnswer" onchange="hide()" /><label for="category2">주관식</label>
 </div>
-<table class="boardTable" style="text-align: center">
-			<tr class="table-center" style="height:40">
+<table class="boardTable" style="text-align: center;">
+			<tr class="table-center" style="height:20">
 				<td><label for="answerChoice">제목:<input type="text" name="title" id="title" /><br></label></td>
 			</tr>
 			<tr class="table-center" style="height:40">
@@ -100,5 +100,5 @@
 <a href="${path}/"> 메인페이지로 이동</a>
 </div>
 </div>
-
+</body>
 <%@ include file="../../include/footer.jsp"%>

@@ -15,11 +15,12 @@
 	}
 
 </script>
+<body>
 <div class="common-container">
 	<div class="move-boardList">
 		<div class="question-titleName" style="text-align:left;">Question ${gq.questionNo}</div>
 		<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
-			<img src="${pageContext.request.contextPath}/resources/img/general-list.png" class="">
+			<img src="${pageContext.request.contextPath}/resources/img/general-list.png" class="general-toList">
 		</a>
 	</div>
 	<table class=" common-card util-width-100" style="margin-bottom:40px;">
@@ -33,7 +34,7 @@
 			</tr>
 	</table>
 
-	<div class="common-container">
+	<div class="general-container">
 		<form action="${path}/question/general/shortAnswerResult" method="post">
 			<input type="text" name="answer" id="answer" placeholder="정답을 입력하세요" class="quiz-result-input" required="required"/>
 			<input type="submit" value="제출" class="general-submit">
@@ -53,5 +54,5 @@
 	
 
 </div>
-
+</body>
 <%@ include file="../../include/footer.jsp"%>

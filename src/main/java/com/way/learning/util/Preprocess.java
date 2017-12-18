@@ -24,7 +24,7 @@ public class Preprocess {
 			code=code.replace("TC"+(tcNo-1),"TC"+tcNo );
 		}
 		
-		//Change to compatible unicode for iphone, ipad
+		//Change  unicode for ensuring compatible  for iphone, ipad
 		if(code.contains("“")) {
 			code = code.replaceAll("“", "\"");
 		}

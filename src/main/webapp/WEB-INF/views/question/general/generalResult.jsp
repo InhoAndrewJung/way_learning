@@ -3,12 +3,12 @@
 <%@ include file="../../include/header.jsp"%>
 
 <link rel="stylesheet" href="${path}/resources/css/board/board.css?ver=2">
-
+<body>
 <div class="common-container">
 	<div class="move-boardList">
 		<div class="general-titleName">Question ${questionNo}</div>
 		<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
-			<img src="${pageContext.request.contextPath}/resources/img/list.png" id="image_list">
+			<img src="${pageContext.request.contextPath}/resources/img/general-list.png" class="general-toList">
 		</a>
 	</div>
 	<table class="util-width-100">
@@ -18,7 +18,7 @@
 						<c:when test="${result =='1'}">
 						<div class="general-answer">
 							<span class="general-image"></span><br><br>
-							<span class="general-msg">GOOD JOB, BRO!<br>
+							<span class="general-msg">GOOD JOB, BRO :-)<br>
 								정답입니다!
 							</span>							
 						</div>	
@@ -62,5 +62,5 @@
 
 
 	</div>
-
+</body>
 <%@ include file="../../include/footer.jsp"%>
