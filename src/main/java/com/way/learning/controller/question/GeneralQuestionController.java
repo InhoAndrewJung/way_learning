@@ -101,9 +101,8 @@ public class GeneralQuestionController {
 		System.out.println("questionNo:" + questionNo);
 		System.out.println("answer:" + answer);
 		int result = questionService.checkAnswer(questionNo, answer);
-
+		System.out.println("multipleChoiceResult result:" + result);
 		mav.addObject("result", result);
-
 		mav.addObject("questionNo", questionNo);
 		mav.addObject("multipleChoice", "multipleChoice");
 		mav.setViewName("/question/general/generalResult");

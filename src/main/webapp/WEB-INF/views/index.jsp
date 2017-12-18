@@ -217,7 +217,9 @@
 										article.appendChild(p)
 										target.appendChild(article)
 									}
-									var target = document.getElementById('si_course')
+									//관리자와 강사만 코스추가 가능하게 변경함
+								<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_AUTHOR')">
+									 var target = document.getElementById('si_course')
 									var article = document.createElement('article')
 									article.dataset.courseNo = 'new'
 									article.className ='new-course-article'
@@ -226,7 +228,8 @@
 										 h3.dataset.courseNo = 'new'
 										 h3.appendChild(document.createTextNode("새로운 코스 등록하기"))
 									article.appendChild(h3)
-									target.appendChild(article)
+									target.appendChild(article) 
+									</sec:authorize>
 								}
 							});
 						});
@@ -306,14 +309,17 @@
 
 	<section class="main_block">
     <ul class="courses" id="courses">
+    <!-- 강사와 관리자만 강의 등록가능함 -->
+   <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_AUTHOR')">
       <li class="course new_course" onclick="course()" data-course-no="new">
         <div class="course_img" data-course-no="new"></div>
         <h3 data-course-no="new">내 코스 등록하기</h3>
         <hr data-course-no="new" />
-        <p data-course-no="new" class="course_desc" style="line-height:80px;height: 69px;">
+        <p data-course-no="new" class="course_desc" style="line-height:80px;height: 69px;;font-size:0.8em">
           자신의 코스를 등록해보세요!
         </p>
       </li>
+      </sec:authorize>
 			<script type="text/javascript">
 				function makeCourseCard(courseObj) {
 					var target=document.getElementById('courses')

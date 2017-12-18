@@ -150,15 +150,15 @@ public class TechBoardController {
 
 	@ResponseBody
 	@RequestMapping("likeStatus")
-	public List<Integer> likeStatus()throws Exception{
+	public int likeStatus(int boardNo)throws Exception{
 
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 
 
-		List<Integer> noList=techBoardService.selectAllRecommendNo(mvo.getUserId());
+		int bno=techBoardService.selectBoardRecommendNo(mvo.getUserId(),boardNo);
 
-		return noList;
+		return bno;
 	}
 
 	@RequestMapping("delete")

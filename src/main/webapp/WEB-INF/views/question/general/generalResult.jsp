@@ -15,7 +15,7 @@
 			<tr>
 				<td style="padding:30px">
 					<c:choose>
-						<c:when test="${result}">
+						<c:when test="${result =='1'}">
 						<div class="general-answer">
 							<span class="general-image"></span><br><br>
 							<span class="general-msg">GOOD JOB, BRO!<br>

@@ -50,7 +50,6 @@
 			<input type="button" value="삭제" onclick="deleteQuestion()" class="general-delete">
 			</div>
 		</div>
-		
 </div>
 
 

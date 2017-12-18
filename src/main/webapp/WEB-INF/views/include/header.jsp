@@ -149,6 +149,7 @@
 											article.appendChild(p)
 											target.appendChild(article)
 										}
+										<sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_AUTHOR')">
 										var target = document.getElementById('si_course')
 										var article = document.createElement('article')
 										article.dataset.courseNo = 'new'
@@ -159,6 +160,7 @@
 											 h3.appendChild(document.createTextNode("새로운 코스 등록하기"))
 										article.appendChild(h3)
 										target.appendChild(article)
+										</sec:authorize>
 									}
 								});
 							});

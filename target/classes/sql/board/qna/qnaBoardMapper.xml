@@ -200,8 +200,8 @@ board_no,title,content,cnt_board_like
     select cnt_board_like from wl_qna_board where board_no=#{boardNo}
     </select>
     
-    <select id="selectAllRecommendNo" resultType="int">
-     select board_no from wl_qna_board_recommend where user_id=#{userId}
+    <select id="selectBoardRecommendNo" resultType="int">
+      select  nvl(max(board_no),0)board_no  from wl_qna_board_recommend where user_id=#{userId} and board_no=#{boardNo}
     
     </select>
     

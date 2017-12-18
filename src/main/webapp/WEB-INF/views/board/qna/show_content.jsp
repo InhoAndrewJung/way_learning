@@ -7,17 +7,18 @@ $(document).ready(function() {
 	listReply(); //댓글 목록
 	$.ajax({
 		type: "post",
-		url: "${pageContext.request.contextPath}/board/tech/likeStatus",
-		data:"${_csrf.parameterName}=${_csrf.token}",
+		url: "${pageContext.request.contextPath}/board/qna/likeStatus",
+		data:"${_csrf.parameterName}=${_csrf.token}&boardNo=${requestScope.bvo.boardNo}",
 			success: function(result){
-				$(result).each(function(index,item) {
-					 $('#boardGood'+item).attr('src' ,'/learning/resources/img/arrowUpGood.png');
-				});
+				
+					 $('#boardGood'+result).attr('src' ,'/learning/resources/img/arrowUpGood.png');
+				
 			}
 		});
 		$('#btnReply').click(function(){
 			reply();
 		});
+		
     function reply(){
   		var replytext=$("#replytext").val();
   		var boardNo="${requestScope.bvo.boardNo}"; // view 컨트롤러에서 가져옴!
@@ -164,6 +165,7 @@ function shareSns(){
       </div>
       <sec:authorize access="isAuthenticated()">
           <sec:authentication var="mvo" property="principal" />
+        
             <c:if test="${mvo.userId == requestScope.bvo.member.userId }">
               <div class="function-edit"><img src="${path}/resources/img/edit.png" id="image_edit" onclick="updateBoard()"></div>
             </c:if>
