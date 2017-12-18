@@ -183,7 +183,7 @@ function deleteReply(replyNo){
 	.cke_bottom {display: !important;}
 	#cke_content { border:none; margin-top:20px; box-shadow: none;}
 </style>
-<h1>제 ${lvo.lectureOrder}강, ${lvo.lectureName}</h1><span class="date">작성일 <fmt:formatDate value="${lvo.regDate}" pattern="YYYY.MM.dd" /></span>
+<h1>제 ${lvo.lectureOrder}강, ${lvo.lectureName}</h1><span class="lecture-date">작성일 <fmt:formatDate value="${lvo.regDate}" pattern="YYYY.MM.dd" /></span>
 <textarea id="content" name="content"  >${lvo.content} </textarea>
 <script>
     //CKEDITOR.replace("content",{  removePlugins : 'elementspath' , resize_enabled : false});  // 태그의 id
@@ -198,7 +198,6 @@ function deleteReply(replyNo){
 		removePlugins : 'elementspath',
 		readOnly : true
 	} );
-	console.log(CKEDITOR)
 </script>
 <hr>
 <div align="center" >

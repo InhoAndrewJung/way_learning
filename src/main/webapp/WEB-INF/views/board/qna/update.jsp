@@ -15,7 +15,7 @@ function viewList() {
 	 location.href = "${pageContext.request.contextPath}/board/qna/list";
 }
 </script>
-<form method=post action="${pageContext.request.contextPath}/board/qna/updateBoard" name="edit_form"  enctype="multipart/form-data">
+<form method=post action="${pageContext.request.contextPath}/board/qna/updateBoard?${_csrf.parameterName}=${_csrf.token}" name="edit_form"  enctype="multipart/form-data">
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   <input type="hidden" name="boardNo" value="${bvo.boardNo}" />
 	<div class="common-container">

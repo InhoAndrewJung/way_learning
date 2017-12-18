@@ -3,10 +3,6 @@
 <%@ include file="../../include/header.jsp"%>
 
 <link rel="stylesheet" href="${path}/resources/css/board/board.css?ver=2">
-
-
-
-
 <body>
 <div class="common-container">
 	<div class="move-boardList">

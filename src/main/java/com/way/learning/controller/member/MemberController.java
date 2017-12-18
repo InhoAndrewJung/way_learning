@@ -242,7 +242,7 @@ public class MemberController {
 
 	@RequestMapping("showAllRanking")
 	public ModelAndView showAllRanking(HttpServletRequest request, ModelAndView mav,
-			@RequestParam(defaultValue = "cntSubmit") String sorting) throws Exception {
+			@RequestParam(defaultValue = "cntRight") String sorting) throws Exception {
 		System.out.println("showAllRanking 컨트롤러 입성!");
 		Member mvo = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userId = mvo.getUserId();

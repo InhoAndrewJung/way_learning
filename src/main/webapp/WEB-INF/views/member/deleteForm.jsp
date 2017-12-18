@@ -26,7 +26,7 @@ function toMain() {
 
 				<div class="body">
 
-					<div class="title">
+					<div class="leave-title">
 					정말로 떠나실 건가요 ??
 					</div>
 				</div>

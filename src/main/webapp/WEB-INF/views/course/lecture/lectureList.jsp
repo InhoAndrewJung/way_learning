@@ -30,15 +30,11 @@
 			});
 		}
 		function deleteLecture(){
-			alert("lectno:"+lecNo);
-			 alert("courseNo"+${cvo.courseNo});
 			 if(confirm("해당 코스를 삭제하시겠습니까?")){
 				location.href="${pageContext.request.contextPath}/lectureBoard/deleteLecture?courseNo=${cvo.courseNo}&lectureNo="+lecNo;
 			}
 		}
 		function updateLecture(){
-			alert("코스넘:"+${cvo.courseNo});
-			alert("렉쳐넘:"+lecNo);
 			if(confirm("해당 코스를 수정하시겠습니까?")){
 				 $.ajax({
 					type:"post",
@@ -98,6 +94,13 @@
 				<c:forEach var="row" items="${lecList}" varStatus="status">
 					<li data-lec-no="${row.lectureNo}" onclick="showLecture('${row.lectureNo}')">${row.lectureOrder}강, ${row.lectureName}</li>
 				</c:forEach>
+				<sec:authorize access="isAuthenticated()">
+					<c:if test="${mvo.userId == cvo.member.userId}">
+						<article data-course-no="my" class="my-course-article common-btn" style="width: 80%; margin: 20px auto;" onclick="course()">
+							<span data-course-no="my">내 코스 관리</span>
+						</article>
+					</c:if>
+				</sec:authorize>
 				<script type="text/javascript">
 					var lectures = document.querySelectorAll("[data-lec-no]")
 					lectures = Array.prototype.slice.call(lectures)
@@ -108,7 +111,6 @@
 						xhr.open('get', '${pageContext.request.contextPath}/lectureBoard/isMyLectureRecordExist?lectureNo='+lno+'&courseNo=${cvo.courseNo}')
 						xhr.send(null)
 						xhr.onload = function() {
-							console.log(xhr.response)
 							if(xhr.response==1) lecture.classList.add('finish_lesson')
 						}
 					}
@@ -120,12 +122,8 @@
 			<sec:authorize access="isAuthenticated()">
 				<sec:authentication var="mvo" property="principal" />
 				<c:if test="${mvo.userId == cvo.member.userId }">
-					<img alt="삭제"
-						src="${pageContext.request.contextPath}/resources/img/delete_btn.jpg"
-						onclick="deleteLecture()">
-					<img alt="수정"
-						src="${pageContext.request.contextPath}/resources/img/modify_btn.jpg"
-						onclick="updateLecture()">
+					<input type="button" class="common-btn" value="강의수정" onclick="updateLecture()" style="background-color:#4e737c;width:49%;margin-bottom: 30px;">
+					<input type="button" class="common-btn" value="강의삭제" onclick="deleteLecture()" style="background-color:#c61919;width:49%">
 				</c:if>
 			</sec:authorize>
 			<div id="lecture"></div>
