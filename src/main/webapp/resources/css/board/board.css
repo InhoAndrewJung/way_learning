@@ -118,7 +118,10 @@ a:link, a:visited  {
 .boardTitleSet{
 	position: absolute;
 	float: left;
-	max-width: 250px;
+	width:60%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	padding-left: 20px;
 	top: 50%;
 	transform: translateY(-50%);
@@ -858,11 +861,6 @@ hr {
     border: 0px;
     cursor: pointer;
     padding: 0px 10px;
-}
-
-.common-container{
-	text-align: center;
-	
 }
 
 .general-submit{

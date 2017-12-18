@@ -806,7 +806,7 @@ text-shadow: none;}
   text-shadow: 0px 0px 5px #000000;
   background: linear-gradient(#6b9db9, #3e899c);
   overflow: hidden;
-  margin-bottom:0px;
+  margin-bottom: -40px;
 }
 
 
