@@ -883,6 +883,20 @@ hr {
 	padding: 14px 32px;
 }
 
+.general-cancel{
+	border-radius: 7px;
+	font-size: 17px;
+	font-weight: bold;
+	margin-top: 15px;
+	background: #d86924;
+	width: 95%;
+	padding: 10px 10px 10px 10px;
+	color: #fefefe;
+	border: 0px;
+	cursor: pointer;
+	padding: 14px 32px;
+}
+
 .general-edit{
 	border-radius: 7px;
 	font-size: 17px;

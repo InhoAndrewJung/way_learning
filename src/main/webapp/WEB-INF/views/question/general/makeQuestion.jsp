@@ -28,7 +28,7 @@
 	function addAnswerChoice() {
 		/* console.log($('#multiple')[0]); */
 		var answerCnt = $('#multiple')[0].querySelectorAll('span').length;
-		var answerInput = '<span><input type="radio" name="answer" id="answer'+(answerCnt+1)+'" value="'+(answerCnt+1)+'"><label for="answer'+(answerCnt+1)+'"><input type="text" name="answerChoice" /></label><br></span>'
+		var answerInput = '<span><input type="radio" name="answer" id="answer'+(answerCnt+1)+'" value="'+(answerCnt+1)+'"><label for="answer'+(answerCnt+1)+'"><input type="text" name="answerChoice" class="ques-answerChoice" /></label><br></span>'
 		console.log(answerInput)
 		$('#multiple').append(answerInput)
 		
@@ -43,6 +43,9 @@
 		
 	}
 	
+	function goBack() {
+		window.history.back();
+	}
 
 
 
@@ -56,7 +59,7 @@
 	</div>
 	<div class="ques-boardTable" >
 			<div class="ques-title" >
-				<label for="answerChoice">제목:<input type="text" name="title" id="title" class="ques-titleText" value="111" /><br></label>
+				<label for="answerChoice">제목:<input type="text" name="title" id="title" class="ques-titleText" /><br></label>
 				
 			</div>
 			<hr style="margin:20px">
@@ -96,6 +99,7 @@
 					<br><br>
 				</div>
 				<input type="submit" value="등록" class="general-submit util-width-100" />
+				<input type="button" value="취소" onclick="goBack()" class="general-cancel util-width-100" />
 			</div>
 	</div>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
