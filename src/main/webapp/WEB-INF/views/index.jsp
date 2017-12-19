@@ -355,12 +355,11 @@
     </ul>
   </section>
   <section class="main_block mb_apply">
-    <h1>in is there anyone</h1>
-    <p>ystem, and expound the actual teachings of the great explorer
-       of the truth, the master-builder of human happiness. No one rejects,
-      dislikes, or avoids pleasure itself, because it is pleasure, but because
-      those who do not know how to pursue pleasure rationally encounter
-      consequen</p>
+    <h1 style="font-size:40px;">Python(파이썬)</h1>
+    <p>본 수업은 프로그래밍 언어의 문법과 기능을 익히는 수업입니다. <br> 수준은 초심자도 이해할 수 있도록 쉽게 진행됩니다. 
+    언어를 먼저 공부하고 싶다면 여기서 시작하시면 됩니다. 하지만 프로그래밍을 통해서 무엇을 할 수 있는지를 먼저 경험하고 싶다면 '웹 애플리케이션 만들기' 수업을 먼저 볼 것을 추천합니다. 
+    
+      </p>
       <input type="button" value="→ 수강신청" onclick="showDialog()"/>
       <div class="loop_square loop_green loop_square_60s" style="width:1200px; height:1200px; left:-1000px;top:-1000px;"></div>
       <div class="loop_square loop_blue loop_square_40s" style="width:1200px; height:1200px; left:-1400px;top:-1500px;z-index:1;"></div>
