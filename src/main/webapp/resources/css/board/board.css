@@ -118,7 +118,10 @@ a:link, a:visited  {
 .boardTitleSet{
 	position: absolute;
 	float: left;
-	max-width: 250px;
+	width:60%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 	padding-left: 20px;
 	top: 50%;
 	transform: translateY(-50%);
@@ -860,9 +863,10 @@ hr {
     padding: 0px 10px;
 }
 
+
 .general-container{
 	text-align: center;
-	
+
 }
 
 .general-submit{
@@ -991,7 +995,7 @@ hr {
     padding: 10px;
     width: 443px;
     margin: 15px;
-} 
+}
 .ques-question{
 	border-radius: 7px;
 	border: 1px solid #e5e9f2;
@@ -1004,7 +1008,7 @@ hr {
 	overflow: hidden;
 }
 .ques-content{
-	
+
 }
 .ques-footer{
 	margin-bottom: 20px;
