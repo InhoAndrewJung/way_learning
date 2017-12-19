@@ -63,6 +63,10 @@ alert('${requestScope.errorMessage }');
 </c:if>
 
 
+setTimeout(function() {
+  document.getElementById('helloWord').style.display = "none";
+}, 1500);
+
 
 
 </script>
