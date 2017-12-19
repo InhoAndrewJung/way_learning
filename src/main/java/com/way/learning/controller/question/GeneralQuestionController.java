@@ -66,19 +66,6 @@ public class GeneralQuestionController {
 
 
 
-	/*
-	 * @RequestMapping("/getList") public ModelAndView getList(ModelAndView
-	 * mav, @RequestParam(defaultValue = "") String keyword,
-	 *
-	 * @RequestParam(defaultValue = "") String sorting) throws SQLException {
-	 * System.out.println("keyword:" + keyword); System.out.println("sorting:" +
-	 * sorting); List<GeneralQuestion> list =
-	 * questionService.getGeneralList(keyword, sorting); mav.addObject("list",
-	 * list); mav.addObject("keyword", keyword);
-	 * mav.setViewName("/question/general/list");
-	 *
-	 * return mav; }
-	 */
 	@RequestMapping("/multipleChoiceContent")
 	public ModelAndView multipleChoiceContent(ModelAndView mav, int questionNo, String keyword) throws SQLException {
 

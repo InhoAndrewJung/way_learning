@@ -31,6 +31,17 @@ public class Member {
 		this.userId = userId;
 		this.password = password;
 	}
+	
+	public Member(String userId, String email, String password, int activity, String imgProfile, Date regDate) {
+	      super();
+	      this.userId = userId;
+	      this.email = email;
+	      this.password = password;
+	      this.activity = activity;
+	      this.imgProfile = imgProfile;
+	      this.regDate = regDate;
+	   }
+
 
 	public Member() {
 		// TODO Auto-generated constructor stub

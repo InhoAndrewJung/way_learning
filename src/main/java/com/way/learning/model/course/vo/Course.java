@@ -32,6 +32,20 @@ public class Course {
 		this.uploadFile = uploadFile;
 		this.tags = tags;
 	}
+	
+	public Course(int courseNo, String courseName, String description, String courseImage, Date regDate, Member member,
+	         int isAccept, int cntCourseLike) {
+	      super();
+	      this.courseNo = courseNo;
+	      this.courseName = courseName;
+	      this.description = description;
+	      this.courseImage = courseImage;
+	      this.regDate = regDate;
+	      this.member = member;
+	      this.isAccept = isAccept;
+	      this.cntCourseLike = cntCourseLike;
+	   }
+
 
 	
 	public Course() {

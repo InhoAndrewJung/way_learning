@@ -4,18 +4,7 @@
 
 
 
-	<!-- <insert id="insertGeneralQuestion" parameterType="generalQuestion">
-		<selectKey keyProperty="question_no" resultType="int" order="BEFORE">
-			SELECT
-			wl_general_question_SEQ.nextval FROM dual
-		</selectKey>
-		insert into
-		wl_general_question
-		(question_no,title,question,answer,category)
-		values(#{questionNo},#{title},#{question},
-		#{answer},#{category})
-
-	</insert> -->
+	
 	<insert id="insertGeneralQuestion" parameterType="generalQuestion"> 
 		insert into wl_general_question (question_no,title,question,answer,category) 
 		values(wl_general_question_SEQ.nextval,#{title},#{question}, #{answer},#{category}) 
