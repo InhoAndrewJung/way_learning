@@ -111,7 +111,7 @@ function toMain() {
 </head>
 <body>
 <div class="common-container" style="max-width:400px">
-	<div class="logo"><img src="${path}/resources/img/google.png" id="image_logo" onclick="toMain()"></div>
+	<div class="logo"><img src="${path}/resources/img/logo_black.png" id="image_logo" onclick="toMain()"></div>
 
 	<div class="common-card">
 		<form method="post" action="${pageContext.request.contextPath}/member/registerMember?${_csrf.parameterName}=${_csrf.token}" id="regForm"  enctype="multipart/form-data">

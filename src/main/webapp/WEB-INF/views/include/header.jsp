@@ -193,13 +193,13 @@
 				</li>
 	    </ul>
 			<sec:authorize access="isAnonymous()">
-				<div id="nav_profile" class="nav_profile" onclick="subnav()" data-sn-target="mypage">
+				<div id="nav_profile" class="nav_profile nav_profile_init" onclick="subnav()" data-sn-target="mypage">
 					<span id="profile_img" data-sn-target="mypage" class="profile_img" style="background-image:url(${path}/resources/img/logo.png);"></span>
 					<span id="profile_info" data-sn-target="mypage" class="profile_info">
 						login
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
-				<div id="nav_profile" class="nav_profile" onclick="subnav()" data-sn-target="mypage">
+				<div id="nav_profile" class="nav_profile nav_profile_init" onclick="subnav()" data-sn-target="mypage">
 					<span id="profile_img" data-sn-target="mypage" class="profile_img" style="background-image:url(${path}/resources/upload/${mvo.imgProfile});"></span>
 					<span id="profile_info" data-sn-target="mypage" class="profile_info">
 						${mvo.userId}
