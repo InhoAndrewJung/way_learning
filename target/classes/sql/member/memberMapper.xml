@@ -41,15 +41,18 @@
 		wl_member(user_id,password,email,img_profile)
 		values(#{userId},#{password},#{email},#{imgProfile})
 	</insert>
+	
 	<select id="idcheck" resultType="int">
 		select count(*) from wl_member
 		where user_id=#{value}
 	</select>
+	
 	<select id="emailcheck" resultType="int">
 		SELECT count(*)
 		FROM wl_member
 		WHERE email=#{value}
 	</select>
+	
 	<select id="findMemberById" resultMap="memberRM">
 
 		SELECT
@@ -113,7 +116,7 @@
 	<select id="selectMyRanking" resultType="int">
 		select a.ranking from(select user_id ,sum(MY_CNT_SUBMIT)
 		my_cnt_submit,sum(MY_CNT_RIGHT)my_cnt_right,sum(MY_CNT_WRONG)
-		my_cnt_wrong,rank() over(order by sum(MY_CNT_SUBMIT) desc)as ranking
+		my_cnt_wrong,rank() over(order by sum(MY_CNT_RIGHT) desc)as ranking
 		from wl_answer_result group by user_id)a
 		where user_id=#{userId}
 	</select>
@@ -201,7 +204,6 @@ where lb.course_no=lr.course_no and lr.course_no=lc.course_no and lb.lecture_no=
 	<select id="selectLectureFavorite" resultType="hashmap">
 select cr.course_no,course_name,description,cr.reg_date,cr.user_id,author,m.img_profile,m.activity from wl_course_recommend cr, wl_course c,wl_member m where cr.course_no=c.course_no
 and c.author=m.user_id and cr.user_id=#{userId}
-
 	</select>
 
 

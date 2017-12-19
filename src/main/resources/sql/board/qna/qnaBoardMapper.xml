@@ -60,7 +60,6 @@
       <if test="sorting == 'board_no'">order by board_no DESC</if> 
       <if test="sorting == 'recommend'">order by cnt_board_like  DESC</if> 		
       <if test="sorting == 're'">order by cnt_reply  DESC</if> 		
-     	
       <if test="sorting == 'view'">order by cnt_view DESC</if> 
 		)
 		) b
