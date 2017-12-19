@@ -31,7 +31,7 @@
 		</tr>
 		<c:forEach var="row" items="${list}">
 			<tr>
-				<td>${row.questionNo}</td>
+				<td>${row.questionNo-999}</td>
 				<td style="text-align:left;" nowrap>
 					<a href="${path}/question/essay/showEssayContent?questionNo=${row.questionNo}&keyword=${keyword}">${row.title }</a>
 				</td>

@@ -44,7 +44,6 @@
 			})
 		}
 	  window.onscroll = function() {navControll()};
-
 	  function navControll() {
 			if (document.body.scrollTop > 72 || document.documentElement.scrollTop > 72) {
 				document.getElementById("nav_bg").classList.add("nav_bg_scroll")
@@ -161,7 +160,6 @@
 											 h32.appendChild(document.createTextNode("내 코스 관리"))
 										courseMgnArticle.appendChild(h32)
 										target.appendChild(courseMgnArticle)
-
 										var article = document.createElement('article')
 										article.dataset.courseNo = 'new'
 										article.className ='new-course-article'
@@ -171,8 +169,6 @@
 											 h3.appendChild(document.createTextNode("새로운 코스 등록하기"))
 										article.appendChild(h3)
 										target.appendChild(article)
-
-
 										</sec:authorize>
 									}
 								});

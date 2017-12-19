@@ -3,7 +3,7 @@
 <%@ include file="../../include/header.jsp"%>
 
 <link rel="stylesheet" href="${path}/resources/css/board/board.css?ver=2">
-
+<body>
 <div class="common-container">
 	<div class="move-boardList">
 		<div class="general-titleName">Question ${questionNo}</div>
@@ -15,10 +15,10 @@
 			<tr>
 				<td style="padding:30px">
 					<c:choose>
-						<c:when test="${result =='1'}">
+						<c:when test="${result ==true}">
 						<div class="general-answer">
 							<span class="general-image"></span><br><br>
-							<span class="general-msg">GOOD JOB, BRO!<br>
+							<span class="general-msg">GOOD JOB, BRO :-)<br>
 								정답입니다!
 							</span>							
 						</div>	
@@ -62,5 +62,5 @@
 
 
 	</div>
-
+</body>
 <%@ include file="../../include/footer.jsp"%>

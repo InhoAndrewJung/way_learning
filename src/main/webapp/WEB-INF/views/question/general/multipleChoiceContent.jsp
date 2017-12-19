@@ -13,7 +13,7 @@
 		location.href = "${path}/question/general/updateQuestion?questionNo=${gq.questionNo}";
 	}
 </script>
-
+<body>
 <div class="common-container">
 	<div class="move-boardList">
 		<div class="question-titleName" style="text-align:left;">Question ${gq.questionNo}</div>
@@ -41,16 +41,16 @@
 				</c:forEach>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				<input type="hidden" name="questionNo" value="${gq.questionNo}"/>
-			
-				<input type="submit" value="제출" class="general-submit"/>		
+					<hr style="margin:10px">
+				<input type="submit" value="제출" class="general-submit"/>	
+				<hr style="margin:10px">
+				<div>
+					<input type="button" value="수정" onclick="updateQuestion()" class="general-edit">
+					<input type="button" value="삭제" onclick="deleteQuestion()" class="general-delete">	
+				</div>	
 			</form>
-			<div>
-			<hr style="margin:10px">
-			<input type="button" value="수정" onclick="updateQuestion()" class="general-edit">
-			<input type="button" value="삭제" onclick="deleteQuestion()" class="general-delete">
-			</div>
 		</div>
 </div>
-
+</body>
 
 	<%@ include file="../../include/footer.jsp"%>

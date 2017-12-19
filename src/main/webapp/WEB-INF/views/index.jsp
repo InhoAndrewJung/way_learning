@@ -31,13 +31,11 @@
     }
     document.getElementById('nav_line_2').classList.toggle('nav_line_2_init')
     document.getElementById('nav_profile').classList.toggle('nav_profile_init')
-
 		var courses = document.getElementById('courses').children
     for(var i=courses.length-1;i>=0;i--){
      	 setTimeoutForCourseSet(courses[i], i)
        courses[i].addEventListener("mouseover", coursesMouseOver);
     }
-
     setTimeout(function(){
       document.getElementById('loader_box').style.display = "none"
       document.body.classList.remove('scroll-lock')
@@ -54,7 +52,6 @@
 		}, 100*idx)
 	}
 	function coursesMouseOver(event) {
-
 	}
 	function subnav() {
 		closeSubnav()
@@ -76,10 +73,7 @@
 			}
 		})
 	}
-
-
   window.onscroll = function() {navControll()};
-
   function navControll() {
 		if (document.body.scrollTop > 72 || document.documentElement.scrollTop > 72) {
 			document.getElementById("nav_bg").classList.add("nav_bg_scroll")
@@ -105,8 +99,6 @@
        list[i].classList.remove("nav_item_scroll")
     }
   }
-
-
   function mb_quiz(selectId){
     var result = document.getElementById('mb_quiz_result')
     var emoji = document.getElementById('loop_flip')
@@ -117,7 +109,6 @@
         toggleModal('modal_quiz')
         result.classList.remove('mb_quiz_right')
       },1000)
-
     } else {
       result.classList.add('mb_quiz_wrong')
       emoji.style.backgroundImage="url(${path}/resources/img/mb_quiz_emoji_0.png)"
@@ -230,7 +221,6 @@
  										 h32.appendChild(document.createTextNode("내 코스 관리"))
  									courseMgnArticle.appendChild(h32)
  									target.appendChild(courseMgnArticle)
-
 									var article = document.createElement('article')
 									article.dataset.courseNo = 'new'
 									article.className ='new-course-article'
@@ -355,7 +345,6 @@
 					li.appendChild(title)
 					li.appendChild(hr)
 					li.appendChild(p)
-
 					target.appendChild(li)
 				}
 			</script>

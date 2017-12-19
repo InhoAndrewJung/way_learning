@@ -193,37 +193,7 @@ a {
     animation-name: showCard;
     animation-duration: 1s; 
 }
-
-.login-card_button{
-	text-decoration: none;
-}
-
-.login-card_social{
-	text-align: center;
-	margin: 20px auto 20px auto;
-}
-
-.login-card_facebook_logo{
-	border-radius: 5px;
-    width: 30%;
-    height: 48px;
-    cursor: pointer;
-}
-
-.login-card_twitter_logo{
-	border-radius: 5px;
-    width: 30%;
-    height: 48px;
-    cursor: pointer;
-}
-
-.login-card_google_logo{
-	border-radius: 5px;
-    width: 30%;
-    height: 48px;
-    cursor: pointer;
-}
-
+/* /* 
 .login-card_divider {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -243,7 +213,7 @@ a {
     justify-content: center;
     margin-bottom: 12px;
 }
-
+ */
 .login-card_divider::before {
     content: '';
     position: absolute;
@@ -263,7 +233,7 @@ a {
     font-weight: 700;
     position: relative;
     z-index: 1;
-}
+} */
 
 form {
     display: block;
@@ -291,7 +261,7 @@ form {
 .dashboard-form_input_id {
     border: 0px;
     border-left: 5px solid #4c90f6;
-    width: 80%;
+    width: 95%;
     padding: 10px;
     font-size: 20px;
 	color: #4c90f6;
@@ -309,7 +279,7 @@ form {
 .dashboard-form_input_pass{
 	border: 0px;
     border-left: 5px solid #ed4d3c;
-    width: 80%;
+    width: 95%;
     padding: 10px;
     font-size: 20px;
 	color: #ed4d3c;

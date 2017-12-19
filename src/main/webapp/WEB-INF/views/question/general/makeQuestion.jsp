@@ -9,96 +9,97 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-
-		var count= $('input[name=answerChoice]').length+1
-
-		var ac ='<label for="answerChoice">선택지'+count+':</label><input type="text" name="answerChoice" id="answerChoice" /><br>';
-		$('#btnAnswerPlus').click(function() {
-			count=count+1;
-
-
-
-			$('#answerChoicePlus').html(ac)
-		ac+='<label for="answerChoice">선택지'+count+':</label><input type="text" name="answerChoice" id="answerChoice" /><br>';
-						/* 	 $('#btnAnswerPlus').one('click',function() {
-			$('#answerChoicePlus').slideToggle();
-		})	  */
-
-		})
+		multiple1();
 	});//document
 
 
-	function hide(){
-		$('#change').hide();
-
+	function multiple1(){
+		$('#multiple').show();
+		$('#multiple2').show();
+		$('#short').hide();
 	}
 
-	function show(){
-		$('#change').show();
-
+	function short(){
+		$('#multiple').hide();
+		$('#multiple2').hide();
+		$('#short').show();
 	}
-
+	
+	function addAnswerChoice() {
+		/* console.log($('#multiple')[0]); */
+		var answerCnt = $('#multiple')[0].querySelectorAll('span').length;
+		var answerInput = '<span><input type="radio" name="answer" id="answer'+(answerCnt+1)+'" value="'+(answerCnt+1)+'"><label for="answer'+(answerCnt+1)+'"><input type="text" name="answerChoice" /></label><br></span>'
+		console.log(answerInput)
+		$('#multiple').append(answerInput)
+		
+	}
+	function removeAnswerChoice() {
+		var answerCnt = $('#multiple')[0].querySelectorAll('span').length;
+		if ( answerCnt >= 5) {
+			$('#multiple')[0].querySelectorAll('span')[answerCnt-1].remove();
+		}else{
+			alert("최소 선택지는 4개이상이어야 합니다");
+		}
+		
+	}
+	
 
 
 
 </script>
-
-<div class="container">
-<form action="${path}/question/general/insertQuestion" method="post">
-<div style="text-align:center;">
-<input type="radio" name="category" id="category1" value="multipleChoice" onchange="show()" checked="checked"/><label for="category1">객관식</label>
-<input type="radio" name="category" id="category2" value="shortAnswer" onchange="hide()" /><label for="category2">주관식</label><br>
+<body>
+<div class="common-container">
+	<form name="frm1" action="${path}/question/general/insertQuestion" method="post">
+	<div style="text-align:center;">
+		<input type="radio" name="category" id="category1" value="multipleChoice" onchange="multiple1()" checked="checked" /><label for="category1">객관식</label>
+		<input type="radio" name="category" id="category2" value="shortAnswer" onchange="short()" /><label for="category2">주관식</label><br>
+	</div>
+	<div class="ques-boardTable" >
+			<div class="ques-title" >
+				<label for="answerChoice">제목:<input type="text" name="title" id="title" class="ques-titleText" value="111" /><br></label>
+				
+			</div>
+			<hr style="margin:20px">
+			<div class="ques-content" >
+				<textarea name="question" id="question" cols="60" rows="30" class="ques-question"></textarea>
+					
+			</div>
+			
+			<div class="ques-footer">
+				<div id="short" class="ques-answertitle">정답:
+					<input type="text" name="answer" id="answer" class="ques-answer"><br>
+				</div>
+				
+				<div id="multiple">
+					<span>
+					<input type="radio" name="answer" id="answer1" value="1">
+						<label for="answer1"><input type="text" name="answerChoice" class="ques-answerChoice" /></label><br>
+					</span>
+					<span>
+					<input type="radio" name="answer" id="answer2" value="2">
+						<label for="answer2"><input type="text" name="answerChoice" class="ques-answerChoice" /></label><br>
+					</span>
+					<span>	
+					<input type="radio" name="answer" id="answer3" value="3">
+						<label for="answer3"><input type="text" name="answerChoice" class="ques-answerChoice" /></label><br>
+					</span>
+					<span>	
+					<input type="radio" name="answer" id="answer4" value="4">
+						<label for="answer4"><input type="text" name="answerChoice" class="ques-answerChoice" /></label><br>
+					</span>
+				</div>
+			</div>
+			<div style="width: 542px; margin: 0px auto;">
+				<div class="ques-groupBtn" id="multiple2">
+					<input type="button" onclick="addAnswerChoice()" id="btnAnswerPlus" value="선택지 추가" class="general-edit"/>
+					<input type="button" onclick="removeAnswerChoice()" id="btnAnswerPlus" value="선택지 제거" class="general-delete" />
+					<br><br>
+				</div>
+				<input type="submit" value="등록" class="general-submit util-width-100" />
+			</div>
+	</div>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	</form>
 </div>
-<table class="boardTable" style="text-align: center">
-			<tr class="table-center" style="height:40">
-				<td><label for="answerChoice">제목:<input type="text" name="title" id="title" /><br></label></td>
-			</tr>
-			<tr class="table-center" style="height:40">
-				<td><label for="question">문제:</label><textarea name="question" id="question" cols="60" rows="30"></textarea><td>
-			</tr>
-			<tr>
-				<td><label for="answer">정답:</label><textarea name="answer" id="answer" cols="60" rows="1"></textarea><br></td>
-			</tr>
-			<tr class="table-center">
-				<td>
-					<span id="change">
-						<label for="answerChoice">선택지1:<input type="text" name="answerChoice" id="answerChoice" /><br>
-						<label for="answerChoice">선택지2:<input type="text" name="answerChoice" id="answerChoice" /><br>
-						<label for="answerChoice">선택지3:<input type="text" name="answerChoice" id="answerChoice"/><br>
-						<label for="answerChoice">선택지4:<input type="text" name="answerChoice" id="answerChoice" /><br>
-						<div id="answerChoicePlus"></div>
-					</label></label></label></label></span></td>
-			</tr>
-			<tr>
-				<td>
-					<input type="button" id="btnAnswerPlus" value="선택지 추가" />&nbsp;<input type="submit" value="제출" />
-				</td>
-			</tr>
-			</table>
-
-
-
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-<!-- <label for="question">문제:</label><input type="text" name="question" id="question" /><br> -->
-<!-- <label for="answer">정답:</label><input type="text" name="answer" id="answer" /><br> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</form>
-<div style="text-align:center;">
-<a href="${path}/"> 메인페이지로 이동</a>
-</div>
-</div>
-
+</body>
 <%@ include file="../../include/footer.jsp"%>
