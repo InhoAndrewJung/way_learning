@@ -49,8 +49,8 @@ public class GeneralQuestionController {
 	public ModelAndView getList(HttpServletRequest request, ModelAndView mav, HttpServletResponse response,
 			@RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "") String sorting)
 			throws SQLException {
-		System.out.println("keyword:" + keyword);
-		System.out.println("sorting:" + sorting);
+		System.out.println("getList keyword:" + keyword);
+		System.out.println("getList sorting:" + sorting);
 
 
 		List<GeneralQuestion> list = questionService.getGeneralList(keyword, sorting);
