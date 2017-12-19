@@ -96,7 +96,7 @@
 				</c:forEach>
 				<sec:authorize access="isAuthenticated()">
 					<c:if test="${mvo.userId == cvo.member.userId}">
-						<article data-course-no="my" class="my-course-article common-btn" style="width: 80%; margin: 20px auto;" onclick="course()">
+						<article data-course-no="my" class="my-course-article common-btn letucre-mycourse-btn" style="width: 60%; margin: 20px auto;" onclick="course()">
 							<span data-course-no="my">내 코스 관리</span>
 						</article>
 					</c:if>

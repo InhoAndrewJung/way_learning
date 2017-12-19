@@ -38,6 +38,12 @@
   border-radius: 50%;
 }*/
 
+.letucre-mycourse-btn {
+  font-size: 0.9em;
+  line-height: 20px;
+  cursor: pointer;
+  padding: 5px;
+}
 .lesson_course_img{
   z-index: 1;
   box-shadow: 1px 1px 10px -3px rgb(0, 0, 0);

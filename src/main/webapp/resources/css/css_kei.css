@@ -389,15 +389,17 @@ nav {
 }
 
 .profile_img {
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  border:3px #25506b solid;
-  background-color:white;
-  vertical-align:middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px #25506b solid;
+  background-color: white;
+  vertical-align: middle;
   box-sizing: border-box;
-  float:left;
+  float: left;
   background-size: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
  .profile_info {
@@ -590,6 +592,10 @@ width:100%; left:0px;top:0px; border-radius: 50px;}
 .si_btn_mp:hover::after{background-color:#567e96;}
 .si_btn_so::after{content:"로그아웃";}
 .si_btn_so:hover::after{background-color:#ca5d5d;}
+.si_btn_login::after{content:"로그인";}
+.si_btn_login:hover::after{background-color:#567e96;}
+.si_btn_signup::after{content:"회원가입";}
+.si_btn_signup:hover::after{background-color:#389280;}
 
 
 [type=button]:focus{outline: none;}

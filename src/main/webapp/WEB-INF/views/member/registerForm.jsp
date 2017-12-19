@@ -32,13 +32,6 @@ $(document).ready(function(){
 			return false;
 		}
 
-		
-
-
-
-
-
-		
 	});//submit
 	$("#regForm :input[name=userId]").keyup(function(){
 		var userId=$(this).val().trim();
@@ -55,10 +48,10 @@ $(document).ready(function(){
 			data:"${_csrf.parameterName}=${_csrf.token}&&userId="+userId,
 			success:function(data){
 				if(data=="fail"){
-				$("#idCheckView").html(" X ").css("color","#ed4d3c");
+				$("#idCheckView").html("&#x2717; 이미 사용중인 아이디입니다.").css("color","#ed4d3c");
 					checkResultId="";
 				}else{
-					$("#idCheckView").html("  O ").css("color","#3bb15d");
+					$("#idCheckView").html("&#x2713; 사용 가능한 아이디입니다.").css("color","#3bb15d");
 					checkResultId=userId;
 				}
 			}//callback
@@ -68,35 +61,27 @@ $(document).ready(function(){
 	//아래 검증을 정규표현식도 검증하도록 작업해주세요!!!!기쁨씨!!!!
 	$("#regForm :input[name=email]").keyup(function(){
 		var email=$(this).val().trim();
-
-
+		if(regExp.test(email)) {
 		$.ajax({
 			type:"POST",
 			url:"${pageContext.request.contextPath}/member/emailcheckAjax",
 			data:"${_csrf.parameterName}=${_csrf.token}&&email="+email,
 			success:function(data){
-				//alert(data);
 				if(data!=0){
-				$("#emailCheckView").html(" X ").css("color","#ed4d3c");
-				checkResultEmail="";
+					$("#emailCheckView").html("&#x2717; 이미 사용중인 이메일입니다.").css("color","#ed4d3c");
+					checkResultEmail="";
 				}else{
-					$("#emailCheckView").html(" O ").css("color","#3bb15d");
+					$("#emailCheckView").html("&#x2713; 사용가능한 이메일입니다.").css("color","#3bb15d");
 					checkResultEmail=email;
 				}
 			}//callback
 		});//ajax
+	} else {
+		$("#emailCheckView").html("&#x2717; 유효한 이메일을 입력해주세요.").css("color","#ed4d3c");
+	}
 	});//keyup
 
 	var uploadFile = $('.update_image .uploadFile');
-/* 	uploadFile.on('change', function(){
-		if(window.FileReader){
-			var filename = $(this)[0].files[0].name;
-		} else {
-			var filename = $(this).val().split('/').pop().split('\\').pop();
-		}
-		document.getElementById('fileName').value = filename;
-	}); */
-
 	uploadFile.on('change', function(){
         if ($(this)[0].files && $(this)[0].files[0]) {
             var reader = new FileReader();

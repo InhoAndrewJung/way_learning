@@ -166,7 +166,7 @@
 										article.addEventListener('click', course)
 											 var h3 = document.createElement('h3')
 											 h3.dataset.courseNo = 'new'
-											 h3.appendChild(document.createTextNode("새로운 코스 등록하기"))
+											 h3.appendChild(document.createTextNode("새 코스 등록"))
 										article.appendChild(h3)
 										target.appendChild(article)
 										</sec:authorize>
@@ -193,14 +193,14 @@
 				</li>
 	    </ul>
 			<sec:authorize access="isAnonymous()">
-				<div id="nav_profile" class="nav_profile nav_profile_init" onclick="subnav()" data-sn-target="mypage">
-					<span id="profile_img" data-sn-target="mypage" class="profile_img" style="background:url(${path}/resources/img/man.png);background-size:100%;background-color:white;"></span>
+				<div id="nav_profile" class="nav_profile" onclick="subnav()" data-sn-target="mypage">
+					<span id="profile_img" data-sn-target="mypage" class="profile_img" style="background-image:url(${path}/resources/img/logo.png);"></span>
 					<span id="profile_info" data-sn-target="mypage" class="profile_info">
 						login
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
-				<div id="nav_profile" class="nav_profile nav_profile_init" onclick="subnav()" data-sn-target="mypage">
-					<span id="profile_img" data-sn-target="mypage" class="profile_img" style="background:url(${path}/resources/upload/${mvo.imgProfile});background-size:100%;background-color:white;"></span>
+				<div id="nav_profile" class="nav_profile" onclick="subnav()" data-sn-target="mypage">
+					<span id="profile_img" data-sn-target="mypage" class="profile_img" style="background-image:url(${path}/resources/upload/${mvo.imgProfile});"></span>
 					<span id="profile_info" data-sn-target="mypage" class="profile_info">
 						${mvo.userId}
 			</sec:authorize>
@@ -208,9 +208,10 @@
 					<section class="subnav_item si_profile" data-sn-name="mypage">
 						<div>
 							<sec:authorize access="isAnonymous()">
-								<img src="${path}/resources/img/man.png" />
-								<h3>LOGIN</h3>
-								<span class="si_btn si_btn_mp" onclick="login()">LOGIN</span>
+								<img src="${path}/resources/img/logo.png" />
+								<h3>HELLO</h3>
+								<span class="si_btn si_btn_login" onclick="login()">LOGIN</span>
+								<span class="si_btn si_btn_signup" onclick="signup()">SIGN UP</span>
 							</sec:authorize>
 							<sec:authorize access="isAuthenticated()">
 								<img src="${path}/resources/upload/${mvo.imgProfile}" />

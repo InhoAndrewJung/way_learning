@@ -19,27 +19,33 @@
     padding: 20px;
     position: relative;
 }
-
-.input_id{
-	border-radius: 13px;
-    padding: 10px 3% 10px 2%;
-    font-size: 20px;
-    display: inline-block;
-    margin: 10px;
-    width: 94%;
-    height: 50px;
-    margin: 10px auto 10px auto;
-
+.body>div {
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
-.text_id{
-	border: 0px;
+input+span{
+  display: block;
+  font-size: 0.8em;
+  margin-top: -30px;
+  margin-left: 300px;
+}
+
+.text_id,
+.text_pass,
+.text_email,
+.fileName {
+  border: 0px;
   border-left: 5px solid #4c90f6;
-  width: 92%;
-  padding: 10px;
-  font-size: 20px;
-	color: #4c90f6;
+  width:94%;
+  padding:10px 3%;
+  font-size:1.3em;
 	font-weight: bold;
+}
+.text_id{
+  border-left-color: #4c90f6;
+	color: #4c90f6;
 }
 
 .text_id::-webkit-input-placeholder { /* Chrome */
@@ -47,25 +53,9 @@
   font-weight: bold;
 }
 
-.input_pass{
-    border-radius: 13px;
-    padding: 10px 3% 10px 2%;
-    font-size: 20px;
-    display: inline-block;
-    margin: 10px;
-    width: 94%;
-    height: 50px;
-    margin: 10px auto 10px auto;
-}
-
 .text_pass{
-  border: 0px;
-  border-left: 5px solid #ed4d3c;
-  width: 92%;
-  padding: 10px;
-  font-size: 20px;
+  border-left-color: #ed4d3c;
   color: #ed4d3c;
-  font-weight: bold;
 }
 
 .text_pass::-webkit-input-placeholder { /* Chrome */
@@ -73,25 +63,9 @@
   font-weight: bold;
 }
 
-.input_email{
-    border-radius: 13px;
-    padding: 10px 3% 10px 2%;
-    font-size: 20px;
-    display: inline-block;
-    margin: 10px;
-    width: 94%;
-    height: 50px;
-    margin: 10px auto 10px auto;
-}
-
 .text_email{
-  border: 0px;
-  border-left: 5px solid #3bb15d;
-  width: 92%;
-  padding: 10px;
-  font-size: 20px;
-  color:#3bb15d;
-  font-weight: bold;
+  border-left-color: #3bb15d;
+	color: #3bb15d;
 }
 
 .text_email::-webkit-input-placeholder { /* Chrome */
@@ -99,24 +73,10 @@
   font-weight: bold;
 }
 
-.update_image{
-	border-radius: 13px;
-  padding: 10px 3% 10px 2%;
-  font-size: 20px;
-  display: inline-block;
-  margin: 10px;
-  width: 94%;
-  height: 50px;
-  margin: 10px auto 10px auto;
-}
-
 .fileName{
-	border: 0px;
-  border-left: 5px solid #fbc403;
-  width: 55%;
-  padding: 10px;
-  font-size: 20px;
+  border-left-color: #fbc403;
   color: #fbc403;
+  width: 55%;
 }
 
 .fileName::-webkit-input-placeholder { /* Chrome */
@@ -153,6 +113,7 @@
     position: absolute;
     border-radius: 50%;
     display: none;
+    border:1px rgba(119, 119, 119, 0.3) solid;
 }
 hr{
     width: 95%;
