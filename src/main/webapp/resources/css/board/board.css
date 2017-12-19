@@ -289,7 +289,7 @@ a:link, a:visited  {
 
 .comment-hit{
 	float : right;
-	margin : 10px;
+	margin : 20px;
 }
 .comment-hit>span {
 	border-radius: 13px;
@@ -385,6 +385,13 @@ a:link, a:visited  {
 
 .function-like{
 	position: relative;
+}
+.function-delete{
+	top: -45px;
+  right: 10px;
+  position: absolute;
+  margin: 0;
+	cursor: pointer;
 }
 
 .image_empty-heart{

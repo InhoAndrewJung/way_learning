@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -23,11 +23,11 @@ function goMain() {
 				"こんにちは。","Bonjour",
 				"¡Hola!","Guten Tag","Xin chào","Здравствуйте",
 				"Ciao","สวัสดีครับ","สวัสดีครับ ","Apa kabar?",
-				".مرحبًا",		
-				"Сайн байна уу",			
+				".مرحبًا",
+				"Сайн байна уу",
 				""
 ] ;
-			
+
 var christmasBox = [
 	"메리크리스마스",
 	"Merry Christmas!",
@@ -48,12 +48,12 @@ helloBox.forEach(printMsg)
 
 function printMsg(item, idx) {
 	setTimeout(function(){
-		
-	
+
+
 	setTimeout(function() {
 		var target = document.getElementById("login-card_title");
 		target.innerHTML = item
-		
+
 	}, idx * 2000)
 	},700)
 } */
@@ -89,10 +89,10 @@ alert('${requestScope.errorMessage }');
 	<div class = "login-card" id="login-card">
 		<div class="login-card_header">
 			<div class="login-card_logo">
-				<img src="${path}/resources/img/logo.png" class="image_logo" onclick="goMain()"/>
-			
-			</div>	
-		
+				<img src="${path}/resources/img/logo_black.png" class="image_logo" onclick="goMain()"/>
+
+			</div>
+
 				<div class="animated-words">
 					<h4>안녕하세요</h4>
 					<h4>Hello!</h4>
@@ -103,46 +103,46 @@ alert('${requestScope.errorMessage }');
 					<h4>Xin chào</h4>
 					<h4>Здравствуйте</h4>
 					<h4>Ciao</h4>
-					<h4>สวัสดีครับ","สวัสดีครับ</h4>	
+					<h4>สวัสดีครับ","สวัสดีครับ</h4>
 					<h4>Apa kabar?</h4>
 					<h4>.مرحبًا</h4>
 					<h4>Сайн байна уу</h4>
 				</div>
-		</div>	
-	
+		</div>
+
 		<div class="login-card_content">
 			<form action="${pageContext.request.contextPath}/j_spring_security_check" method="post">
-						
-			<!-- <div class="login-card_divider">	
-				<div class="login-card_divider-text">or</div>		
+
+			<!-- <div class="login-card_divider">
+				<div class="login-card_divider-text">or</div>
 			</div> -->
 
-				
+
 					<div class="form-row">
 						<label class="dashboard-form_group">
 							<div class="dashboard-form_label"></div>
-							
+
 							<input autofocus="autofocus" class="dashboard-form_input_id"
 						 value="" name="userId" id="userId" placeholder="ID">
 						</label>
 					</div>
-					
+
 					<div class="form-row">
 						<label class="dashboard-form_group">
 							<div class="dashboard-form_label"></div>
-							
+
 							<div class="login-card_password">
 								<input autocomplete="off" class="dashboard-form_input_pass"
 									type="password" name="password" id="userPassword" placeholder="Password">
-									
+
 								<div class="login-card_tooltip">
 									<div class="login-card_tooltip-content">
 										<div class="login-card_tooltip-triangle">
-										
-											
+
+
 										If you forgot your password you can look it up in your email inbox!
 										</div>
-										
+
 									</div>
 								</div>
 							</div>
@@ -154,34 +154,34 @@ alert('${requestScope.errorMessage }');
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				</form>
-		
-				
+
+
 				<hr>
-	
+
 		</div>
-		
-		
+
+
 		<div class="login-card_footer">
 			<form action="${pageContext.request.contextPath}/member/findIdByEmail?${_csrf.parameterName}=${_csrf.token}"
 		id="findIdForm">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<div class="noRegister">
-				
-				Not registered? 
+
+				Not registered?
 				<a href="${path}/member/registerForm">Sign up</a>
-			</div>	
-		
-		
+			</div>
+
+
 			<div class="forgot">
 				Forgot your <a href="${pageContext.request.contextPath}/member/findId" id="forget">ID</a>
-				or				 
+				or
 				  <a href="${pageContext.request.contextPath}/member/ExistId">Password?</a>
 			</div>
 			</form>
 		</div>
 	</div>
 </div>
-	
-	
+
+
 </body>
 </html>
