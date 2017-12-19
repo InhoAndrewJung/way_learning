@@ -89,7 +89,7 @@ alert('${requestScope.errorMessage }');
 	<div class = "login-card" id="login-card">
 		<div class="login-card_header">
 			<div class="login-card_logo">
-				<img src="${path}/resources/img/google.png" class="image_logo" onclick="goMain()"/>
+				<img src="${path}/resources/img/logo.png" class="image_logo" onclick="goMain()"/>
 			
 			</div>	
 		
@@ -112,25 +112,10 @@ alert('${requestScope.errorMessage }');
 	
 		<div class="login-card_content">
 			<form action="${pageContext.request.contextPath}/j_spring_security_check" method="post">
-			<div class="login-card_social">
-				<a class="login-card_button" href="http://www.facebook.com">
-					<img src="${path}/resources/img/Facebook_icon.jpg" class="login-card_facebook_logo">
-				</a>
-				
-				<a class="login-card_button" href="http://www.twitter.com">
-					<img src="${path}/resources/img/Twitter_icon.jpg" class="login-card_twitter_logo">
-				</a>
-				
-				<a class="login-card_button" href="http://www.google.com">
-					<img src="${path}/resources/img/Google_icon.jpg" class="login-card_google_logo">
-				</a>
-				
-				
-			</div>
-			
-			<div class="login-card_divider">	
+						
+			<!-- <div class="login-card_divider">	
 				<div class="login-card_divider-text">or</div>		
-			</div>
+			</div> -->
 
 				
 					<div class="form-row">

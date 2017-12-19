@@ -15,6 +15,7 @@
 	}
 
 </script>
+<body>
 <div class="common-container">
 	<div class="move-boardList">
 		<div class="question-titleName" style="text-align:left;">Question ${gq.questionNo}</div>
@@ -37,7 +38,7 @@
 
 
 
-	<div class="common-container">
+	<div class="general-container">
 		<form action="${path}/question/general/shortAnswerResult" method="post">
 			<input type="text" name="answer" id="answer" placeholder="정답을 입력하세요" class="quiz-result-input" required="required"/>
 			<input type="submit" value="제출" class="general-submit">
@@ -58,5 +59,5 @@
 	
 
 </div>
-
+</body>
 <%@ include file="../../include/footer.jsp"%>
