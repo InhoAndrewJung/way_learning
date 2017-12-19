@@ -26,6 +26,12 @@
 		WHERE board_no=#{value}
 	</select>
 	
+	<select id="selectWriterActivity" resultType="int"
+		parameterType="int">
+		SELECT activity FROM wl_member
+		WHERE user_id=#{value}
+	</select>
+	
 	
 	
 	

@@ -59,6 +59,7 @@ public class TechBoardController {
 		bvo.setMember(mvo); //bvo와 mvo의 Hasing 관계가 성립된다..
 
 		techBoardService.insertBoard(bvo);
+		bvo.getMember().setActivity(techBoardService.selectWriterActivity(mvo.getUserId()));
 		List tagList= techBoardService.getTag(bvo.getBoardNo()+"");
 		mav.setViewName("board/tech/show_content");
 		mav.addObject("tagList", tagList);

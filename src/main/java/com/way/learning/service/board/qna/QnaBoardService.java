@@ -19,6 +19,7 @@ public interface QnaBoardService {
 	
 	
 	public int insertBoard(QnaBoard bvo)throws SQLException;
+	public int selectWriterActivity(String userId) throws SQLException;
 	
 	public List<QnaBoard> getBoardList(String Pageno,  String keyword, String sorting) throws SQLException;
 	

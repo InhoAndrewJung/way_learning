@@ -20,6 +20,8 @@ public interface TechBoardService {
 	
 	public int insertBoard(TechBoard bvo)throws SQLException;
 	
+	public int selectWriterActivity(String userId) throws SQLException;
+	
 	public List<TechBoard> getBoardList(String Pageno,  String keyword, String sorting) throws SQLException;
 	
 	public List getTag(String boardNo) throws SQLException;

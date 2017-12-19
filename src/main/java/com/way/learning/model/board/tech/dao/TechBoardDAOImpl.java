@@ -28,6 +28,11 @@ public class TechBoardDAOImpl implements TechBoardDAO{
 	public Date selectByNoForDate(int no) throws SQLException{
 		return sqlSession.selectOne("techBoardMapper.selectByNoForDate", no);
 	}	
+
+	//selectWriterActivity
+	public int selectWriterActivity(String userId) throws SQLException{
+		return sqlSession.selectOne("techBoardMapper.selectWriterActivity", userId);
+	}	
 	//getBoardList
 	public List<TechBoard> getBoardList(String pageNo,String keyword, String sorting) throws SQLException{
 		Map<String,Object> map = new HashMap<String,Object>();
