@@ -16,6 +16,13 @@
 	<div class="menu">
 		<div class="titleName" style="margin-bottom:40px;">
 				<img src="${path}/resources/img/java.svg" id="image_title"> Question
+				
+			<!-- 비로그인 사용자는 일반문제 생성을 보여주지 않는다. -->
+			<sec:authorize access="isAuthenticated()">
+			<span style="text-align:center;margin-top:40px;">
+				<input type="button" id="search_button"  style="padding: 8px; border-radius: 12px; margin: 18px;" value="문제생성" onclick="makeQuestion()">
+			</span>
+			</sec:authorize>
 		</div>
 		<form name="form1" method="post" action="${pageContext.request.contextPath}/question/general/getList" id="form1">
 			<span class="search_button">
@@ -64,12 +71,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<!-- 비로그인 사용자는 일반문제 생성을 보여주지 않는다. -->
-	<sec:authorize access="isAuthenticated()">
-	<div style="text-align:center;margin-top:40px;">
-		<input type="button" id="search_button"  style="padding:6px;border-radius: 5%;"value="일반 문제 생성" onclick="makeQuestion()">
-	</div>
-	</sec:authorize>
 </div>
 
 <%@ include file="../../include/footer.jsp"%>

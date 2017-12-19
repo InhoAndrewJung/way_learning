@@ -58,6 +58,9 @@ public class QnaBoardController {
 		bvo.setMember(mvo); //bvo와 mvo의 Hasing 관계가 성립된다..
 
 		qnaBoardService.insertBoard(bvo); 
+		
+	
+		bvo.getMember().setActivity(qnaBoardService.selectWriterActivity(mvo.getUserId()));
 		List tagList= qnaBoardService.getTag(bvo.getBoardNo()+"");
 		mav.setViewName("board/qna/show_content");
 		mav.addObject("tagList", tagList);

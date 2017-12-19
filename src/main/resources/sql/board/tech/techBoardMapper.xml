@@ -25,6 +25,12 @@
 		SELECT reg_date FROM wl_tech_board
 		WHERE board_no=#{value}
 	</select>
+	
+	<select id="selectWriterActivity" resultType="int"
+		parameterType="int">
+		SELECT activity FROM wl_member
+		WHERE user_id=#{value}
+	</select>
 
 	<!-- 전체게시글보기를 위한 resultMap -->
 	<!-- jdbctype은 insert, update, delete의 경우 nullable column인 경우에만 필수적이다. -->

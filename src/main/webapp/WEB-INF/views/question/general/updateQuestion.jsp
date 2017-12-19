@@ -59,7 +59,7 @@
 			<input type="radio" name="category" id="category1" value="multipleChoice" onchange="multiple1()" checked="checked" /><label for="category1">객관식</label>
 		</c:if>
 		<c:if test="${gq.category == 'shortAnswer'}">
-		<input type="radio" name="category" id="category2" value="shortAnswer" onchange="short()" /><label for="category2">주관식</label><br>
+		<input type="radio" name="category" id="category2" value="shortAnswer" onchange="short()" checked="checked" /><label for="category2">주관식</label><br>
 		</c:if>	
 	</div>
 	<div class="ques-boardTable" >
@@ -76,7 +76,7 @@
 			<div class="ques-footer">
 				<c:if test="${gq.category == 'shortAnswer'}">
 				<div id="short" class="ques-answertitle">정답:
-					<input type="text" name="answer" id="answer" class="ques-answer"><br>
+					<input type="text" name="answer" id="answer" class="ques-answer" value="${gq.answer}"><br>
 				</div>
 				</c:if>
 				<div id="multiple">
@@ -106,72 +106,6 @@
 </body>
 
 
-<%-- <table class="boardTable" style="text-align: center">
-<form action="${path}/question/general/updateQuestionAction?questionNo=${gq.questionNo}" method="post">
-<tr class="table-center" style="height:40">
-	<td>
-		<c:if test="${gq.category == 'multipleChoice'}">
-		<label for="category">객관식</label><input type="radio" name="category" id="category1" value="multipleChoice"  onchange="show()" <c:out value="checked"></c:out> />
-		</c:if>
-		<c:if test="${gq.category == 'shortAnswer'}">
-		<label for="category">주관식</label><input type="radio" name="category" id="category2" value="shortAnswer" onchange="hide()" <c:out value="checked"></c:out> />
-		</c:if><br>
-	</td>
-</tr>
-<tr class="table-center"  style="height:40">
-	<td >
-		<label for="answerChoice">제목:<input type="text" name="title" id="title" value="${gq.title}" /><br>
-	</label>
-	</td>
-</tr>
-<tr class="table-center"  style="height:40">
-
-	<td>
-	<span>
-		<label for="question">문제:</label>
-	</span>
-		<textarea name="question" id="question" cols="60" rows="30"  >${gq.question}</textarea><br>
-	</td>
-</tr>
-<tr class="table-center" style="height:40">
-	<td>
-		<label for="answer">정답:</label><textarea name="answer" id="answer" cols="60" rows="1" >${gq.answer}</textarea>
-	</td>
-</tr>
-
-<tr class="table-center" style="height:40">
-	<td>
-		<span id="change">
-
-		<c:forEach var="tag" items="${aList}" varStatus="status" begin="0">
-		<label for="answerChoice">선택지 ${status.index+1}:<input type="text" name="answerChoice" id="answerChoice"  value="${tag.answerChoice}"/><br>
-
-		</c:forEach>
-		<div id="answerChoicePlus"></div>
-		<c:if test="${gq.category == 'multipleChoice'}">
-		<input type="button" id="btnAnswerPlus" value="선택지 추가" /><br>
-		</c:if>
-		</span>
-	</td>
-</tr>
-
-<tr class="table-center" style="height:40">
-	<td>
-		<input type="submit" value="제출" />
-	</td>
-</tr>
-
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-
-
-</form>
-</table>
-<div style="text-align:center;">
-<!-- 메인으로 이동 -->
-				<a href="${path}/">
-					<img src="${pageContext.request.contextPath}/resources/img/house.png" id="image_list">
-				</a>
-</div> --%>
 
 
 <%@ include file="../../include/footer.jsp"%>

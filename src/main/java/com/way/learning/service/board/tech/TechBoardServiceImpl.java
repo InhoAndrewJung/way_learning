@@ -39,6 +39,10 @@ public class TechBoardServiceImpl implements TechBoardService{
 		return result;
 	}
 	
+	public int selectWriterActivity(String userId) throws SQLException{
+		return techBoardDao.selectWriterActivity(userId);
+	}	
+	
 	public List<TechBoard> getBoardList(String Pageno,  String keyword, String sorting) throws SQLException{// no 
 		
 		return techBoardDao.getBoardList(Pageno,keyword, sorting);

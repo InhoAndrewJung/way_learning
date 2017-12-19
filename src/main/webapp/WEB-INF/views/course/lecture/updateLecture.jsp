@@ -38,9 +38,14 @@ hr {
 		<textarea name="content" id="content">${lvo.content}</textarea>
 	</section>
 	<script>
-		CKEDITOR.replace("content", {
-			filebrowserUploadUrl : "${pageContext.request.contextPath}/lectureBoard/imageUpload"
-		});
+	 CKEDITOR.replace( 'content', {
+   		extraPlugins: 'autogrow,youtube',
+   		autoGrow_minHeight: 500,
+   		autoGrow_maxHeight: 10000,
+   		autoGrow_bottomSpace: 50,
+   		filebrowserUploadUrl : "${pageContext.request.contextPath}/lectureBoard/imageUpload",
+   		removePlugins: 'resize',
+   	} );
 		// CKEDITOR.on('instanceLoaded', function(e) {e.editor.resize(700, 1000)} );
 	</script>
 	<input type="button" class="common-btn util-width-100" value="확인" onclick="content_submit()" style="margin: 30px auto;display: block;">

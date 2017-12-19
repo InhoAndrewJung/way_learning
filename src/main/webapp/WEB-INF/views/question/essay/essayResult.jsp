@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ include file="../../include/common.jsp"%>
 <%@ include file="../../include/header.jsp"%>
-
+<head>
+<script type="text/javascript">
+function goBack() {
+	window.history.back();	
+}
+</script>
+</head>
 <link rel="stylesheet" href="${path}/resources/css/board/board.css?ver=2">
 <body>
 <div class="common-container">
@@ -20,7 +26,8 @@
 							<span class="general-image"></span><br><br>
 							<span class="general-msg">GOOD JOB, BRO :-)<br>
 								정답입니다!
-							</span>							
+							</span><br><br>					
+							<img src="/learning/resources/img/ok-arrow.png" class="general-imgBack" onclick="goBack()">
 						</div>	
 						</c:if>
 						

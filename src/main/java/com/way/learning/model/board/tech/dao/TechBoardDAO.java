@@ -18,6 +18,9 @@ public interface TechBoardDAO {
 	
 	//selectByNoForDate
 	public Date selectByNoForDate(int no) throws SQLException;
+	
+	public int selectWriterActivity(String userId) throws SQLException;
+	
 	//getBoardList
 	public List<TechBoard> getBoardList(String pageNo, String keyword, String sorting) throws SQLException;
 	

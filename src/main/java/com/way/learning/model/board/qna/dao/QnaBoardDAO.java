@@ -18,6 +18,8 @@ public interface QnaBoardDAO {
 	
 	//selectByNoForDate
 	public Date selectByNoForDate(int no) throws SQLException;
+	
+	public int selectWriterActivity(String userId) throws SQLException;
 	//getBoardList
 	public List<QnaBoard> getBoardList(String pageNo, String keyword, String sorting) throws SQLException;
 	

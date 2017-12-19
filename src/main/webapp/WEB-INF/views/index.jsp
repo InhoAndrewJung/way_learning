@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -320,7 +321,7 @@
         <div class="course_img" data-course-no="new"></div>
         <h3 data-course-no="new">내 코스 등록하기</h3>
         <hr data-course-no="new" />
-        <p data-course-no="new" class="course_desc" style="line-height:80px;font-size:1em">
+        <p data-course-no="new" class="course_desc" style="line-height:80px;font-size:0.8em">
           자신의 코스를 등록해보세요!
         </p>
       </li>
@@ -368,22 +369,22 @@
 
   <section class="main_block mb_quiz">
     <div class="mb_quiz_content">
-      <h1>WHO IS THE WINNER?</h1>
+      <h1>java의 자료형으로 옳지 않은 것은?</h1>
       <p>
         <input type="radio" id="test1" name="radio-group" onchange="mb_quiz(this.id)">
-        <label for="test1">Apple</label>
+        <label for="test1">int</label>
       </p>
       <p>
         <input type="radio" id="test2" name="radio-group" onchange="mb_quiz(this.id)">
-        <label for="test2">SAMSUNG</label>
+        <label for="test2">double</label>
       </p>
       <p>
         <input type="radio" id="test3" name="radio-group" onchange="mb_quiz(this.id)">
-        <label for="test3">TOYOYA</label>
+        <label for="test3">String</label>
       </p>
       <p>
         <input type="radio" id="test4" name="radio-group" onchange="mb_quiz(this.id)">
-        <label for="test4">BLACKBERRY</label>
+        <label for="test4">triple</label>
       </p>
     </div>
     <div class="mb_quiz_result" id="mb_quiz_result"></div>
@@ -407,12 +408,14 @@
   <section class="modal_card">
     <span onclick="toggleModal('modal_quiz')">&#x2717;</span>
     <h1><img src="${path}/resources/img/confetti.png" />Wow! GREAT!</h1>
-    <p>AETAETASFASD~~~!@!~@!~@!~@SDFASFSEFQ#RSEFSDFSD</p>
+    <p>정답입니다!!!!</p>
     <h3>How about this Course?</h3>
     <iframe width="40%" height="200" src="https://www.youtube.com/embed/BkRZfxznaOo" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
     <article class="modal_quiz_desc">
-      <h2>Spring MVC 박살내기</h2>
-      <p>blah blah </p>
+      <h3>Spring MVC 박살내기</h3>
+      <p> 자바 프레임워크인 SPRING 의 실전 강좌 입니다. 
+
+SPRING 프레임워크는 현재 JAVA 프레임워크중 가장 많이 사용되어 표준이라 해도 무방할 만큼 널리 쓰이는 도구 입니다. 앞선 프로그래머 취업을 위한 실전 자바 (JAVA) 강좌 에서 충실히 학습을 하셨다면 이해하는데 무리가 없을것 입니다. </p>
     </article>
     <div class="btn_apply">COURSE APPLY</div>
   </section>

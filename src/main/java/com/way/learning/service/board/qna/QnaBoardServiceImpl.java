@@ -26,8 +26,10 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 		System.out.println("After BVO :: "+bvo.getBoardNo()); //3
 
 		Date date=qnaBoardDao.selectByNoForDate(bvo.getBoardNo());//3
+		
 		//받아온 날짜를 bvo에 다시 세팅해준다...
 		bvo.setRegDate(date);
+		
 
 		List<String> tag=bvo.getTag();
 
@@ -38,6 +40,11 @@ public class QnaBoardServiceImpl implements QnaBoardService{
 		}
 		return result;
 	}
+	
+	//selectWriterActivity
+		public int selectWriterActivity(String userId) throws SQLException{
+			return qnaBoardDao.selectWriterActivity(userId);
+		}	
 
 	public List<QnaBoard> getBoardList(String Pageno,  String keyword, String sorting) throws SQLException{// no 
 

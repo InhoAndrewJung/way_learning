@@ -13,7 +13,6 @@
 	function updateQuestion() {
 			location.href = "${path}/question/general/updateQuestion?questionNo=${gq.questionNo}";
 	}
-
 </script>
 <body>
 <div class="common-container">
@@ -34,24 +33,19 @@
 			</tr>
 	</table>
 </div>
-
-
-
-
-	<div class="general-container">
-		<form action="${path}/question/general/shortAnswerResult" method="post">
-			<input type="text" name="answer" id="answer" placeholder="정답을 입력하세요" class="quiz-result-input" required="required"/>
-			<input type="submit" value="제출" class="general-submit">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-			<input type="hidden" name="questionNo" value="${gq.questionNo}">
-		</form>
+<div class="common-container" style="text-align: center;">
+	<form action="${path}/question/general/shortAnswerResult" method="post">
+		<input type="text" name="answer" id="answer" placeholder="정답을 입력하세요" class="quiz-result-input common-card util-width-100" required="required"/>
+		<input type="submit" value="제출" class="general-submit">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<input type="hidden" name="questionNo" value="${gq.questionNo}">
+	</form>
 		<hr style="margin:10px">
 		<div>
 		<input type="button" value="수정" onclick="updateQuestion()" class="general-edit">
 		<input type="button" value="삭제" onclick="deleteQuestion()" class="general-delete">
 		
-	</div>
-	
+		</div>
 	</div>
 
 
