@@ -59,7 +59,7 @@
 			<input type="radio" name="category" id="category1" value="multipleChoice" onchange="multiple1()" checked="checked" /><label for="category1">객관식</label>
 		</c:if>
 		<c:if test="${gq.category == 'shortAnswer'}">
-		<input type="radio" name="category" id="category2" value="shortAnswer" onchange="short()" /><label for="category2">주관식</label><br>
+		<input type="radio" name="category" id="category2" value="shortAnswer" onchange="short()" checked="checked" /><label for="category2">주관식</label><br>
 		</c:if>	
 	</div>
 	<div class="ques-boardTable" >
@@ -76,7 +76,7 @@
 			<div class="ques-footer">
 				<c:if test="${gq.category == 'shortAnswer'}">
 				<div id="short" class="ques-answertitle">정답:
-					<input type="text" name="answer" id="answer" class="ques-answer"><br>
+					<input type="text" name="answer" id="answer" class="ques-answer" value="${gq.answer}"><br>
 				</div>
 				</c:if>
 				<div id="multiple">

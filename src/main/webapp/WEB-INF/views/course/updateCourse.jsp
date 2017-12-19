@@ -44,5 +44,5 @@ uploadFile.on('change', function(){
 	<input type="hidden" name="courseNo" value="${cvo.courseNo}"/>
 	<label for="tags">태그</label><input class="common-card" type="text" id="tags" name="tags" maxlength="200" size="200" placeholder="코스 태그를 입력해주세요"  value="<c:out value="${tag}" ><c:forEach var="tag" items="${tags}"  varStatus="status">${tag} <c:if test="${!status.last}">,</c:if> </c:forEach>	 </c:out>">
 
-	<input type="button" class="common-btn" value="확인" onclick="content_submit()">
+	<input type="button" class="common-btn" value="수정" onclick="content_submit()">
 </form>

@@ -12,6 +12,12 @@
 	<div class="menu">
 		<div class="titleName" style="margin-bottom:40px;">
 				<img src="${path}/resources/img/algorithm.svg" id="image_title"> Algorithm
+			<!-- 비로그인 사용자는 일반문제 생성을 보여주지 않는다. -->
+			<sec:authorize access="isAuthenticated()">
+			<div style="text-align:center;margin-top:40px;">
+				<input type="button" id="search_button"  style="padding: 8px; border-radius: 12px; margin: 18px;" value="알고리즘 문제 생성" onclick="makeQuestion()">
+			</div>
+			</sec:authorize>
 		</div>
 		<form name="form1" method="post" action="${pageContext.request.contextPath}/question/essay/getList" id="form1">
 			<span class="search_section" style="margin-bottom: 1em;">
@@ -48,12 +54,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<!-- 비로그인 사용자는 일반문제 생성을 보여주지 않는다. -->
-	<sec:authorize access="isAuthenticated()">
-	<div style="text-align:center;margin-top:40px;">
-		<input type="button" id="search_button"  style="padding:6px;border-radius: 5%;"value="알고리즘 문제 생성" onclick="makeQuestion()">
-	</div>
-	</sec:authorize>
+	
 </div>
 
 <%@ include file="../../include/footer.jsp"%>
