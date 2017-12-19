@@ -34,23 +34,13 @@
 			</tr>
 	</table>
 </div>
-<div class="common-container">
+<div class="common-container" style="text-align: center;">
 	<form action="${path}/question/general/shortAnswerResult" method="post">
 		<input type="text" name="answer" id="answer" placeholder="정답을 입력하세요" class="quiz-result-input common-card util-width-100" required="required"/>
-		<input type="submit" id="search_button" value="제출" style="border-radius:0px;"/>
+		<input type="submit" value="제출" class="general-submit">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		<input type="hidden" name="questionNo" value="${gq.questionNo}">
 	</form>
-</div>
-
-
-	<div class="general-container">
-		<form action="${path}/question/general/shortAnswerResult" method="post">
-			<input type="text" name="answer" id="answer" placeholder="정답을 입력하세요" class="quiz-result-input" required="required"/>
-			<input type="submit" value="제출" class="general-submit">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-			<input type="hidden" name="questionNo" value="${gq.questionNo}">
-		</form>
 		<hr style="margin:10px">
 		<div>
 		<input type="button" value="수정" onclick="updateQuestion()" class="general-edit">

@@ -863,6 +863,7 @@ hr {
 .general-container{
 	text-align: center;
 	
+	
 }
 
 .general-submit{
@@ -960,6 +961,7 @@ hr {
 .general-imgBack{
 	width: 100px;
 	height: 100px;
+	cursor: pointer;
 }
 
 /* 에세이문제 */

@@ -45,7 +45,7 @@ function selectedOrder(){
 <div class="common-container">
 	<form action="${pageContext.request.contextPath}/lectureBoard/insertLecture?${_csrf.parameterName}=${_csrf.token}" method="post" name="write_form" enctype="multipart/form-data">
 		<div class="titleName" style="margin-bottom:40px;">
-			<img src="${path}/resources/img/write-page.png" id="image_title">새 강의
+			<img src="${path}/resources/img/write-page.png" id="image_title"> 새 강의
 		</div>
 		<div class="common-card">
 			<div class="body-head">
