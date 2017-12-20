@@ -244,8 +244,8 @@
       <li class="nav_item" data-sn-target="test">
 				TEST
 				<section class="subnav_item" data-sn-name="test">
-					<article onclick="quiz('multiple')"><h3>객관식</h3></article>
-					<article onclick="quiz('short')"><h3>주관식</h3></article>
+					<article onclick="quiz('multipleChoice')"><h3>객관식</h3></article>
+					<article onclick="quiz('shortAnswer')"><h3>주관식</h3></article>
 					<article onclick="quiz('essay')"><h3>알고리즘</h3></article>
 				</section>
 			</li>

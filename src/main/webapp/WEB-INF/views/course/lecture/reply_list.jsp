@@ -51,7 +51,7 @@
     <!-- 디자인 수정 해야함************************** -->
     <a  id="modifyDo${row.replyNo}" class="edit_done" onclick="modify('${row.replyNo}')">
     <img src="${pageContext.request.contextPath}/resources/img/replyEdit.png" class="image_replyEditDone"></a>
-    <a id="modifyCancel${row.replyNo}" class="modifyCancel" onclick="modifyCancel('${row.replytext}','${row.replyNo}')">
+    <a id="modifyCancel${row.replyNo}" class="modifyCancel" onclick="modifyCancel('${row.replyNo}')">
     <img src="${pageContext.request.contextPath}/resources/img/cancel.png" class="image_replyCancel"></a>
   </div>
   <hr>

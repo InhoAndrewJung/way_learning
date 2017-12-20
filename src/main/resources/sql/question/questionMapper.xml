@@ -54,8 +54,8 @@ insert into wl_algorithm_question (question_no, title, question,input,output) va
 		<where>
 			(question like '%'||#{keyword}||'%'
 			or title like '%'||#{keyword}||'%')
-			<if test="sorting=='multiple'">and category='multipleChoice'</if>
-			<if test="sorting == 'short'">and category='shortAnswer'</if>
+			<if test="sorting=='multipleChoice'">and category='multipleChoice'</if>
+			<if test="sorting == 'shortAnswer'">and category='shortAnswer'</if>
 		</where>
 		order by question_no desc
 	</select>

@@ -111,11 +111,17 @@ function showModify(replyNo){
   $('a[id=modifyDo'+replyNo+']').hide();
   $('a[id=modifyCancel'+replyNo+']').hide();
 }
-function modifyCancel(replytext,replyNo){
+function modifyCancel(replyNo){
+	
+	 var replytext=$('#reply'+replyNo+'').val();
+	
+	 
+	 
   $('a[id=modify'+replyNo+']').show();
   $('a[id=deleteReply'+replyNo+']').show();
   $('a[id=modifyDo'+replyNo+']').hide();
   $('a[id=modifyCancel'+replyNo+']').hide();
+  
   $('div[title=modifyResult'+replyNo+']').html(replytext);
 }
 function deleteReply(replyNo){

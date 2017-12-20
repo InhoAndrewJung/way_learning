@@ -44,10 +44,12 @@
 					<hr style="margin:10px">
 				<input type="submit" value="제출" class="general-submit"/>	
 				<hr style="margin:10px">
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<div>
 					<input type="button" value="수정" onclick="updateQuestion()" class="general-edit">
 					<input type="button" value="삭제" onclick="deleteQuestion()" class="general-delete">	
 				</div>	
+				</sec:authorize>
 			</form>
 		</div>
 </div>

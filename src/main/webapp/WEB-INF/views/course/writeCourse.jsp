@@ -71,8 +71,7 @@ function content_submit(){
 	<%-- <input class="common-card"  type="text" name="description" maxlength="200" size="200" placeholder="코스 설명을 입력해주세요" value="${cvo.description }"> --%>
 	<textarea class="common-card" name="description" id="description" placeholder="코스설명을 입력해주세요"></textarea>
 
-	<input type="hidden" name="author" value="${cvo.member.userId}"/>
-	<input type="hidden" name="courseNo" value="${cvo.courseNo}"/>
+
 
 	<label for="tags">태그</label><input class="common-card" type="text" id="tags" name="tags" maxlength="200" size="200" placeholder="코스 태그를 입력해주세요" >
 
