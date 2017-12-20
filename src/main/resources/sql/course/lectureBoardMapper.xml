@@ -11,6 +11,10 @@
 	<select id="selectMyCourseNo"  resultType="hashmap">
 	select course_no,course_name from wl_course where author=#{value}
 	</select>
+	
+	<select id="selectMaxLectureNo" parameterType="int" resultType="int">
+	select (max(lecture_order)+1)  from wl_lecture_board where course_no=#{courseNo}
+	</select>
 
 
 	<insert id="insertLecture" >

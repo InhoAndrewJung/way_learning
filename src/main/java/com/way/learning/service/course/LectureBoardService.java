@@ -9,6 +9,7 @@ import com.way.learning.model.course.vo.LectureBoard;
 
 public interface LectureBoardService {
 	public List selectMyCourseNo(String userId);
+	public int selectMaxLectureNo(int courseNo);
 	public int insertLecture(LectureBoard lvo);
 	public int isLectureOrderExist(int courseNo,int lectureOrder);
 	public List<LectureBoard> selectLectureList(int courseNo);

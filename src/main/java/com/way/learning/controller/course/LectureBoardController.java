@@ -74,6 +74,19 @@ System.out.println("isLectureOrderExist result:"+result);
 
 		return result;
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping("selectMaxLectureNo")
+	public int selectMaxLectureNo(@RequestParam(defaultValue="0") int courseNo ) throws Exception{
+		System.out.println("selectMaxLectureNo courseNo:"+courseNo);
+		
+
+		int result=lectureBoardService.selectMaxLectureNo(courseNo);
+
+
+		return result;
+	}
 
 
 
