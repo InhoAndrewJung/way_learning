@@ -13,7 +13,7 @@ function goBack() {
 <div class="common-container">
 	<div class="move-boardList">
 		<div class="general-titleName">Question ${questionNo}</div>
-		<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}">
+		<a href="${pageContext.request.contextPath}/question/general/getList?keyword=${keyword}&sorting=${multipleChoice}${shortAnswer}">
 			<img src="${pageContext.request.contextPath}/resources/img/general-list.png" class="general-toList">
 		</a>
 	</div>

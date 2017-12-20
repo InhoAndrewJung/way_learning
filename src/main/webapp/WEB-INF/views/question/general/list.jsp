@@ -26,8 +26,8 @@
 		</div>
 		<form name="form1" method="post" action="${pageContext.request.contextPath}/question/general/getList" id="form1">
 			<span class="search_button">
-				<a href="#" onclick="sorting('multiple')">객관식 </a>
-				<a href="#" onclick="sorting('short')">주관식 </a>
+				<a href="#" onclick="sorting('multipleChoice')">객관식 </a>
+				<a href="#" onclick="sorting('shortAnswer')">주관식 </a>
 				<input type="hidden"  name="sorting"  value="">
 			</span>
 			<span class="search_section">

@@ -45,7 +45,7 @@
 	
 	<select id="selectAccetpedCourseList" resultMap="courseRM" >
 	select course_no, course_name,description,course_image,author,c.reg_date,is_accept,cnt_course_like,activity,img_profile 
-	from wl_course c, wl_member m where  c.AUTHOR=m.USER_ID and is_accept=1
+	from wl_course c, wl_member m where  c.AUTHOR=m.USER_ID and is_accept=1 order by reg_date desc
 	</select>
 	
 	<select id="selectMyCourse" resultMap="courseRM">

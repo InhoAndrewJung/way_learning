@@ -13,23 +13,27 @@
 <script type="text/javascript">
   // var lectures = new Map()
   var lectures = []
-  var courses = new Map()
+ // var courses = new Map()
   <c:forEach var="list" items="${lectureList}">
     lectures.push({courseName:"${list.COURSE_NAME}", progress:${list.PROGRESS}, courseNo:${list.COURSE_NO}, cnt:${list.CNT_COURSE}
                     , author:"${list.AUTHOR}", lectureNo:${list.LECTURE_NO}, lectureOrder:${list.LECTURE_ORDER}, lectureName:"${list.LECTURE_NAME}"
                     , courseImage:"${list.COURSE_IMAGE}"})
   </c:forEach>
+   // console.log(lectures);
   var target = document.getElementById('course_list')
   lectures.forEach(drawCourse)
   function drawCourse(item, idx){
-    var course = courses.get(item.courseName)
-    if(typeof course == 'undefined'){
-      courses.set(item.courseName, [item])
+	  console.log(item)
+   // var course = courses.get(item.courseName)
+    //console.log(course)
+   // if(typeof course == 'undefined'){
+    	
+    //  courses.set(item.courseName, [item])
       var article = document.createElement('article')
       article.className = "mycourse common-card"
       var title = document.createElement('h3')
-      title.dataset.path = 'lectureBoard/showLectureList?courseNo='+item.courseNo
-      title.appendChild(document.createTextNode(item.courseName))
+      title.dataset.path = 'lectureBoard/showLectureList?courseNo='+item.courseNo+'&lectureNo='+item.lectureNo
+      title.appendChild(document.createTextNode(item.courseName+' '+item.lectureOrder+'강'))
       var courseImage = document.createElement('img')
       courseImage.dataset.path = 'lectureBoard/showLectureList?courseNo='+item.courseNo
       courseImage.setAttribute('src', '${path}/resources/upload/'+item.courseImage)
@@ -43,19 +47,28 @@
       progressGraph.className = 'course_progress_bar'
       var progressValue = document.createElement('span')
       progressValue.appendChild(document.createTextNode(item.progress+'% / 총 '+item.cnt+'강'))
+      
+      // var lectureNo = document.createElement('h4')
+       // lectureNo.dataset.path = 'lectureBoard/showLectureList?courseNo='+item.courseNo+'&lectureNo='+item.lectureNo
+       // lectureNo.appendChild(document.createTextNode(item.lectureOrder+'강'))
+        
       progressGraphBox.appendChild(progressGraph)
       progressGraphBox.appendChild(progressValue)
+     
       progress.appendChild(progressGraphBox)
       progress.appendChild(progressValue)
+      //progress.appendChild(lectureNo)
       article.appendChild(courseImage)
       article.appendChild(title)
       article.appendChild(author)
       article.appendChild(progress)
+      //article.appendChild(lectureNo)
       target.appendChild(article)
-    } else {
-      course.push(item)
-    }
-    course = courses.get(item.courseName)
+   // } else {
+    //  course.push(item)
+       //console.log(course)
+   // }
+  //  course = courses.get(item.courseName)
     // if(drawed.get(item.courseName)==-1){
     //   drawed.push(item.courseName)
     //     var course = document.createElement('article')
@@ -63,7 +76,7 @@
     //     course.className = "mycourse"
     //     target.appendChild(course)
     // }
-    console.log(course)
+    //console.log(course)
   }
   function drawProgress() {
     var courseList = document.querySelectorAll("[data-course-progress]")
