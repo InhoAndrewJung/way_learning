@@ -21,6 +21,7 @@ $(document).ready(function(){
 			success: function(result){
 				//alert(result);
 				$('#lectureOrder').val(result);
+				$('#duplicate').val("false");
 				
 			}
 		}); 
@@ -40,19 +41,9 @@ function selectedCourse(){
 	courseNo=$('#courseNo').val();
 	selectedOrder()
 }
+
 function selectedOrder(){
-	//alert("courseNo:"+courseNo);
 	
-	$.ajax({
-		type: "post",
-		url: "${pageContext.request.contextPath}/lectureBoard/selectMaxLectureNo",
-		data:"${_csrf.parameterName}=${_csrf.token}&courseNo="+courseNo,
-		success: function(result){
-			//alert(result);
-			$('#lectureOrder').val(result);
-			
-		}
-	}); 
 	
 	
 	
