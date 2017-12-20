@@ -21,6 +21,14 @@ public class LectureBoardDAOImpl implements LectureBoardDAO {
 	public List selectMyCourseNo(String userId){
 		return  sqlSession.selectList("lectureBoardMapper.selectMyCourseNo", userId);
 	}
+	
+	
+	public int selectMaxLectureNo(int courseNo){
+		System.out.println("dao selectMaxLectureNo:"+courseNo);
+		int result =sqlSession.selectOne("lectureBoardMapper.selectMaxLectureNo", courseNo);
+		System.out.println("selectMaxLectureNo 결과:"+result);
+		return  result;
+	}
 
 	public int insertLecture(LectureBoard lvo){
 

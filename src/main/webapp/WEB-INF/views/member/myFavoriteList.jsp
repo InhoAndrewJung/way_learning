@@ -81,3 +81,42 @@
 			</c:forEach>
 		</div>
 	</div>
+	
+	
+	<div class="container-reply">
+		<div class="boardTable">
+			<div class="title">
+				<span class="title-text">
+				최근 내가 좋아요한 코스
+					</span>
+				<span class="title-no">
+					<img src="${path}/resources/img/white_heart.png" class="image-heart"> ${fn:length(lectureList)}
+				</span>
+			</div>
+			<c:forEach var="ll" items="${lectureList}">
+			<div class="table-center">
+				<div class="table-title">
+					
+
+						<a href="${path}/lectureBoard/showLectureList?courseNo=${ll.COURSE_NO}">${ll.COURSE_NAME}</a>
+					
+				</div>
+
+				<!-- 글쓴이, 활동점수, 글쓴시각 -->
+				<div class="userList">
+					<%-- <img src="${path}/resources/upload/${rl. IMG_PROFILE}" id="image_profile"> --%>
+					<div class="userList-info">
+						<a class="userId">${ll.AUTHOR }</a>
+						<%-- <div class="activity">
+							<span class="fa fa-graduation-cap"></span>
+							${rl.ACTIVITY}
+						</div> --%>
+						<div class="date" style="text-align:left;">
+							<span class="timeago" ><fmt:formatDate value="${ll.REG_DATE}" pattern="yyyy.MM.dd" /></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			</c:forEach>
+		</div>
+	</div>

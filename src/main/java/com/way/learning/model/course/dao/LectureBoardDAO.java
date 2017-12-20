@@ -9,6 +9,7 @@ public interface LectureBoardDAO {
 	public List selectMyCourseNo(String userId);
 	public int insertLecture(LectureBoard lvo);
 	public int isLectureOrderExist(int courseNo,int lectureOrder);
+	public int selectMaxLectureNo(int courseNo);
 	public List<LectureBoard> selectLectureList(int courseNo);
 	public Course selectCourse(int courseNo, String userId);
 	public List<String> selectCourseTag(int courseNo) ;

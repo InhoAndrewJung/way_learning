@@ -11,7 +11,6 @@
 <section class="course_list" id="course_list">
 </section>
 <script type="text/javascript">
-  // var lectures = new Map()
   var lectures = []
   var courses = new Map()
   <c:forEach var="list" items="${lectureList}">
@@ -22,9 +21,9 @@
   var target = document.getElementById('course_list')
   lectures.forEach(drawCourse)
   function drawCourse(item, idx){
-    var course = courses.get(item.courseName)
-    if(typeof course == 'undefined'){
-      courses.set(item.courseName, [item])
+   var course = courses.get(item.courseName)
+   if(typeof course == 'undefined'){
+     courses.set(item.courseName, [item])
       var article = document.createElement('article')
       article.className = "mycourse common-card"
       var title = document.createElement('h3')
@@ -53,8 +52,10 @@
       progressGraph.className = 'course_progress_bar'
       var progressValue = document.createElement('span')
       progressValue.appendChild(document.createTextNode(item.progress+'% / 총 '+item.cnt+'강'))
+
       progressGraphBox.appendChild(progressGraph)
       progressGraphBox.appendChild(progressValue)
+
       progress.appendChild(progressGraphBox)
       progress.appendChild(progressValue)
       article.appendChild(courseImage)
@@ -63,10 +64,11 @@
       article.appendChild(lectureList)
       article.appendChild(progress)
       target.appendChild(article)
-    } else {
-      course.push(item)
-    }
-    course = courses.get(item.courseName)
+   } else {
+     course.push(item)
+       console.log(course)
+   }
+   course = courses.get(item.courseName)
     // if(drawed.get(item.courseName)==-1){
     //   drawed.push(item.courseName)
     //     var course = document.createElement('article')
@@ -74,7 +76,7 @@
     //     course.className = "mycourse"
     //     target.appendChild(course)
     // }
-    console.log(course)
+    //console.log(course)
   }
   function drawProgress() {
     var courseList = document.querySelectorAll("[data-course-progress]")

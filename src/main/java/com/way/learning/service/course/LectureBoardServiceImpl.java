@@ -22,6 +22,10 @@ public class LectureBoardServiceImpl implements LectureBoardService {
 	public List selectMyCourseNo(String userId){
 		return  lectureBoardDAO.selectMyCourseNo(userId);
 	}
+	
+	public int selectMaxLectureNo(int courseNo){
+		return  lectureBoardDAO.selectMaxLectureNo(courseNo);
+	}
 
 	public int insertLecture(LectureBoard lvo){
 		return lectureBoardDAO.insertLecture(lvo);

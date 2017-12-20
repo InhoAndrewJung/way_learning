@@ -55,11 +55,11 @@
 				<tr>
 					<td>
 					<span class="boardTitleSet">
-						<h2>
+						<h3>
               <a href="${pageContext.request.contextPath}/board/tech/showContent?boardNo=${bvo.boardNo}&&keyword=${map.keyword}">
                 ${bvo.title}
               </a>
-						</h2>
+						</h3>
 						<div class="left_tag">
   						<c:forEach var="result" items="${requestScope.map.tagList}">
   							<c:if test="${bvo.boardNo == result.BOARD_NO}">

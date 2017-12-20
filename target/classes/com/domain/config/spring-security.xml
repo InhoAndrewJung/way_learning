@@ -11,7 +11,7 @@
 	 <sec:http pattern="/board/tech/imageUpload"  security="none" />
 	 <sec:http pattern="/board/qna/imageUpload"  security="none" />
 	 <sec:http pattern="/lectureBoard/imageUpload"  security="none" />
-	  <sec:http pattern="/learning/resources/upload"  security="none" />
+	 <sec:http pattern="/learning/resources/upload"  security="none" />
 	  
 	  
 	  

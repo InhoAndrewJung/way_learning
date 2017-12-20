@@ -36,7 +36,7 @@ function passCheck() {
 </head>
 <body>
 <div class="container">
-	<div class="logo"><img src="${path}/resources/img/google.png" id="image_logo" onclick="toMain()"></div>
+	<div class="logo"><img src="${path}/resources/img/logo_black.png" id="image_logo" onclick="toMain()"></div>
 	<div class="container-body">
 	<form action="${pageContext.request.contextPath}/member/mailSender?${_csrf.parameterName}=${_csrf.token}" id="ExistIdForm" method="post" name="mailSenderForm"	id="mailSenderForm">	
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 

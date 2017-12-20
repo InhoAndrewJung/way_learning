@@ -17,8 +17,8 @@
 		<div class="titleName" style="margin-bottom:40px;">
 				<img src="${path}/resources/img/java.svg" id="image_title"> Question
 				
-			<!-- 비로그인 사용자는 일반문제 생성을 보여주지 않는다. -->
-			<sec:authorize access="isAuthenticated()">
+			<!-- 관리자만 문제생성이 가능하다. -->
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<span style="text-align:center;margin-top:40px;">
 				<input type="button" id="search_button"  style="padding: 8px; border-radius: 12px; margin: 18px;" value="문제생성" onclick="makeQuestion()">
 			</span>
@@ -26,8 +26,8 @@
 		</div>
 		<form name="form1" method="post" action="${pageContext.request.contextPath}/question/general/getList" id="form1">
 			<span class="search_button">
-				<a href="#" onclick="sorting('multiple')">객관식 </a>
-				<a href="#" onclick="sorting('short')">주관식 </a>
+				<a href="#" onclick="sorting('multipleChoice')">객관식 </a>
+				<a href="#" onclick="sorting('shortAnswer')">주관식 </a>
 				<input type="hidden"  name="sorting"  value="">
 			</span>
 			<span class="search_section">

@@ -70,7 +70,7 @@ function showModify(replyNo){
 	}
 function modifyCancel(replyNo){
 	 var replytext=$('#reply'+replyNo+'').val();
-	 alert("modifycancel:"+replytext)
+	// alert("modifycancel:"+replytext)
   toggleBtnView(replyNo)
   
   $('div[title=modifyResult'+replyNo+']').html(replytext);

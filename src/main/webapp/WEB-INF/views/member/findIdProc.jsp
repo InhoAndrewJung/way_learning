@@ -20,7 +20,7 @@
 		
 					<div class="body">
 			
-							<div class="title">
+							<div class="title" align="center">
 							Your ID is<p class="getUserId">${userId}</p>
 							</div>
 						<div class="go-SignIn">
