@@ -605,15 +605,32 @@ a:link, a:visited  {
 }
 .mycourse>span {
   text-align: left;
-  display:block;
-  color:#666;
-  font-size:0.8em;
-  margin-bottom:25px;
+  display: block;
+  color: #666;
+  font-size: 0.8em;
+  margin-bottom: 10px;
 }
 .mycourse p {
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.mycourse-lecture-list{
+  font-size: 0.7em;
+  text-align: left;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 13px;
+  padding: 3px 0;
+}
+.mycourse-lecture-list>span{
+  padding: 2px 8px;
+  border: 1px rgba(49, 88, 134, 0.5) solid;
+  border-radius: 8px;
+  margin-right: 5px;
+  cursor: pointer;
+  background-color: #6c8bb0;
+  color: white;
 }
 .course_progress {
   position:relative;
