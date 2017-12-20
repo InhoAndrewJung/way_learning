@@ -35,6 +35,16 @@
       courseImage.setAttribute('src', '${path}/resources/upload/'+item.courseImage)
       var author = document.createElement('span')
       author.appendChild(document.createTextNode(item.author))
+      var lectureList = document.createElement('div')
+      lectureList.className = 'mycourse-lecture-list';
+      for(var i=0; i<lectures.length; i++) {
+        if(item.courseNo == lectures[i].courseNo){
+          var lectureItem = document.createElement('span');
+          lectureItem.dataset.path = 'lectureBoard/showLectureList?courseNo='+item.courseNo+'&lectureNo='+lectures[i].lectureNo
+          lectureItem.appendChild(document.createTextNode(lectures[i].lectureOrder+'강'))
+          lectureList.appendChild(lectureItem);
+        }
+      }
       var progress = document.createElement('div')
       progress.className = 'course_progress'
       var progressGraphBox = document.createElement('section')
@@ -50,6 +60,7 @@
       article.appendChild(courseImage)
       article.appendChild(title)
       article.appendChild(author)
+      article.appendChild(lectureList)
       article.appendChild(progress)
       target.appendChild(article)
     } else {
