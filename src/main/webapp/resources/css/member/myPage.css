@@ -603,7 +603,7 @@ a:link, a:visited  {
   margin: 10px;
   cursor: pointer;
 }
-
+.mycourse-lecture-list  span{cursor:pointer; font-size:2em}
 
 .mycourse h4 {
   font-size: 1.7em;

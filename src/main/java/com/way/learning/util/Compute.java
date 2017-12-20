@@ -36,7 +36,7 @@ public class Compute {
 	File rFile = new File("C:\\The Coder\\result.txt");
 	File tcFile = new File("C:\\The Coder\\TestCase\\Q"+qNo+"_TC"+tcNo+"_ANS.txt");
 	File tmpFile = new File("C:\\The Coder\\tmp.txt");
-	Thread.sleep(250);
+	Thread.sleep(500);
 	Scanner scanError = new Scanner(eFile);
 	Scanner scanResult = new Scanner(rFile);
 	Scanner expAnswer = new Scanner(tcFile);
@@ -67,7 +67,8 @@ public class Compute {
 	data[1] = result;
 	
 	
-	
+	scanError.close();
+	scanResult.close();
 	//save TC0~4 answer
 	/*for(int i = 0; i<5; i++) {
 		if(tcNo == i ) {
@@ -92,8 +93,7 @@ public class Compute {
 	checkTestcase(tcNo, result, answer, data, tmpFile);
 	
 	
-	scanError.close();
-	scanResult.close();
+	
 	
 	//eFile.delete();
 	//rFile.delete();
@@ -143,7 +143,7 @@ public class Compute {
 		long start = System.currentTimeMillis(); //시작시각
 		synchronized (desk) {
 			desk.open(bfile);		
-			Thread.sleep(1500);
+			Thread.sleep(2000);
 		}
 		//Add kill CMD process code after 2s
 		Runtime rt = Runtime.getRuntime();

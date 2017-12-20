@@ -3,46 +3,6 @@
 <%@ include file="../../include/header.jsp"%>
 <link rel="stylesheet" href="${path}/resources/css/board/board.css?ver=2">
 
-<script type="text/javascript">
-
-$(document).ready(function() {
-  var multipleHTML = document.getElementById('multiple').innerHTML;
-  var shortHTML = document.getElementById('short').innerHTML;
-  var answerTarget = document.getElementById('answerSection');
-  multiple1();
-
-   function multiple1(){
-      answerTarget.innerHTML = multipleHTML;
-    $('#multiple2').show();
-   }
-
-   function short(){
-    answerTarget.innerHTML = shortHTML;
-      $('#multiple2').hide();
-   }
-});//document
-function addAnswerChoice() {
-  /* console.log($('#multiple')[0]); */
-  var answerCnt = $('#answerSection')[0].querySelectorAll('span').length;
-  var answerInput = '<span><input type="radio" name="answer" id="answer'+(answerCnt+1)+'" value="'+(answerCnt+1)+'"><label for="answer'+(answerCnt+1)+'"><input type="text" name="answerChoice" class="ques-answerChoice" /></label><br></span>'
-  console.log(answerInput)
-  $('#answerSection').append(answerInput)
-}
-function removeAnswerChoice() {
-  var answerCnt = $('#answerSection')[0].querySelectorAll('span').length;
-  if ( answerCnt >= 5) {
-    $('#answerSection')[0].querySelectorAll('span')[answerCnt-1].remove();
-  }else{
-    alert("최소 선택지는 4개이상이어야 합니다");
-  }
-}
-
-function goBack() {
-  window.history.back();
-}
-
-</script>
-<body>
 <div class="common-container">
    <form name="frm1" action="${path}/question/general/insertQuestion" method="post">
    <div style="text-align:center;">
@@ -51,7 +11,7 @@ function goBack() {
    </div>
    <div class="ques-boardTable" >
          <div class="ques-title" >
-            <label for="answerChoice">제목:<input type="text" name="title" id="title" class="ques-titleText" /><br></label>
+            <label for="title">제목:<input type="text" name="title" id="title" class="ques-titleText" /><br></label>
 
          </div>
          <hr style="margin:20px">
@@ -63,6 +23,7 @@ function goBack() {
          <div id="answerSection" class="ques-footer">
             <div id="short" class="ques-answertitle">정답:
                <input type="text" name="answer" id="answer" class="ques-answer"><br>
+          <input type="hidden" name="answerChoice" id="answerChoice"><br>
             </div>
 
             <div id="multiple">
@@ -97,5 +58,38 @@ function goBack() {
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
    </form>
 </div>
-</body>
+<script type="text/javascript">
+  var multipleHTML = document.getElementById('multiple').innerHTML;
+  var shortHTML = document.getElementById('short').innerHTML;
+  var answerTarget = document.getElementById('answerSection');
+  multiple1();
+
+  function multiple1(){
+     answerTarget.innerHTML = multipleHTML;
+    $('#multiple2').show();
+  }
+
+  function short(){
+    answerTarget.innerHTML = shortHTML;
+     $('#multiple2').hide();
+  }
+  function addAnswerChoice() {
+    /* console.log($('#multiple')[0]); */
+    var answerCnt = $('#answerSection')[0].querySelectorAll('span').length;
+    var answerInput = '<span><input type="radio" name="answer" id="answer'+(answerCnt+1)+'" value="'+(answerCnt+1)+'"><label for="answer'+(answerCnt+1)+'"><input type="text" name="answerChoice" class="ques-answerChoice" /></label><br></span>'
+    console.log(answerInput)
+    $('#answerSection').append(answerInput)
+  }
+  function removeAnswerChoice() {
+    var answerCnt = $('#answerSection')[0].querySelectorAll('span').length;
+    if ( answerCnt >= 5) {
+      $('#answerSection')[0].querySelectorAll('span')[answerCnt-1].remove();
+    }else{
+      alert("최소 선택지는 4개이상이어야 합니다");
+    }
+  }
+  function goBack() {
+    window.history.back();
+  }
+</script>
 <%@ include file="../../include/footer.jsp"%>

@@ -88,33 +88,40 @@ public class EssayQuestionController {
 		 
 		
 		String[] compiledResult = new String[4];
-		
-		int tcNo = 0; //TestCase number
-		//Handling System.in & Compare user soureCode and Answer
-		Preprocess proc = new Preprocess();
-		for(tcNo=0; tcNo<2; tcNo++) {
-			code = proc.process(code, questionNo, tcNo);
-			System.out.println("After process:"+code);
-			//Compile using javac
-			Compute com = new Compute();
-			compiledResult = com.compile(code, questionNo, tcNo);
-			//put error message and result to setVO
-		}
-		//0 : answerResult, 1 : error, 2 : result 
-		System.out.println("에러메세지@controller : "+ compiledResult[0]);
-		if(compiledResult[0].contains("Exception")) {
-			System.out.println("런타임에러 확인 :"+compiledResult[0]);
-			compiledResult[0] = "Exception";
-		}
-		
-		System.out.println("런타임에러 확인 :"+compiledResult[1]);
-		Data set = new Data(compiledResult[0], compiledResult[1], compiledResult[2]);
-		mav.setViewName("/question/essay/essayResult");
-		mav.addObject("code",set);
-		mav.addObject("questionNo",questionNo);
-		
-		return mav;	
+	      
+	      int tcNo = 0; //TestCase number
+	      //Handling System.in & Compare user soureCode and Answer
+	      Preprocess proc = new Preprocess();
+	      for(tcNo=0; tcNo<2; tcNo++) {
+	    	  System.out.println("controller 에서 code:"+code);
+	    	  System.out.println("controller 에서 questionNo:"+questionNo);
+	    	  System.out.println("controller 에서 tcNo:"+tcNo);
+	         code = proc.process(code, questionNo, tcNo);
+	         System.out.println("After process:"+code);
+	         //Compile using javac
+	         Compute com = new Compute();
+	         compiledResult = com.compile(code, questionNo, tcNo);
+	         //put error message and result to setVO
+	      }
+	      //0 : answerResult, 1 : error, 2 : result 
+	      System.out.println("에러메세지@controller : "+ compiledResult[0]);
+	      if(compiledResult[0].contains("Exception")) {
+	         System.out.println("런타임에러 확인 :"+compiledResult[0]);
+	         compiledResult[0] = "Exception";
+	      }
+	      
+	      System.out.println("런타임에러 확인 :"+compiledResult[1]);
+	      Data set = new Data(compiledResult[0], compiledResult[1], compiledResult[2]);
+	      mav.setViewName("/question/essay/essayResult");
+	      mav.addObject("code",set);
+	      mav.addObject("questionNo",questionNo);
+	      
+	      return mav;   
 	}
+	
+	
+	
+	  
 		
 	
 	
