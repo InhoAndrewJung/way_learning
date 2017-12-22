@@ -6,10 +6,28 @@
 <link rel="stylesheet" href="${path}/resources/css/board/board.css">
 
 <script type="text/javascript">
+
 var courseNo = ${list[0].COURSE_NO}
 <c:if test="${not empty param.cno}">
 courseNo = ${param.cno}
 </c:if>
+
+
+$(document).ready(function(){
+	 $.ajax({
+			type: "post",
+			url: "${pageContext.request.contextPath}/lectureBoard/selectMaxLectureNo",
+			data:"${_csrf.parameterName}=${_csrf.token}&courseNo="+courseNo,
+			success: function(result){
+				//alert(result);
+				$('#lectureOrder').val(result);
+				
+			}
+		}); 
+	
+})
+
+
 function content_submit(){
 	var f=document.write_form;
 	if(f.duplicate.value == 'true'){
@@ -23,20 +41,44 @@ function selectedCourse(){
 	selectedOrder()
 }
 function selectedOrder(){
-	var lectureOrder=$('#lectureOrder').val();
+	//alert("courseNo:"+courseNo);
+	
 	$.ajax({
 		type: "post",
-		url: "${pageContext.request.contextPath}/lectureBoard/isLectureOrderExist",
-		data:"${_csrf.parameterName}=${_csrf.token}&courseNo="+courseNo+"&lectureOrder="+lectureOrder,
+		url: "${pageContext.request.contextPath}/lectureBoard/selectMaxLectureNo",
+		data:"${_csrf.parameterName}=${_csrf.token}&courseNo="+courseNo,
 		success: function(result){
-			if(result == 1){
-				alert("이미 존재하는 강의번호 입니다.")
-			$('#duplicate').val("true");
-			}else{
-				$('#duplicate').val("false");
-			}
+			//alert(result);
+			$('#lectureOrder').val(result);
+			
 		}
-	});
+	}); 
+	
+	
+	
+	setTimeout(() => {
+		var lectureOrder=$('#lectureOrder').val();
+		$.ajax({
+			type: "post",
+			url: "${pageContext.request.contextPath}/lectureBoard/isLectureOrderExist",
+			data:"${_csrf.parameterName}=${_csrf.token}&courseNo="+courseNo+"&lectureOrder="+lectureOrder,
+			success: function(result){
+				if(result == 1){
+					alert("이미 존재하는 강의번호 입니다.")
+				$('#duplicate').val("true");
+				}else{
+					$('#duplicate').val("false");
+				}
+			}
+		});
+	}, 500);
+	
+	
+	
+	 
+	
+	
+	
 }
 </script>
 
@@ -49,7 +91,7 @@ function selectedOrder(){
 		</div>
 		<div class="common-card">
 			<div class="body-head">
-				<select class="title" style="float:left;border: none;" name="courseNo" id="courseNo" onchange="selectedCourse()">
+				<select class="title" style="float:left;border:none;" name="courseNo" id="courseNo" onchange="selectedCourse()">
 				<c:forEach var="row" items="${list}">
 					<c:choose>
 						<c:when  test="${not empty param.cno && param.cno==row.COURSE_NO}">
