@@ -61,7 +61,7 @@ public class CourseServiceImpl implements CourseService {
 		List<String> tag=cvo.getTags();
 
 		for(String tags:tag){
-			courseDAO.insertTags(tags);
+			courseDAO.insertTags(tags,cvo.getCourseNo());
 
 		}
 
@@ -132,11 +132,11 @@ public class CourseServiceImpl implements CourseService {
 		}
 
 			int result=courseDAO.updateCourse(cvo);
-			courseDAO.delteTags(cvo.getCourseNo());
+			courseDAO.deleteTags(cvo.getCourseNo());
 			List<String> tag=cvo.getTags();
 
 			for(String tags:tag){
-				courseDAO.insertTags(tags);
+				courseDAO.insertTags(tags,cvo.getCourseNo());
 
 			}
 	

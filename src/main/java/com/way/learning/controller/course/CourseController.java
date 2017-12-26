@@ -34,11 +34,11 @@ public class CourseController {
 		Member mvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println("而⑦듃濡쒕윭 mvo:"+mvo);
 
-		if(mvo==null){ //濡쒓렇�씤 �긽�깭媛� �븘�땲�떎...湲��벐湲곕줈 紐산컙�떎..
+		if(mvo==null){ 
 			return new ModelAndView("redirect:/");			
 		}
-		//濡쒓렇�씤 �븳 �긽�깭�씪硫�
-		cvo.setMember(mvo); //cvo�� mvo�쓽 Hasing 愿�怨꾧� �꽦由쎈맂�떎..
+		
+		cvo.setMember(mvo); 
 
 		courseService.insertCourse(cvo,request); 
 
@@ -99,7 +99,7 @@ public class CourseController {
 		Course cvo=courseService.selectMyCourse(mvo.getUserId(), courseNo);
 		System.out.println("cvo:"+cvo);
 		List<String> tags=courseService.selectCourseTag(courseNo);
-		System.out.println("tags:"+tags);
+		System.out.println(" updateForm tags:"+tags);
 		mav.setViewName("course/updateCourse");
 		mav.addObject("cvo", cvo);
 		mav.addObject("tags", tags);
@@ -111,7 +111,7 @@ public class CourseController {
 
 	@RequestMapping("updateCourse")
 	public ModelAndView updateCouse(Course cvo ,HttpServletRequest request, ModelAndView mav) throws Exception{
-		System.out.println("updateCourse �엯�꽦");
+		System.out.println("updateCourse ");
 		courseService.updateCourse(cvo,request); 
 
 

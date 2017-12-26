@@ -23,9 +23,13 @@ public class CourseDAOImpl implements CourseDAO {
 	}
 
 
-	public int insertTags(String tags) throws Exception{
+	public int insertTags(String tags,int courseNo) throws Exception{
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("tags", tags);
+		map.put("courseNo", courseNo);
 
-		return sqlSession.insert("courseMapper.insertTags", tags);
+		
+		return sqlSession.insert("courseMapper.insertTags", map);
 
 	}
 
@@ -70,7 +74,7 @@ public class CourseDAOImpl implements CourseDAO {
 
 
 
-	public int delteTags(int  courseNo) throws Exception{
+	public int deleteTags(int  courseNo) throws Exception{
 		
 		
 		return sqlSession.delete("courseMapper.deleteTags", courseNo);
