@@ -36,7 +36,7 @@
 	</insert>
 	
 	<insert id="insertTags">
-	insert into  wl_course_tag (course_no,tag) values((select Max(course_no) from wl_course),#{tags})
+	insert into  wl_course_tag (course_no,tag) values(#{courseNo},#{tags})
 	</insert>
 	
 	<select id="selectMyCourseList" resultMap="courseRM" >

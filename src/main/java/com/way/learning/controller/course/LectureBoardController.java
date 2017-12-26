@@ -108,7 +108,7 @@ System.out.println("isLectureOrderExist result:"+result);
 
 		//System.out.println("showLectureList lvo:"+lvo);
 		System.out.println("showLectureList cvo:"+cvo);
-		//System.out.println("showLectureList tags:"+tags);
+		System.out.println("showLectureList tags:"+tags);
 
 
 		mav.setViewName("course/lecture/lectureList");
