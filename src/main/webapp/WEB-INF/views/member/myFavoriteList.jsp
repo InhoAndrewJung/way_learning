@@ -22,15 +22,12 @@
 					</c:if>
 				</div>
 
-				<!-- 글쓴이, 활동점수, 글쓴시각 -->
+				
 				<div class="userList">
-					<%-- <img src="${path}/resources/upload/${bl.IMG_PROFILE}" id="image_profile"> --%>
+					
 					<div class="userList-info">
 						<a class="userId">${bl.WRITER }</a>
-						<%-- <div class="activity">
-							<span class="fa fa-graduation-cap"></span>
-							${bl.ACTIVITY}
-						</div> --%>
+						
 						<div class="date" style="text-align:left;">
 							<span class="timeago" ><fmt:formatDate value="${bl.REG_DATE}" pattern="yyyy.MM.dd" /></span>
 						</div>
@@ -63,15 +60,12 @@
 					</c:if>
 				</div>
 
-				<!-- 글쓴이, 활동점수, 글쓴시각 -->
+				
 				<div class="userList">
-					<%-- <img src="${path}/resources/upload/${rl. IMG_PROFILE}" id="image_profile"> --%>
+					
 					<div class="userList-info">
 						<a class="userId">${rl.WRITER }</a>
-						<%-- <div class="activity">
-							<span class="fa fa-graduation-cap"></span>
-							${rl.ACTIVITY}
-						</div> --%>
+						
 						<div class="date" style="text-align:left;">
 							<span class="timeago" ><fmt:formatDate value="${rl.REG_DATE}" pattern="yyyy.MM.dd" /></span>
 						</div>

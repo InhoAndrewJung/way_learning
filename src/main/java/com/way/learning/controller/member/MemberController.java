@@ -242,15 +242,23 @@ public class MemberController {
 
 	@RequestMapping("showAllRanking")
 	public ModelAndView showAllRanking(HttpServletRequest request, ModelAndView mav,
-			@RequestParam(defaultValue = "cntRight") String sorting) throws Exception {
+			@RequestParam(defaultValue = "cntRight") String sorting , @RequestParam(defaultValue = "")String ajax) throws Exception {
 		System.out.println("showAllRanking 컨트롤러 입성!");
 		Member mvo = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userId = mvo.getUserId();
 		System.out.println("showAllRanking 유저아이디:" + userId);
 		System.out.println("showAllRanking sorting:" + sorting);
+		System.out.println("showAllRanking ajax:" + ajax);
 		List<AnswerResult> list = memberService.selectAllRanking(sorting);
 		mav.addObject("list", list);
-		mav.setViewName("/member/showAllRanking");
+		if(ajax.equals("true")){
+			System.out.println("ajax true");
+			mav.setViewName("/member/showAllRankingAjax");
+			
+		}else{
+			mav.setViewName("/member/showAllRanking");
+		}
+		
 
 		return mav;
 	}

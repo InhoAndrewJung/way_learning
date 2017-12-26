@@ -10,13 +10,20 @@
 				url: "${pageContext.request.contextPath}/lectureBoard/likeStatus",
 				data:"${_csrf.parameterName}=${_csrf.token}&courseNo=${cvo.courseNo}",
 				success: function(result){
-				//alert(result)
-					if(result == 1){
-						document.getElementById('rcm-btn').classList.add('btn_course_recommanded')
-					}
+					
+					if(result == 1) document.getElementById('rcm-btn').classList.add('btn_course_recommanded')
+				}
+			});
+			$.ajax({
+				type: "post",
+				url: "${pageContext.request.contextPath}/lectureBoard/selectCntCourseLike",
+				data: "${_csrf.parameterName}=${_csrf.token}&courseNo=${cvo.courseNo}",
+				success: function(result){
+					$("#recommendCnt").html(result);	
 				}
 			});
 		});
+		
 		var lecNo= ${lecList[0].lectureNo};
 		function showLecture(lectureNo){
 			lecNo=lectureNo;
@@ -85,6 +92,7 @@
 							value="${cvo.regDate}" pattern="YYYY.MM.dd" /></span>
           <div class="author_img" style="background-image:url('${path}/resources/upload/${cvo.member.imgProfile}')"></div>
           <div class="btn_course_recommand" id="rcm-btn" onclick="courseLikeChange()"><span>이 코스 추천하기</span></div>
+          <span align="center" id="recommendCnt" style="height:20px;width:20px;border:1px solid red;color:white;text-align:center;background-color:red;border-radius:50%;float:right;margin-top:5px"></span>
         </div>
       </div>
     </header>
@@ -121,7 +129,7 @@
     <section class="lesson_content">
 			<sec:authorize access="isAuthenticated()">
 				<sec:authentication var="mvo" property="principal" />
-				<c:if test="${mvo.userId == cvo.member.userId }">
+				<c:if test="${mvo.userId == cvo.member.userId  || mvo.userId == 'james'}">
 					<input type="button" class="common-btn" value="강의수정" onclick="updateLecture()" style="background-color:#4e737c;width:49%;margin-bottom: 30px;">
 					<input type="button" class="common-btn" value="강의삭제" onclick="deleteLecture()" style="background-color:#c61919;width:49%">
 				</c:if>

@@ -221,6 +221,17 @@ System.out.println("isLectureOrderExist result:"+result);
 	
 	
 	@ResponseBody
+	@RequestMapping("selectCntCourseLike")
+	public int selectCntCourseLike(int courseNo)throws Exception{
+		
+		int cnt=lectureBoardService.selectCntCourseLike(courseNo);
+		return cnt;
+	}
+	
+	
+	
+	
+	@ResponseBody
 	@RequestMapping("changeMyLecutreRecord")
 	public int changeMyLecutreRecord(int courseNo,int lectureNo)throws Exception{
 		System.out.println("changeMyLecutreRecord 컨트롤러 입성");
