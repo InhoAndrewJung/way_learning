@@ -2,13 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/board.css?ver=2">
 
 <c:if test="${not empty list}">
   <div class="reply-title">
     <span class="footer_comment">
-      <img src="${pageContext.request.contextPath}/resources/img/reply.png" id="footer_image_reply">
+      <img src="${pageContext.request.contextPath}/resources/img/reply.png" id="footer_image_reply"> ${fn:length(list)}
     </span>
   </div>
 </c:if>

@@ -32,7 +32,7 @@
       courseImage.dataset.path = 'lectureBoard/showLectureList?courseNo='+item.courseNo
       courseImage.setAttribute('src', '${path}/resources/upload/'+item.courseImage)
       var author = document.createElement('span')
-      author.appendChild(document.createTextNode(item.author))
+      author.appendChild(document.createTextNode('강사:'+item.author))
       var lectureList = document.createElement('div')
       lectureList.className = 'mycourse-lecture-list';
       for(var i=0; i<lectures.length; i++) {

@@ -119,7 +119,7 @@ a:link, a:visited  {
 .boardTitleSet{
 	position: absolute;
 	float: left;
-	max-width: 400px;
+	max-width: 600px;
 	padding-left: 20px;
 	top: 50%;
 	transform: translateY(-50%);
@@ -457,7 +457,7 @@ a:link, a:visited  {
 .board-qna-likes{
 	font-size: 1em;
   font-weight: bold;
-  color: #572cff;
+  color: #000;
   cursor: pointer;
 }
 

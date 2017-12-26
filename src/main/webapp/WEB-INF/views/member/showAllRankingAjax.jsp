@@ -1,65 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/common.jsp" %>
 
-<script>
-
-	
-
-function sorting(sort){
-
-	if(sort == 'cntSubmit'){
-		
-		$.ajax({
-			type: "post",
-			url: "${path}/member/showAllRanking",
-			data:"${_csrf.parameterName}=${_csrf.token}&ajax=true&sorting=cntSubmit",
-			success: function(result){
-				$(".sortingResult").html(result);
-			}
-		});
-	}
-	
-		
-		
-	else if(sort == 'cntRight'){
-		
-		$.ajax({
-			type: "post",
-			url: "${path}/member/showAllRanking",
-			data:"${_csrf.parameterName}=${_csrf.token}&ajax=true&sorting=cntRight",
-			success: function(result){
-				$(".sortingResult").html(result);
-			}
-		});
-		
-	
-		
-	}else if(sort == 'RightPercent'){
-		
-		$.ajax({
-			type: "post",
-			url: "${path}/member/showAllRanking",
-			data:"${_csrf.parameterName}=${_csrf.token}&ajax=true&sorting=RightPercent",
-			success: function(result){
-				$(".sortingResult").html(result);
-			}
-		});
-	
-	}
-}
-	
-	 
-
-</script>
 
 
-    <h2 class="mypage_title">전체 랭킹보기</h2>
-    
-    <a href="#"  onclick="sorting('cntSubmit')">푼문제  </a>  &nbsp; 
-	<a href="#"  onclick="sorting('cntRight')">정답수</a>  &nbsp; 
-	<a href="#"  onclick="sorting('RightPercent')">정답비율순</a>  &nbsp;  
+
 	
-	<div class="sortingResult">
 	<ul class="ranking-ul">
 		<li class="first-rankCard common-card" >
 			<div class="first-rank">
@@ -164,4 +109,4 @@ function sorting(sort){
 		</c:forEach>
 	</ul>
 	
-	</div>
+

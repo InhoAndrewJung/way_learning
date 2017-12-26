@@ -16,14 +16,14 @@ $(document).ready(function() {
 			url: "${pageContext.request.contextPath}/lectureReply/insertReply",
 			data: param,
 			success: function(){
-				listReply(); //이거안하면 새로고침해야 쓴게 나옴!!!
+				listReply(); 
 			}
 		});
 		$("#replytext").val("");
 	});
 		$('#finishLecture').click(function(){
-			var thisLec = document.querySelector('[data-lec-no="${lvo.lectureNo}"]')
-			var lectureWatched=finishTarget.dataset.finished;
+			var thisLec = document.querySelector('[data-lec-no="${lvo.lectureNo}"]') // lectureList에서<li data-lec-no=""
+			var lectureWatched=finishTarget.dataset.finished; //다 봤어요 id의 data-finished="true" 
 
 			var lectureNo="${lvo.lectureNo}";
 			var courseNo="${lvo.courseNo}";
@@ -34,13 +34,13 @@ $(document).ready(function() {
 				data: param,
 				success: function(){
 					if(lectureWatched=="false"){
-						finishTarget.dataset.finished=true
+						finishTarget.dataset.finished=true 
 						finishTarget.innerText="다 봤어요 취소"
-						thisLec.classList.add('finish_lesson')
+						thisLec.classList.add('finish_lesson') // lectureList에서 해당렉쳐 체크표시 없앰
 					}else{
 						finishTarget.dataset.finished=false
 						finishTarget.innerText="다 봤어요"
-						thisLec.classList.remove('finish_lesson')
+						thisLec.classList.remove('finish_lesson') // lectureList에서 해당렉쳐 체크표시 넣음
 					}
 				}
 			});
@@ -59,7 +59,8 @@ function listReply(){
 function showWatchResult(){
 	 $.ajax({
 		type:"get",
-		url: "${pageContext.request.contextPath}/lectureBoard/isMyLectureRecordExist?lectureNo=${lvo.lectureNo}&courseNo=${lvo.courseNo}",  //url방식으로 보내기!! url 밑에 param: 해서 정의 안함!!!!
+		url: "${pageContext.request.contextPath}/lectureBoard/isMyLectureRecordExist?lectureNo=${lvo.lectureNo}"
+		+"&courseNo=${lvo.courseNo}",  
 		success: function(result){
 			if(result==1){
 				finishTarget.dataset.finished=true

@@ -16,7 +16,6 @@
 	</select>
 
 	<update id="changeAuthority">
-
 		update wl_authorities set
 		<if test="role == 'ROLE_AUTHOR'">
 			role='ROLE_MEMBER'
@@ -24,9 +23,7 @@
 		<if test="role == 'ROLE_MEMBER'">
 			role='ROLE_AUTHOR'
 		</if>
-
 		where user_id=#{userId}
-
 	</update>
 
 	<resultMap type="Course" id="courseRM">
@@ -52,19 +49,16 @@
 	</select>
 	
 	
-	<update id="changeAcceptStatus">
-
-		update wl_course set
-		<if test="isAccept == 'accept'">
-			is_accept=0
-		</if>
-		<if test="isAccept == 'notAccept'">
-			is_accept=1
-		</if>
-where course_no=#{courseNo}
-		
-
-	</update>
+<update id="changeAcceptStatus">
+	update wl_course set
+	<if test="isAccept == 'accept'">
+		is_accept=0
+	</if>
+	<if test="isAccept == 'notAccept'">
+		is_accept=1
+	</if>
+	where course_no=#{courseNo}
+</update>
 
 
 </mapper>
